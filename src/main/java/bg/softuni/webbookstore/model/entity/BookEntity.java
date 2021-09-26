@@ -42,10 +42,10 @@ public class BookEntity extends BaseEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<CategoryEntity> categories;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private AuthorEntity author;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private PublishingHouseEntity publishingHouse;
 
     public String getTitle() {

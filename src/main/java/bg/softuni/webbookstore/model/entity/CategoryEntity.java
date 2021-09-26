@@ -2,16 +2,14 @@ package bg.softuni.webbookstore.model.entity;
 
 import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "categories")
 public class CategoryEntity extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private CategoryEnum category;
 
     public CategoryEnum getCategory() {
