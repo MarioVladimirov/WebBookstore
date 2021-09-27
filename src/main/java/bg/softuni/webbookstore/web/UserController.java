@@ -41,7 +41,7 @@ public class UserController {
         return "auth-register";
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public String registerAndLoginUser(UserRegisterBindingModel userRegisterBindingModel,
                                        BindingResult bindingResult,
                                        RedirectAttributes redirectAttributes) {
