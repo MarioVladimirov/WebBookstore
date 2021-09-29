@@ -1,7 +1,9 @@
 package bg.softuni.webbookstore.web;
 
 import bg.softuni.webbookstore.model.binding.BookAddBindingModel;
+import bg.softuni.webbookstore.model.service.BookAddServiceModel;
 import bg.softuni.webbookstore.service.BookService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +19,11 @@ import javax.validation.Valid;
 public class BookController {
 
     private final BookService bookService;
+    private final ModelMapper modelMapper;
 
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, ModelMapper modelMapper) {
         this.bookService = bookService;
+        this.modelMapper = modelMapper;
     }
 
     @ModelAttribute("bookAddBindingModel")
@@ -38,9 +42,18 @@ public class BookController {
                              RedirectAttributes redirectAttributes) {
 
         //TODO
+        //check if exists by ISBN -> bookService.increaseCopies(isbn);
+        //do not require to fill all form fields; do not validate all other fields
+        //else add as a new book
+
+        //TODO
         //add validation
 
 
+        BookAddServiceModel bookAddServiceModel = modelMapper
+                .map(bookAddBindingModel, BookAddServiceModel.class);
+
+        bookService.add(bookAddServiceModel);
 
         return "redirect:/home";
     }

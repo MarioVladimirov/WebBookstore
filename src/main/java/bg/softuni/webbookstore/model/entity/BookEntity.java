@@ -12,6 +12,9 @@ import java.util.Set;
 @Table(name = "books")
 public class BookEntity extends BaseEntity {
 
+    @Column(nullable = false,unique = true)
+    private String isbn;
+
     @Column(nullable = false)
     private String title;
 
@@ -47,6 +50,16 @@ public class BookEntity extends BaseEntity {
 
     @ManyToOne(optional = false)
     private PublishingHouseEntity publishingHouse;
+
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public BookEntity setIsbn(String isbn) {
+        this.isbn = isbn;
+        return this;
+    }
 
     public String getTitle() {
         return title;
@@ -159,5 +172,15 @@ public class BookEntity extends BaseEntity {
     @PostConstruct
     public void afterAdd() {
         setAddedOn(Instant.now());
+    }
+
+    public BookEntity increaseCopies(Integer copies) {
+        this.copies += copies;
+        return this;
+    }
+
+    public BookEntity decreaseCopies(Integer copies) {
+        this.copies -= copies;
+        return this;
     }
 }
