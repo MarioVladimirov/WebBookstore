@@ -4,8 +4,8 @@ import bg.softuni.webbookstore.model.binding.UserRegisterBindingModel;
 import bg.softuni.webbookstore.model.service.UserRegisterServiceModel;
 import bg.softuni.webbookstore.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -44,16 +44,16 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerAndLoginUser(@Valid UserRegisterBindingModel userRegisterBindingModel,
-                                       BindingResult bindingResult,
-                                       RedirectAttributes redirectAttributes) {
+    public String registerConfirm(@Valid UserRegisterBindingModel userRegisterBindingModel,
+                                  BindingResult bindingResult,
+                                  RedirectAttributes redirectAttributes) {
 
-       if (bindingResult.hasErrors()) {
-           redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
-           redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
 
-           return "redirect:/users/register";
-       }
+            return "redirect:/users/register";
+        }
 
         if (userService.userNameExists(userRegisterBindingModel.getUsername())) {
             redirectAttributes.addFlashAttribute("registrationBindingModel", userRegisterBindingModel);
@@ -62,11 +62,29 @@ public class UserController {
             return "redirect:/users/register";
         }
 
+        if (!userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
+            redirectAttributes.addFlashAttribute("registrationBindingModel", userRegisterBindingModel);
+            redirectAttributes.addFlashAttribute("confirmPasswordDifferent", true);
+
+            return "redirect:/users/register";
+        }
+
         UserRegisterServiceModel userRegisterServiceModel = modelMapper
                 .map(userRegisterBindingModel, UserRegisterServiceModel.class);
 
-        userService.registerAndLoginUser(userRegisterServiceModel);
+        userService.register(userRegisterServiceModel);
 
         return "redirect:/home";
+    }
+
+    @PostMapping("/login-error")
+    public String failedLogin(@ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
+                                      String username,
+                              RedirectAttributes redirectAttributes) {
+
+        redirectAttributes.addFlashAttribute("badCredentials", true);
+        redirectAttributes.addFlashAttribute("username", username);
+
+        return "redirect:/users/login";
     }
 }

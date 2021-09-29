@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerAndLoginUser(UserRegisterServiceModel userRegisterServiceModel) {
+    public void register(UserRegisterServiceModel userRegisterServiceModel) {
         UserEntity newUser = modelMapper
                 .map(userRegisterServiceModel, UserEntity.class);
 
@@ -77,6 +77,9 @@ public class UserServiceImpl implements UserService {
                         () -> new IllegalStateException("USER role not found!")
                 );
         newUser.addRole(userRole);
+
+        //TODO
+        //if no imageUrl, set default image
 
         newUser = userRepository.save(newUser);
 

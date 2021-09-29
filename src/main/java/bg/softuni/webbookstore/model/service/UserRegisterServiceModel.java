@@ -6,6 +6,7 @@ public class UserRegisterServiceModel {
     private String lastName;
     private String username;
     private String password;
+    private String imageUrl;
 
 
     public String getFirstName() {
@@ -41,6 +42,15 @@ public class UserRegisterServiceModel {
 
     public UserRegisterServiceModel setPassword(String password) {
         this.password = password;
+        return this;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public UserRegisterServiceModel setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
         return this;
     }
 }
