@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,14 +25,14 @@ public class UserServiceImpl implements UserService {
     private final UserRoleRepository userRoleRepository;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
-    private final WebBookstoreUserService webBookstoreUserService;
+    private final BookstoreUserService bookstoreUserService;
 
-    public UserServiceImpl(UserRepository userRepository, UserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper, WebBookstoreUserService webBookstoreUserService) {
+    public UserServiceImpl(UserRepository userRepository, UserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper, BookstoreUserService bookstoreUserService) {
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
         this.passwordEncoder = passwordEncoder;
         this.modelMapper = modelMapper;
-        this.webBookstoreUserService = webBookstoreUserService;
+        this.bookstoreUserService = bookstoreUserService;
     }
 
     @Override
@@ -79,7 +80,7 @@ public class UserServiceImpl implements UserService {
 
         newUser = userRepository.save(newUser);
 
-        UserDetails principal = webBookstoreUserService
+        UserDetails principal = bookstoreUserService
                 .loadUserByUsername(newUser.getUsername());
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(
@@ -91,5 +92,13 @@ public class UserServiceImpl implements UserService {
         SecurityContextHolder.getContext()
                 .setAuthentication(authentication);
 
+    }
+
+    @Override
+    public boolean userNameExists(String username) {
+        Optional<UserEntity> userEntity = userRepository
+                .findByUsername(username);
+
+        return userEntity.isPresent();
     }
 }

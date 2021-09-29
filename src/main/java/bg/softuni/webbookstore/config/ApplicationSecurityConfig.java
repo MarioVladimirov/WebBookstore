@@ -1,6 +1,6 @@
 package bg.softuni.webbookstore.config;
 
-import bg.softuni.webbookstore.service.impl.WebBookstoreUserService;
+import bg.softuni.webbookstore.service.impl.BookstoreUserService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,12 +14,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final WebBookstoreUserService webBookstoreUserService;
+    private final BookstoreUserService bookstoreUserService;
     private final PasswordEncoder passwordEncoder;
 
 
-    public ApplicationSecurityConfig(WebBookstoreUserService webBookstoreUserService, PasswordEncoder passwordEncoder) {
-        this.webBookstoreUserService = webBookstoreUserService;
+    public ApplicationSecurityConfig(BookstoreUserService bookstoreUserService, PasswordEncoder passwordEncoder) {
+        this.bookstoreUserService = bookstoreUserService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -44,7 +44,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         auth
-                .userDetailsService(webBookstoreUserService)
+                .userDetailsService(bookstoreUserService)
                 .passwordEncoder(passwordEncoder);
     }
 }

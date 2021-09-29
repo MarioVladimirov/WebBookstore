@@ -27,20 +27,22 @@
                        min="2" max="20"
                        class="form-control"
                        placeholder="First name"/>
-                <p class="errors alert alert-danger">
+                <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                   class="invalid-feedback errors alert alert-danger">
                     First name is required.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label for="lastName" class="text-white font-weight-bold">Last Name</label>
                 <input th:field="*{lastName}"
+                       th:errorclass="is-invalid"
                        id="lastName"
                        name="lastName"
                        type="text"
                        min="2" max="20"
                        class="form-control"
                        placeholder="First name"/>
-                <p class="errors alert alert-danger">
+                <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="errors alert alert-danger">
                     Last name is required.
                 </p>
             </div>
@@ -49,41 +51,62 @@
             <div class="form-group col-md-6 mb-3">
                 <label for="username" class="text-white font-weight-bold">Username</label>
                 <input th:field="*{username}"
+                       th:errorclass="is-invalid"
                        id="username"
                        name="username"
                        type="text"
                        min="2" max="20"
                        class="form-control"
-                       placeholder="Email address"/>
-                <p class="errors alert alert-danger">
+                       placeholder="Username"/>
+                <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="errors alert alert-danger">
                     Username is required.
                 </p>
-                <p class="errors alert alert-danger">
+                <p th:if="${userExistsError}" id="usernameUniqueError"
+                   class="errors alert alert-danger">
                     Username is already occupied.
-                </p>
-            </div>
-            <div class="form-group col-md-6 mb-3">
-                <label for="password" class="text-white font-weight-bold">Password</label>
-                <input id="password"
-                       name="password"
-                       type="password"
-                       min="2" max="20"
-                       class="form-control"
-                       placeholder="Password"/>
-                <p class="errors alert alert-danger">
-                    Password is required.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label for="imageUrl" class="text-white font-weight-bold">Image</label>
                 <input th:field="*{imageUrl}"
+                       th:errorclass="is-invalid"
                        id="imageUrl"
                        name="imageUrl"
                        type="text"
                        min="2" max="20"
                        class="form-control"
                        placeholder="Image"/>
-                <p class="errors alert alert-danger">
+                <p th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" class="errors alert alert-danger">
+                    Password is required.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label for="password" class="text-white font-weight-bold">Password</label>
+                <input th:errorclass="is-invalid"
+                       id="password"
+                       name="password"
+                       type="password"
+                       min="2" max="20"
+                       class="form-control"
+                       placeholder="Password"/>
+                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                   class="errors alert alert-danger">
+                    Password is required.
+                </p>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label for="confirmPassword" class="text-white font-weight-bold">Password</label>
+                <input th:errorclass="is-invalid"
+                       id="confirmPassword"
+                       name="confirmPassword"
+                       type="password"
+                       min="2" max="20"
+                       class="form-control"
+                       placeholder="Password"/>
+                <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"
+                   class="errors alert alert-danger">
                     Password is required.
                 </p>
             </div>

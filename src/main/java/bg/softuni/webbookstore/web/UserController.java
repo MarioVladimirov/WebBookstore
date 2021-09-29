@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
@@ -25,10 +27,10 @@ public class UserController {
         this.modelMapper = modelMapper;
     }
 
-//    @ModelAttribute("userRegisterBindingModel")
-//    public UserRegisterBindingModel userRegisterBindingModel() {
-//        return new UserRegisterBindingModel();
-//    }
+    @ModelAttribute("userRegisterBindingModel")
+    public UserRegisterBindingModel userRegisterBindingModel() {
+        return new UserRegisterBindingModel();
+    }
 
     @GetMapping("/login")
     public String login() {
@@ -37,21 +39,28 @@ public class UserController {
 
 
     @GetMapping("/register")
-    public String register(Model model) {
-        if (!model.containsAttribute("userRegisterBindingModel")) {
-            model.addAttribute("userRegisterBindingModel",
-                    new UserRegisterBindingModel());
-        }
+    public String register() {
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerAndLoginUser(UserRegisterBindingModel userRegisterBindingModel,
+    public String registerAndLoginUser(@Valid UserRegisterBindingModel userRegisterBindingModel,
                                        BindingResult bindingResult,
                                        RedirectAttributes redirectAttributes) {
 
-        //TODO
-        //Add validation
+       if (bindingResult.hasErrors()) {
+           redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
+           redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
+
+           return "redirect:/users/register";
+       }
+
+        if (userService.userNameExists(userRegisterBindingModel.getUsername())) {
+            redirectAttributes.addFlashAttribute("registrationBindingModel", userRegisterBindingModel);
+            redirectAttributes.addFlashAttribute("userExistsError", true);
+
+            return "redirect:/users/register";
+        }
 
         UserRegisterServiceModel userRegisterServiceModel = modelMapper
                 .map(userRegisterBindingModel, UserRegisterServiceModel.class);

@@ -13,11 +13,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class WebBookstoreUserService implements UserDetailsService {
+public class BookstoreUserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    public WebBookstoreUserService(UserRepository userRepository) {
+    public BookstoreUserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
