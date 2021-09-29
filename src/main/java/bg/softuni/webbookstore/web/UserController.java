@@ -3,9 +3,9 @@ package bg.softuni.webbookstore.web;
 import bg.softuni.webbookstore.model.binding.UserRegisterBindingModel;
 import bg.softuni.webbookstore.model.service.UserRegisterServiceModel;
 import bg.softuni.webbookstore.service.UserService;
-import com.sun.xml.bind.v2.TODO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,20 +25,24 @@ public class UserController {
         this.modelMapper = modelMapper;
     }
 
-    @ModelAttribute("userRegisterBindingModel")
-    public UserRegisterBindingModel userRegisterBindingModel() {
-        return new UserRegisterBindingModel();
-    }
+//    @ModelAttribute("userRegisterBindingModel")
+//    public UserRegisterBindingModel userRegisterBindingModel() {
+//        return new UserRegisterBindingModel();
+//    }
 
     @GetMapping("/login")
     public String login() {
-        return "auth-login";
+        return "login";
     }
 
 
     @GetMapping("/register")
-    public String register() {
-        return "auth-register";
+    public String register(Model model) {
+        if (!model.containsAttribute("userRegisterBindingModel")) {
+            model.addAttribute("userRegisterBindingModel",
+                    new UserRegisterBindingModel());
+        }
+        return "register";
     }
 
     @PostMapping("/register")

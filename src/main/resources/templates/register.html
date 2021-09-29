@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:include="~{fragments/head}"></th:block>
 
@@ -76,7 +77,7 @@
             <div class="form-group col-md-6 mb-3">
                 <label for="imageUrl" class="text-white font-weight-bold">Image</label>
                 <input th:field="*{imageUrl}"
-                        id="imageUrl"
+                       id="imageUrl"
                        name="imageUrl"
                        type="text"
                        min="2" max="20"
