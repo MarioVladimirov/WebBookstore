@@ -19,6 +19,7 @@
             <div class="form-group col-md-6 mb-3">
                 <label for="firstName" class="text-white font-weight-bold">First Name</label>
                 <input th:field="*{firstName}"
+                       th:errorclass="is-invalid"
                        id="firstName"
                        name="firstName"
                        type="text"
@@ -74,7 +75,8 @@
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label for="imageUrl" class="text-white font-weight-bold">Image</label>
-                <input id="imageUrl"
+                <input th:field="*{imageUrl}"
+                        id="imageUrl"
                        name="imageUrl"
                        type="text"
                        min="2" max="20"
@@ -84,16 +86,6 @@
                     Password is required.
                 </p>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="text-center text-white font-weight-bold" for="roles">Roles</label>
-            <select id="roles" class="form-control" multiple>
-                <option>
-                </option>
-            </select>
-            <p class="errors alert alert-danger">
-                Selecting a role is required.
-            </p>
         </div>
 
         <div class="row">
