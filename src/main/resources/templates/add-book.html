@@ -18,110 +18,182 @@
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label for="firstName" class="text-white font-weight-bold">First Name</label>
-                <input th:field="*{firstName}"
+                <label for="isbn" class="text-white font-weight-bold">ISBN</label>
+                <input th:field="*{isbn}"
                        th:errorclass="is-invalid"
-                       id="firstName"
-                       name="firstName"
+                       id="isbn"
+                       name="isbn"
                        type="text"
-                       min="2" max="20"
                        class="form-control"
-                       placeholder="First name"/>
-                <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
-                   id="firstNameError"
+                       placeholder="ISBN"/>
+                <p th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"
+                   id="isbnError"
                    class="invalid-feedback errors alert alert-danger">
-                    First name is required.
+                    ISBN is required.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="lastName" class="text-white font-weight-bold">Last Name</label>
-                <input th:field="*{lastName}"
+                <label for="title" class="text-white font-weight-bold">Title</label>
+                <input th:field="*{title}"
                        th:errorclass="is-invalid"
-                       id="lastName"
-                       name="lastName"
+                       id="title"
+                       name="title"
                        type="text"
-                       min="2" max="20"
                        class="form-control"
-                       placeholder="First name"/>
-                <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
-                   id="lastNameError"
+                       placeholder="Title"/>
+                <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
+                   id="titleError"
                    class="errors alert alert-danger">
-                    Last name is required.
+                    Title is required.
                 </p>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label for="username" class="text-white font-weight-bold">Username</label>
-                <input th:field="*{username}"
+                <label for="description" class="text-white font-weight-bold">Description</label>
+                <input th:field="*{description}"
                        th:errorclass="is-invalid"
-                       id="username"
-                       name="username"
+                       id="description"
+                       name="description"
                        type="text"
-                       min="2" max="20"
                        class="form-control"
-                       placeholder="Username"/>
-                <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
-                   id="usernameError"
+                       placeholder="Description"/>
+                <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+                   id="descriptionError"
                    class="errors alert alert-danger">
-                    Username is required.
-                </p>
-                <p th:if="${userExistsError}"
-                   id="usernameUniqueError"
-                   class="errors alert alert-danger">
-                    Username is already occupied.
+                    Description is required.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="imageUrl" class="text-white font-weight-bold">Image</label>
+                <label for="imageUrl" class="text-white font-weight-bold">ImageUrl</label>
                 <input th:field="*{imageUrl}"
                        th:errorclass="is-invalid"
                        id="imageUrl"
                        name="imageUrl"
                        type="text"
                        class="form-control"
-                       placeholder="Image"/>
+                       placeholder="ImageUrl"/>
                 <p th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"
                    id="imageUrlError"
                    class="errors alert alert-danger">
-                    Password is required.
+                    Username is required.
                 </p>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label for="password" class="text-white font-weight-bold">Password</label>
-                <input th:errorclass="is-invalid"
-                       id="password"
-                       name="password"
-                       type="password"
-                       min="2" max="20"
+                <label for="releaseYear" class="text-white font-weight-bold">Release Year</label>
+                <input th:field="*{releaseYear}"
+                       th:errorclass="is-invalid"
+                       id="releaseYear"
+                       name="releaseYear"
+                       type="text"
                        class="form-control"
-                       placeholder="Password"/>
-                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
-                   id="passwordError"
+                       placeholder="Release Year"/>
+                <p th:if="${#fields.hasErrors('releaseYear')}" th:errors="*{releaseYear}"
+                   id="releaseYearError"
                    class="errors alert alert-danger">
-                    Password is required.
+                    Release Year is required.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="confirmPassword" class="text-white font-weight-bold">Confirm password</label>
-                <input th:errorclass="is-invalid"
-                       id="confirmPassword"
-                       name="confirmPassword"
-                       type="password"
-                       min="2" max="20"
+                <label for="price" class="text-white font-weight-bold">Price</label>
+                <input th:field="*{price}"
+                       th:errorclass="is-invalid"
+                       id="price"
+                       name="price"
+                       type="text"
                        class="form-control"
-                       placeholder="Confirm password"/>
-                <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"
-                   id="confirmPasswordError"
+                       placeholder="Price"/>
+                <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+                   id="priceError"
                    class="errors alert alert-danger">
-                    Password is required.
+                    Price is required.
                 </p>
-                <p th:if="${confirmPasswordDifferent}"
-                   id="confirmPasswordDifferent"
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label for="language" class="text-white font-weight-bold">Language</label>
+                <select id="language"
+                        name="language"
+                        th:field="*{language}"
+                        th:errorclass="is-invalid"
+                        class="custom-select">
+                    <option value="" selected>Select language</option>
+                    <option th:each="l : ${languages}"
+                            th:text="${l}"
+                            th:value="${l}"
+                    </option>
+                </select>
+                <p th:if="${#fields.hasErrors('language')}" th:errors="*{language}"
+                   id="languageError"
                    class="errors alert alert-danger">
-                    Passwords don't match.
+                    Language is required.
+                </p>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label for="categories" class="text-white font-weight-bold">Categories</label>
+                <select id="categories"
+                        name="categories"
+                        th:field="*{categories}"
+                        th:errorclass="is-invalid"
+                        class="custom-select"
+                        multiple>
+                    <option value="" selected>Select Categories</option>
+                    <option th:each="c : ${categories}"
+                            th:text="${c}"
+                            th:value="${c}"
+                    </option>
+                </select>
+                <p th:if="${#fields.hasErrors('categories')}" th:errors="*{categories}"
+                   id="categoriesError"
+                   class="errors alert alert-danger">
+                    Category is required.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label for="author" class="text-white font-weight-bold">Author</label>
+                <select id="author"
+                        name="author"
+                        th:field="*{author}"
+                        th:errorclass="is-invalid"
+                        class="custom-select">
+                    <option value="" selected>Select Author</option>
+                    <option th:each="a : ${authors}"
+                            th:text="${a}"
+                            th:value="${a}"
+                    </option>
+                    <option value="New Author"><a th:href="@{/authors/add}">
+                        Add New Author</a></option>
+                </select>
+                <p th:if="${#fields.hasErrors('author')}" th:errors="*{author}"
+                   id="authorError"
+                   class="errors alert alert-danger">
+                    Author is required.
+                </p>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label for="publishingHouse" class="text-white font-weight-bold">Publishing House</label>
+                <select id="publishingHouse"
+                        name="publishingHouse"
+                        th:field="*{publishingHouse}"
+                        th:errorclass="is-invalid"
+                        class="custom-select">
+                    <option value="" selected>Select Publishing House</option>
+                    <option th:each="p : ${publishingHouses}"
+                            th:text="${p}"
+                            th:value="${p}"
+                    </option>
+                    <option value="New Publishing House"><a th:href="@{/publishingHouses/add}">
+                        Add New Publishing House</a></option>
+                </select>
+                <p th:if="${#fields.hasErrors('publishingHouse')}" th:errors="*{publishingHouse}"
+                   id="publishingHouseError"
+                   class="errors alert alert-danger">
+                    Publishing House is required.
                 </p>
             </div>
         </div>

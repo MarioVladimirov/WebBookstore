@@ -1,0 +1,26 @@
+package bg.softuni.webbookstore.service.impl;
+
+import bg.softuni.webbookstore.repository.AuthorRepository;
+import bg.softuni.webbookstore.service.AuthorService;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class AuthorServiceImpl implements AuthorService {
+
+    private final AuthorRepository authorRepository;
+    private final ModelMapper modelMapper;
+
+    public AuthorServiceImpl(AuthorRepository authorRepository, ModelMapper modelMapper) {
+        this.authorRepository = authorRepository;
+        this.modelMapper = modelMapper;
+    }
+
+    @Override
+    public List<String> findAllAuthorsNames() {
+        return authorRepository
+                .findAllAuthorsNames();
+    }
+}
