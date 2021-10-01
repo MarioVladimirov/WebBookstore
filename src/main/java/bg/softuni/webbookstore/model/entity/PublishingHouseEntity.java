@@ -1,9 +1,6 @@
 package bg.softuni.webbookstore.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -27,7 +24,7 @@ public class PublishingHouseEntity extends BaseEntity {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @OneToMany(mappedBy = "publishingHouse")
+    @OneToMany(mappedBy = "publishingHouse", fetch = FetchType.EAGER)
     private List<BookEntity> books;
 
     public String getName() {

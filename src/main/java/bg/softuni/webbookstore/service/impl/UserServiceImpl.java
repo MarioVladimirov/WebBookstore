@@ -104,4 +104,9 @@ public class UserServiceImpl implements UserService {
 
         return userEntity.isPresent();
     }
+
+    @Override
+    public Optional<UserEntity> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 }

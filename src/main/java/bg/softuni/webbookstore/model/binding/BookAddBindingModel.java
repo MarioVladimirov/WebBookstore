@@ -1,11 +1,8 @@
 package bg.softuni.webbookstore.model.binding;
 
-import bg.softuni.webbookstore.model.entity.AuthorEntity;
-import bg.softuni.webbookstore.model.entity.CategoryEntity;
-import bg.softuni.webbookstore.model.entity.PublishingHouseEntity;
+import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
 import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
 
-import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Set;
@@ -31,6 +28,7 @@ public class BookAddBindingModel {
     private Integer copies;
 
     @NotNull(message = "Please enter the book's release year.")
+    //TODO - annotation to check that year is past or present
     private Integer releaseYear;
 
     @Positive(message = "Price should be a positive number")
@@ -40,13 +38,14 @@ public class BookAddBindingModel {
     private LanguageEnum language;
 
     @NotNull
-    private Set<CategoryEntity> categories;
+    private Set<CategoryEnum> categoryEnums;
 
     @NotNull
-    private AuthorEntity author;
+    private String author;
 
     @NotNull
-    private PublishingHouseEntity publishingHouse;
+    private String publishingHouse;
+
 
     public String getIsbn() {
         return isbn;
@@ -129,29 +128,29 @@ public class BookAddBindingModel {
         return this;
     }
 
-    public Set<CategoryEntity> getCategories() {
-        return categories;
+    public Set<CategoryEnum> getCategoryEnums() {
+        return categoryEnums;
     }
 
-    public BookAddBindingModel setCategories(Set<CategoryEntity> categories) {
-        this.categories = categories;
+    public BookAddBindingModel setCategoryEnums(Set<CategoryEnum> categoryEnums) {
+        this.categoryEnums = categoryEnums;
         return this;
     }
 
-    public AuthorEntity getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public BookAddBindingModel setAuthor(AuthorEntity author) {
+    public BookAddBindingModel setAuthor(String author) {
         this.author = author;
         return this;
     }
 
-    public PublishingHouseEntity getPublishingHouse() {
+    public String getPublishingHouse() {
         return publishingHouse;
     }
 
-    public BookAddBindingModel setPublishingHouse(PublishingHouseEntity publishingHouse) {
+    public BookAddBindingModel setPublishingHouse(String publishingHouse) {
         this.publishingHouse = publishingHouse;
         return this;
     }

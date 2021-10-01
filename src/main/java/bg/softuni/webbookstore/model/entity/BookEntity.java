@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -43,13 +44,16 @@ public class BookEntity extends BaseEntity {
     private LanguageEnum language;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<CategoryEntity> categories;
+    private Set<CategoryEntity> categories = new HashSet<>();
 
     @ManyToOne(optional = false)
     private AuthorEntity author;
 
     @ManyToOne(optional = false)
     private PublishingHouseEntity publishingHouse;
+
+    @ManyToOne(optional = false)
+    private UserEntity creator;
 
 
     public String getIsbn() {
@@ -169,7 +173,7 @@ public class BookEntity extends BaseEntity {
         return this;
     }
 
-    @PostConstruct
+    @PrePersist
     public void afterAdd() {
         setAddedOn(Instant.now());
     }
@@ -181,6 +185,15 @@ public class BookEntity extends BaseEntity {
 
     public BookEntity decreaseCopies(Integer copies) {
         this.copies -= copies;
+        return this;
+    }
+
+    public UserEntity getCreator() {
+        return creator;
+    }
+
+    public BookEntity setCreator(UserEntity creator) {
+        this.creator = creator;
         return this;
     }
 }

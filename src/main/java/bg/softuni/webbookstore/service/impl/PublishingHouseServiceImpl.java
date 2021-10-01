@@ -1,5 +1,6 @@
 package bg.softuni.webbookstore.service.impl;
 
+import bg.softuni.webbookstore.model.entity.PublishingHouseEntity;
 import bg.softuni.webbookstore.repository.PublishingHouseRepository;
 import bg.softuni.webbookstore.service.PublishingHouseService;
 import org.modelmapper.ModelMapper;
@@ -22,5 +23,15 @@ public class PublishingHouseServiceImpl implements PublishingHouseService {
     public List<String> findAllPublishingHousesNames() {
         return publishingHouseRepository
                 .findAllPublishingHousesNames();
+    }
+
+    @Override
+    public PublishingHouseEntity findByName(String name) {
+        return publishingHouseRepository
+                .findByName(name)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        String.format("Publishing House with name %s not found",
+                                name)
+                ));
     }
 }

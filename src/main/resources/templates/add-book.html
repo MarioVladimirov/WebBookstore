@@ -114,6 +114,38 @@
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
+                <label for="pagesCount" class="text-white font-weight-bold">Pages Count</label>
+                <input th:field="*{pagesCount}"
+                       th:errorclass="is-invalid"
+                       id="pagesCount"
+                       name="pagesCount"
+                       type="text"
+                       class="form-control"
+                       placeholder="Pages Count"/>
+                <p th:if="${#fields.hasErrors('pagesCount')}" th:errors="*{pagesCount}"
+                   id="pagesCountError"
+                   class="errors alert alert-danger">
+                    Pages Count is required.
+                </p>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label for="copies" class="text-white font-weight-bold">Copies</label>
+                <input th:field="*{copies}"
+                       th:errorclass="is-invalid"
+                       id="copies"
+                       name="copies"
+                       type="text"
+                       class="form-control"
+                       placeholder="Copies"/>
+                <p th:if="${#fields.hasErrors('copies')}" th:errors="*{copies}"
+                   id="copiesError"
+                   class="errors alert alert-danger">
+                    Copies is required.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
                 <label for="language" class="text-white font-weight-bold">Language</label>
                 <select id="language"
                         name="language"
@@ -136,7 +168,7 @@
                 <label for="categories" class="text-white font-weight-bold">Categories</label>
                 <select id="categories"
                         name="categories"
-                        th:field="*{categories}"
+                        th:field="*{categoryEnums}"
                         th:errorclass="is-invalid"
                         class="custom-select"
                         multiple>
@@ -146,7 +178,7 @@
                             th:value="${c}"
                     </option>
                 </select>
-                <p th:if="${#fields.hasErrors('categories')}" th:errors="*{categories}"
+                <p th:if="${#fields.hasErrors('categoryEnums')}" th:errors="*{categoryEnums}"
                    id="categoriesError"
                    class="errors alert alert-danger">
                     Category is required.
@@ -166,8 +198,6 @@
                             th:text="${a}"
                             th:value="${a}"
                     </option>
-                    <option value="New Author"><a th:href="@{/authors/add}">
-                        Add New Author</a></option>
                 </select>
                 <p th:if="${#fields.hasErrors('author')}" th:errors="*{author}"
                    id="authorError"
@@ -187,8 +217,6 @@
                             th:text="${p}"
                             th:value="${p}"
                     </option>
-                    <option value="New Publishing House"><a th:href="@{/publishingHouses/add}">
-                        Add New Publishing House</a></option>
                 </select>
                 <p th:if="${#fields.hasErrors('publishingHouse')}" th:errors="*{publishingHouse}"
                    id="publishingHouseError"

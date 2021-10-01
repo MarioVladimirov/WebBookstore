@@ -8,6 +8,8 @@ import bg.softuni.webbookstore.service.AuthorService;
 import bg.softuni.webbookstore.service.BookService;
 import bg.softuni.webbookstore.service.PublishingHouseService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -56,28 +58,34 @@ public class BookController {
         return "add-book";
     }
 
+    @PostMapping("/update")
+    public String updateBook() {
+
+//        bookService.increaseCopies(bookAddBindingModel.getIsbn(), bookAddBindingModel.getCopies());
+
+        return "redirect:/home";
+        // TODO - create view and implement method
+        // redirect to updated book details
+
+    }
+
     @PostMapping("/add")
     public String addConfirm(@Valid BookAddBindingModel bookAddBindingModel,
                              BindingResult bindingResult,
-                             RedirectAttributes redirectAttributes) {
+                             RedirectAttributes redirectAttributes,
+                             @AuthenticationPrincipal UserDetails principal) {
 
-        //TODO
-        if (bookService.existsByIsbn(bookAddBindingModel)
-                && bookAddBindingModel.getCopies() > 0) {
-            bookService.increaseCopies(bookAddBindingModel.getIsbn(), bookAddBindingModel.getCopies());
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("bookAddBindingModel", bookAddBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.bookAddBindingModel", bindingResult);
 
-            return "redirect:/home";
-            // TODO
-            // redirect to updated book details
+            return "redirect:/books/add";
         }
-
-
-        //TODO
-        //add validation
-
 
         BookAddServiceModel bookAddServiceModel = modelMapper
                 .map(bookAddBindingModel, BookAddServiceModel.class);
+
+        bookAddServiceModel.setCreator(principal.getUsername());
 
         bookService.add(bookAddServiceModel);
 
