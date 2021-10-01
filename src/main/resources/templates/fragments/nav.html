@@ -16,19 +16,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
             <ul class="navbar-nav mr-auto col-12 justify-content-between">
+
                 <li class="nav-item">
-                    <a sec:authorize="isAuthenticated()" class="logged-user nav-link">
+                    <span sec:authorize="isAuthenticated()" class="navbar-text">
                         Hello, <span th:text="${#authentication.getPrincipal().getUsername()}">User</span>!
                         Welcome to The Magic World of Books!
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/books/all}">All Books</a>
-                </li>
-
-                <li sec:authorize="hasRole('ROLE_ADMIN')"
-                    class="nav-item">
-                    <a class="nav-link" th:href="@{/books/add}">Add Book</a>
+                    </span>
                 </li>
 
                 <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item dropdown">
@@ -36,45 +29,44 @@
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Admin
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" th:href="@{/}">Assign Role</a>
+                    <div class="dropdown-menu" aria-labelledby="adminDropdown">
+                        <a class="dropdown-item" th:href="@{/books/add}">Add Book</a>
                         <a class="dropdown-item" th:href="@{/}">Another action</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" th:href="@{/}">Something else here</a>
+                        <a class="dropdown-item" th:href="@{/}">Assign role</a>
                     </div>
                 </li>
 
-                <li sec:authorize="isAuthenticated()" class="nav-item">
-                    <a class="nav-link" th:href="@{/}">My Profile</a>
-                </li>
-
                 <li class="nav-item">
-                    <a class="nav-link"
-                       sec:authorize="!isAuthenticated()"
-                       th:href="@{/users/login}">
-                        Login
-                    </a>
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                    </form>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link"
-                       sec:authorize="!isAuthenticated()"
-                       th:href="@{/users/register}">
-                        Register
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" th:href="@{/}" id="authenticatedUserDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img th:src="@{/images/avatar.png}" alt="Avatar" class="avatar">
                     </a>
-                </li>
-
-                <li sec:authorize="isAuthenticated()"
-                    class="nav-link nav-item">
-                    <div class="form-inline my-2 my-lg-0 border px-3">
-                        <form th:action="@{/users/logout}"
-                              method="POST">
-                            <button type="submit">
-                                Logout
-                            </button>
-                        </form>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a sec:authorize="!isAuthenticated()" class="dropdown-item" th:href="@{/users/login}">Login</a>
+                        <a sec:authorize="!isAuthenticated()" class="dropdown-item" th:href="@{/users/register}">Register</a>
+                        <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/users/profile}">My
+                            profile</a>
+                        <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/users/logout}">
+                            <div class="form-inline my-2 my-lg-0 border px-3">
+                                <form th:action="@{/users/logout}"
+                                      method="POST">
+                                    <button type="submit">
+                                        Logout
+                                    </button>
+                                </form>
+                            </div>
+                        </a>
                     </div>
                 </li>
+
             </ul>
 
         </div>

@@ -58,8 +58,8 @@ public class BookController {
         return "add-book";
     }
 
-    @PostMapping("/update")
-    public String updateBook() {
+    @PostMapping("/edit")
+    public String editBook() {
 
 //        bookService.increaseCopies(bookAddBindingModel.getIsbn(), bookAddBindingModel.getCopies());
 
