@@ -10,35 +10,80 @@
     <th:block th:include="~{fragments/nav}"></th:block>
 </div>
 
-<div class="container-fluid">
+<div id="wrapper" class="toggled container-fluid">
 
-    <nav class="navbar navbar-dark" style="background-color: #0f2137;">
-        <a class="navbar-brand" href="/">
-            <img th:src="@{/images/avatar.png}" width="30" height="30" class="d-inline-block align-top" alt="">
-            Categories
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#categoriesNavbar"
-                aria-controls="categoriesNavbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a class="navbar-brand align-items-center" href="/">
+                    <img th:src="@{/images/categories-navbar.png}" width="20" height="20"
+                         class="d-inline-block align-items-center" alt="">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/books/all}">All books</a>
+            </li>
+            <li>
+                <a href="#">Shortcuts</a>
+            </li>
+            <li>
+                <a href="#">Overview</a>
+            </li>
+            <li>
+                <a href="#">Events</a>
+            </li>
+            <li>
+                <a href="#">About</a>
+            </li>
+            <li>
+                <a href="#">Services</a>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
 
-        <div class="collapse navbar-collapse" id="categoriesNavbar">
-
-            <ul class="navbar-nav mr-auto col-12 justify-content-between">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/books/all}">All Books</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/books/add}">Add Book</a>
-                </li>
-            </ul>
-
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="row mt-5" id="booksList">
+            <div class="col-md-3">
+                <div class="card mb-4 box-shadow">
+                    <img th:src="@{/}" class="card-img-top" alt=""
+                         data-holder-rendered="true"
+                         style="height: 225px; width: 100%; display: block;">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <p class="card-text border-bottom ">Name: Name of album</p>
+                            <p class="card-text border-bottom ">Artist: Metallica</p>
+                            <p class="card-text border-bottom ">Genre: Metal</p>
+                            <p class="card-text border-bottom ">Price: 19.99</p>
+                            <p class="card-text border-bottom">Release Date: </p>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a type="button" class="btn btn-sm btn-outline-secondary">Details</a>
+                            </div>
+                            <div class="btn-group">
+                                <a type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </nav>
-
-    <h5 class="text-center text-white mt-5">Here I will insert the books</h5>
+    </div>
 </div>
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
 
 <th:block th:include="~{fragments/footer}"></th:block>
 
