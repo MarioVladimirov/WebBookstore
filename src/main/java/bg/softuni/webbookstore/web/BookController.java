@@ -3,10 +3,10 @@ package bg.softuni.webbookstore.web;
 import bg.softuni.webbookstore.model.binding.BookAddBindingModel;
 import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
 import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
+import bg.softuni.webbookstore.model.entity.enums.PublishingHouseEnum;
 import bg.softuni.webbookstore.model.service.BookAddServiceModel;
 import bg.softuni.webbookstore.service.AuthorService;
 import bg.softuni.webbookstore.service.BookService;
-import bg.softuni.webbookstore.service.PublishingHouseService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,13 +27,11 @@ public class BookController {
 
     private final BookService bookService;
     private final AuthorService authorService;
-    private final PublishingHouseService publishingHouseService;
     private final ModelMapper modelMapper;
 
-    public BookController(BookService bookService, AuthorService authorService, PublishingHouseService publishingHouseService, ModelMapper modelMapper) {
+    public BookController(BookService bookService, AuthorService authorService, ModelMapper modelMapper) {
         this.bookService = bookService;
         this.authorService = authorService;
-        this.publishingHouseService = publishingHouseService;
         this.modelMapper = modelMapper;
     }
 
@@ -53,20 +51,8 @@ public class BookController {
         model.addAttribute("languages", LanguageEnum.values());
         model.addAttribute("categories", CategoryEnum.values());
         model.addAttribute("authors", authorService.findAllAuthorsNames());
-        model.addAttribute("publishingHouses", publishingHouseService.findAllPublishingHousesNames());
-
+        model.addAttribute("publishingHouses", PublishingHouseEnum.values());
         return "add-book";
-    }
-
-    @PostMapping("/edit")
-    public String editBook() {
-
-//        bookService.increaseCopies(bookAddBindingModel.getIsbn(), bookAddBindingModel.getCopies());
-
-        return "redirect:/home";
-        // TODO - create view and implement method
-        // redirect to updated book details
-
     }
 
     @PostMapping("/add")
@@ -82,6 +68,13 @@ public class BookController {
             return "redirect:/books/add";
         }
 
+        if (bookService.existsByIsbn(bookAddBindingModel.getIsbn())) {
+            redirectAttributes.addFlashAttribute("bookAddBindingModel", bookAddBindingModel);
+            redirectAttributes.addFlashAttribute("bookExistsError", true);
+
+            return "redirect:/books/add";
+        }
+
         BookAddServiceModel bookAddServiceModel = modelMapper
                 .map(bookAddBindingModel, BookAddServiceModel.class);
 
@@ -91,6 +84,20 @@ public class BookController {
 
         return "redirect:/home";
         // TODO
+        // redirect to created book
+    }
+
+    @GetMapping("/edit")
+    public String edit() {
+        return "edit-book";
+    }
+
+    @PostMapping("/edit")
+    public String editConfirm() {
+
+        return "redirect:/home";
+        // TODO - create view and implement method
         // redirect to updated book details
+
     }
 }

@@ -24,6 +24,9 @@ public class UserEntity extends BaseEntity {
     private List<UserRoleEntity> roles = new ArrayList<>();
 
 
+    public UserEntity() {
+    }
+
     public String getFirstName() {
         return firstName;
     }

@@ -22,6 +22,10 @@ public class AuthorEntity extends BaseEntity {
     @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
     private List<BookEntity> books;
 
+
+    public AuthorEntity() {
+    }
+
     public String getFirstName() {
         return firstName;
     }

@@ -1,8 +1,8 @@
 package bg.softuni.webbookstore.model.entity;
 
 import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
+import bg.softuni.webbookstore.model.entity.enums.PublishingHouseEnum;
 
-import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -25,7 +25,7 @@ public class BookEntity extends BaseEntity {
     @Column(name = "image_url", columnDefinition = "TEXT")
     private String imageUrl;
 
-    @Column(name = "added_on", nullable = false)
+    @Column(name = "added_on")
     private Instant addedOn;
 
     @Column(name = "pages_count", nullable = false)
@@ -41,7 +41,12 @@ public class BookEntity extends BaseEntity {
     private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private LanguageEnum language;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "publishing_house", nullable = false)
+    private PublishingHouseEnum publishingHouse;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<CategoryEntity> categories = new HashSet<>();
@@ -50,11 +55,11 @@ public class BookEntity extends BaseEntity {
     private AuthorEntity author;
 
     @ManyToOne(optional = false)
-    private PublishingHouseEntity publishingHouse;
-
-    @ManyToOne(optional = false)
     private UserEntity creator;
 
+
+    public BookEntity() {
+    }
 
     public String getIsbn() {
         return isbn;
@@ -146,6 +151,15 @@ public class BookEntity extends BaseEntity {
         return this;
     }
 
+    public PublishingHouseEnum getPublishingHouse() {
+        return publishingHouse;
+    }
+
+    public BookEntity setPublishingHouse(PublishingHouseEnum publishingHouse) {
+        this.publishingHouse = publishingHouse;
+        return this;
+    }
+
     public Set<CategoryEntity> getCategories() {
         return categories;
     }
@@ -161,30 +175,6 @@ public class BookEntity extends BaseEntity {
 
     public BookEntity setAuthor(AuthorEntity author) {
         this.author = author;
-        return this;
-    }
-
-    public PublishingHouseEntity getPublishingHouse() {
-        return publishingHouse;
-    }
-
-    public BookEntity setPublishingHouse(PublishingHouseEntity publishingHouse) {
-        this.publishingHouse = publishingHouse;
-        return this;
-    }
-
-    @PrePersist
-    public void afterAdd() {
-        setAddedOn(Instant.now());
-    }
-
-    public BookEntity increaseCopies(Integer copies) {
-        this.copies += copies;
-        return this;
-    }
-
-    public BookEntity decreaseCopies(Integer copies) {
-        this.copies -= copies;
         return this;
     }
 

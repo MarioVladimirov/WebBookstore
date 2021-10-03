@@ -14,17 +14,20 @@ public class UserRegisterBindingModel {
     @Size(min = 2, max = 20, message = "Last name should be between 2 and 20 characters long")
     private String lastName;
 
-    @Size(min = 2, max = 20, message = "Username should be between 2 and 20 characters long")
     @NotEmpty(message = "Please enter a username")
+    @Size(min = 2, max = 20, message = "Username should be between 2 and 20 characters long")
     private String username;
 
-    @Size(min = 2, max = 20, message = "Password should be between 2 and 20 characters long")
     @NotEmpty(message = "Please enter a password")
+    @Size(min = 2, max = 20, message = "Password should be between 2 and 20 characters long")
     private String password;
 
     @NotEmpty(message = "Please confirm your password")
     private String confirmPassword;
 
+
+    public UserRegisterBindingModel() {
+    }
 
     public String getFirstName() {
         return firstName;

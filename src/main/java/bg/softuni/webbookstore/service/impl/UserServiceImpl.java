@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,34 +35,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void seedUsers() {
-
-        if (userRepository.count() == 0) {
-
-            UserRoleEntity adminRole = new UserRoleEntity().setRole(UserRoleEnum.ADMIN);
-            UserRoleEntity userRole = new UserRoleEntity().setRole(UserRoleEnum.USER);
-
-            userRoleRepository.saveAll(List.of(adminRole, userRole));
-
-            UserEntity admin = new UserEntity()
-                    .setUsername("admin")
-                    .setFirstName("Admin")
-                    .setLastName("Adminov")
-                    .setPassword(passwordEncoder.encode("123"))
-                    .setRoles(List.of(adminRole, userRole));
-
-            UserEntity user = new UserEntity()
-                    .setUsername("user")
-                    .setFirstName("User")
-                    .setLastName("Userov")
-                    .setPassword(passwordEncoder.encode("123"))
-                    .setRoles(List.of(userRole));
-
-            userRepository.saveAll(List.of(admin, user));
-        }
-    }
-
-    @Override
     public void register(UserRegisterServiceModel userRegisterServiceModel) {
         UserEntity newUser = modelMapper
                 .map(userRegisterServiceModel, UserEntity.class);
@@ -77,9 +48,6 @@ public class UserServiceImpl implements UserService {
                         () -> new IllegalStateException("USER role not found!")
                 );
         newUser.addRole(userRole);
-
-        //TODO
-        //if no imageUrl, set default image
 
         newUser = userRepository.save(newUser);
 
@@ -103,10 +71,5 @@ public class UserServiceImpl implements UserService {
                 .findByUsername(username);
 
         return userEntity.isPresent();
-    }
-
-    @Override
-    public Optional<UserEntity> findByUsername(String username) {
-        return userRepository.findByUsername(username);
     }
 }

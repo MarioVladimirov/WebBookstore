@@ -1,11 +1,10 @@
 package bg.softuni.webbookstore.service.impl;
 
-import bg.softuni.webbookstore.model.binding.BookAddBindingModel;
 import bg.softuni.webbookstore.model.entity.*;
 import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
 import bg.softuni.webbookstore.model.service.BookAddServiceModel;
 import bg.softuni.webbookstore.model.view.BookViewServiceModel;
-import bg.softuni.webbookstore.repository.BookRepository;
+import bg.softuni.webbookstore.repository.*;
 import bg.softuni.webbookstore.service.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -18,28 +17,17 @@ import java.util.stream.Collectors;
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
-    private final UserService userService;
-    private final CategoryService categoryService;
-    private final AuthorService authorService;
-    private final PublishingHouseService publishingHouseService;
+    private final UserRepository userRepository;
+    private final CategoryRepository categoryRepository;
+    private final AuthorRepository authorRepository;
     private final ModelMapper modelMapper;
 
-    public BookServiceImpl(BookRepository bookRepository, UserService userService, CategoryService categoryService, AuthorService authorService, PublishingHouseService publishingHouseService, ModelMapper modelMapper) {
+    public BookServiceImpl(BookRepository bookRepository, UserRepository userRepository, CategoryRepository categoryRepository, AuthorRepository authorRepository, ModelMapper modelMapper) {
         this.bookRepository = bookRepository;
-        this.userService = userService;
-        this.categoryService = categoryService;
-        this.authorService = authorService;
-        this.publishingHouseService = publishingHouseService;
+        this.userRepository = userRepository;
+        this.categoryRepository = categoryRepository;
+        this.authorRepository = authorRepository;
         this.modelMapper = modelMapper;
-    }
-
-    @Override
-    public void increaseCopies(String isbn, Integer copies) {
-        BookEntity bookEntity = bookRepository
-                .findByIsbn(isbn).get();
-        bookEntity.increaseCopies(copies);
-
-//        bookRepository.save(bookEntity);
     }
 
     @Override
@@ -52,22 +40,30 @@ public class BookServiceImpl implements BookService {
 
         Set<CategoryEnum> categories = bookAddServiceModel.getCategoryEnums();
         for (CategoryEnum category : categories) {
-            CategoryEntity categoryEntity = categoryService.findByCategoryName(category);
+            CategoryEntity categoryEntity = categoryRepository
+                    .findByCategory(category)
+                    .orElseThrow(() -> new IllegalArgumentException(
+                            "Category with name " + category + " not found")
+                    );
             bookEntity.getCategories().add(categoryEntity);
         }
 
-        AuthorEntity author = authorService
-                .findByName(bookAddServiceModel.getAuthor().split(" ")[0], bookAddServiceModel.getAuthor().split(" ")[1]);
+        AuthorEntity author = authorRepository
+                .findByFirstNameAndLastName(
+                        bookAddServiceModel.getAuthor().split(" ")[0],
+                        bookAddServiceModel.getAuthor().split(" ")[1])
+                .orElseThrow(() -> new IllegalArgumentException(
+                        String.format("Author with name %s %s not found",
+                                bookAddServiceModel.getAuthor().split(" ")[0],
+                                bookAddServiceModel.getAuthor().split(" ")[1]))
+                );
         bookEntity.setAuthor(author);
 
-        PublishingHouseEntity house = publishingHouseService
-                .findByName(bookAddServiceModel.getPublishingHouse());
-        bookEntity.setPublishingHouse(house);
-
-
-        UserEntity creator = userService
+        UserEntity creator = userRepository
                 .findByUsername(bookAddServiceModel.getCreator())
-                .orElseThrow(() -> new IllegalArgumentException("Creator " + bookAddServiceModel.getCreator() + " could not be found"));
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Creator " + bookAddServiceModel.getCreator() + " could not be found")
+                );
         bookEntity.setCreator(creator);
 
 
@@ -84,8 +80,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public boolean existsByIsbn(BookAddBindingModel bookAddBindingModel) {
-        return bookRepository
-                .existsByIsbn(bookAddBindingModel.getIsbn());
+    public boolean existsByIsbn(String isbn) {
+        return bookRepository.existsByIsbn(isbn);
     }
 }

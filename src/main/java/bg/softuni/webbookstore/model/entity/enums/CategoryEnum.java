@@ -10,5 +10,6 @@ public enum CategoryEnum {
     THRILLER,
     ROMANCE,
     SCIENCE_FICTION,
-    WESTERN
+    WESTERN,
+    CLASSIC,
 }

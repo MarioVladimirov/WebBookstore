@@ -9,8 +9,12 @@ import javax.persistence.*;
 public class CategoryEntity extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private CategoryEnum category;
+
+
+    public CategoryEntity() {
+    }
 
     public CategoryEnum getCategory() {
         return category;

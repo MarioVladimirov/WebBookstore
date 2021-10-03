@@ -8,6 +8,9 @@ public class UserRegisterServiceModel {
     private String password;
 
 
+    public UserRegisterServiceModel() {
+    }
+
     public String getFirstName() {
         return firstName;
     }

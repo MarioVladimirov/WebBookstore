@@ -31,6 +31,11 @@
                    class="invalid-feedback errors alert alert-danger">
                     ISBN is required.
                 </p>
+                <p th:if="${bookExistsError}"
+                   id="bookExistsError"
+                   class="invalid-feedback errors alert alert-danger">
+                    Book with this ISBN is already present in the Database.
+                </p>
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label for="title" class="text-white font-weight-bold">Title</label>
@@ -165,23 +170,22 @@
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="categories" class="text-white font-weight-bold">Categories</label>
-                <select id="categories"
-                        name="categories"
-                        th:field="*{categoryEnums}"
+                <label for="publishingHouse" class="text-white font-weight-bold">Publishing House</label>
+                <select id="publishingHouse"
+                        name="publishingHouse"
+                        th:field="*{publishingHouse}"
                         th:errorclass="is-invalid"
-                        class="custom-select"
-                        multiple>
-                    <option value="" selected>Select Categories</option>
-                    <option th:each="c : ${categories}"
-                            th:text="${c}"
-                            th:value="${c}"
+                        class="custom-select">
+                    <option value="" selected>Select Publishing House</option>
+                    <option th:each="p : ${publishingHouses}"
+                            th:text="${p}"
+                            th:value="${p}"
                     </option>
                 </select>
-                <p th:if="${#fields.hasErrors('categoryEnums')}" th:errors="*{categoryEnums}"
-                   id="categoriesError"
+                <p th:if="${#fields.hasErrors('publishingHouse')}" th:errors="*{publishingHouse}"
+                   id="publishingHouseError"
                    class="errors alert alert-danger">
-                    Category is required.
+                    Publishing House is required.
                 </p>
             </div>
         </div>
@@ -206,22 +210,23 @@
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="publishingHouse" class="text-white font-weight-bold">Publishing House</label>
-                <select id="publishingHouse"
-                        name="publishingHouse"
-                        th:field="*{publishingHouse}"
+                <label for="categories" class="text-white font-weight-bold">Categories</label>
+                <select id="categories"
+                        name="categories"
+                        th:field="*{categoryEnums}"
                         th:errorclass="is-invalid"
-                        class="custom-select">
-                    <option value="" selected>Select Publishing House</option>
-                    <option th:each="p : ${publishingHouses}"
-                            th:text="${p}"
-                            th:value="${p}"
+                        class="custom-select"
+                        multiple>
+                    <option value="" selected>Select Categories</option>
+                    <option th:each="c : ${categories}"
+                            th:text="${c}"
+                            th:value="${c}"
                     </option>
                 </select>
-                <p th:if="${#fields.hasErrors('publishingHouse')}" th:errors="*{publishingHouse}"
-                   id="publishingHouseError"
+                <p th:if="${#fields.hasErrors('categoryEnums')}" th:errors="*{categoryEnums}"
+                   id="categoriesError"
                    class="errors alert alert-danger">
-                    Publishing House is required.
+                    Category is required.
                 </p>
             </div>
         </div>

@@ -9,8 +9,12 @@ import javax.persistence.*;
 public class UserRoleEntity extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private UserRoleEnum role;
+
+
+    public UserRoleEntity() {
+    }
 
     public UserRoleEnum getRole() {
         return role;

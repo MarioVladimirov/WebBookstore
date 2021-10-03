@@ -2,6 +2,7 @@ package bg.softuni.webbookstore.model.binding;
 
 import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
 import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
+import bg.softuni.webbookstore.model.entity.enums.PublishingHouseEnum;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
@@ -10,8 +11,6 @@ import java.util.Set;
 public class BookAddBindingModel {
 
     @NotEmpty(message = "Please enter a valid ISBN number")
-    @Pattern(regexp = "^(?=(?:\\D*\\d){10}(?:(?:\\D*\\d){3})?$)[\\d-]+$",
-            message = "Please enter a valid ISBN number")
     private String isbn;
 
     @NotEmpty(message = "Please enter a title")
@@ -40,14 +39,17 @@ public class BookAddBindingModel {
     private LanguageEnum language;
 
     @NotNull
+    private PublishingHouseEnum publishingHouse;
+
+    @NotNull
     private Set<CategoryEnum> categoryEnums;
 
     @NotNull
     private String author;
 
-    @NotNull
-    private String publishingHouse;
 
+    public BookAddBindingModel() {
+    }
 
     public String getIsbn() {
         return isbn;
@@ -130,6 +132,15 @@ public class BookAddBindingModel {
         return this;
     }
 
+    public PublishingHouseEnum getPublishingHouse() {
+        return publishingHouse;
+    }
+
+    public BookAddBindingModel setPublishingHouse(PublishingHouseEnum publishingHouse) {
+        this.publishingHouse = publishingHouse;
+        return this;
+    }
+
     public Set<CategoryEnum> getCategoryEnums() {
         return categoryEnums;
     }
@@ -145,15 +156,6 @@ public class BookAddBindingModel {
 
     public BookAddBindingModel setAuthor(String author) {
         this.author = author;
-        return this;
-    }
-
-    public String getPublishingHouse() {
-        return publishingHouse;
-    }
-
-    public BookAddBindingModel setPublishingHouse(String publishingHouse) {
-        this.publishingHouse = publishingHouse;
         return this;
     }
 }
