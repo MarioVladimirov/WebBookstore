@@ -20,8 +20,8 @@
                 <li class="nav-item">
                     <span sec:authorize="isAuthenticated()" class="navbar-text">
                         Hello, <span th:text="${#authentication.getPrincipal().getUsername()}">User</span>!
-                        Welcome to The Magic World of Books!
                     </span>
+                    <span class="navbar-text">Welcome to The Magic World of Books!</span>
                 </li>
 
                 <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item dropdown">
@@ -39,7 +39,7 @@
 
                 <li class="nav-item">
                     <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control mr-sm-4" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </li>

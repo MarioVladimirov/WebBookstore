@@ -179,3 +179,7 @@ form.main-form {
         margin-right: 0;
     }
 }
+
+input.form-control {
+    width: 400px !important;
+}
