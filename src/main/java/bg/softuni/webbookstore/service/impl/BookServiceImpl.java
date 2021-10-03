@@ -3,7 +3,7 @@ package bg.softuni.webbookstore.service.impl;
 import bg.softuni.webbookstore.model.entity.*;
 import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
 import bg.softuni.webbookstore.model.service.BookAddServiceModel;
-import bg.softuni.webbookstore.model.view.BookViewServiceModel;
+import bg.softuni.webbookstore.model.view.BookViewModel;
 import bg.softuni.webbookstore.repository.*;
 import bg.softuni.webbookstore.service.*;
 import org.modelmapper.ModelMapper;
@@ -71,11 +71,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookViewServiceModel> findAll() {
+    public List<BookViewModel> getAllBooks() {
         return bookRepository
                 .findAll()
                 .stream()
-                .map(bookEntity -> modelMapper.map(bookEntity, BookViewServiceModel.class))
+                .map(bookEntity -> modelMapper.map(bookEntity, BookViewModel.class))
                 .collect(Collectors.toList());
     }
 

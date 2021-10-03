@@ -44,6 +44,9 @@
         </div>
     </div>
 </div>
+
+<th:block th:include="~{fragments/footer}"></th:block>
+
 <!-- Menu Toggle Script -->
 <script>
     $("#menu-toggle").click(function (e) {
@@ -51,8 +54,7 @@
         $("#wrapper").toggleClass("toggled");
     });
 </script>
-
-<th:block th:include="~{fragments/footer}"></th:block>
+<script th:src="@{js/sidebar.js}"></script>
 
 </body>
 </html>
