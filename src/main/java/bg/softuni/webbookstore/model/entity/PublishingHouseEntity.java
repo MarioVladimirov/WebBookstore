@@ -21,7 +21,7 @@ public class PublishingHouseEntity extends BaseEntity {
 
     private String webSite;
 
-    @Column(name = "image_url")
+    @Column(name = "image_url", columnDefinition = "TEXT")
     private String imageUrl;
 
     @OneToMany(mappedBy = "publishingHouse", fetch = FetchType.EAGER)

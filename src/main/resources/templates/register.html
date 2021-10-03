@@ -73,23 +73,6 @@
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="imageUrl" class="text-white font-weight-bold">Image</label>
-                <input th:field="*{imageUrl}"
-                       th:errorclass="is-invalid"
-                       id="imageUrl"
-                       name="imageUrl"
-                       type="text"
-                       class="form-control"
-                       placeholder="ImageUrl"/>
-                <p th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"
-                   id="imageUrlError"
-                   class="errors alert alert-danger">
-                    ImageUrl is required.
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-6 mb-3">
                 <label for="password" class="text-white font-weight-bold">Password</label>
                 <input th:errorclass="is-invalid"
                        id="password"
@@ -104,6 +87,8 @@
                     Password is required.
                 </p>
             </div>
+        </div>
+        <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label for="confirmPassword" class="text-white font-weight-bold">Confirm password</label>
                 <input th:errorclass="is-invalid"

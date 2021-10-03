@@ -20,9 +20,6 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
-    @Column(name = "image_url")
-    private String imageUrl;
-
     @ManyToMany(fetch = FetchType.EAGER)
     private List<UserRoleEntity> roles = new ArrayList<>();
 
@@ -60,15 +57,6 @@ public class UserEntity extends BaseEntity {
 
     public UserEntity setPassword(String password) {
         this.password = password;
-        return this;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public UserEntity setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
         return this;
     }
 

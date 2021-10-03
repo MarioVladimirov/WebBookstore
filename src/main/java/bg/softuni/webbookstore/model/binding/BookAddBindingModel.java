@@ -19,6 +19,8 @@ public class BookAddBindingModel {
 
     private String description;
 
+    @Pattern(regexp = "(https?:\\/\\/.*\\.(?:png|jpg))",
+            message = "Please enter a valid image URL: 'https://{image path}.jpg' or 'https://{image path}.png'")
     private String imageUrl;
 
     @Positive(message = "Pages count should be a positive number")

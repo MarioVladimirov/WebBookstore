@@ -13,10 +13,10 @@ public class AuthorEntity extends BaseEntity {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "image_url", columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "image_url")
+    @Column(columnDefinition = "TEXT")
     private String imageUrl;
 
     @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)

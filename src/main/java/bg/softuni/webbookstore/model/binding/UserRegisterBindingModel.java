@@ -18,10 +18,6 @@ public class UserRegisterBindingModel {
     @NotEmpty(message = "Please enter a username")
     private String username;
 
-    @Pattern(regexp = "(https?:\\/\\/.*\\.(?:png|jpg))",
-            message = "Please enter a valid image URL: 'https://{image path}.jpg' or 'https://{image path}.png'")
-    private String imageUrl;
-
     @Size(min = 2, max = 20, message = "Password should be between 2 and 20 characters long")
     @NotEmpty(message = "Please enter a password")
     private String password;
@@ -54,15 +50,6 @@ public class UserRegisterBindingModel {
 
     public UserRegisterBindingModel setUsername(String username) {
         this.username = username;
-        return this;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public UserRegisterBindingModel setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
         return this;
     }
 
