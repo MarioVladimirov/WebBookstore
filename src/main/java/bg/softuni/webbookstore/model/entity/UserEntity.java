@@ -73,7 +73,7 @@ public class UserEntity extends BaseEntity {
     }
 
     public UserEntity addRole(UserRoleEntity role) {
-        this.roles.add(role);
+        roles.add(role);
         return this;
     }
 }

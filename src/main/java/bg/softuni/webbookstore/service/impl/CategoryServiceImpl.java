@@ -4,8 +4,6 @@ import bg.softuni.webbookstore.repository.CategoryRepository;
 import bg.softuni.webbookstore.service.CategoryService;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-
 @Service
 public class CategoryServiceImpl implements CategoryService {
 

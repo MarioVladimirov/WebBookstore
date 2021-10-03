@@ -22,9 +22,11 @@ public class BookAddBindingModel {
             message = "Please enter a valid image URL: 'https://{image path}.jpg' or 'https://{image path}.png'")
     private String imageUrl;
 
+    @NotNull
     @Positive(message = "Pages count should be a positive number")
     private Integer pagesCount;
 
+    @NotNull
     @Positive(message = "Copies count should be a positive number")
     private Integer copies;
 
@@ -32,6 +34,7 @@ public class BookAddBindingModel {
     //TODO - annotation to check that year is past or present
     private Integer releaseYear;
 
+    @NotNull
     @Positive(message = "Price should be a positive number")
     private BigDecimal price;
 
@@ -44,7 +47,7 @@ public class BookAddBindingModel {
     @NotNull
     private Set<CategoryEnum> categoryEnums;
 
-    @NotNull
+    @NotEmpty
     private String author;
 
 
