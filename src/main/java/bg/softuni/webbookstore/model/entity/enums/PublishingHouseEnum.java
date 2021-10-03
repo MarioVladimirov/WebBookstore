@@ -1,11 +1,17 @@
 package bg.softuni.webbookstore.model.entity.enums;
 
 public enum PublishingHouseEnum {
-    Просвета,
-    Сиела,
-    Изток_Запад,
-    Колибри,
+    ПРОСВЕТА,
+    СИЕЛА,
+    ИЗТОК_ЗАПАД,
+    КОЛИБРИ,
     БАРД,
-    Захарий_Стоянов,
-    Абагар_Холдинг
+    ЗАХАРИЙ_СТОЯНОВ,
+    АБАГАР_ХОЛДИНГ;
+
+    @Override
+    public String toString() {
+        String capitalized = name().charAt(0) + name().substring(1).toLowerCase();
+        return capitalized.replaceAll("_", " ");
+    }
 }
