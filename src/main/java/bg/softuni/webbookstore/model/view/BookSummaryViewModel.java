@@ -1,12 +1,16 @@
 package bg.softuni.webbookstore.model.view;
 
+import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
+
 import java.math.BigDecimal;
+import java.util.Set;
 
 public class BookSummaryViewModel {
 
     private String title;
     private String imageUrl;
     private BigDecimal price;
+    private Set<CategoryEnum> categories;
     private String author;
 
 
@@ -37,6 +41,15 @@ public class BookSummaryViewModel {
 
     public BookSummaryViewModel setPrice(BigDecimal price) {
         this.price = price;
+        return this;
+    }
+
+    public Set<CategoryEnum> getCategories() {
+        return categories;
+    }
+
+    public BookSummaryViewModel setCategories(Set<CategoryEnum> categories) {
+        this.categories = categories;
         return this;
     }
 

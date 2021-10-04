@@ -11,6 +11,8 @@ fetch("http://localhost:8080/books/api")
         }
     });
 
+
+
 searchBar.addEventListener('submit', (e) => {
     e.preventDefault();
 

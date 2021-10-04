@@ -15,11 +15,9 @@ import java.util.List;
 public class BookRestController {
 
     private final BookService bookService;
-    private final ModelMapper modelMapper;
 
-    public BookRestController(BookService bookService, ModelMapper modelMapper) {
+    public BookRestController(BookService bookService) {
         this.bookService = bookService;
-        this.modelMapper = modelMapper;
     }
 
     @GetMapping("/api")
