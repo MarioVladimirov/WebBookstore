@@ -4,9 +4,9 @@ INSERT INTO roles (id, role)
 VALUES (2, 'USER');
 
 INSERT INTO users (id, first_name, last_name, username, password)
-VALUES (1, 'Admin', 'Adminov', 'admin', '12345');
+VALUES (1, 'Admin', 'Adminov', 'admin', '713ced98f52887220162f4a73fc4109ac9a76bb919a888ffb41fed4f922148b158f84bdef58778a3');
 INSERT INTO users (id, first_name, last_name, username, password)
-VALUES (2, 'User', 'Userov', 'user', '12345');
+VALUES (2, 'User', 'Userov', 'user', '713ced98f52887220162f4a73fc4109ac9a76bb919a888ffb41fed4f922148b158f84bdef58778a3');
 
 INSERT INTO users_roles (`user_entity_id`, `roles_id`)
 VALUES (1, 1);

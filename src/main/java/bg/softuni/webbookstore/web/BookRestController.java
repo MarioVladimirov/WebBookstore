@@ -1,6 +1,6 @@
 package bg.softuni.webbookstore.web;
 
-import bg.softuni.webbookstore.model.view.BookViewModel;
+import bg.softuni.webbookstore.model.view.BookSummaryViewModel;
 import bg.softuni.webbookstore.service.BookService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +23,13 @@ public class BookRestController {
     }
 
     @GetMapping("/api")
-    public ResponseEntity<List<BookViewModel>> getAllBooks() {
+    public ResponseEntity<List<BookSummaryViewModel>> getAllBooks() {
 
-        List<BookViewModel> bookViewModels = bookService.getAllBooks();
+        List<BookSummaryViewModel> bookSummaryViewModels = bookService.getAllBooks();
 
         return ResponseEntity
                 .ok()
-                .body(bookViewModels);
+                .body(bookSummaryViewModels);
     }
 
 }
