@@ -1,11 +1,11 @@
 const booksList = document.getElementById('booksList')
 const searchForm = document.getElementById('searchForm')
 
-const allBooks = [];
 
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    const allBooks = [];
     const searchingCharacters = document
         .getElementById('searchBar').value.toLowerCase();
 
@@ -20,6 +20,7 @@ searchForm.addEventListener('submit', (e) => {
                     return book.title.toLowerCase().includes(searchingCharacters)
                         || book.author.toLowerCase().includes(searchingCharacters);
                 });
+
                 displayBooks(filteredBooks);
             }
         );

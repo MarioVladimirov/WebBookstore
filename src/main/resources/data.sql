@@ -39,9 +39,7 @@ VALUES (10, 'НАУКА');
 INSERT INTO categories (id, category)
 VALUES (11, 'КЛАСИЧЕСКИ_РОМАНИ');
 INSERT INTO categories (id, category)
-VALUES (12, 'ХУМОР');
-INSERT INTO categories (id, category)
-VALUES (13, 'ДЕТСКА_ЛИТЕРАТУРА');
+VALUES (12, 'ДЕТСКА_ЛИТЕРАТУРА');
 
 
 INSERT INTO authors (id, first_name, last_name, description, image_url)

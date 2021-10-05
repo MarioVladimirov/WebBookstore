@@ -5,30 +5,18 @@
                 <a class="navbar-brand align-items-center" href="/">
                     <img th:src="@{/images/categories-sidebar.png}" width="20" height="20"
                          class="d-inline-block align-items-center" alt="">
-                    <span>Categories</span>
+                    <span>Категории:</span>
                 </a>
             </li>
             <li>
-                <a th:href="@{/books/all}">All books</a>
+                <a th:href="@{/books/all}">Всички</a>
             </li>
-            <li>
-                <a href="#">Shortcuts</a>
+            <li th:each="c : ${T(bg.softuni.webbookstore.model.entity.enums.CategoryEnum).values()}"
+                >
+                <a th:text="${c}"
+                   th:value="${c}" href="/">Shortcuts</a>
             </li>
-            <li>
-                <a href="#">Overview</a>
-            </li>
-            <li>
-                <a href="#">Events</a>
-            </li>
-            <li>
-                <a href="#">About</a>
-            </li>
-            <li>
-                <a href="#">Services</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
+
         </ul>
     </div>
 </th:block>
