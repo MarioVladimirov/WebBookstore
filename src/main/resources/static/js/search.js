@@ -1,28 +1,31 @@
 const booksList = document.getElementById('booksList')
-const searchBar = document.getElementById('searchBar')
+const searchForm = document.getElementById('searchForm')
 
 const allBooks = [];
 
-fetch("http://localhost:8080/books/api")
-    .then(response => response.json())
-    .then(books => {
-        for (let book of books) {
-            allBooks.push(book);
-        }
-    });
-
-
-
-searchBar.addEventListener('submit', (e) => {
+searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const searchingCharacters = searchBar.value.toLowerCase();
-    let filteredBooks = allBooks.filter(book => {
-        return book.title.toLowerCase().includes(searchingCharacters)
-            || book.author.toLowerCase().includes(searchingCharacters);
-    });
-    displayBooks(filteredBooks);
-})
+    const searchingCharacters = document
+        .getElementById('searchBar').value.toLowerCase();
+
+    fetch("http://localhost:8080/books/api")
+        .then(response => response.json())
+        .then(books => {
+                for (let book of books) {
+                    allBooks.push(book);
+                }
+
+                let filteredBooks = allBooks.filter(book => {
+                    return book.title.toLowerCase().includes(searchingCharacters)
+                        || book.author.toLowerCase().includes(searchingCharacters);
+                });
+                displayBooks(filteredBooks);
+            }
+        );
+
+
+});
 
 
 const displayBooks = (books) => {
@@ -43,9 +46,9 @@ const displayBooks = (books) => {
                 </div>
                 <div class="card-body">
                     <div class="text-center">
-                        <p class="card-text border-bottom ">${b.title}</p>
-                        <p class="card-text border-bottom text-secondary">Author: ${b.author}</p>
-                        <p class="card-text border-bottom ">Price: ${b.price}</p>
+                        <p class="card-text border-bottom equal-size">${b.title}</p>
+                        <p class="card-text border-bottom text-secondary equal-size">Author: ${b.author}</p>
+                        <p class="card-text border-bottom">Price: ${(b.price).toFixed(2)} лв.</p>
                     </div>
                 </div>
             </div>
