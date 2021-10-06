@@ -5,6 +5,7 @@ import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
 import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
 import bg.softuni.webbookstore.model.entity.enums.PublishingHouseEnum;
 import bg.softuni.webbookstore.model.service.BookAddServiceModel;
+import bg.softuni.webbookstore.model.view.BookDetailViewModel;
 import bg.softuni.webbookstore.service.AuthorService;
 import bg.softuni.webbookstore.service.BookService;
 import org.modelmapper.ModelMapper;
@@ -13,10 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -82,9 +80,18 @@ public class BookController {
 
         bookService.add(bookAddServiceModel);
 
-        return "redirect:/home";
-        // TODO
-        // redirect to created book
+        return "redirect:/books/details/" + bookAddServiceModel.getId();
+    }
+
+    @GetMapping("/books/details/{id}")
+    public String details(@PathVariable Long id,
+                          Model model) {
+
+        BookDetailViewModel detailViewModel = bookService.findById(id);
+
+        model.addAttribute("book", detailViewModel);
+
+        return "details";
     }
 
     @GetMapping("/edit")

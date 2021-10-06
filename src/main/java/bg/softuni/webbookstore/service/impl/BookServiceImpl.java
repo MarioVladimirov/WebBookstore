@@ -3,6 +3,7 @@ package bg.softuni.webbookstore.service.impl;
 import bg.softuni.webbookstore.model.entity.*;
 import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
 import bg.softuni.webbookstore.model.service.BookAddServiceModel;
+import bg.softuni.webbookstore.model.view.BookDetailViewModel;
 import bg.softuni.webbookstore.model.view.BookSummaryViewModel;
 import bg.softuni.webbookstore.repository.*;
 import bg.softuni.webbookstore.service.*;
@@ -82,6 +83,19 @@ public class BookServiceImpl implements BookService {
     @Override
     public boolean existsByIsbn(String isbn) {
         return bookRepository.existsByIsbn(isbn);
+    }
+
+    @Override
+    public BookDetailViewModel findById(Long id) {
+        BookEntity bookEntity = bookRepository
+                .findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Book not found"));
+
+        BookDetailViewModel viewModel = modelMapper
+                .map(bookEntity, BookDetailViewModel.class);
+
+        //TODO - check what is returned and if additional map is needed
+        return viewModel;
     }
 
 

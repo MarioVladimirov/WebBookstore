@@ -185,3 +185,27 @@ form > input.form-control {
     line-height: 24px;
 }
 
+.book-card {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    background-color: #ececec;
+}
+
+.product-box .image-wrapper img.first {
+    position: relative;
+    z-index: 9;
+    height: 225px;
+    width: 100%;
+    display: block;
+}
+
+.product-box .image-wrapper img {
+    display: table;
+    max-width: 100%;
+    padding: 0px;
+    margin: 0px auto;
+    border: none;
+    border-radius: 3px 3px 0px 0px;
+    vertical-align: middle;
+}

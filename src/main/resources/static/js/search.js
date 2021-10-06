@@ -32,29 +32,62 @@ searchForm.addEventListener('submit', (e) => {
 const displayBooks = (books) => {
     booksList.innerHTML = books
         .map((b) => {
-            return `<div class="col-md-3" >
-                <div class="card mb-4 box-shadow">
-                <img src="${b.imageUrl}" class="card-img-top" alt="Thumbnail [100%x225]"
-                     data-holder-rendered="true"
-                     style="height: 225px; width: 100%; display: block;">
-                <div class="d-flex justify-content-between align-items-center">
-                     <div class="btn-group">
-                        <a href="/books/details/${b.id}"  type="button" class="btn btn-sm btn-outline-secondary">Details</a>
-                     </div>
-                     <div class="btn-group">
-                         <a href="/books/delete/${b.id}"  type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
-                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="text-center">
-                        <p class="card-text border-bottom equal-size">${b.title}</p>
-                        <p class="card-text border-bottom text-secondary equal-size">Author: ${b.author}</p>
-                        <p class="card-text border-bottom">Price: ${(b.price).toFixed(2)} лв.</p>
-                    </div>
-                </div>
-            </div>
-            </div>`
+            return `<div class="book-card col-xs-3 five-on-a-row">
+                        <a class="product-box" href="/books/details/${b.id}">
+                            <span class="image-wrapper">
+                                <img class="first" src="${b.imageUrl}" alt="Thumbnail [100%x225]"
+                                    data-holder-rendered="true">
+                            </span>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="/books/details/${b.id}"
+                                        type="button" class="btn btn-sm btn-outline-secondary">
+                                        <img src="/" alt="">
+                                        Add to Cart
+                                    </a>
+                                </div>
+                                <div class="btn-group">
+                                    <a href="/books/details/${b.id}"
+                                        type="button" class="btn btn-sm btn-outline-secondary">
+                                        <img src="/" alt="">
+                                        Add to Favorites
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <p class="card-text equal-size">${b.title}</p>
+                                    <p class="card-text text-secondary equal-size">Author: ${b.author}</p>
+                                    <p class="card-text">Price: ${(b.price).toFixed(2)} лв.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>`
         })
         .join('');
 
 }
+
+
+// return `<div class="col-md-3" >
+//     <div class="card mb-4 box-shadow">
+//     <img src="${b.imageUrl}" class="card-img-top" alt="Thumbnail [100%x225]"
+//          data-holder-rendered="true"
+//          style="height: 225px; width: 100%; display: block;">
+//     <div class="d-flex justify-content-between align-items-center">
+//          <div class="btn-group">
+//             <a href="/books/details/${b.id}"  type="button" class="btn btn-sm btn-outline-secondary">Details</a>
+//          </div>
+//          <div class="btn-group">
+//              <a href="/books/delete/${b.id}"  type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
+//          </div>
+//     </div>
+//     <div class="card-body">
+//         <div class="text-center">
+//             <p class="card-text border-bottom equal-size">${b.title}</p>
+//             <p class="card-text border-bottom text-secondary equal-size">Author: ${b.author}</p>
+//             <p class="card-text border-bottom">Price: ${(b.price).toFixed(2)} лв.</p>
+//         </div>
+//     </div>
+// </div>
+// </div>`

@@ -8,6 +8,7 @@ import java.util.Set;
 
 public class BookDetailViewModel {
 
+    private Long id;
     private String title;
     private String description;
     private String imageUrl;
@@ -21,6 +22,15 @@ public class BookDetailViewModel {
     private String author;
 
     public BookDetailViewModel() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public BookDetailViewModel setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public String getTitle() {
