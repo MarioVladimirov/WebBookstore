@@ -7,6 +7,7 @@ import java.util.Set;
 
 public class BookSummaryViewModel {
 
+    private Long id;
     private String title;
     private String imageUrl;
     private BigDecimal price;
@@ -15,6 +16,15 @@ public class BookSummaryViewModel {
 
 
     public BookSummaryViewModel() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public BookSummaryViewModel setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public String getTitle() {
