@@ -17,33 +17,39 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="row mt-5" id="booksList">
-            <div class="book-card col-xs-3 five-on-a-row">
-                <a class="product-box" href="/books/details/${b.id}">
+            <div th:each="b : ${books}"
+                 th:object="${b}"
+                 class="book-card col-md-3 five-on-a-row">
+                <a class="product-box" th:href="@{/books/details/{id}(id=*{id})}">
                             <span class="image-wrapper">
-                                <img class="first" src="${b.imageUrl}" alt="Thumbnail [100%x225]"
+                                <img class="first" th:src="*{getImageUrl()}" alt="Thumbnail [100%x225]"
                                      data-holder-rendered="true">
                             </span>
                     <div class="d-flex">
                         <div class="btn-group">
-                            <a href="/books/details/${b.id}"
+                            <a th:href="@{/books/details/{id}(id=*{id})}"
                                type="button" class="btn btn-sm">
-                                <img src="/images/add-to-favorites.png" title="Add to Favorites"
+                                <img th:src="@{/images/add-to-favorites.png}" title="Add to Favorites"
                                      alt="add-to-favorites">
                             </a>
                         </div>
                         <div class="btn-group">
-                            <a href="/books/details/${b.id}"
+                            <a th:href="@{/books/details/{id}(id=*{id})}"
                                type="button" class="btn btn-sm">
-                                <img src="/images/add-to-cart.png" title="Add to Cart"
+                                <img th:src="@{/images/add-to-cart.png}" title="Add to Cart"
                                      alt="add-to-cart">
                             </a>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="text-center">
-                            <p class="card-text equal-size">${b.title}</p>
-                            <p class="card-text text-secondary equal-size">Author: ${b.author}</p>
-                            <p class="card-text">Price: ${(b.price).toFixed(2)} лв.</p>
+                            <p class="card-text equal-size" th:text="*{title}">${b.title}</p>
+                            <p class="card-text text-secondary equal-size">Author:
+                                <span th:text="*{author}"></span>
+                            </p>
+                            <p class="card-text">Price:
+                                <span th:text="*{price}"></span> лв.
+                            </p>
                         </div>
                     </div>
                 </a>

@@ -2,19 +2,6 @@ const booksList = document.getElementById('booksList')
 const searchForm = document.getElementById('searchForm')
 const sidebar = document.getElementById('sidebar')
 
-// document.addEventListener('load', (e) => {
-//     const allBooks = [];
-//     fetch("http://localhost:8080/books/api")
-//         .then(response => response.json())
-//         .then(books => {
-//                 for (let book of books) {
-//                     allBooks.push(book);
-//                 }
-//                 displayBooks(allBooks);
-//             }
-//         );
-// })
-
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -62,7 +49,7 @@ searchForm.addEventListener('submit', (e) => {
 const displayBooks = (books) => {
     booksList.innerHTML = books
         .map((b) => {
-            return `<div class="book-card col-xs-3 five-on-a-row">
+            return `<div class="book-card col-md-3 five-on-a-row">
                         <a class="product-box" href="/books/details/${b.id}">
                             <span class="image-wrapper">
                                 <img class="first" src="${b.imageUrl}" alt="Thumbnail [100%x225]"

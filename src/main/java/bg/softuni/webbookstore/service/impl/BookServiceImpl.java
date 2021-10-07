@@ -98,7 +98,6 @@ public class BookServiceImpl implements BookService {
         return viewModel;
     }
 
-
     private BookSummaryViewModel getSummaryViewModel(BookEntity bookEntity) {
         BookSummaryViewModel viewModel = modelMapper
                 .map(bookEntity, BookSummaryViewModel.class);

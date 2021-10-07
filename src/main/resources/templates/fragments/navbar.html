@@ -53,6 +53,7 @@
                         <a sec:authorize="!isAuthenticated()" class="dropdown-item" th:href="@{/users/register}">Register</a>
                         <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/users/profile}">My
                             profile</a>
+                        <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/users/profile}">My orders</a>
                         <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/users/logout}">
                             <div class="form-inline my-2 my-lg-0 border px-3">
                                 <form th:action="@{/users/logout}"
