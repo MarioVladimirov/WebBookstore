@@ -1,21 +1,21 @@
 const booksList = document.getElementById('booksList')
-const sidebar = document.getElementById('sidebar')
-
-const allBooks = [];
-
-fetch("http://localhost:8080/books/api")
-    .then(response => response.json())
-    .then(books => {
-        for (let book of books) {
-            allBooks.push(book);
-        }
-    });
 
 
 sidebar.addEventListener('click', (e) => {
     e.preventDefault();
 
-    const category = e.target.value.toUpperCase();
+    const category = e.target.value;
+
+    const allBooks = [];
+
+    fetch("http://localhost:8080/books/api")
+        .then(response => response.json())
+        .then(books => {
+            for (let book of books) {
+                allBooks.push(book);
+            }
+        });
+
     let filteredBooks = allBooks.filter(book =>
         book.categories.contains(category));
 

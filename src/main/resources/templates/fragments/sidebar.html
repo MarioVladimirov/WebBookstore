@@ -3,18 +3,20 @@
         <ul class="sidebar-nav" id="sidebar">
             <li class="sidebar-brand">
                 <a class="navbar-brand align-items-center" href="/">
-                    <img th:src="@{/images/categories-sidebar.png}" width="20" height="20"
-                         class="d-inline-block align-items-center" alt="">
                     <span>Категории:</span>
                 </a>
             </li>
-            <li>
-                <a th:href="@{/books/all}">Всички</a>
+            <li class="nav-item">
+                <a th:href="@{/books/all}" class="nav-link">
+<!--                    <img th:src="@{/images/arrow.png}" width="20" height="20"-->
+<!--                         class="d-inline-block align-items-center" alt="">-->
+                    <span>Всички</span>
+                </a>
             </li>
-            <li th:each="c : ${T(bg.softuni.webbookstore.model.entity.enums.CategoryEnum).values()}"
-                >
-                <a th:text="${c}"
-                   th:value="${c}" href="/">Shortcuts</a>
+            <li th:each="c : ${T(bg.softuni.webbookstore.model.entity.enums.CategoryEnum).values()}">
+                <a th:href="@{/books/${c}}" class="nav-link">
+                    <span th:text="${c}" th:value="${c}">Категория</span>
+                </a>
             </li>
 
         </ul>

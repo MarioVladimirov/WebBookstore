@@ -15,31 +15,32 @@ VALUES (1, 2);
 INSERT INTO users_roles (`user_entity_id`, `roles_id`)
 VALUES (2, 2);
 
+INSERT INTO categories (id, category)
+VALUES (1, 'ХУДОЖЕСТВЕНА_ЛИТЕРАТУРА');
+INSERT INTO categories (id, category)
+VALUES (2, 'КРИМИНАЛНИ_И_ТРИЛЪРИ');
+INSERT INTO categories (id, category)
+VALUES (3, 'РОМАНТИЧНИ');
+INSERT INTO categories (id, category)
+VALUES (4, 'ФЕНТЪЗИ');
+INSERT INTO categories (id, category)
+VALUES (5, 'НАУЧНА_ФАНТАТИКА');
+INSERT INTO categories (id, category)
+VALUES (6, 'НАУКА');
+INSERT INTO categories (id, category)
+VALUES (7, 'КЛАСИЧЕСКИ_РОМАНИ');
+INSERT INTO categories (id, category)
+VALUES (8, 'ДЕТСКА_ЛИТЕРАТУРА');
+INSERT INTO categories (id, category)
+VALUES (9, 'ИСТОРИЯ');
+INSERT INTO categories (id, category)
+VALUES (10, 'ИЗКУСТВО');
+INSERT INTO categories (id, category)
+VALUES (11, 'ХОРЪР');
+INSERT INTO categories (id, category)
+VALUES (12, 'ПОЕЗИЯ');
 
-INSERT INTO categories (id, category)
-VALUES (1, 'ФЕНТЪЗИ');
-INSERT INTO categories (id, category)
-VALUES (2, 'ИСТОРИЯ');
-INSERT INTO categories (id, category)
-VALUES (3, 'ИЗКУСТВО');
-INSERT INTO categories (id, category)
-VALUES (4, 'ХОРЪР');
-INSERT INTO categories (id, category)
-VALUES (5, 'ПОЕЗИЯ');
-INSERT INTO categories (id, category)
-VALUES (6, 'ХУДОЖЕСТВЕНА_ЛИТЕРАТУРА');
-INSERT INTO categories (id, category)
-VALUES (7, 'КРИМИНАЛНИ_И_ТРИЛЪРИ');
-INSERT INTO categories (id, category)
-VALUES (8, 'РОМАНТИЧНИ');
-INSERT INTO categories (id, category)
-VALUES (9, 'НАУЧНА_ФАНТАТИКА');
-INSERT INTO categories (id, category)
-VALUES (10, 'НАУКА');
-INSERT INTO categories (id, category)
-VALUES (11, 'КЛАСИЧЕСКИ_РОМАНИ');
-INSERT INTO categories (id, category)
-VALUES (12, 'ДЕТСКА_ЛИТЕРАТУРА');
+
 
 
 INSERT INTO authors (id, first_name, last_name, description, image_url)
@@ -121,26 +122,24 @@ VALUES (6, '9789542815075', 'Човек на име Уве',
 
 
 INSERT INTO books_categories (book_entity_id, categories_id)
-VALUES (1, 6);
+VALUES (1, 1);
 INSERT INTO books_categories (book_entity_id, categories_id)
-VALUES (1, 11);
+VALUES (1, 7);
 INSERT INTO books_categories (book_entity_id, categories_id)
-VALUES (2, 2);
+VALUES (2, 1);
 INSERT INTO books_categories (book_entity_id, categories_id)
-VALUES (2, 6);
+VALUES (2, 4);
 INSERT INTO books_categories (book_entity_id, categories_id)
-VALUES (3, 6);
+VALUES (3, 1);
 INSERT INTO books_categories (book_entity_id, categories_id)
-VALUES (3, 9);
+VALUES (3, 5);
 INSERT INTO books_categories (book_entity_id, categories_id)
-VALUES (4, 2);
+VALUES (4, 1);
 INSERT INTO books_categories (book_entity_id, categories_id)
-VALUES (4, 6);
+VALUES (4, 4);
 INSERT INTO books_categories (book_entity_id, categories_id)
-VALUES (5, 6);
+VALUES (5, 1);
 INSERT INTO books_categories (book_entity_id, categories_id)
-VALUES (5, 11);
+VALUES (5, 7);
 INSERT INTO books_categories (book_entity_id, categories_id)
-VALUES (6, 3);
-INSERT INTO books_categories (book_entity_id, categories_id)
-VALUES (6, 6);
+VALUES (6, 1);

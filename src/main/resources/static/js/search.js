@@ -1,6 +1,19 @@
 const booksList = document.getElementById('booksList')
 const searchForm = document.getElementById('searchForm')
+const sidebar = document.getElementById('sidebar')
 
+// document.addEventListener('load', (e) => {
+//     const allBooks = [];
+//     fetch("http://localhost:8080/books/api")
+//         .then(response => response.json())
+//         .then(books => {
+//                 for (let book of books) {
+//                     allBooks.push(book);
+//                 }
+//                 displayBooks(allBooks);
+//             }
+//         );
+// })
 
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -13,21 +26,38 @@ searchForm.addEventListener('submit', (e) => {
         .then(response => response.json())
         .then(books => {
                 for (let book of books) {
-                    allBooks.push(book);
+                    if (book.title.toLowerCase().includes(searchingCharacters)
+                        || book.author.toLowerCase().includes(searchingCharacters)) {
+
+                        allBooks.push(book);
+                    }
                 }
-
-                let filteredBooks = allBooks.filter(book => {
-                    return book.title.toLowerCase().includes(searchingCharacters)
-                        || book.author.toLowerCase().includes(searchingCharacters);
-                });
-
-                displayBooks(filteredBooks);
+                displayBooks(allBooks);
             }
         );
-
-
 });
 
+// sidebar.addEventListener('click', (e) => {
+//     e.preventDefault();
+//
+//     const allBooks = [];
+//     let target = e.target;
+//     const category = target.getEle
+//
+//         fetch("http://localhost:8080/books/api")
+//         .then(response => response.json())
+//         .then(books => {
+//                 for (let book of books) {
+//                     allBooks.push(book);
+//                 }
+//
+//                 let filteredBooks = allBooks.filter(book =>
+//                     book.categories.contains(category));
+//
+//                 displayBooks(filteredBooks);
+//             }
+//         );
+// });
 
 const displayBooks = (books) => {
     booksList.innerHTML = books
@@ -38,19 +68,19 @@ const displayBooks = (books) => {
                                 <img class="first" src="${b.imageUrl}" alt="Thumbnail [100%x225]"
                                     data-holder-rendered="true">
                             </span>
-                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex">
                                 <div class="btn-group">
                                     <a href="/books/details/${b.id}"
-                                        type="button" class="btn btn-sm btn-outline-secondary">
-                                        <img src="/" alt="">
-                                        Add to Cart
+                                        type="button" class="btn btn-sm">
+                                        <img src="/images/add-to-favorites.png" title="Add to Favorites" 
+                                            alt="add-to-favorites">
                                     </a>
                                 </div>
                                 <div class="btn-group">
                                     <a href="/books/details/${b.id}"
-                                        type="button" class="btn btn-sm btn-outline-secondary">
-                                        <img src="/" alt="">
-                                        Add to Favorites
+                                        type="button" class="btn btn-sm">
+                                        <img src="/images/add-to-cart.png" title="Add to Cart"
+                                        alt="add-to-cart">
                                     </a>
                                 </div>
                             </div>
