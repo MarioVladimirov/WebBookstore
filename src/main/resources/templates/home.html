@@ -6,16 +6,16 @@
 
 <body>
 
-<div>
-    <th:block th:include="~{fragments/navbar}"></th:block>
-</div>
+<div class="wrapper container-fluid">
 
-<div id="wrapper" class="toggled container-fluid">
-
+    <!-- Sidebar-->
     <th:block th:include="~{fragments/sidebar}"></th:block>
 
     <!-- Page Content -->
-    <div id="page-content-wrapper">
+    <div id="content">
+
+        <th:block th:include="~{fragments/navbar}"></th:block>
+
         <div class="row mt-5" id="booksList">
             <div th:each="b : ${books}"
                  th:object="${b}"
@@ -62,9 +62,12 @@
 
 <!-- Menu Toggle Script -->
 <script>
-    $("#menu-toggle").click(function (e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
+    $(document).ready(function () {
+
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+
     });
 </script>
 <script th:src="@{js/search.js}" type="text/javascript"></script>

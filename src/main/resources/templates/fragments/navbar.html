@@ -2,11 +2,17 @@
           xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #0f2137;">
-        <a class="navbar-brand" th:href="@{/}">
-            <img alt="book picture"
-                 th:src="@{/images/book-magic.jpg}"
-                 class="logo">
-        </a>
+        <!--        <a class="navbar-brand" th:href="@{/}">-->
+        <!--            <img alt="book picture"-->
+        <!--                 th:src="@{/images/book-magic.jpg}"-->
+        <!--                 class="logo">-->
+        <!--        </a>-->
+
+        <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -38,7 +44,8 @@
 
                 <li class="nav-item">
                     <form id="searchForm" class="form-inline">
-                        <input id="searchBar" class="form-control mr-sm-4" type="search" placeholder="Search book by title or author" aria-label="Search">
+                        <input id="searchBar" class="form-control mr-sm-4" type="search"
+                               placeholder="Search book by title or author" aria-label="Search">
                         <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </li>
@@ -53,7 +60,8 @@
                         <a sec:authorize="!isAuthenticated()" class="dropdown-item" th:href="@{/users/register}">Register</a>
                         <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/users/profile}">My
                             profile</a>
-                        <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/users/profile}">My orders</a>
+                        <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/users/profile}">My
+                            orders</a>
                         <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/users/logout}">
                             <div class="form-inline my-2 my-lg-0 border px-3">
                                 <form th:action="@{/users/logout}"
