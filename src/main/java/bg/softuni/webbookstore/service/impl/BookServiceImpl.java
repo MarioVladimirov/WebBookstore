@@ -94,6 +94,9 @@ public class BookServiceImpl implements BookService {
         BookDetailViewModel viewModel = modelMapper
                 .map(bookEntity, BookDetailViewModel.class);
 
+        viewModel.setAuthor(
+                bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName());
+
         //TODO - check what is returned and if additional map is needed
         return viewModel;
     }
@@ -101,9 +104,9 @@ public class BookServiceImpl implements BookService {
     private BookSummaryViewModel getSummaryViewModel(BookEntity bookEntity) {
         BookSummaryViewModel viewModel = modelMapper
                 .map(bookEntity, BookSummaryViewModel.class);
+
         viewModel.setAuthor(
-                bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName()
-        );
+                bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName());
 
         return viewModel;
     }

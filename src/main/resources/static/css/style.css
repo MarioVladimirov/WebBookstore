@@ -174,8 +174,33 @@ form.main-form {
 
 
 /* Shrinking the sidebar from 250px to 80px and center aligining its content*/
-.wrapper {
-    display: block;
+#wrapper {
+    display: grid;
+    row-gap: 30px;
+    column-gap: 30px;
+    grid-template-areas:
+         'sidebar content content'
+         'footer footer footer';
+}
+
+#sidebar {
+    grid-area: sidebar;
+}
+
+#footer {
+    grid-area: footer;
+}
+
+@media screen and (max-width: 728px) {
+    #site {
+        grid-template-areas:
+             'content'
+             'footer';
+    }
+
+    #sidebar {
+        display: none;
+    }
 }
 
 #sidebar.active {
