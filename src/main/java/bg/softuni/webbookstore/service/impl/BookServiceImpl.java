@@ -2,6 +2,7 @@ package bg.softuni.webbookstore.service.impl;
 
 import bg.softuni.webbookstore.model.entity.*;
 import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
+import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
 import bg.softuni.webbookstore.model.service.BookAddServiceModel;
 import bg.softuni.webbookstore.model.view.BookDetailViewModel;
 import bg.softuni.webbookstore.model.view.BookSummaryViewModel;
@@ -39,10 +40,14 @@ public class BookServiceImpl implements BookService {
 
         //TODO - set image url
 
-        Set<CategoryEnum> categories = bookAddServiceModel.getCategoryEnums();
-        for (CategoryEnum category : categories) {
+        bookEntity.setLanguage(
+                LanguageEnum.valueOf(bookAddServiceModel.getLanguage().toUpperCase()));
+
+        Set<String> categories = bookAddServiceModel.getCategories();
+        for (String category : categories) {
+            CategoryEnum categoryEnum = CategoryEnum.valueOf(category.toUpperCase());
             CategoryEntity categoryEntity = categoryRepository
-                    .findByCategory(category)
+                    .findByCategory(categoryEnum)
                     .orElseThrow(() -> new IllegalArgumentException(
                             "Category with name " + category + " not found")
                     );

@@ -1,5 +1,7 @@
 package bg.softuni.webbookstore.service.impl;
 
+import bg.softuni.webbookstore.model.entity.AuthorEntity;
+import bg.softuni.webbookstore.model.service.AuthorAddServiceModel;
 import bg.softuni.webbookstore.repository.AuthorRepository;
 import bg.softuni.webbookstore.service.AuthorService;
 import org.modelmapper.ModelMapper;
@@ -22,5 +24,14 @@ public class AuthorServiceImpl implements AuthorService {
     public List<String> findAllAuthorsNames() {
         return authorRepository
                 .findAllAuthorsNames();
+    }
+
+    @Override
+    public void add(AuthorAddServiceModel authorAddServiceModel) {
+
+        AuthorEntity authorEntity = modelMapper
+                .map(authorAddServiceModel, AuthorEntity.class);
+
+        authorRepository.save(authorEntity);
     }
 }

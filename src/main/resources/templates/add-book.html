@@ -217,7 +217,7 @@
                     <label for="categories" class="text-white font-weight-bold">Categories</label>
                     <select id="categories"
                             name="categories"
-                            th:field="*{categoryEnums}"
+                            th:field="*{categories}"
                             th:errorclass="is-invalid"
                             class="custom-select"
                             multiple>
@@ -227,7 +227,7 @@
                                 th:value="${c}"
                         </option>
                     </select>
-                    <p th:if="${#fields.hasErrors('categoryEnums')}" th:errors="*{categoryEnums}"
+                    <p th:if="${#fields.hasErrors('categoryEnums')}" th:errors="*{categories}"
                        id="categoriesError"
                        class="errors alert alert-danger">
                         Category is required.

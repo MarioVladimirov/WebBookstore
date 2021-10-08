@@ -1,7 +1,5 @@
 package bg.softuni.webbookstore.model.binding;
 
-import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
-import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
 import bg.softuni.webbookstore.model.entity.enums.PublishingHouseEnum;
 
 import javax.validation.constraints.*;
@@ -39,13 +37,13 @@ public class BookAddBindingModel {
     private BigDecimal price;
 
     @NotNull
-    private LanguageEnum language;
+    private String language;
 
     @NotNull
     private PublishingHouseEnum publishingHouse;
 
     @NotNull
-    private Set<CategoryEnum> categoryEnums;
+    private Set<String> categories;
 
     @NotEmpty
     private String author;
@@ -126,11 +124,11 @@ public class BookAddBindingModel {
         return this;
     }
 
-    public LanguageEnum getLanguage() {
+    public String getLanguage() {
         return language;
     }
 
-    public BookAddBindingModel setLanguage(LanguageEnum language) {
+    public BookAddBindingModel setLanguage(String language) {
         this.language = language;
         return this;
     }
@@ -144,12 +142,12 @@ public class BookAddBindingModel {
         return this;
     }
 
-    public Set<CategoryEnum> getCategoryEnums() {
-        return categoryEnums;
+    public Set<String> getCategories() {
+        return categories;
     }
 
-    public BookAddBindingModel setCategoryEnums(Set<CategoryEnum> categoryEnums) {
-        this.categoryEnums = categoryEnums;
+    public BookAddBindingModel setCategories(Set<String> categories) {
+        this.categories = categories;
         return this;
     }
 

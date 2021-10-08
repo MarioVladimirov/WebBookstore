@@ -1,7 +1,5 @@
 package bg.softuni.webbookstore.model.service;
 
-import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
-import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
 import bg.softuni.webbookstore.model.entity.enums.PublishingHouseEnum;
 
 import java.math.BigDecimal;
@@ -18,9 +16,9 @@ public class BookAddServiceModel {
     private Integer copies;
     private Integer releaseYear;
     private BigDecimal price;
-    private LanguageEnum language;
+    private String language;
     private PublishingHouseEnum publishingHouse;
-    private Set<CategoryEnum> categoryEnums;
+    private Set<String> categories;
     private String author;
     private String creator;
 
@@ -109,11 +107,11 @@ public class BookAddServiceModel {
         return this;
     }
 
-    public LanguageEnum getLanguage() {
+    public String getLanguage() {
         return language;
     }
 
-    public BookAddServiceModel setLanguage(LanguageEnum language) {
+    public BookAddServiceModel setLanguage(String language) {
         this.language = language;
         return this;
     }
@@ -127,12 +125,12 @@ public class BookAddServiceModel {
         return this;
     }
 
-    public Set<CategoryEnum> getCategoryEnums() {
-        return categoryEnums;
+    public Set<String> getCategories() {
+        return categories;
     }
 
-    public BookAddServiceModel setCategoryEnums(Set<CategoryEnum> categoryEnums) {
-        this.categoryEnums = categoryEnums;
+    public BookAddServiceModel setCategories(Set<String> categories) {
+        this.categories = categories;
         return this;
     }
 
