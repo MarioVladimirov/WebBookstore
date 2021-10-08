@@ -6,124 +6,136 @@
 
 <body>
 
-<div>
-    <th:block th:include="~{fragments/navbar}"></th:block>
-</div>
+<th:block th:include="~{fragments/navbar}"></th:block>
 
-<div class="container">
-    <h2 class="text-center text-white">Register User</h2>
-    <form method="POST"
-          th:action="@{/users/register}"
-          th:object="${userRegisterBindingModel}"
-          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
-        <div class="row">
-            <div class="form-group col-md-6 mb-3">
-                <label for="firstName" class="text-white font-weight-bold">First Name</label>
-                <input th:field="*{firstName}"
-                       th:errorclass="is-invalid"
-                       id="firstName"
-                       name="firstName"
-                       type="text"
-                       min="2" max="20"
-                       class="form-control"
-                       placeholder="First name"/>
-                <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
-                   id="firstNameError"
-                   class="invalid-feedback errors alert alert-danger">
-                    First name is required.
-                </p>
-            </div>
-            <div class="form-group col-md-6 mb-3">
-                <label for="lastName" class="text-white font-weight-bold">Last Name</label>
-                <input th:field="*{lastName}"
-                       th:errorclass="is-invalid"
-                       id="lastName"
-                       name="lastName"
-                       type="text"
-                       min="2" max="20"
-                       class="form-control"
-                       placeholder="First name"/>
-                <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
-                   id="lastNameError"
-                   class="invalid-feedback errors alert alert-danger">
-                    Last name is required.
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-6 mb-3">
-                <label for="username" class="text-white font-weight-bold">Username</label>
-                <input th:field="*{username}"
-                       th:errorclass="is-invalid"
-                       id="username"
-                       name="username"
-                       type="text"
-                       min="2" max="20"
-                       class="form-control"
-                       placeholder="Username"/>
-                <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
-                   id="usernameError"
-                   class="invalid-feedback errors alert alert-danger">
-                    Username is required.
-                </p>
-                <p th:if="${userExistsError}"
-                   id="usernameUniqueError"
-                   class="invalid-feedback errors alert alert-danger">
-                    Username is already occupied.
-                </p>
-            </div>
-            <div class="form-group col-md-6 mb-3">
-                <label for="password" class="text-white font-weight-bold">Password</label>
-                <input th:errorclass="is-invalid"
-                       id="password"
-                       name="password"
-                       type="password"
-                       min="2" max="20"
-                       class="form-control"
-                       placeholder="Password"/>
-                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
-                   id="passwordError"
-                   class="invalid-feedback errors alert alert-danger">
-                    Password is required.
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-6 mb-3">
-                <label for="confirmPassword" class="text-white font-weight-bold">Confirm password</label>
-                <input th:errorclass="is-invalid"
-                       id="confirmPassword"
-                       name="confirmPassword"
-                       type="password"
-                       min="2" max="20"
-                       class="form-control"
-                       placeholder="Confirm password"/>
-                <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"
-                   id="confirmPasswordError"
-                   class="invalid-feedback errors alert alert-danger">
-                    Password is required.
-                </p>
-                <p th:if="${confirmPasswordDifferent}"
-                   id="confirmPasswordDifferent"
-                   class="invalid-feedback errors alert alert-danger">
-                    Passwords don't match.
-                </p>
-            </div>
-        </div>
+<div class="container-fluid" id="wrapper">
 
-        <div class="row">
-            <div class="col col-md-4">
-                <div class="button-holder d-flex">
-                    <input type="submit" class="btn btn-info btn-lg" value="Register"/>
+    <!-- Sidebar-->
+    <th:block th:include="~{fragments/sidebar}"></th:block>
+
+    <!-- Page Content -->
+    <div id="content">
+
+        <h2 class="text-center text-white">Register User</h2>
+        <form method="POST"
+              th:action="@{/users/register}"
+              th:object="${userRegisterBindingModel}"
+              class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="firstName" class="text-white font-weight-bold">First Name</label>
+                    <input th:field="*{firstName}"
+                           th:errorclass="is-invalid"
+                           id="firstName"
+                           name="firstName"
+                           type="text"
+                           min="2" max="20"
+                           class="form-control"
+                           placeholder="First name"/>
+                    <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                       id="firstNameError"
+                       class="invalid-feedback errors alert alert-danger">
+                        First name is required.
+                    </p>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="lastName" class="text-white font-weight-bold">Last Name</label>
+                    <input th:field="*{lastName}"
+                           th:errorclass="is-invalid"
+                           id="lastName"
+                           name="lastName"
+                           type="text"
+                           min="2" max="20"
+                           class="form-control"
+                           placeholder="First name"/>
+                    <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                       id="lastNameError"
+                       class="invalid-feedback errors alert alert-danger">
+                        Last name is required.
+                    </p>
                 </div>
             </div>
-        </div>
-    </form>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="username" class="text-white font-weight-bold">Username</label>
+                    <input th:field="*{username}"
+                           th:errorclass="is-invalid"
+                           id="username"
+                           name="username"
+                           type="text"
+                           min="2" max="20"
+                           class="form-control"
+                           placeholder="Username"/>
+                    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+                       id="usernameError"
+                       class="invalid-feedback errors alert alert-danger">
+                        Username is required.
+                    </p>
+                    <p th:if="${userExistsError}"
+                       id="usernameUniqueError"
+                       class="invalid-feedback errors alert alert-danger">
+                        Username is already occupied.
+                    </p>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="password" class="text-white font-weight-bold">Password</label>
+                    <input th:errorclass="is-invalid"
+                           id="password"
+                           name="password"
+                           type="password"
+                           min="2" max="20"
+                           class="form-control"
+                           placeholder="Password"/>
+                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                       id="passwordError"
+                       class="invalid-feedback errors alert alert-danger">
+                        Password is required.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="confirmPassword" class="text-white font-weight-bold">Confirm password</label>
+                    <input th:errorclass="is-invalid"
+                           id="confirmPassword"
+                           name="confirmPassword"
+                           type="password"
+                           min="2" max="20"
+                           class="form-control"
+                           placeholder="Confirm password"/>
+                    <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"
+                       id="confirmPasswordError"
+                       class="invalid-feedback errors alert alert-danger">
+                        Password is required.
+                    </p>
+                    <p th:if="${confirmPasswordDifferent}"
+                       id="confirmPasswordDifferent"
+                       class="invalid-feedback errors alert alert-danger">
+                        Passwords don't match.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex">
+                        <input type="submit" class="btn btn-info btn-lg" value="Register"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer-->
+    <th:block th:include="~{fragments/footer}"></th:block>
+
 </div>
 
-<div>
-    <th:block th:include="~{fragments/footer}"></th:block>
-</div>
+<!-- Sidebar Toggle Script -->
+<script th:src="@{js/sidebar-toggle.js}" type="text/javascript"></script>
+
+<!-- Search script-->
+<script th:src="@{js/search.js}" type="text/javascript"></script>
 
 </body>
 </html>
