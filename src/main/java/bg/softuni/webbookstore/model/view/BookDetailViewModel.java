@@ -20,6 +20,7 @@ public class BookDetailViewModel {
     private PublishingHouseEnum publishingHouse;
     private Set<CategoryEnum> categories;
     private String author;
+    private Long authorId;
 
     public BookDetailViewModel() {
     }
@@ -129,6 +130,15 @@ public class BookDetailViewModel {
 
     public BookDetailViewModel setAuthor(String author) {
         this.author = author;
+        return this;
+    }
+
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public BookDetailViewModel setAuthorId(Long authorId) {
+        this.authorId = authorId;
         return this;
     }
 }

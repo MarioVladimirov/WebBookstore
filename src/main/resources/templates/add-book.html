@@ -74,7 +74,7 @@
                     </p>
                 </div>
                 <div class="form-group col-md-6 mb-3">
-                    <label for="imageUrl" class="text-white font-weight-bold">ImageUrl</label>
+                    <label for="imageUrl" class="text-white font-weight-bold">Image Url</label>
                     <input th:field="*{imageUrl}"
                            th:errorclass="is-invalid"
                            id="imageUrl"
@@ -85,7 +85,7 @@
                     <p th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"
                        id="imageUrlError"
                        class="errors alert alert-danger">
-                        Username is required.
+                        Image Url is required.
                     </p>
                 </div>
             </div>

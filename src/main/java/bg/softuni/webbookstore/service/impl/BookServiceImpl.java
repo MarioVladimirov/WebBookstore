@@ -97,6 +97,9 @@ public class BookServiceImpl implements BookService {
         viewModel.setAuthor(
                 bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName());
 
+        viewModel.setAuthorId(
+                bookEntity.getAuthor().getId());
+
         //TODO - check what is returned and if additional map is needed
         return viewModel;
     }
