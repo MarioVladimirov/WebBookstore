@@ -94,7 +94,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void add(BookAddServiceModel bookAddServiceModel) {
+    public Long add(BookAddServiceModel bookAddServiceModel) {
 
         BookEntity bookEntity = modelMapper
                 .map(bookAddServiceModel, BookEntity.class);
@@ -142,7 +142,9 @@ public class BookServiceImpl implements BookService {
         bookEntity.setCreator(creator);
 
 
-        bookRepository.save(bookEntity);
+        bookEntity = bookRepository.save(bookEntity);
+
+        return bookEntity.getId();
     }
 
     @Override

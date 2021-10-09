@@ -80,9 +80,9 @@ public class BookController {
 
         bookAddServiceModel.setCreator(principal.getUsername());
 
-        bookService.add(bookAddServiceModel);
+        Long bookId = bookService.add(bookAddServiceModel);
 
-        return "redirect:/books/details/" + bookAddServiceModel.getId();
+        return "redirect:/books/details/" + bookId;
     }
 
     @GetMapping("/books/details/{id}")

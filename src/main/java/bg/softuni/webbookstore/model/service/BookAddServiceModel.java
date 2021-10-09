@@ -5,7 +5,6 @@ import java.util.Set;
 
 public class BookAddServiceModel {
 
-    private Long id;
     private String isbn;
     private String title;
     private String description;
@@ -22,15 +21,6 @@ public class BookAddServiceModel {
 
 
     public BookAddServiceModel() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public BookAddServiceModel setId(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getIsbn() {

@@ -50,9 +50,9 @@ public class AuthorController {
         AuthorAddServiceModel authorAddServiceModel = modelMapper
                 .map(authorAddBindingModel, AuthorAddServiceModel.class);
 
-        authorService.add(authorAddServiceModel);
+        Long authorId = authorService.add(authorAddServiceModel);
 
-        return "redirect:/authors/details/" + authorAddServiceModel.getId();
+        return "redirect:/authors/details/" + authorId;
     }
 
     @GetMapping("/authors/details/{id}")

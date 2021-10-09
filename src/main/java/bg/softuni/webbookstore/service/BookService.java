@@ -16,7 +16,7 @@ public interface BookService {
 
     BookDetailViewModel findById(Long id);
 
-    void add(BookAddServiceModel bookAddServiceModel);
+    Long add(BookAddServiceModel bookAddServiceModel);
 
     boolean existsByIsbn(String isbn);
 }

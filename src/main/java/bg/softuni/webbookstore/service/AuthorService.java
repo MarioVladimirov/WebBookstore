@@ -9,7 +9,7 @@ public interface AuthorService {
 
     List<String> findAllAuthorsNames();
 
-    void add(AuthorAddServiceModel authorAddServiceModel);
+    Long add(AuthorAddServiceModel authorAddServiceModel);
 
     AuthorViewModel findById(Long id);
 }

@@ -32,12 +32,14 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void add(AuthorAddServiceModel authorAddServiceModel) {
+    public Long add(AuthorAddServiceModel authorAddServiceModel) {
 
         AuthorEntity authorEntity = modelMapper
                 .map(authorAddServiceModel, AuthorEntity.class);
 
-        authorRepository.save(authorEntity);
+        authorEntity = authorRepository.save(authorEntity);
+
+        return authorEntity.getId();
     }
 
     @Override
