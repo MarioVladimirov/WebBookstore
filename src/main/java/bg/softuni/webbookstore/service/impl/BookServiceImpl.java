@@ -36,6 +36,64 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<BookSummaryViewModel> getAllBooks() {
+        return bookRepository
+                .findAll()
+                .stream()
+                .map(this::getSummaryViewModel)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public BookSummaryViewModel getSummaryViewModel(BookEntity bookEntity) {
+        BookSummaryViewModel viewModel = modelMapper
+                .map(bookEntity, BookSummaryViewModel.class);
+
+        Set<String> categories = new HashSet<>();
+        bookEntity
+                .getCategories()
+                .stream()
+                .map(categoryEntity -> categoryEntity.getCategory().name())
+                .forEach(categories::add);
+
+        viewModel
+                .setCategories(categories)
+                .setAuthor(
+                        bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName());
+
+        return viewModel;
+    }
+
+    @Override
+    public BookDetailViewModel findById(Long id) {
+        BookEntity bookEntity = bookRepository
+                .findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Book not found"));
+
+        BookDetailViewModel viewModel = modelMapper
+                .map(bookEntity, BookDetailViewModel.class);
+
+        Set<String> categories = new HashSet<>();
+        bookEntity
+                .getCategories()
+                .stream()
+                .map(categoryEntity -> categoryEntity.getCategory().name())
+                .forEach(categories::add);
+
+        viewModel
+                .setCategories(categories)
+                .setPublishingHouse(
+                        bookEntity.getPublishingHouse().getName())
+                .setAuthor(
+                        bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName())
+                .setAuthorId(
+                        bookEntity.getAuthor().getId());
+
+        //TODO - check what is returned and if additional map is needed
+        return viewModel;
+    }
+
+    @Override
     public void add(BookAddServiceModel bookAddServiceModel) {
 
         BookEntity bookEntity = modelMapper
@@ -88,64 +146,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookSummaryViewModel> getAllBooks() {
-        return bookRepository
-                .findAll()
-                .stream()
-                .map(this::getSummaryViewModel)
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public boolean existsByIsbn(String isbn) {
         return bookRepository.existsByIsbn(isbn);
-    }
-
-    @Override
-    public BookDetailViewModel findById(Long id) {
-        BookEntity bookEntity = bookRepository
-                .findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Book not found"));
-
-        BookDetailViewModel viewModel = modelMapper
-                .map(bookEntity, BookDetailViewModel.class);
-
-        Set<String> categories = new HashSet<>();
-        bookEntity
-                .getCategories()
-                .stream()
-                .map(categoryEntity -> categoryEntity.getCategory().name())
-                .forEach(categories::add);
-
-        viewModel
-                .setCategories(categories)
-                .setPublishingHouse(
-                        bookEntity.getPublishingHouse().getName())
-                .setAuthor(
-                        bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName())
-                .setAuthorId(
-                        bookEntity.getAuthor().getId());
-
-        //TODO - check what is returned and if additional map is needed
-        return viewModel;
-    }
-
-    private BookSummaryViewModel getSummaryViewModel(BookEntity bookEntity) {
-        BookSummaryViewModel viewModel = modelMapper
-                .map(bookEntity, BookSummaryViewModel.class);
-
-        Set<String> categories = new HashSet<>();
-        bookEntity
-                .getCategories()
-                .stream()
-                .map(categoryEntity -> categoryEntity.getCategory().name())
-                .forEach(categories::add);
-
-        viewModel
-                .setCategories(categories)
-                .setAuthor(
-                        bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName());
-
-        return viewModel;
     }
 }

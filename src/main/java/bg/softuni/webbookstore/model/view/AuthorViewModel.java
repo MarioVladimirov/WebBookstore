@@ -4,7 +4,6 @@ import java.util.List;
 
 public class AuthorViewModel {
 
-    private Long id;
     private String firstName;
     private String lastName;
     private String description;
@@ -13,15 +12,6 @@ public class AuthorViewModel {
 
 
     public AuthorViewModel() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public AuthorViewModel setId(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getFirstName() {

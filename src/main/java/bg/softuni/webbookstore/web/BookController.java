@@ -93,7 +93,7 @@ public class BookController {
 
         model.addAttribute("book", detailViewModel);
 
-        return "details";
+        return "book-details";
     }
 
     @GetMapping("/edit")
