@@ -11,6 +11,7 @@ import bg.softuni.webbookstore.service.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -43,16 +44,17 @@ public class BookServiceImpl implements BookService {
         bookEntity.setLanguage(
                 LanguageEnum.valueOf(bookAddServiceModel.getLanguage().toUpperCase()));
 
-        Set<String> categories = bookAddServiceModel.getCategories();
-        for (String category : categories) {
+        Set<CategoryEntity> categoryEntities = new HashSet<>();
+        for (String category : bookAddServiceModel.getCategories()) {
             CategoryEnum categoryEnum = CategoryEnum.valueOf(category.toUpperCase());
             CategoryEntity categoryEntity = categoryRepository
                     .findByCategory(categoryEnum)
                     .orElseThrow(() -> new IllegalArgumentException(
                             "Category with name " + category + " not found")
                     );
-            bookEntity.getCategories().add(categoryEntity);
+            categoryEntities.add(categoryEntity);
         }
+        bookEntity.setCategories(categoryEntities);
 
         AuthorEntity author = authorRepository
                 .findByFirstNameAndLastName(
@@ -99,11 +101,19 @@ public class BookServiceImpl implements BookService {
         BookDetailViewModel viewModel = modelMapper
                 .map(bookEntity, BookDetailViewModel.class);
 
-        viewModel.setAuthor(
-                bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName());
+        Set<String> categories = new HashSet<>();
+        bookEntity
+                .getCategories()
+                .stream()
+                .map(categoryEntity -> categoryEntity.getCategory().name())
+                .forEach(categories::add);
 
-        viewModel.setAuthorId(
-                bookEntity.getAuthor().getId());
+        viewModel
+                .setCategories(categories)
+                .setAuthor(
+                        bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName())
+                .setAuthorId(
+                        bookEntity.getAuthor().getId());
 
         //TODO - check what is returned and if additional map is needed
         return viewModel;
@@ -113,8 +123,17 @@ public class BookServiceImpl implements BookService {
         BookSummaryViewModel viewModel = modelMapper
                 .map(bookEntity, BookSummaryViewModel.class);
 
-        viewModel.setAuthor(
-                bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName());
+        Set<String> categories = new HashSet<>();
+        bookEntity
+                .getCategories()
+                .stream()
+                .map(categoryEntity -> categoryEntity.getCategory().name())
+                .forEach(categories::add);
+
+        viewModel
+                .setCategories(categories)
+                .setAuthor(
+                        bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName());
 
         return viewModel;
     }

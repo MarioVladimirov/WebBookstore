@@ -1,7 +1,5 @@
 package bg.softuni.webbookstore.model.view;
 
-import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
-
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -11,7 +9,7 @@ public class BookSummaryViewModel {
     private String title;
     private String imageUrl;
     private BigDecimal price;
-    private Set<CategoryEnum> categories;
+    private Set<String> categories;
     private String author;
 
 
@@ -54,11 +52,11 @@ public class BookSummaryViewModel {
         return this;
     }
 
-    public Set<CategoryEnum> getCategories() {
+    public Set<String> getCategories() {
         return categories;
     }
 
-    public BookSummaryViewModel setCategories(Set<CategoryEnum> categories) {
+    public BookSummaryViewModel setCategories(Set<String> categories) {
         this.categories = categories;
         return this;
     }

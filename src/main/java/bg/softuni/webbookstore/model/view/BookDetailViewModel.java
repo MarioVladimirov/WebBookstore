@@ -18,7 +18,7 @@ public class BookDetailViewModel {
     private BigDecimal price;
     private LanguageEnum language;
     private PublishingHouseEnum publishingHouse;
-    private Set<CategoryEnum> categories;
+    private Set<String> categories;
     private String author;
     private Long authorId;
 
@@ -115,11 +115,11 @@ public class BookDetailViewModel {
         return this;
     }
 
-    public Set<CategoryEnum> getCategories() {
+    public Set<String> getCategories() {
         return categories;
     }
 
-    public BookDetailViewModel setCategories(Set<CategoryEnum> categories) {
+    public BookDetailViewModel setCategories(Set<String> categories) {
         this.categories = categories;
         return this;
     }
