@@ -1,10 +1,10 @@
 package bg.softuni.webbookstore.model.entity.enums;
 
 public enum LanguageEnum {
-    БЪЛГАРСКИ,
-    АНГЛИЙСКИ,
-    НЕМСКИ,
-    РУСКИ;
+    BULGARIAN,
+    ENGLISH,
+    GERMAN,
+    RUSSIAN;
 
     @Override
     public String toString() {
