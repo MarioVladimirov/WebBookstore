@@ -1,18 +1,18 @@
 package bg.softuni.webbookstore.model.entity.enums;
 
 public enum CategoryEnum {
-    ХУДОЖЕСТВЕНА_ЛИТЕРАТУРА,
-    КРИМИНАЛНИ_И_ТРИЛЪРИ,
-    РОМАНТИЧНИ,
-    ФЕНТЪЗИ,
-    НАУЧНА_ФАНТАТИКА,
-    НАУКА,
-    КЛАСИЧЕСКИ_РОМАНИ,
-    ДЕТСКА_ЛИТЕРАТУРА,
-    ИСТОРИЯ,
-    ИЗКУСТВО,
-    ХОРЪР,
-    ПОЕЗИЯ;
+    FICTION,
+    CRIME_AND_THRILLER,
+    ROMANCE,
+    FANTASY,
+    SCIENCE_FICTION,
+    SCIENCE,
+    CLASSICS,
+    CHILDREN,
+    HISTORY,
+    ART,
+    HORROR,
+    POETRY;
 
     @Override
     public String toString() {

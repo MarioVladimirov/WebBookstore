@@ -3,11 +3,11 @@ package bg.softuni.webbookstore.web;
 import bg.softuni.webbookstore.model.binding.BookAddBindingModel;
 import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
 import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
-import bg.softuni.webbookstore.model.entity.enums.PublishingHouseEnum;
 import bg.softuni.webbookstore.model.service.BookAddServiceModel;
 import bg.softuni.webbookstore.model.view.BookDetailViewModel;
 import bg.softuni.webbookstore.service.AuthorService;
 import bg.softuni.webbookstore.service.BookService;
+import bg.softuni.webbookstore.service.PublishingHouseService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,11 +24,13 @@ import javax.validation.Valid;
 public class BookController {
 
     private final BookService bookService;
+    private final PublishingHouseService publishingHouseService;
     private final AuthorService authorService;
     private final ModelMapper modelMapper;
 
-    public BookController(BookService bookService, AuthorService authorService, ModelMapper modelMapper) {
+    public BookController(BookService bookService, PublishingHouseService publishingHouseService, AuthorService authorService, ModelMapper modelMapper) {
         this.bookService = bookService;
+        this.publishingHouseService = publishingHouseService;
         this.authorService = authorService;
         this.modelMapper = modelMapper;
     }
@@ -48,8 +50,8 @@ public class BookController {
     public String add(Model model) {
         model.addAttribute("languages", LanguageEnum.values());
         model.addAttribute("categories", CategoryEnum.values());
+        model.addAttribute("publishingHouses", publishingHouseService.findAllPublishingHouseNames());
         model.addAttribute("authors", authorService.findAllAuthorsNames());
-        model.addAttribute("publishingHouses", PublishingHouseEnum.values());
         return "add-book";
     }
 

@@ -1,6 +1,5 @@
 package bg.softuni.webbookstore.model.view;
 import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
-import bg.softuni.webbookstore.model.entity.enums.PublishingHouseEnum;
 
 import java.math.BigDecimal;
 import java.util.Set;

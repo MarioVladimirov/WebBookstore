@@ -132,21 +132,21 @@ public class BookAddServiceModel {
         return this;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public BookAddServiceModel setAuthor(String author) {
-        this.author = author;
-        return this;
-    }
-
     public String getCreator() {
         return creator;
     }
 
     public BookAddServiceModel setCreator(String creator) {
         this.creator = creator;
+        return this;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public BookAddServiceModel setAuthor(String author) {
+        this.author = author;
         return this;
     }
 }
