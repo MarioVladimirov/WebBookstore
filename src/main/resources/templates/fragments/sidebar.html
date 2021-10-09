@@ -26,8 +26,8 @@
                 </a>
                 <ul class="collapse list-unstyled" id="categoriesSubmenu">
                     <li th:each="c : ${T(bg.softuni.webbookstore.model.entity.enums.CategoryEnum).values()}">
-                        <a th:href="@{/books/${c}}">
-                            <span th:text="${c}" th:value="${c}">Category</span>
+                        <a href="/" th:text="${c}" th:value="${c}">
+                           Category
                         </a>
                     </li>
                 </ul>

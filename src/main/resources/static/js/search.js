@@ -1,6 +1,6 @@
 const booksList = document.getElementById('booksList')
 const searchForm = document.getElementById('searchForm')
-const sidebar = document.getElementById('sidebar')
+const sidebar = document.getElementById('categoriesSubmenu')
 
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -24,27 +24,27 @@ searchForm.addEventListener('submit', (e) => {
         );
 });
 
-// sidebar.addEventListener('click', (e) => {
-//     e.preventDefault();
-//
-//     const allBooks = [];
-//     let target = e.target;
-//     const category = target.getEle
-//
-//         fetch("http://localhost:8080/books/api")
-//         .then(response => response.json())
-//         .then(books => {
-//                 for (let book of books) {
-//                     allBooks.push(book);
-//                 }
-//
-//                 let filteredBooks = allBooks.filter(book =>
-//                     book.categories.contains(category));
-//
-//                 displayBooks(filteredBooks);
-//             }
-//         );
-// });
+sidebar.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const allBooks = [];
+    const searchCategory = e.target.getAttribute('value').toUpperCase();
+
+        fetch("http://localhost:8080/books/api")
+        .then(response => response.json())
+        .then(books => {
+                for (const book of books) {
+                    for (const category of book.categories) {
+                        if (category === searchCategory) {
+                            allBooks.push(book);
+                            break;
+                        }
+                    }
+                }
+                displayBooks(allBooks);
+            }
+        );
+});
 
 const displayBooks = (books) => {
     booksList.innerHTML = books
@@ -52,21 +52,21 @@ const displayBooks = (books) => {
             return `<div class="book-card col-md-3 five-on-a-row">
                         <a class="product-box" href="/books/details/${b.id}">
                             <span class="image-wrapper">
-                                <img class="first" src="${b.imageUrl}" alt="Thumbnail [100%x225]"
+                                <img class="first" src="/" alt="Thumbnail [100%x225]"
                                     data-holder-rendered="true">
                             </span>
                             <div class="d-flex">
                                 <div class="btn-group">
                                     <a href="/books/details/${b.id}"
                                         type="button" class="btn btn-sm">
-                                        <img src="/images/add-to-favorites.png" title="Add to Favorites" 
+                                        <img src="/" title="Add to Favorites" 
                                             alt="add-to-favorites">
                                     </a>
                                 </div>
                                 <div class="btn-group">
                                     <a href="/books/details/${b.id}"
                                         type="button" class="btn btn-sm">
-                                        <img src="/images/add-to-cart.png" title="Add to Cart"
+                                        <img src="/" title="Add to Cart"
                                         alt="add-to-cart">
                                     </a>
                                 </div>
