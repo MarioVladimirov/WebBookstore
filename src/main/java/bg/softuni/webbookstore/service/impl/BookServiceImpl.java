@@ -22,13 +22,15 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
+    private final PublishingHouseRepository publishingHouseRepository;
     private final AuthorRepository authorRepository;
     private final ModelMapper modelMapper;
 
-    public BookServiceImpl(BookRepository bookRepository, UserRepository userRepository, CategoryRepository categoryRepository, AuthorRepository authorRepository, ModelMapper modelMapper) {
+    public BookServiceImpl(BookRepository bookRepository, UserRepository userRepository, CategoryRepository categoryRepository, PublishingHouseRepository publishingHouseRepository, AuthorRepository authorRepository, ModelMapper modelMapper) {
         this.bookRepository = bookRepository;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
+        this.publishingHouseRepository = publishingHouseRepository;
         this.authorRepository = authorRepository;
         this.modelMapper = modelMapper;
     }
@@ -50,11 +52,18 @@ public class BookServiceImpl implements BookService {
             CategoryEntity categoryEntity = categoryRepository
                     .findByCategory(categoryEnum)
                     .orElseThrow(() -> new IllegalArgumentException(
-                            "Category with name " + category + " not found")
-                    );
+                            "Category with name " + category + " not found"
+                    ));
             categoryEntities.add(categoryEntity);
         }
         bookEntity.setCategories(categoryEntities);
+
+        PublishingHouseEntity publishingHouseEntity = publishingHouseRepository
+                .findByName(bookAddServiceModel.getPublishingHouse())
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Publishing house " + bookAddServiceModel.getPublishingHouse() + " not found"
+                ));
+        bookEntity.setPublishingHouse(publishingHouseEntity);
 
         AuthorEntity author = authorRepository
                 .findByFirstNameAndLastName(
@@ -110,6 +119,8 @@ public class BookServiceImpl implements BookService {
 
         viewModel
                 .setCategories(categories)
+                .setPublishingHouse(
+                        bookEntity.getPublishingHouse().getName())
                 .setAuthor(
                         bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName())
                 .setAuthorId(

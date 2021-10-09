@@ -1,5 +1,4 @@
 package bg.softuni.webbookstore.model.view;
-import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
 import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
 import bg.softuni.webbookstore.model.entity.enums.PublishingHouseEnum;
 
@@ -17,8 +16,8 @@ public class BookDetailViewModel {
     private Integer releaseYear;
     private BigDecimal price;
     private LanguageEnum language;
-    private PublishingHouseEnum publishingHouse;
     private Set<String> categories;
+    private String publishingHouse;
     private String author;
     private Long authorId;
 
@@ -106,21 +105,21 @@ public class BookDetailViewModel {
         return this;
     }
 
-    public PublishingHouseEnum getPublishingHouse() {
-        return publishingHouse;
-    }
-
-    public BookDetailViewModel setPublishingHouse(PublishingHouseEnum publishingHouse) {
-        this.publishingHouse = publishingHouse;
-        return this;
-    }
-
     public Set<String> getCategories() {
         return categories;
     }
 
     public BookDetailViewModel setCategories(Set<String> categories) {
         this.categories = categories;
+        return this;
+    }
+
+    public String getPublishingHouse() {
+        return publishingHouse;
+    }
+
+    public BookDetailViewModel setPublishingHouse(String publishingHouse) {
+        this.publishingHouse = publishingHouse;
         return this;
     }
 

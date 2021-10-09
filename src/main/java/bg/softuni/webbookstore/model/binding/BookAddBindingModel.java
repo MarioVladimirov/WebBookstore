@@ -1,7 +1,5 @@
 package bg.softuni.webbookstore.model.binding;
 
-import bg.softuni.webbookstore.model.entity.enums.PublishingHouseEnum;
-
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Set;
@@ -40,10 +38,10 @@ public class BookAddBindingModel {
     private String language;
 
     @NotNull
-    private PublishingHouseEnum publishingHouse;
-
-    @NotNull
     private Set<String> categories;
+
+    @NotEmpty
+    private String publishingHouse;
 
     @NotEmpty
     private String author;
@@ -133,21 +131,21 @@ public class BookAddBindingModel {
         return this;
     }
 
-    public PublishingHouseEnum getPublishingHouse() {
-        return publishingHouse;
-    }
-
-    public BookAddBindingModel setPublishingHouse(PublishingHouseEnum publishingHouse) {
-        this.publishingHouse = publishingHouse;
-        return this;
-    }
-
     public Set<String> getCategories() {
         return categories;
     }
 
     public BookAddBindingModel setCategories(Set<String> categories) {
         this.categories = categories;
+        return this;
+    }
+
+    public String getPublishingHouse() {
+        return publishingHouse;
+    }
+
+    public BookAddBindingModel setPublishingHouse(String publishingHouse) {
+        this.publishingHouse = publishingHouse;
         return this;
     }
 

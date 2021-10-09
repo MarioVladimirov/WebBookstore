@@ -1,7 +1,6 @@
 package bg.softuni.webbookstore.model.entity;
 
 import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
-import bg.softuni.webbookstore.model.entity.enums.PublishingHouseEnum;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -44,12 +43,11 @@ public class BookEntity extends BaseEntity {
     @Column(nullable = false)
     private LanguageEnum language;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "publishing_house", nullable = false)
-    private PublishingHouseEnum publishingHouse;
-
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<CategoryEntity> categories = new HashSet<>();
+
+    @ManyToOne(optional = false)
+    private PublishingHouseEntity publishingHouse;
 
     @ManyToOne(optional = false)
     private AuthorEntity author;
@@ -151,21 +149,21 @@ public class BookEntity extends BaseEntity {
         return this;
     }
 
-    public PublishingHouseEnum getPublishingHouse() {
-        return publishingHouse;
-    }
-
-    public BookEntity setPublishingHouse(PublishingHouseEnum publishingHouse) {
-        this.publishingHouse = publishingHouse;
-        return this;
-    }
-
     public Set<CategoryEntity> getCategories() {
         return categories;
     }
 
     public BookEntity setCategories(Set<CategoryEntity> categories) {
         this.categories = categories;
+        return this;
+    }
+
+    public PublishingHouseEntity getPublishingHouse() {
+        return publishingHouse;
+    }
+
+    public BookEntity setPublishingHouse(PublishingHouseEntity publishingHouse) {
+        this.publishingHouse = publishingHouse;
         return this;
     }
 
