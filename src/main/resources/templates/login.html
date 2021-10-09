@@ -5,61 +5,68 @@
 <th:block th:include="~{fragments/head}"></th:block>
 
 <body>
+<main class="page align-content-center">
 
-<th:block th:include="~{fragments/navbar}"></th:block>
+    <!-- Navigation-->
+    <th:block th:include="~{fragments/navbar}"></th:block>
 
-<div class="container-fluid" id="wrapper">
+    <!-- Main Content-->
+    <section class="container-fluid" id="wrapper">
 
-    <!-- Sidebar-->
-    <th:block th:include="~{fragments/sidebar}"></th:block>
+        <!-- Sidebar-->
+        <th:block th:include="~{fragments/sidebar}"></th:block>
 
-    <!-- Page Content -->
-    <div id="content">
+        <!-- Page Content -->
+        <div id="content">
 
-        <h2 class="text-center text-white">Login</h2>
+            <h2 class="text-center text-white">Login</h2>
 
-        <p th:if="${badCredentials}"
-           id="loginError"
-           class="invalid-feedback errors alert alert-danger">
-            Invalid username or password.
-        </p>
+            <form method="POST"
+                  th:action="@{/users/login}"
+                  class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
 
-        <form method="POST"
-              th:action="@{/users/login}"
-              class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
-            <div class="form-group">
-                <label for="username" class="text-white font-weight-bold">Username</label>
-                <input th:value="${username}"
-                       id="username"
-                       name="username"
-                       type="text"
-                       min="2" max="20"
-                       class="form-control"
-                       placeholder="Username"/>
-            </div>
-            <div class="form-group">
-                <label for="password" class="text-white font-weight-bold">Password</label>
-                <input id="password"
-                       name="password"
-                       type="password"
-                       min="2" max="20"
-                       class="form-control"
-                       placeholder="Password"/>
-            </div>
+                <div class="form-group">
 
-            <div class="row">
-                <div class="col col-md-4">
-                    <div class="button-holder d-flex">
-                        <input type="submit" class="btn btn-info btn-lg" value="Login"/>
+                    <p th:if="${badCredentials}"
+                       id="loginError"
+                       class="invalid-feedback errors alert alert-danger">
+                        Invalid username or password.
+                    </p>
+
+                    <label for="username" class="text-white font-weight-bold">Username</label>
+                    <input th:value="${username}"
+                           id="username"
+                           name="username"
+                           type="text"
+                           min="2" max="20"
+                           class="form-control"
+                           placeholder="Username"/>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="text-white font-weight-bold">Password</label>
+                    <input id="password"
+                           name="password"
+                           type="password"
+                           min="2" max="20"
+                           class="form-control"
+                           placeholder="Password"/>
+                </div>
+
+                <div class="row">
+                    <div class="col col-md-4">
+                        <div class="button-holder d-flex">
+                            <input type="submit" class="btn btn-info btn-lg" value="Login"/>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
+    </section>
 
     <!-- Footer-->
     <th:block th:include="~{fragments/footer}"></th:block>
 
+</main>
 </div>
 
 <!-- Sidebar Toggle Script -->
