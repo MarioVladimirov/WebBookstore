@@ -22,7 +22,7 @@
             <div class="row mt-5" id="booksList">
                 <div th:each="b : ${books}"
                      th:object="${b}"
-                     class="book-card col-md-3 five-on-a-row">
+                     class="book-card col-md-3">
                     <a class="product-box" th:href="@{/books/details/{id}(id=*{id})}">
                             <span class="image-wrapper">
                                 <img class="first" th:src="*{getImageUrl()}" alt="Thumbnail [100%x225]"

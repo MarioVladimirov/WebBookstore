@@ -28,9 +28,11 @@ sidebar.addEventListener('click', (e) => {
     e.preventDefault();
 
     const allBooks = [];
-    const searchCategory = e.target.getAttribute('value').toUpperCase();
+    const searchCategory = e.target.getAttribute('value')
+        .toUpperCase()
+        .replaceAll(' ', '_');
 
-        fetch("http://localhost:8080/books/api")
+    fetch("http://localhost:8080/books/api")
         .then(response => response.json())
         .then(books => {
                 for (const book of books) {
@@ -49,37 +51,39 @@ sidebar.addEventListener('click', (e) => {
 const displayBooks = (books) => {
     booksList.innerHTML = books
         .map((b) => {
-            return `<div class="book-card col-md-3 five-on-a-row">
-                        <a class="product-box" href="/books/details/${b.id}">
+            return `<div class="book-card col-md-3">
+                    <a class="product-box" href="/books/details/${b.id}">
                             <span class="image-wrapper">
-                                <img class="first" src="/" alt="Thumbnail [100%x225]"
-                                    data-holder-rendered="true">
+                                <img class="first" src="${b.imageUrl}" alt="Thumbnail [100%x225]"
+                                     data-holder-rendered="true">
                             </span>
-                            <div class="d-flex">
-                                <div class="btn-group">
-                                    <a href="/books/details/${b.id}"
-                                        type="button" class="btn btn-sm">
-                                        <img src="/" title="Add to Favorites" 
-                                            alt="add-to-favorites">
-                                    </a>
-                                </div>
-                                <div class="btn-group">
-                                    <a href="/books/details/${b.id}"
-                                        type="button" class="btn btn-sm">
-                                        <img src="/" title="Add to Cart"
-                                        alt="add-to-cart">
-                                    </a>
-                                </div>
+                        <div class="d-flex">
+                            <div class="btn-group">
+                                <a href="/books/details/${b.id}"
+                                   type="button" class="btn btn-sm">
+                                    <i class="far fa-heart"></i>
+                                </a>
                             </div>
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <p class="card-text equal-size">${b.title}</p>
-                                    <p class="card-text text-secondary equal-size">Author: ${b.author}</p>
-                                    <p class="card-text">Price: ${(b.price).toFixed(2)} лв.</p>
-                                </div>
+                            <div class="btn-group">
+                                <a href="/books/details/${b.id}"
+                                   type="button" class="btn btn-sm">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </a>
                             </div>
-                        </a>
-                    </div>`
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center">
+                                <p class="card-text equal-size">${b.title}</p>
+                                <p class="card-text text-secondary equal-size">Author: 
+                                    <span>${b.author}</span>
+                                </p>
+                                <p class="card-text">Price:
+                                    <span>${b.price.toFixed(2)}</span> lv.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>`
         })
         .join('');
 

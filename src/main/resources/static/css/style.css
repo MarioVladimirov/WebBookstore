@@ -19,6 +19,13 @@ body {
     padding-left: 45px;
 }
 
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
 .bg-text {
     background-color: rgb(0, 0, 0); /* Fallback color */
     background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
@@ -54,20 +61,53 @@ form.main-form {
 /*    color: white;*/
 /*}*/
 
+
+.form-control {
+    background-color: #ececec !important;
+}
+
+form > input.form-control {
+    width: 400px !important;
+}
+
+/* Book cards */
+.equal-size {
+    height: 25px;
+    line-height: 24px;
+}
+
+.book-card {
+    padding: 10px;
+    margin: 15px;
+    border-radius: 5px;
+    background-color: #ececec;
+}
+
+.product-box .image-wrapper img.first {
+    position: relative;
+    z-index: 9;
+    height: 225px;
+    width: 100%;
+    display: block;
+}
+
+.product-box .image-wrapper img {
+    display: table;
+    max-width: 100%;
+    padding: 0px;
+    margin: 0px auto;
+    border: none;
+    border-radius: 3px 3px 3px 3px;
+    vertical-align: middle;
+}
+
 /* Footer */
 .footer {
     margin-top: 20px;
     padding: 10px;
 }
 
-.avatar {
-    vertical-align: middle;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
-
+/* Wrapper content */
 #wrapper {
     display: grid;
     grid-gap: 25px;
@@ -95,6 +135,8 @@ form.main-form {
     }
 }
 
+
+/* Sidebar */
 /* Shrinking the sidebar from 250px to 80px and center aligning its content*/
 #sidebar.active {
     min-width: 80px;
@@ -102,7 +144,7 @@ form.main-form {
     text-align: center;
 }
 
-/* Toggling the sidebar header content, hide the big heading [h3] and showing the small heading [strong] and vice versa*/
+/* Toggling the sidebar header content, hide the big heading [h5] and showing the small heading [strong] and vice versa*/
 #sidebar .sidebar-header strong {
     display: none;
 }
@@ -169,7 +211,7 @@ form.main-form {
 
 
     /* Toggling the sidebar header content,
-       hide the big heading [h3] and showing the small heading [strong] and vice versa
+       hide the big heading [h5] and showing the small heading [strong] and vice versa
     */
     #sidebar .sidebar-header strong {
         display: none;
@@ -215,41 +257,4 @@ form.main-form {
 }
 
 
-.form-control {
-    background-color: #ececec !important;
-}
-
-form > input.form-control {
-    width: 400px !important;
-}
-
-.equal-size {
-    height: 25px;
-    line-height: 24px;
-}
-
-.book-card {
-    padding: 10px;
-    margin: 15px;
-    border-radius: 5px;
-    background-color: #ececec;
-}
-
-.product-box .image-wrapper img.first {
-    position: relative;
-    z-index: 9;
-    height: 225px;
-    width: 100%;
-    display: block;
-}
-
-.product-box .image-wrapper img {
-    display: table;
-    max-width: 100%;
-    padding: 0px;
-    margin: 0px auto;
-    border: none;
-    border-radius: 3px 3px 3px 3px;
-    vertical-align: middle;
-}
 
