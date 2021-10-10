@@ -8,7 +8,18 @@ body {
 }
 
 .page {
+    height: auto;
+}
 
+#sidebar {
+    position: absolute;
+    left: 20px;
+    width: 150px;
+}
+
+#content {
+    width: auto;
+    margin-left: 150px;
 }
 
 .container-fluid {
@@ -105,34 +116,6 @@ form > input.form-control {
 .footer {
     margin-top: 20px;
     padding: 10px;
-}
-
-/* Wrapper content */
-#wrapper {
-    display: grid;
-    grid-gap: 25px;
-    grid-template-areas:
-         'sidebar content content';
-}
-
-#sidebar {
-    grid-area: sidebar;
-}
-
-#content {
-    grid-area: content;
-}
-
-@media screen and (max-width: 728px) {
-    #site {
-        grid-template-areas:
-            'sidebar'
-            'content';
-    }
-
-    #sidebar {
-        display: none;
-    }
 }
 
 
