@@ -82,8 +82,6 @@ public class BookServiceImpl implements BookService {
 
         viewModel
                 .setCategories(categories)
-                .setPublishingHouse(
-                        bookEntity.getPublishingHouse().getName())
                 .setAuthor(
                         bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName())
                 .setAuthorId(

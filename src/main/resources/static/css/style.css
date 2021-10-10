@@ -82,11 +82,6 @@ form > input.form-control {
 }
 
 /* Book cards */
-.equal-size {
-    height: 25px;
-    line-height: 24px;
-}
-
 .book-card {
     padding: 10px;
     margin: 15px;
@@ -96,20 +91,88 @@ form > input.form-control {
 
 .product-box .image-wrapper img.first {
     position: relative;
-    z-index: 9;
-    height: 225px;
-    width: 100%;
+    height: 250px;
+    width: 180px;
     display: block;
 }
 
 .product-box .image-wrapper img {
-    display: table;
-    max-width: 100%;
-    padding: 0px;
-    margin: 0px auto;
+    max-width: 90%;
+    margin: auto;
     border: none;
     border-radius: 3px 3px 3px 3px;
     vertical-align: middle;
+}
+
+.card-body div p {
+    height: 20px;
+    line-height: 20px;
+}
+
+/* Book Details Card */
+.book-container {
+    border-radius: 5px;
+    background-color: #ececec;
+    position: relative;
+    margin: 10px;
+    padding: 20px;
+}
+
+#book-details {
+    display: grid;
+    grid-gap: 15px;
+    grid-template-areas:
+        'book-cover book-info book-buttons'
+;
+}
+
+#book-cover {
+    grid-area: book-cover;
+}
+
+#book-info {
+    grid-area: book-info;
+    font-size: 16px;
+    line-height: 26px;
+}
+
+#book-buttons {
+    grid-area: book-buttons;
+}
+
+@media screen and (max-width: 728px) {
+    #book-details {
+        grid-template-areas:
+             'book-cover'
+             'book-info'
+             'book-buttons';
+    }
+}
+
+#book-buttons a.btn.btn-info {
+    margin: 5px;
+}
+
+.info-section {
+    padding: 20px;
+    margin: 10px;
+}
+
+#book-cover span img {
+    position: relative;
+    height: 400px;
+    width: auto;
+}
+
+.ph-img {
+    float: left;
+    height: 150px;
+    width: 150px;
+}
+
+.ph-text {
+    width: auto;
+    padding-left: 10px;
 }
 
 /* Footer */

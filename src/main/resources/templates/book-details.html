@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <th:block th:include="~{fragments/head}"></th:block>
 
@@ -18,8 +19,120 @@
 
         <!-- Page Content -->
         <div id="content">
+            <div class="book-container"
+                 th:object="${book}">
 
+                <div id="book-details" class="info-section">
+                    <section id="book-cover">
+                        <span>
+                            <img th:src="*{getImageUrl()}" alt="Thumbnail [100%x225]"
+                                 data-holder-rendered="true">
+                        </span>
+                    </section>
 
+                    <section id="book-info">
+                        <h1 th:text="*{title}">Title</h1>
+                        <div class="attribute-list-content">
+                            <div class="text-left">
+                                <ul class="attribute-list">
+                                    <li>
+                                        <strong>Author: </strong>
+                                        <span>
+                                        <a th:text="*{author}" th:href="@{/authors/details/{id}(id=*{authorId})}">
+                                            Author name
+                                        </a>
+                                    </span>
+                                    </li>
+                                    <li>
+                                        <strong>Publishing House: </strong>
+                                        <span>
+                                        <a th:text="*{publishingHouse.getName()}"
+                                           th:href="@{/publishinghouses/details/{id}(id=*{publishingHouse.getId()})}">
+                                            Publishing House
+                                        </a>
+                                    </span>
+                                    </li>
+                                    <li>
+                                        <strong>Language: </strong>
+                                        <span th:text="*{language}"></span>
+                                    </li>
+                                    <li>
+                                        <strong>ISBN: </strong>
+                                        <span th:text="*{isbn}"></span>
+                                    </li>
+                                    <li>
+                                        <strong>Release Year: </strong>
+                                        <span th:text="*{releaseYear}"></span>
+                                    </li>
+                                    <li>
+                                        <strong>Pages count: </strong>
+                                        <span th:text="*{pagesCount}"></span>
+                                    </li>
+                                    <li>
+                                        <strong>Categories: </strong>
+                                        <span th:each="c : *{categories}" th:text="${c}"></span>,
+                                    </li>
+                                    <li>
+                                        <strong>Price: </strong>
+                                        <span th:text="*{price}"></span> lv.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="book-buttons" class="d-flex flex-column justify-content-center">
+                        <div sec:authorize="isAuthenticated()" class="btn-group">
+                            <a th:href="@{/books/details/{id}(id=*{id})}"
+                               type="button" class="btn btn-info btn-md">
+                                <i class="far fa-heart"></i> Favourites</a>
+                        </div>
+                        <div sec:authorize="isAuthenticated()" class="btn-group">
+                            <a th:href="@{/books/details/{id}(id=*{id})}"
+                               type="button" class="btn btn-info btn-md">
+                                <i class="fas fa-shopping-cart"></i> Buy</a>
+                        </div>
+                        <div sec:authorize="hasRole('ROLE_ADMIN')" class="btn-group">
+                            <a th:href="@{/books/details/{id}(id=*{id})}"
+                               type="button" class="btn btn-info btn-md">
+                                <i class="far fa-edit"></i> Edit</a>
+                        </div>
+                        <div sec:authorize="hasRole('ROLE_ADMIN')" class="btn-group">
+                            <a th:href="@{/books/details/{id}(id=*{id})}"
+                               type="button" class="btn btn-info btn-md">
+                                <i class="fa fa-trash-o fa-lg"></i> Delete</a>
+                        </div>
+                    </section>
+                </div>
+
+                <section id="description-info" class="info-section">
+                    <h3 class="text-center">Full Book Description: </h3>
+                    <p class="text-justify" th:text="*{description}">
+                        Description
+                    </p>
+                </section>
+
+                <section class="info-section align-items-center">
+                    <h5 class="text-center">Publishing House:
+                        <span th:text="*{publishingHouse.getName()}"></span>
+                    </h5>
+                    <div class="align-items-center">
+                        <a th:href="@{/publishinghouses/details/{id}(id=*{publishingHouse.getId()})}">
+                            <span>
+                                <img class="ph-img" th:src="*{publishingHouse.getImageUrl()}" alt="Thumbnail [100%x225]"
+                                    data-holder-rendered="true">
+                            </span>
+                        </a>
+                        <p class="ph-text text-justify" th:text="*{publishingHouse.getDescription()}">
+                            Publishing House Description
+                        </p>
+                    </div>
+                </section>
+
+                <section id="revues-container" class="info-section">
+                    <!-- TODO -->
+                </section>
+            </div>
         </div>
     </section>
 

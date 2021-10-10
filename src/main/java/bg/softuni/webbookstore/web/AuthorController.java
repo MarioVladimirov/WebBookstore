@@ -55,7 +55,7 @@ public class AuthorController {
         return "redirect:/authors/details/" + authorId;
     }
 
-    @GetMapping("/authors/details/{id}")
+    @GetMapping("/details/{id}")
     public String details(@PathVariable Long id,
                           Model model) {
 

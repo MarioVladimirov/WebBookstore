@@ -7,6 +7,7 @@ import java.util.Set;
 public class BookDetailViewModel {
 
     private Long id;
+    private String isbn;
     private String title;
     private String description;
     private String imageUrl;
@@ -16,7 +17,7 @@ public class BookDetailViewModel {
     private BigDecimal price;
     private LanguageEnum language;
     private Set<String> categories;
-    private String publishingHouse;
+    private PublishingHouseViewModel publishingHouse;
     private String author;
     private Long authorId;
 
@@ -29,6 +30,15 @@ public class BookDetailViewModel {
 
     public BookDetailViewModel setId(Long id) {
         this.id = id;
+        return this;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public BookDetailViewModel setIsbn(String isbn) {
+        this.isbn = isbn;
         return this;
     }
 
@@ -113,11 +123,11 @@ public class BookDetailViewModel {
         return this;
     }
 
-    public String getPublishingHouse() {
+    public PublishingHouseViewModel getPublishingHouse() {
         return publishingHouse;
     }
 
-    public BookDetailViewModel setPublishingHouse(String publishingHouse) {
+    public BookDetailViewModel setPublishingHouse(PublishingHouseViewModel publishingHouse) {
         this.publishingHouse = publishingHouse;
         return this;
     }

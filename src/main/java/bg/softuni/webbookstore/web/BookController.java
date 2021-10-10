@@ -85,7 +85,7 @@ public class BookController {
         return "redirect:/books/details/" + bookId;
     }
 
-    @GetMapping("/books/details/{id}")
+    @GetMapping("/details/{id}")
     public String details(@PathVariable Long id,
                           Model model) {
 

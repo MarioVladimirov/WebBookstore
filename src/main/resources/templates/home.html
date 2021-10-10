@@ -24,28 +24,28 @@
                      th:object="${b}"
                      class="book-card col-md-3">
                     <a class="product-box" th:href="@{/books/details/{id}(id=*{id})}">
-                            <span class="image-wrapper">
-                                <img class="first" th:src="*{getImageUrl()}" alt="Thumbnail [100%x225]"
-                                     data-holder-rendered="true">
-                            </span>
+                        <span class="image-wrapper">
+                            <img class="first" th:src="*{getImageUrl()}" alt="Thumbnail [100%x225]"
+                                 data-holder-rendered="true">
+                        </span>
                         <div class="d-flex">
                             <div class="btn-group">
                                 <a th:href="@{/books/details/{id}(id=*{id})}"
-                                   type="button" class="btn btn-sm">
+                                   type="button" class="btn btn-md">
                                     <i class="far fa-heart"></i>
                                 </a>
                             </div>
                             <div class="btn-group">
                                 <a th:href="@{/books/details/{id}(id=*{id})}"
-                                   type="button" class="btn btn-sm">
+                                   type="button" class="btn btn-md">
                                     <i class="fas fa-shopping-cart"></i>
                                 </a>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="text-center">
-                                <p class="card-text equal-size" th:text="*{title}">${b.title}</p>
-                                <p class="card-text text-secondary equal-size">Author:
+                                <p class="card-text" th:text="*{title}">${b.title}</p>
+                                <p class="card-text text-secondary">Author:
                                     <span th:text="*{author}"></span>
                                 </p>
                                 <p class="card-text">Price:
