@@ -48,6 +48,7 @@ sidebar.addEventListener('click', (e) => {
         );
 });
 
+// TODO - make book-card div the same as in home
 const displayBooks = (books) => {
     booksList.innerHTML = books
         .map((b) => {
