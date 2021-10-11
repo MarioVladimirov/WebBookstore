@@ -19,7 +19,7 @@
 
         <!-- Page Content -->
         <div id="content">
-            <div class="book-container"
+            <div id="book-wrapper"
                  th:object="${book}">
 
                 <div id="book-details" class="info-section">
@@ -85,12 +85,12 @@
                         <div sec:authorize="isAuthenticated()" class="btn-group">
                             <a th:href="@{/books/details/{id}(id=*{id})}"
                                type="button" class="btn btn-info btn-md">
-                                <i class="far fa-heart"></i> Favourites</a>
+                                <i class="fas fa-shopping-cart"></i> Add to Cart</a>
                         </div>
                         <div sec:authorize="isAuthenticated()" class="btn-group">
                             <a th:href="@{/books/details/{id}(id=*{id})}"
                                type="button" class="btn btn-info btn-md">
-                                <i class="fas fa-shopping-cart"></i> Buy</a>
+                                <i class="far fa-heart"></i> Add to Favourites</a>
                         </div>
                         <div sec:authorize="hasRole('ROLE_ADMIN')" class="btn-group">
                             <a th:href="@{/books/details/{id}(id=*{id})}"

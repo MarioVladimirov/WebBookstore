@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="~{fragments/head}"></th:block>
+
+<body>
+<main class="page align-content-center">
+
+    <!-- Navigation-->
+    <th:block th:include="~{fragments/navbar}"></th:block>
+
+    <!-- Main Content-->
+    <section class="container-fluid" id="wrapper">
+
+        <!-- Sidebar-->
+        <th:block th:include="~{fragments/sidebar}"></th:block>
+
+        <!-- Page Content -->
+        <div id="content">
+            <div id="shopping-cart-wrapper">
+                <h3 class="text-center">My Shopping Cart:</h3>
+                <br/>
+
+                <div th:if="${#lists.isEmpty(cartItems)}">
+                    <h5 class="text-center">You have not chosen any books yet</h5>
+                </div>
+
+                <div class="cart-items-container">
+
+                    <div th:each="cartItem : ${cartItems}"
+                         th:object="${cartItem}"
+                         class="cart-item row m-1">
+                        <div class="col-sm-8">
+                            <div class="row border rounded">
+                                <div class="col-1">
+                                    <div class="btn-group">
+                                        <a th:href="@{/cart/{id}(id=*{id})}"
+                                           type="button" class="btn btn-md">
+                                            <i class="fa fa-trash-o fa-lg"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <a th:href="@{/books/details/{id}(id=*{book.getId()})}">
+                                <img class="img-fluid"
+                                     th:src="*{book.getImageUrl()}"
+                                     th:title="*{book.getTitle()}">
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <div>
+                                <strong th:text="*{book.getTitle()}"></strong>
+                            </div>
+                            <div th:replace="~{fragments :: quantity-control(*{quantity}, *{book.getId()})}">
+                            </div>
+                            <div>
+                                <span>x</span>
+                                <span th:text="*{book.getPrice()}"></span> lv.
+                            </div>
+                            <div>
+                                <span>=</span><span class="h5">Subtotal</span>
+                            </div>
+                        </div>
+                        <div class="row m-1">&nbsp;</div>
+
+                        <div class="col-sm-4" th:unless="${#lists.isEmpty(cartItems)}">
+                            <div>
+                                <span class="h3">Estimated total:</span>
+                            </div>
+                            <div class="mt-2">
+                                <span class="h2">[Total amount]</span>
+                            </div>
+                            <div class="mt-2">
+                                <button class="btn btn btn-info btn-md">
+                                    Check Out
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer-->
+    <th:block th:include="~{fragments/footer}"></th:block>
+
+</main>
+<!-- Sidebar Toggle Script -->
+<script th:src="@{js/sidebar-toggle.js}" type="text/javascript"></script>
+
+<!-- Search script-->
+<script th:src="@{js/search.js}" type="text/javascript"></script>
+
+</body>
+</html>

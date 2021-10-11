@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ShoppingCartService {
 
-    List<CartItemViewModel> listCartItemsByCustomerUsername(String username);
+    List<CartItemViewModel> listCartItemsByCustomer(String username);
 }

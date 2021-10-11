@@ -26,9 +26,8 @@ public class ShoppingCartController {
     public String showShoppingCart(Model model,
                                    @AuthenticationPrincipal UserDetails principal) {
 
-        String customer = principal.getUsername();
         List<CartItemViewModel> cartItemViewModels = shoppingCartService
-                .listCartItemsByCustomerUsername(customer);
+                .listCartItemsByCustomer(principal.getUsername());
 
         model.addAttribute("cartItems", cartItemViewModels);
 

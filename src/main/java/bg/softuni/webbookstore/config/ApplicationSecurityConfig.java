@@ -30,23 +30,23 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .antMatchers("/", "/home", "/books/all", "/users/login", "/users/register").permitAll()
-                .antMatchers("/books/add", "/authors/add").hasRole("ADMIN")
-                .antMatchers("/**").authenticated()
+                    .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                    .antMatchers("/", "/home", "/books/all", "/users/login", "/users/register").permitAll()
+                    .antMatchers("/books/add", "/authors/add").hasRole("ADMIN")
+                    .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/users/login")
-                .usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
-                .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
-                .defaultSuccessUrl("/home")
-                .failureForwardUrl("/users/login-error")
+                    .loginPage("/users/login")
+                    .usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
+                    .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
+                    .defaultSuccessUrl("/home")
+                    .failureForwardUrl("/users/login-error")
                 .and()
                 .logout()
-                .logoutUrl("/users/logout")
-                .logoutSuccessUrl("/")
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID");
+                    .logoutUrl("/users/logout")
+                    .logoutSuccessUrl("/")
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID");
     }
 
     @Override

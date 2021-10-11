@@ -110,7 +110,7 @@ form > input.form-control {
 }
 
 /* Book Details Card */
-.book-container {
+#book-wrapper, #shopping-cart-wrapper {
     border-radius: 5px;
     background-color: #ececec;
     position: relative;

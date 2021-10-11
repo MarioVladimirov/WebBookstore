@@ -25,7 +25,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public List<CartItemViewModel> listCartItemsByCustomerUsername(String username) {
+    public List<CartItemViewModel> listCartItemsByCustomer(String username) {
         return cartItemRepository
                 .findByCustomerUsername(username)
                 .stream()
