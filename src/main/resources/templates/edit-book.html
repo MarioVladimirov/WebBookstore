@@ -200,10 +200,10 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6 mb-3">
-                        <label for="publishingHouse" class="text-white font-weight-bold">Publishing House</label>
-                        <select id="publishingHouse"
-                                name="publishingHouse"
-                                th:field="*{publishingHouse}"
+                        <label for="publishingHouseName" class="text-white font-weight-bold">Publishing House</label>
+                        <select id="publishingHouseName"
+                                name="publishingHouseName"
+                                th:field="*{publishingHouseName}"
                                 th:errorclass="is-invalid"
                                 class="custom-select">
                             <option value="" selected>Select Publishing House</option>
@@ -212,7 +212,7 @@
                                     th:value="${p}"
                             </option>
                         </select>
-                        <p th:if="${#fields.hasErrors('publishingHouse')}" th:errors="*{publishingHouse}"
+                        <p th:if="${#fields.hasErrors('publishingHouseName')}" th:errors="*{publishingHouseName}"
                            id="publishingHouseError"
                            class="errors alert alert-danger">
                             Publishing House is required.
