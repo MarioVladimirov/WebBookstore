@@ -133,24 +133,19 @@
                     </p>
                 </section>
 
-                <!-- TODO - text and picture padding -->
                 <section class="info-section align-items-center">
                     <h5 class="text-center" th:text="|Publishing House: *{publishingHouse.getName()}|">
                     </h5>
-                    <div class="row align-items-center">
-                        <div class="col-sm-3">
-                            <a th:href="@{/publishinghouses/details/{id}(id=*{publishingHouse.getId()})}">
+                    <div class="clearfix align-items-center">
+                        <a th:href="@{/publishinghouses/details/{id}(id=*{publishingHouse.getId()})}">
                             <span>
-                                <img class="ph-img" th:src="*{publishingHouse.getImageUrl()}" alt="Thumbnail [100%x225]"
+                                <img class="ph-img float-md-left mr-3" th:src="*{publishingHouse.getImageUrl()}" alt="Thumbnail [100%x225]"
                                      data-holder-rendered="true">
                             </span>
-                            </a>
-                        </div>
-                        <div class="col-sm-9">
-                            <p class="ph-text text-justify" th:text="*{publishingHouse.getDescription()}">
-                                Publishing House Description
-                            </p>
-                        </div>
+                        </a>
+                        <p class="text-justify" th:text="*{publishingHouse.getDescription()}">
+                            Publishing House Description
+                        </p>
                     </div>
                 </section>
 
