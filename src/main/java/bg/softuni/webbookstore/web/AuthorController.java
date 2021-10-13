@@ -4,6 +4,7 @@ import bg.softuni.webbookstore.model.binding.AuthorAddBindingModel;
 import bg.softuni.webbookstore.model.service.AuthorAddServiceModel;
 import bg.softuni.webbookstore.model.view.AuthorViewModel;
 import bg.softuni.webbookstore.service.AuthorService;
+import bg.softuni.webbookstore.service.BookService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +19,12 @@ import javax.validation.Valid;
 public class AuthorController {
 
     private final AuthorService authorService;
+    private final BookService bookService;
     private final ModelMapper modelMapper;
 
-    public AuthorController(AuthorService authorService, ModelMapper modelMapper) {
+    public AuthorController(AuthorService authorService, BookService bookService, ModelMapper modelMapper) {
         this.authorService = authorService;
+        this.bookService = bookService;
         this.modelMapper = modelMapper;
     }
 
@@ -62,6 +65,7 @@ public class AuthorController {
         AuthorViewModel viewModel = authorService.findById(id);
 
         model.addAttribute("author", viewModel);
+        model.addAttribute("books", bookService.findBooksByAuthor(id));
 
         return "author-details";
     }

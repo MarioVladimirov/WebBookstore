@@ -44,12 +44,12 @@
                         </div>
                         <div class="card-body">
                             <div class="text-center">
-                                <p class="card-text" th:text="*{title}">${b.title}</p>
-                                <p class="card-text text-secondary">Author:
-                                    <span th:text="*{author}"></span>
+                                <p class="card-text" th:text="*{title}"></p>
+                                <p class="card-text text-secondary">
+                                    <span th:text="|Author: *{author}|"></span>
                                 </p>
-                                <p class="card-text">Price:
-                                    <span th:text="*{price}"></span> lv.
+                                <p class="card-text">
+                                    <span th:text="|Price: *{price}|"></span> BGN
                                 </p>
                             </div>
                         </div>

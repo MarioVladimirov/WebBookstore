@@ -2,6 +2,7 @@ package bg.softuni.webbookstore.model.view;
 import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.Set;
 
 public class BookDetailViewModel {
@@ -11,6 +12,7 @@ public class BookDetailViewModel {
     private String title;
     private String description;
     private String imageUrl;
+    private Instant addedOn;
     private Integer pagesCount;
     private Integer copies;
     private Integer releaseYear;
@@ -20,6 +22,7 @@ public class BookDetailViewModel {
     private PublishingHouseViewModel publishingHouse;
     private String author;
     private Long authorId;
+    private String creator;
 
     public BookDetailViewModel() {
     }
@@ -66,6 +69,15 @@ public class BookDetailViewModel {
 
     public BookDetailViewModel setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public Instant getAddedOn() {
+        return addedOn;
+    }
+
+    public BookDetailViewModel setAddedOn(Instant addedOn) {
+        this.addedOn = addedOn;
         return this;
     }
 
@@ -147,6 +159,15 @@ public class BookDetailViewModel {
 
     public BookDetailViewModel setAuthorId(Long authorId) {
         this.authorId = authorId;
+        return this;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public BookDetailViewModel setCreator(String creator) {
+        this.creator = creator;
         return this;
     }
 }

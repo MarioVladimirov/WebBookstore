@@ -46,18 +46,9 @@ public class AuthorServiceImpl implements AuthorService {
     public AuthorViewModel findById(Long id) {
         AuthorEntity authorEntity = authorRepository
                 .findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Author not foudng"));
+                .orElseThrow(() -> new IllegalArgumentException("Author not found"));
 
-        AuthorViewModel viewModel = modelMapper
+        return modelMapper
                 .map(authorEntity, AuthorViewModel.class);
-
-        viewModel.setBooks(
-                authorEntity.getBooks()
-                        .stream()
-                        .map(bookService::getSummaryViewModel)
-                        .collect(Collectors.toList())
-        );
-
-        return viewModel;
     }
 }

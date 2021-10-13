@@ -45,24 +45,23 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookSummaryViewModel getSummaryViewModel(BookEntity bookEntity) {
-        BookSummaryViewModel viewModel = modelMapper
-                .map(bookEntity, BookSummaryViewModel.class);
-
-        Set<String> categories = new HashSet<>();
-        bookEntity
-                .getCategories()
+    public List<BookSummaryViewModel> findBooksByAuthor(Long id) {
+        return bookRepository
+                .findByAuthorId(id)
                 .stream()
-                .map(categoryEntity -> categoryEntity.getCategory().name())
-                .forEach(categories::add);
-
-        viewModel
-                .setCategories(categories)
-                .setAuthor(
-                        bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName());
-
-        return viewModel;
+                .map(this::getSummaryViewModel)
+                .collect(Collectors.toList());
     }
+
+    @Override
+    public List<BookSummaryViewModel> findBooksByPublishingHouse(Long id) {
+        return bookRepository
+                .findByPublishingHouseId(id)
+                .stream()
+                .map(this::getSummaryViewModel)
+                .collect(Collectors.toList());
+    }
+
 
     @Override
     public BookDetailViewModel findById(Long id) {
@@ -85,7 +84,9 @@ public class BookServiceImpl implements BookService {
                 .setAuthor(
                         bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName())
                 .setAuthorId(
-                        bookEntity.getAuthor().getId());
+                        bookEntity.getAuthor().getId())
+                .setCreator(
+                        bookEntity.getCreator().getFirstName() + " " + bookEntity.getCreator().getLastName());
 
         //TODO - check what is returned and if additional map is needed
         return viewModel;
@@ -149,4 +150,24 @@ public class BookServiceImpl implements BookService {
     public boolean existsByIsbn(String isbn) {
         return bookRepository.existsByIsbn(isbn);
     }
+
+    private BookSummaryViewModel getSummaryViewModel(BookEntity bookEntity) {
+        BookSummaryViewModel viewModel = modelMapper
+                .map(bookEntity, BookSummaryViewModel.class);
+
+        Set<String> categories = new HashSet<>();
+        bookEntity
+                .getCategories()
+                .stream()
+                .map(categoryEntity -> categoryEntity.getCategory().name())
+                .forEach(categories::add);
+
+        viewModel
+                .setCategories(categories)
+                .setAuthor(
+                        bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName());
+
+        return viewModel;
+    }
+
 }

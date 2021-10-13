@@ -1,15 +1,11 @@
 package bg.softuni.webbookstore.model.view;
 
-import java.util.List;
-
 public class AuthorViewModel {
 
     private String firstName;
     private String lastName;
     private String description;
     private String imageUrl;
-    private List<BookSummaryViewModel> books;
-
 
     public AuthorViewModel() {
     }
@@ -47,15 +43,6 @@ public class AuthorViewModel {
 
     public AuthorViewModel setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-        return this;
-    }
-
-    public List<BookSummaryViewModel> getBooks() {
-        return books;
-    }
-
-    public AuthorViewModel setBooks(List<BookSummaryViewModel> books) {
-        this.books = books;
         return this;
     }
 }
