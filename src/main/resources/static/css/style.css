@@ -149,7 +149,7 @@ form > input.form-control {
     }
 }
 
-#book-buttons a.btn.btn-info {
+#book-buttons a.btn.btn-info, #book-buttons button.btn.btn-info {
     margin: 5px;
 }
 

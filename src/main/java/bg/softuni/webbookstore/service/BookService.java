@@ -20,4 +20,6 @@ public interface BookService {
     List<BookSummaryViewModel> findBooksByAuthor(Long id);
 
     List<BookSummaryViewModel> findBooksByPublishingHouse(Long id);
+
+    void delete(Long id);
 }

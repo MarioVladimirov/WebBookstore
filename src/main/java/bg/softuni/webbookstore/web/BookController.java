@@ -113,4 +113,11 @@ public class BookController {
         // TODO - create view and implement method
 
     }
+
+    @DeleteMapping("/{id}")
+    public String deleteOffer(@PathVariable Long id) {
+        bookService.delete(id);
+
+        return "redirect:/books/all";
+    }
 }

@@ -63,6 +63,11 @@ public class BookServiceImpl implements BookService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void delete(Long id) {
+        bookRepository.deleteById(id);
+    }
+
 
     @Override
     public BookDetailViewModel findById(Long id) {

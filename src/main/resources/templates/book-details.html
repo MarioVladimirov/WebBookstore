@@ -114,14 +114,16 @@
                                 <i class="far fa-heart"></i> Add to Favourites</a>
                         </div>
                         <div sec:authorize="hasRole('ROLE_ADMIN')" class="btn-group">
-                            <a th:href="@{/books/details/{id}(id=*{id})}"
+                            <a th:href="@{/books/edit/{id}(id=*{id})}"
                                type="button" class="btn btn-info btn-md">
                                 <i class="far fa-edit"></i> Edit</a>
                         </div>
                         <div sec:authorize="hasRole('ROLE_ADMIN')" class="btn-group">
-                            <a th:href="@{/books/details/{id}(id=*{id})}"
-                               type="button" class="btn btn-info btn-md">
-                                <i class="fa fa-trash-o fa-lg"></i> Delete</a>
+                            <form th:action="@{/books/{id}(id=*{id})}"
+                                  th:method="delete">
+                                <button type="submit" class="btn btn-info btn-md">
+                                    <i class="fa fa-trash-o fa-lg"></i> Delete</button>
+                            </form>
                         </div>
                     </section>
                 </div>
@@ -139,7 +141,8 @@
                     <div class="clearfix align-items-center">
                         <a th:href="@{/publishinghouses/details/{id}(id=*{publishingHouse.getId()})}">
                             <span>
-                                <img class="ph-img float-md-left mr-3" th:src="*{publishingHouse.getImageUrl()}" alt="Thumbnail [100%x225]"
+                                <img class="ph-img float-md-left mr-3" th:src="*{publishingHouse.getImageUrl()}"
+                                     alt="Thumbnail [100%x225]"
                                      data-holder-rendered="true">
                             </span>
                         </a>
