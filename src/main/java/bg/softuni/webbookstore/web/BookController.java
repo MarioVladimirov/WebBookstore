@@ -96,17 +96,21 @@ public class BookController {
         return "book-details";
     }
 
-    @GetMapping("/edit")
-    public String edit() {
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Long id,
+                       Model model) {
+
+        BookDetailViewModel detailViewModel = bookService.findById(id);
+        // map to BookUpdateBindingModel and give to bookService to update it
+
         return "edit-book";
     }
 
-    @PostMapping("/edit")
-    public String editConfirm() {
+    @PatchMapping("/edit/{id}")
+    public String editConfirm(@PathVariable Long id) {
 
-        return "redirect:/home";
+        return "redirect:/books/details" + id;
         // TODO - create view and implement method
-        // redirect to updated book details
 
     }
 }
