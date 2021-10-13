@@ -1,5 +1,6 @@
 package bg.softuni.webbookstore.service.impl;
 
+import bg.softuni.webbookstore.model.binding.BookUpdateBindingModel;
 import bg.softuni.webbookstore.model.entity.*;
 import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
 import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
@@ -70,7 +71,7 @@ public class BookServiceImpl implements BookService {
 
 
     @Override
-    public BookDetailViewModel findById(Long id) {
+    public BookDetailViewModel findBookDetails(Long id) {
         BookEntity bookEntity = bookRepository
                 .findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Book not found"));
@@ -78,18 +79,10 @@ public class BookServiceImpl implements BookService {
         BookDetailViewModel viewModel = modelMapper
                 .map(bookEntity, BookDetailViewModel.class);
 
-        Set<String> categories = new HashSet<>();
-        bookEntity
-                .getCategories()
-                .stream()
-                .map(categoryEntity -> categoryEntity.getCategory().name())
-                .map(s -> s.charAt(0) + s.substring(1).toLowerCase().replaceAll("_", " "))
-                .forEach(categories::add);
-
         viewModel
                 .setAddedOn(bookEntity.getAddedOn().atZone(ZoneId.systemDefault()))
                 .setModified(bookEntity.getModified().atZone(ZoneId.systemDefault()))
-                .setCategories(categories)
+                .setCategories(getCategoriesAsStrings(bookEntity))
                 .setAuthor(
                         bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName())
                 .setAuthorId(
@@ -99,6 +92,23 @@ public class BookServiceImpl implements BookService {
 
         //TODO - check what is returned and if additional map is needed
         return viewModel;
+    }
+
+    @Override
+    public BookUpdateBindingModel findBookToEdit(Long id) {
+        BookEntity bookEntity = bookRepository
+                .findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Book not found"));
+
+        BookUpdateBindingModel updateBindingModel = modelMapper
+                .map(bookEntity, BookUpdateBindingModel.class);
+
+        updateBindingModel
+                .setCategories(getCategoriesAsStrings(bookEntity))
+                .setAuthor(
+                        bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName());
+
+        return updateBindingModel;
     }
 
     @Override
@@ -178,6 +188,17 @@ public class BookServiceImpl implements BookService {
                         bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName());
 
         return viewModel;
+    }
+
+    private Set<String> getCategoriesAsStrings(BookEntity bookEntity) {
+        Set<String> categories = new HashSet<>();
+        bookEntity
+                .getCategories()
+                .stream()
+                .map(categoryEntity -> categoryEntity.getCategory().name())
+                .map(s -> s.charAt(0) + s.substring(1).toLowerCase().replaceAll("_", " "))
+                .forEach(categories::add);
+        return categories;
     }
 
 }

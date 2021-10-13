@@ -1,6 +1,7 @@
 package bg.softuni.webbookstore.web;
 
 import bg.softuni.webbookstore.model.binding.BookAddBindingModel;
+import bg.softuni.webbookstore.model.binding.BookUpdateBindingModel;
 import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
 import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
 import bg.softuni.webbookstore.model.service.BookAddServiceModel;
@@ -38,6 +39,11 @@ public class BookController {
     @ModelAttribute("bookAddBindingModel")
     public BookAddBindingModel bookAddBindingModel() {
         return new BookAddBindingModel();
+    }
+
+    @ModelAttribute("bookUpdateBindingModel")
+    public BookUpdateBindingModel bookUpdateBindingModel() {
+        return new BookUpdateBindingModel();
     }
 
     @GetMapping("/all")
@@ -89,19 +95,31 @@ public class BookController {
     public String details(@PathVariable Long id,
                           Model model) {
 
-        BookDetailViewModel detailViewModel = bookService.findById(id);
+        BookDetailViewModel detailViewModel = bookService.findBookDetails(id);
 
         model.addAttribute("book", detailViewModel);
 
         return "book-details";
     }
 
+    @DeleteMapping("/{id}")
+    public String deleteOffer(@PathVariable Long id) {
+        bookService.delete(id);
+
+        return "redirect:/books/all";
+    }
+
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id,
                        Model model) {
 
-        BookDetailViewModel detailViewModel = bookService.findById(id);
-        // map to BookUpdateBindingModel and give to bookService to update it
+        BookUpdateBindingModel bookUpdateBindingModel = bookService.findBookToEdit(id);
+
+        model.addAttribute("bookUpdateBindingModel", bookUpdateBindingModel);
+        model.addAttribute("languages", LanguageEnum.values());
+        model.addAttribute("categories", CategoryEnum.values());
+        model.addAttribute("publishingHouses", publishingHouseService.findAllPublishingHouseNames());
+        model.addAttribute("authors", authorService.findAllAuthorsNames());
 
         return "edit-book";
     }
@@ -112,12 +130,5 @@ public class BookController {
         return "redirect:/books/details" + id;
         // TODO - create view and implement method
 
-    }
-
-    @DeleteMapping("/{id}")
-    public String deleteOffer(@PathVariable Long id) {
-        bookService.delete(id);
-
-        return "redirect:/books/all";
     }
 }
