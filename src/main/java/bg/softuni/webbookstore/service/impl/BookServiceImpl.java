@@ -11,6 +11,7 @@ import bg.softuni.webbookstore.service.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.ZoneId;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -77,9 +78,12 @@ public class BookServiceImpl implements BookService {
                 .getCategories()
                 .stream()
                 .map(categoryEntity -> categoryEntity.getCategory().name())
+                .map(s -> s.charAt(0) + s.substring(1).toLowerCase().replaceAll("_", " "))
                 .forEach(categories::add);
 
         viewModel
+                .setAddedOn(bookEntity.getAddedOn().atZone(ZoneId.systemDefault()))
+                .setModified(bookEntity.getModified().atZone(ZoneId.systemDefault()))
                 .setCategories(categories)
                 .setAuthor(
                         bookEntity.getAuthor().getFirstName() + " " + bookEntity.getAuthor().getLastName())
@@ -105,7 +109,8 @@ public class BookServiceImpl implements BookService {
 
         Set<CategoryEntity> categoryEntities = new HashSet<>();
         for (String category : bookAddServiceModel.getCategories()) {
-            CategoryEnum categoryEnum = CategoryEnum.valueOf(category.toUpperCase());
+            CategoryEnum categoryEnum = CategoryEnum.valueOf(
+                    category.toUpperCase().replaceAll(" ", "_"));
             CategoryEntity categoryEntity = categoryRepository
                     .findByCategory(categoryEnum)
                     .orElseThrow(() -> new IllegalArgumentException(

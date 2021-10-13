@@ -44,7 +44,7 @@
                                     </span>
                                     </li>
                                     <li>
-                                        <strong>Publishing House: </strong>
+                                        <strong>Publishing house: </strong>
                                         <span>
                                         <a th:text="*{publishingHouse.getName()}"
                                            th:href="@{/publishinghouses/details/{id}(id=*{publishingHouse.getId()})}">
@@ -61,7 +61,7 @@
                                         <span th:text="*{isbn}"></span>
                                     </li>
                                     <li>
-                                        <strong>Release Year: </strong>
+                                        <strong>Release year: </strong>
                                         <span th:text="*{releaseYear}"></span>
                                     </li>
                                     <li>
@@ -70,12 +70,33 @@
                                     </li>
                                     <li>
                                         <strong>Categories: </strong>
-                                        <span th:each="c : *{categories}" th:text="${c}"></span>,
+                                        <span th:text="${#strings.setJoin(book.categories, ', ')}"></span>
                                     </li>
                                     <li>
                                         <strong>Price: </strong>
-                                        <span th:text="*{price}"></span> lv.
+                                        <span th:text="|*{price} BGN|"></span>
                                     </li>
+
+                                    <br/>
+
+                                    <ul sec:authorize="hasRole('ROLE_ADMIN')">
+                                        <li>
+                                            <strong>Copies on stock: </strong>
+                                            <span th:text="*{copies}"></span>
+                                        </li>
+                                        <li>
+                                            <strong>Added on: </strong>
+                                            <span th:text="${#temporals.format(book.addedOn, 'dd/MM/yyyy HH:mm')}"></span>
+                                        </li>
+                                        <li>
+                                            <strong>Last modified on: </strong>
+                                            <span th:text="${#temporals.format(book.modified, 'dd/MM/yyyy HH:mm')}"></span>
+                                        </li>
+                                        <li>
+                                            <strong>Added by: </strong>
+                                            <span th:text="*{creator}"></span>
+                                        </li>
+                                    </ul>
                                 </ul>
                             </div>
                         </div>
@@ -114,19 +135,22 @@
 
                 <!-- TODO - text and picture padding -->
                 <section class="info-section align-items-center">
-                    <h5 class="text-center">Publishing House:
-                        <span th:text="*{publishingHouse.getName()}"></span>
+                    <h5 class="text-center" th:text="|Publishing House: *{publishingHouse.getName()}|">
                     </h5>
-                    <div class="align-items-center">
-                        <a th:href="@{/publishinghouses/details/{id}(id=*{publishingHouse.getId()})}">
+                    <div class="row align-items-center">
+                        <div class="col-sm-3">
+                            <a th:href="@{/publishinghouses/details/{id}(id=*{publishingHouse.getId()})}">
                             <span>
                                 <img class="ph-img" th:src="*{publishingHouse.getImageUrl()}" alt="Thumbnail [100%x225]"
-                                    data-holder-rendered="true">
+                                     data-holder-rendered="true">
                             </span>
-                        </a>
-                        <p class="ph-text text-justify" th:text="*{publishingHouse.getDescription()}">
-                            Publishing House Description
-                        </p>
+                            </a>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="ph-text text-justify" th:text="*{publishingHouse.getDescription()}">
+                                Publishing House Description
+                            </p>
+                        </div>
                     </div>
                 </section>
 

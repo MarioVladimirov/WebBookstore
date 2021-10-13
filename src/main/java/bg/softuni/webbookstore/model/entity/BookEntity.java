@@ -2,6 +2,7 @@ package bg.softuni.webbookstore.model.entity;
 
 import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -12,7 +13,7 @@ import java.util.Set;
 @Table(name = "books")
 public class BookEntity extends BaseEntity {
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String isbn;
 
     @Column(nullable = false)
@@ -24,8 +25,11 @@ public class BookEntity extends BaseEntity {
     @Column(name = "image_url", columnDefinition = "TEXT")
     private String imageUrl;
 
-    @Column(name = "added_on")
+    @Column(name = "added_on", nullable = false)
     private Instant addedOn;
+
+    @Column(nullable = false)
+    private Instant modified;
 
     @Column(name = "pages_count", nullable = false)
     private Integer pagesCount;
@@ -101,6 +105,15 @@ public class BookEntity extends BaseEntity {
 
     public BookEntity setAddedOn(Instant addedOn) {
         this.addedOn = addedOn;
+        return this;
+    }
+
+    public Instant getModified() {
+        return modified;
+    }
+
+    public BookEntity setModified(Instant modified) {
+        this.modified = modified;
         return this;
     }
 
@@ -183,5 +196,17 @@ public class BookEntity extends BaseEntity {
     public BookEntity setCreator(UserEntity creator) {
         this.creator = creator;
         return this;
+    }
+
+    @PrePersist
+    public void onCreate() {
+        this.setAddedOn(Instant.now());
+        this.setModified(Instant.now());
+    }
+
+    // TODO - test if update works
+    @PreUpdate
+    public void onUpdate() {
+        this.setModified(Instant.now());
     }
 }

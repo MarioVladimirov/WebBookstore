@@ -165,15 +165,13 @@ form > input.form-control {
 }
 
 .ph-img {
-    float: left;
     height: 150px;
     width: 150px;
 }
 
-.ph-text {
-    width: auto;
-    padding-left: 10px;
-}
+/*.ph-text {*/
+/*    width: auto;*/
+/*}*/
 
 /* Footer */
 .footer {

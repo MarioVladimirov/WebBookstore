@@ -55,15 +55,12 @@ INSERT INTO publishing_houses (id, name, description, image_url)
 VALUES (3, 'БАРД',
         'He cлyчaйнo мотото нa БAPД e „Kнигитe, ĸoитo чeтe cвeтът“, зaщoтo зaглaвиятa, ĸoитo излизaт c мapĸaтa нa издaтeлcтвoтo, oглaвявaт нe caмo poднитe, нo и cвeтoвнитe читaтeлcĸи ĸлacaции. Бoгaтaтa жaнpoвa пaлитpa вĸлючвa: фaнтacтиĸa, фeнтъзи, тpилъpи, нayчнoпoпyляpнa литepaтypa, cвeтoвнa ĸлacиĸa, cъвpeмeнни poмaни, миcтиĸa и eзoтepиĸa, пoпyляpнa пcиxoлoгия, дeтcĸи ĸниги. C лoгoтo нa БAPД излизaт eдни oт нaй-пoзнaтитe и oбичaни издaтeлcĸи пopeдици „Kpaлeтe нa тpилъpa“, „Избpaнa cвeтoвнa фaнтacтиĸa“ и „Beлиĸи мaйcтopи нa фeнтъзитo и фaнтacтиĸaтa“.',
         '/images/publishing-house-pics/bard.jpg');
-INSERT INTO publishing_houses (id, name, description, image_url)
-VALUES (4, 'Захарий_Стоянов',
-        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim et nostrum
-                                optio perferendis quam quod ratione rem sit soluta ut! A dolor laborum, maiores neque
-                                nesciunt quis rerum sunt suscipit.',
-        '/images/publishing-house-pics/default-publishing-house-picture.jpg');
 INSERT INTO publishing_houses (id, name, image_url)
-VALUES (5, 'Абагар_Холдинг',
-        '/images/publishing-house-pics/default-publishing-house-picture.jpg');
+VALUES (4, 'Захарий Стоянов',
+        '/images/publishing-house-pics/default-ph-picture.png');
+INSERT INTO publishing_houses (id, name, image_url)
+VALUES (5, 'Абагар Холдинг',
+        '/images/publishing-house-pics/default-ph-picture.png');
 INSERT INTO publishing_houses (id, name, description, image_url)
 VALUES (6, 'Колибри',
         'Koлибpи e в aвaнгapдa нa издaтeлcĸия бизнec в Бългapия. Cъздaдeнo пpeз 1990 г., нeпocpeдcтвeнo cлeд пoлитичecĸитe пpoмeни в cтpaнaтa, пpeз гoдинитe издaтeлcтвoтo ce yтвъpди cъc cвoя бeзĸoмпpoмиceн пpoфecиoнaлизъм и oтгoвopнo oтнoшeниe ĸъм ĸлиeнти и пapтньopи. Eдин cплoтeн eĸип cтoи в ocнoвaтa нa peзyлтaти, ĸoитo ce пocтигaт c ycъpдиe, пocлeдoвaтeлнocт и бeзycлoвнa любoв ĸъм литepaтypaтa.
@@ -100,45 +97,50 @@ VALUES (5, 'Фредрик', 'Бакман',
 
 
 
-INSERT INTO books (id, isbn, title, description, image_url, pages_count, copies, release_year, price, language,
+INSERT INTO books (id, isbn, title, description, image_url, added_on, modified, pages_count, copies, release_year, price, language,
                    publishing_house_id, author_id, creator_id)
 VALUES (1, '9547394169', 'Братя Карамазови',
         'Шедьоврите на световната литература са кардиналите, които крепят огромното и невидимо мироздание на човешкия дух. Във всяко време, когато са поставени на изпитание нравствените устои на отделната личност или цели нации, великата творба е като спасителна слънчева стълба в бездната на отчаянието, хаоса и неверието. Романът "Братя Карамазови" е един от най-ярките в творчеството на Фьодор Достоевски и заема своето достойно място в така нареченото Петокнижие на автора, редом с "Идиот", "Престъпление и наказание", "Бесове"... В него характерната за Достоевски тема за страданието и просветлението е особено мащабно застъпена, а образите, които великият майстор е изваял с перото си, са се превърнали в емблематични за всяко поколение.',
         '/images/book-cover-pics/default-book-cover.jpg',
+        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
         934, 3, 2003, 30.00, 'BULGARIAN',
         4, 3, 1);
-INSERT INTO books (id, isbn, title, description, image_url, pages_count, copies, release_year, price, language,
+INSERT INTO books (id, isbn, title, description, image_url, added_on, modified, pages_count, copies, release_year, price, language,
                    publishing_house_id, author_id, creator_id)
 VALUES (2, '9789545841958', 'Хрониките на Амбър 1',
         '“Хрониките на Амбър” са си спечелили заслужено място като класика на всички времена сред шедьоврите на творческото въображение.
 Амбър е единственият истински свят, който се отразява в безброй огледални светове Сенки, подвластни на Принцовете на Амбър. Кралското семейство е разединено от завист и подозрения. Изчезването на родоначалника Оберон е засилило вътрешните конфликти и тронът е уязвим за узурпатори. Станете свидетели на титаничната битка за надмощие на Земята и в Царството на Хаоса, където силите на Амбър и Хаоса водят непрестанна борба за власт посредством заговори и смели ходове.',
         '/images/book-cover-pics/hronikite-na-ambar-1.jpg',
+        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
         576, 5, 2014, 29.99, 'BULGARIAN',
         3, 2, 1);
-INSERT INTO books (id, isbn, title, image_url, pages_count, copies, release_year, price, language,
+INSERT INTO books (id, isbn, title, image_url, added_on, modified, pages_count, copies, release_year, price, language,
                    publishing_house_id, author_id, creator_id)
 VALUES (3, '9549513971', 'Събрани разкази; т.5',
         '/images/book-cover-pics/sybrani-razkazi-5.jpg',
+        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
         288, 2, 2001, 7.00, 'BULGARIAN',
         5, 4, 1);
-INSERT INTO books (id, isbn, title, description, image_url, pages_count, copies, release_year, price, language,
+INSERT INTO books (id, isbn, title, description, image_url, added_on, modified, pages_count, copies, release_year, price, language,
                    publishing_house_id, author_id, creator_id)
 VALUES (4, '9789545841705', 'Властелинът на Пръстените',
         'Не е възможно да се предадат на посягащия за пръв път към тази книга всичките й достойнства, нейния мащаб и великолепие.
 Криволичещ от епичното до комичното, от пасторалното до диаболичното, сюжетът пресъздава по възхитителен начин герои и сцени в един изцяло измислен, но напълно правдоподобен свят на джуджета, елфи и хора.
 Пред вас е пълното издание на един невероятен роман, който не ще ви даде миг покой до последната страница… и дълги години след това.',
         '/images/book-cover-pics/vlastelinyt.jpg',
+        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
         1088, 4, 2001, 46.99, 'BULGARIAN',
         3, 1, 1);
-INSERT INTO books (id, isbn, title, description, image_url, pages_count, copies, release_year, price, language,
+INSERT INTO books (id, isbn, title, description, image_url, added_on, modified, pages_count, copies, release_year, price, language,
                    publishing_house_id, author_id, creator_id)
 VALUES (5, '978954091017Х', 'Престъпление и наказание',
         'Шедьоврите на световната литература са кариатидите, които крепят огромното и невидимото мироздание на човешкия дух. Във всяко време, когато са поставени на изпитание нравствените устои на отделната личност или цели нации, великата творба е като спасителна слънчева стълба в бездната на отчаянието, хаоса и неверието.
 Поредицата „Шедьовър" представя на българския читател образци на световната литература. В този том, драги читателю, ти предстои среща с един от великите романи на Достоевски - „Престъпление и наказание". Всичко ли е позволено на човека, мъртъв ли е неговият вътрешен бог? Всяко престъпление е човешко, а наказанието следва невидимите проявления на божествената воля, която спасява човешкото у човека.',
         '/images/book-cover-pics/default-book-cover.jpg',
+        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
         512, 1, 2011, 30.00, 'BULGARIAN',
         4, 3, 1);
-INSERT INTO books (id, isbn, title, description, image_url, pages_count, copies, release_year, price, language,
+INSERT INTO books (id, isbn, title, description, image_url, added_on, modified, pages_count, copies, release_year, price, language,
                    publishing_house_id, author_id, creator_id)
 VALUES (6, '9789542815075', 'Човек на име Уве',
         'Уве е на 59, заклет почитател и притежател на сааб, вдовец. Тъгата по любимата му Соня го кара всеки ден да пожелава смъртта си.
@@ -146,6 +148,7 @@ VALUES (6, '9789542815075', 'Човек на име Уве',
 
 Една сутрин бъбрива млада двойка с две весели дъщерички се нанасят в съседна къща и случайно смачкват пощенската му кутия. Случката води до комичния и трогателен разказ за безпризорна котка, неочаквано приятелство и древното изкуство да дадеш на заден с ремарке. Всичко, което се случва, ще промени киселия старец и ще разтърси до основи кварталното сдружение на обитателите.',
         '/images/book-cover-pics/uwe.jpg',
+        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
         294, 5, 2014, 14.00, 'BULGARIAN',
         1, 5, 1);
 

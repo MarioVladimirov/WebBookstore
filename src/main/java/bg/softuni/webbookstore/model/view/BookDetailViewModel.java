@@ -2,7 +2,7 @@ package bg.softuni.webbookstore.model.view;
 import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
 
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Set;
 
 public class BookDetailViewModel {
@@ -12,7 +12,8 @@ public class BookDetailViewModel {
     private String title;
     private String description;
     private String imageUrl;
-    private Instant addedOn;
+    private ZonedDateTime addedOn;
+    private ZonedDateTime modified;
     private Integer pagesCount;
     private Integer copies;
     private Integer releaseYear;
@@ -72,12 +73,21 @@ public class BookDetailViewModel {
         return this;
     }
 
-    public Instant getAddedOn() {
+    public ZonedDateTime getAddedOn() {
         return addedOn;
     }
 
-    public BookDetailViewModel setAddedOn(Instant addedOn) {
+    public BookDetailViewModel setAddedOn(ZonedDateTime addedOn) {
         this.addedOn = addedOn;
+        return this;
+    }
+
+    public ZonedDateTime getModified() {
+        return modified;
+    }
+
+    public BookDetailViewModel setModified(ZonedDateTime modified) {
+        this.modified = modified;
         return this;
     }
 
