@@ -169,6 +169,10 @@ form > input.form-control {
     width: 150px;
 }
 
+div.form-group input:read-only, select:disabled {
+    background-color: #6c757d !important;
+}
+
 /* Footer */
 .footer {
     margin-top: 20px;
