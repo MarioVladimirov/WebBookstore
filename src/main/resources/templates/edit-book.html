@@ -23,7 +23,7 @@
             <form th:method="patch"
                   th:object="${bookUpdateBindingModel}"
                   th:action="@{/books/edit/{id}(id=*{id})}"
-                  class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+                  class="main-form mx-auto w-75 bg-blur">
                 <div class="row">
                     <div class="form-group col-md-6 mb-3">
                         <label for="isbn" class="text-white font-weight-bold">ISBN</label>
