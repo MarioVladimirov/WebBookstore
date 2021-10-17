@@ -1,5 +1,7 @@
 package bg.softuni.webbookstore.model.binding;
 
+import bg.softuni.webbookstore.model.validator.PastOrCurrentYear;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -30,20 +32,20 @@ public class BookUpdateBindingModel {
     private Integer copies;
 
     @NotNull(message = "Please enter the book's release year.")
-    //TODO - annotation to check that year is past or present
+    @PastOrCurrentYear
     private Integer releaseYear;
 
     @NotNull
     @Positive(message = "Price should be a positive number")
     private BigDecimal price;
 
-    @NotNull
+    @NotEmpty(message = "Please select language")
     private String language;
 
-    @NotNull
+    @NotEmpty(message = "Please select categories")
     private Set<String> categories;
 
-    @NotEmpty
+    @NotEmpty(message = "Please select publishing house")
     private String publishingHouseName;
 
     private String author;

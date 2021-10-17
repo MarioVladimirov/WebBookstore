@@ -1,5 +1,6 @@
 package bg.softuni.webbookstore.model.binding;
 
+import bg.softuni.webbookstore.model.validator.PastOrCurrentYear;
 import bg.softuni.webbookstore.model.validator.UniqueByIsbn;
 
 import javax.validation.constraints.*;
@@ -29,24 +30,24 @@ public class BookAddBindingModel {
     @Positive(message = "Copies count should be a positive number")
     private Integer copies;
 
-    @NotNull(message = "Please enter the book's release year.")
-    //TODO - annotation to check that year is past or present
+    @NotNull(message = "Please enter the book's release year")
+    @PastOrCurrentYear
     private Integer releaseYear;
 
     @NotNull
     @Positive(message = "Price should be a positive number")
     private BigDecimal price;
 
-    @NotNull
+    @NotEmpty(message = "Please select language")
     private String language;
 
-    @NotNull
+    @NotEmpty(message = "Please select categories")
     private Set<String> categories;
 
-    @NotEmpty
+    @NotEmpty(message = "Please select publishing house")
     private String publishingHouse;
 
-    @NotEmpty
+    @NotEmpty(message = "Please select author or create a new one")
     private String author;
 
 

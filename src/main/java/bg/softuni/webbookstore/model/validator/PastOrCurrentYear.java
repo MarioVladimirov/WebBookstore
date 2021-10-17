@@ -9,10 +9,10 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = UniqueByIsbnValidator.class)
-public @interface UniqueByIsbn {
+@Constraint(validatedBy = PastOrCurrentYearValidator.class)
+public @interface PastOrCurrentYear {
 
-    String message() default "Book with this ISBN is already present in the Database";
+    String message() default "Release year cannot be in the future";
 
     Class<?>[] groups() default { };
 
