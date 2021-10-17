@@ -167,7 +167,8 @@
                             <option value="" selected>Select language</option>
                             <option th:each="l : ${languages}"
                                     th:text="${l}"
-                                    th:value="${l}">
+                                    th:value="${l}"
+                                    th:selected="${l} == *{language}">
                             </option>
                         </select>
                         <p th:if="${#fields.hasErrors('language')}" th:errors="*{language}"
@@ -208,7 +209,8 @@
                             <option value="" selected>Select Publishing House</option>
                             <option th:each="p : ${publishingHouses}"
                                     th:text="${p}"
-                                    th:value="${p}">
+                                    th:value="${p}"
+                                    th:selected="${p} == *{publishingHouse}">
                             </option>
                         </select>
                         <p th:if="${#fields.hasErrors('publishingHouse')}" th:errors="*{publishingHouse}"
@@ -227,7 +229,8 @@
                             <option value="" selected>Select Author</option>
                             <option th:each="a : ${authors}"
                                     th:text="${a}"
-                                    th:value="${a}">
+                                    th:value="${a}"
+                                    th:selected="${a} == *{author}">
                             </option>
                         </select>
                         <p th:if="${#fields.hasErrors('author')}" th:errors="*{author}"

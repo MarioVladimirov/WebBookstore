@@ -47,12 +47,14 @@ public class BookController {
         return new BookUpdateBindingModel();
     }
 
+    //GET
     @GetMapping("/all")
     public String allBooks(Model model) {
         model.addAttribute("books", bookService.getAllBooks());
         return "home";
     }
 
+    //CREATE
     @GetMapping("/add")
     public String add(Model model) {
         model.addAttribute("languages", LanguageEnum.values());
@@ -92,6 +94,7 @@ public class BookController {
         return "redirect:/books/details/" + bookId;
     }
 
+    //DETAILS
     @GetMapping("/details/{id}")
     public String details(@PathVariable Long id,
                           Model model) {
@@ -103,6 +106,7 @@ public class BookController {
         return "book-details";
     }
 
+    //DELETE
     @DeleteMapping("/{id}")
     public String deleteOffer(@PathVariable Long id) {
         bookService.delete(id);
@@ -110,6 +114,7 @@ public class BookController {
         return "redirect:/books/all";
     }
 
+    //UPDATE
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id,
                        Model model) {

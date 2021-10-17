@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface AuthorRepository extends JpaRepository<AuthorEntity, Long> {
 
     @Query("SELECT CONCAT(a.firstName, ' ', a.lastName) FROM AuthorEntity a " +
-            "ORDER BY a.firstName")
+            "ORDER BY a.firstName, a.lastName")
     List<String> findAllAuthorsNames();
 
     Optional<AuthorEntity> findByFirstNameAndLastName(String firstName, String lastName);

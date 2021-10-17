@@ -55,13 +55,6 @@ public class UserController {
             return "redirect:/users/register";
         }
 
-        if (userService.userNameExists(userRegisterBindingModel.getUsername())) {
-            redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
-            redirectAttributes.addFlashAttribute("userExistsError", true);
-
-            return "redirect:/users/register";
-        }
-
         if (!userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
             redirectAttributes.addFlashAttribute("confirmPasswordDifferent", true);

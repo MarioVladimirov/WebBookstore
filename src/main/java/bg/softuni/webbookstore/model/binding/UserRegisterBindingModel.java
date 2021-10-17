@@ -1,5 +1,7 @@
 package bg.softuni.webbookstore.model.binding;
 
+import bg.softuni.webbookstore.model.validator.UniqueUsername;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -13,6 +15,7 @@ public class UserRegisterBindingModel {
     @Size(min = 2, max = 20, message = "Last name should be between 2 and 20 characters long")
     private String lastName;
 
+    @UniqueUsername
     @NotEmpty(message = "Please enter a username")
     @Size(min = 2, max = 20, message = "Username should be between 2 and 20 characters long")
     private String username;
