@@ -3,19 +3,19 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<th:block th:include="~{fragments/head}"></th:block>
+<head th:replace="fragments/commons :: head"></head>
 
 <body>
 <main class="page align-content-center">
 
     <!-- Navigation-->
-    <th:block th:include="~{fragments/navbar}"></th:block>
+    <nav th:replace="fragments/commons :: navbar"></nav>
 
     <!-- Main Content-->
     <section class="container-fluid" id="wrapper">
 
         <!-- Sidebar-->
-        <th:block th:include="~{fragments/sidebar}"></th:block>
+        <nav th:replace="fragments/commons :: sidebar"></nav>
 
         <!-- Page Content -->
         <div id="content">
@@ -103,28 +103,32 @@
                     </section>
 
                     <section id="book-buttons" class="d-flex flex-column justify-content-center">
-                        <div sec:authorize="isAuthenticated()" class="btn-group">
-                            <a th:href="@{/books/details/{id}(id=*{id})}"
-                               type="button" class="btn btn-info btn-md">
-                                <i class="fas fa-shopping-cart"></i> Add to Cart</a>
-                        </div>
-                        <div sec:authorize="isAuthenticated()" class="btn-group">
-                            <a th:href="@{/books/details/{id}(id=*{id})}"
-                               type="button" class="btn btn-info btn-md">
-                                <i class="far fa-heart"></i> Add to Favourites</a>
-                        </div>
-                        <div sec:authorize="hasRole('ROLE_ADMIN')" class="btn-group">
-                            <a th:href="@{/books/edit/{id}(id=*{id})}"
-                               type="button" class="btn btn-info btn-md">
-                                <i class="far fa-edit"></i> Edit</a>
-                        </div>
-                        <div sec:authorize="hasRole('ROLE_ADMIN')" class="btn-group">
-                            <form th:action="@{/books/{id}(id=*{id})}"
-                                  th:method="delete">
-                                <button type="submit" class="btn btn-info btn-md">
-                                    <i class="fa fa-trash-o fa-lg"></i> Delete</button>
-                            </form>
-                        </div>
+                        <th:block sec:authorize="isAuthenticated()">
+                            <div class="btn-group">
+                                <a th:href="@{/books/details/{id}(id=*{id})}"
+                                   type="button" class="btn btn-info btn-md">
+                                    <i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                            </div>
+                            <div class="btn-group">
+                                <a th:href="@{/books/details/{id}(id=*{id})}"
+                                   type="button" class="btn btn-info btn-md">
+                                    <i class="far fa-heart"></i> Add to Favourites</a>
+                            </div>
+                        </th:block>
+                        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                            <div class="btn-group">
+                                <a th:href="@{/books/edit/{id}(id=*{id})}"
+                                   type="button" class="btn btn-info btn-md">
+                                    <i class="far fa-edit"></i> Edit</a>
+                            </div>
+                            <div class="btn-group">
+                                <form th:action="@{/books/{id}(id=*{id})}"
+                                      th:method="delete">
+                                    <button type="submit" class="btn btn-info btn-md">
+                                        <i class="fa fa-trash-o fa-lg"></i> Delete</button>
+                                </form>
+                            </div>
+                        </th:block>
                     </section>
                 </div>
 
@@ -160,7 +164,7 @@
     </section>
 
     <!-- Footer-->
-    <th:block th:include="~{fragments/footer}"></th:block>
+    <footer th:replace="fragments/commons :: footer"></footer>
 
 </main>
 
