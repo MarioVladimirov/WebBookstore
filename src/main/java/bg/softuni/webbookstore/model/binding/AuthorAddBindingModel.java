@@ -1,15 +1,12 @@
 package bg.softuni.webbookstore.model.binding;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 public class AuthorAddBindingModel {
 
-    @NotEmpty(message = "Please enter first name")
     @Size(min = 2, max = 20, message = "First name should be between 2 and 20 characters long")
     private String firstName;
 
-    @NotEmpty(message = "Please enter last name")
     @Size(min = 2, max = 20, message = "Last name should be between 2 and 20 characters long")
     private String lastName;
 

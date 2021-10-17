@@ -15,6 +15,10 @@ public class PastOrCurrentYearValidator implements ConstraintValidator<PastOrCur
 
     @Override
     public boolean isValid(Integer year, ConstraintValidatorContext context) {
+        if (year == null) {
+            return false;
+        }
+
         return year <= this.currentYear;
     }
 }

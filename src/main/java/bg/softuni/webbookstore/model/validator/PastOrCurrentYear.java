@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = PastOrCurrentYearValidator.class)
 public @interface PastOrCurrentYear {
 
-    String message() default "Release year cannot be in the future";
+    String message() default "Release year should be in the past or the current year";
 
     Class<?>[] groups() default { };
 

@@ -23,19 +23,18 @@ public class BookUpdateBindingModel {
 //            message = "Please enter a valid image URL: 'https://{image path}.jpg' or 'https://{image path}.png'")
     private String imageUrl;
 
-    @NotNull
+    @NotNull(message = "Pages count should be a positive number")
     @Positive(message = "Pages count should be a positive number")
     private Integer pagesCount;
 
-    @NotNull
+    @NotNull(message = "Copies count should be a positive number")
     @Positive(message = "Copies count should be a positive number")
     private Integer copies;
 
-    @NotNull(message = "Please enter the book's release year.")
     @PastOrCurrentYear
     private Integer releaseYear;
 
-    @NotNull
+    @NotNull(message = "Price should be a positive number")
     @Positive(message = "Price should be a positive number")
     private BigDecimal price;
 
