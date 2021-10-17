@@ -77,13 +77,6 @@ public class BookController {
             return "redirect:/books/add";
         }
 
-        if (bookService.existsByIsbn(bookAddBindingModel.getIsbn())) {
-            redirectAttributes.addFlashAttribute("bookAddBindingModel", bookAddBindingModel);
-            redirectAttributes.addFlashAttribute("bookExistsError", true);
-
-            return "redirect:/books/add";
-        }
-
         BookAddServiceModel bookAddServiceModel = modelMapper
                 .map(bookAddBindingModel, BookAddServiceModel.class);
 

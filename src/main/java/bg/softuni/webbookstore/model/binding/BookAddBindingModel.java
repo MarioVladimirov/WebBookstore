@@ -1,11 +1,14 @@
 package bg.softuni.webbookstore.model.binding;
 
+import bg.softuni.webbookstore.model.validator.UniqueByIsbn;
+
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Set;
 
 public class BookAddBindingModel {
 
+    @UniqueByIsbn
     @NotEmpty(message = "Please enter a valid ISBN number")
     private String isbn;
 
