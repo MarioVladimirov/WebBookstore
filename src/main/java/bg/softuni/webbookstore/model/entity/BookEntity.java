@@ -204,7 +204,6 @@ public class BookEntity extends BaseEntity {
         this.setModified(Instant.now());
     }
 
-    // TODO - test if update works
     @PreUpdate
     public void onUpdate() {
         this.setModified(Instant.now());

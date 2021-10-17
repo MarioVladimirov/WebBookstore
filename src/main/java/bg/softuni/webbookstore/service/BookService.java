@@ -2,6 +2,7 @@ package bg.softuni.webbookstore.service;
 
 import bg.softuni.webbookstore.model.binding.BookUpdateBindingModel;
 import bg.softuni.webbookstore.model.service.BookAddServiceModel;
+import bg.softuni.webbookstore.model.service.BookUpdateServiceModel;
 import bg.softuni.webbookstore.model.view.BookDetailViewModel;
 import bg.softuni.webbookstore.model.view.BookSummaryViewModel;
 
@@ -27,4 +28,5 @@ public interface BookService {
     void delete(Long id);
 
 
+    Long update(BookUpdateServiceModel bookUpdateServiceModel);
 }

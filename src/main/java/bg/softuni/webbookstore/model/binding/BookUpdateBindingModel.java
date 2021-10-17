@@ -1,7 +1,5 @@
 package bg.softuni.webbookstore.model.binding;
 
-import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -13,16 +11,14 @@ public class BookUpdateBindingModel {
 
     private Long id;
 
-    @NotEmpty(message = "Please enter a valid ISBN number")
     private String isbn;
 
-    @NotEmpty(message = "Please enter a title")
     private String title;
 
     private String description;
 
-    @Pattern(regexp = "(https?:\\/\\/.*\\.(?:png|jpg))",
-            message = "Please enter a valid image URL: 'https://{image path}.jpg' or 'https://{image path}.png'")
+//    @Pattern(regexp = "(https?:\\/\\/.*\\.(?:png|jpg))",
+//            message = "Please enter a valid image URL: 'https://{image path}.jpg' or 'https://{image path}.png'")
     private String imageUrl;
 
     @NotNull
@@ -42,7 +38,7 @@ public class BookUpdateBindingModel {
     private BigDecimal price;
 
     @NotNull
-    private LanguageEnum language;
+    private String language;
 
     @NotNull
     private Set<String> categories;
@@ -50,7 +46,6 @@ public class BookUpdateBindingModel {
     @NotEmpty
     private String publishingHouseName;
 
-    @NotEmpty
     private String author;
 
 
@@ -138,11 +133,11 @@ public class BookUpdateBindingModel {
         return this;
     }
 
-    public LanguageEnum getLanguage() {
+    public String getLanguage() {
         return language;
     }
 
-    public BookUpdateBindingModel setLanguage(LanguageEnum language) {
+    public BookUpdateBindingModel setLanguage(String language) {
         this.language = language;
         return this;
     }

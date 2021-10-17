@@ -194,7 +194,7 @@
                                     th:value="${p}">
                             </option>
                         </select>
-                        <p th:if="${#fields.hasErrors('publishingHouse')}" th:errors="*{publishingHouse}"
+                        <p th:if="${#fields.hasErrors('publishingHouseName')}" th:errors="*{publishingHouseName}"
                            id="publishingHouseError"
                            class="invalid-feedback errors alert alert-danger">
                             Publishing House is required.
@@ -204,6 +204,7 @@
                         <label for="author" class="text-white font-weight-bold">Author</label>
                         <select id="author"
                                 name="author"
+                                disabled
                                 th:field="*{author}"
                                 class="custom-select">
                             <option value="" selected>Select Author</option>

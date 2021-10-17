@@ -5,6 +5,7 @@ import bg.softuni.webbookstore.model.binding.BookUpdateBindingModel;
 import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
 import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
 import bg.softuni.webbookstore.model.service.BookAddServiceModel;
+import bg.softuni.webbookstore.model.service.BookUpdateServiceModel;
 import bg.softuni.webbookstore.model.view.BookDetailViewModel;
 import bg.softuni.webbookstore.service.AuthorService;
 import bg.softuni.webbookstore.service.BookService;
@@ -124,11 +125,37 @@ public class BookController {
         return "edit-book";
     }
 
+    @GetMapping("/edit/{id}/errors")
+    public String editConfirmErrors(@PathVariable Long id, Model model) {
+
+        model.addAttribute("languages", LanguageEnum.values());
+        model.addAttribute("categories", CategoryEnum.values());
+        model.addAttribute("publishingHouses", publishingHouseService.findAllPublishingHouseNames());
+        model.addAttribute("authors", authorService.findAllAuthorsNames());
+
+        return "edit-book";
+    }
+
     @PatchMapping("/edit/{id}")
-    public String editConfirm(@PathVariable Long id) {
+    public String editConfirm(@PathVariable Long id,
+                              @Valid BookUpdateBindingModel bookUpdateBindingModel,
+                              BindingResult bindingResult,
+                              RedirectAttributes redirectAttributes) {
 
-        return "redirect:/books/details" + id;
-        // TODO - create view and implement method
+        if (bindingResult.hasErrors()) {
+            redirectAttributes
+                    .addFlashAttribute("bookUpdateBindingModel", bookUpdateBindingModel)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.bookUpdateBindingModel", bindingResult);
 
+            return "redirect:/books/edit/" + id + "/errors";
+        }
+
+        BookUpdateServiceModel updateServiceModel = modelMapper
+                .map(bookUpdateBindingModel, BookUpdateServiceModel.class);
+        updateServiceModel.setId(id);
+
+        bookService.update(updateServiceModel);
+
+        return "redirect:/books/details/" + id;
     }
 }

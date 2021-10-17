@@ -28,9 +28,7 @@ sidebar.addEventListener('click', (e) => {
     e.preventDefault();
 
     const allBooks = [];
-    const searchCategory = e.target.getAttribute('value')
-        .toUpperCase()
-        .replaceAll(' ', '_');
+    const searchCategory = e.target.getAttribute('value');
 
     fetch("http://localhost:8080/books/api")
         .then(response => response.json())
