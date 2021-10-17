@@ -2,10 +2,7 @@ package bg.softuni.webbookstore.model.binding;
 
 import bg.softuni.webbookstore.model.validator.PastOrCurrentYear;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Set;
 

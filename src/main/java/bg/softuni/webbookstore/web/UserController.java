@@ -61,13 +61,6 @@ public class UserController {
             return "redirect:/users/register";
         }
 
-        if (!userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
-            redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
-            redirectAttributes.addFlashAttribute("confirmPasswordDifferent", true);
-
-            return "redirect:/users/register";
-        }
-
         UserRegisterServiceModel userRegisterServiceModel = modelMapper
                 .map(userRegisterBindingModel, UserRegisterServiceModel.class);
 

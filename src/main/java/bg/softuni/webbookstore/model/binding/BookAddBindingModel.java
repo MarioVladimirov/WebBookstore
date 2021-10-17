@@ -10,9 +10,11 @@ import java.util.Set;
 public class BookAddBindingModel {
 
     @UniqueByIsbn
+    @NotBlank(message = "Please enter a valid isbn")
     @NotEmpty(message = "Please enter a valid ISBN number")
     private String isbn;
 
+    @NotBlank(message = "Please enter a valid title")
     @Size(min = 1, max = 100, message = "Title should be between 1 and 100 characters long")
     private String title;
 
