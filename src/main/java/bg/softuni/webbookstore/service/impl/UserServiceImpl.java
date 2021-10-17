@@ -3,6 +3,7 @@ package bg.softuni.webbookstore.service.impl;
 import bg.softuni.webbookstore.model.entity.UserEntity;
 import bg.softuni.webbookstore.model.entity.UserRoleEntity;
 import bg.softuni.webbookstore.model.entity.enums.UserRoleEnum;
+import bg.softuni.webbookstore.model.service.UserLoginServiceModel;
 import bg.softuni.webbookstore.model.service.UserRegisterServiceModel;
 import bg.softuni.webbookstore.repository.UserRepository;
 import bg.softuni.webbookstore.repository.UserRoleRepository;
@@ -14,8 +15,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -49,20 +48,22 @@ public class UserServiceImpl implements UserService {
                 );
         newUser.addRole(userRole);
 
-        newUser = userRepository.save(newUser);
+        userRepository.save(newUser);
+    }
 
+    @Override
+    public void login(UserLoginServiceModel loginServiceModel) {
         UserDetails principal = bookstoreUserService
-                .loadUserByUsername(newUser.getUsername());
+                .loadUserByUsername(loginServiceModel.getUsername());
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(
                 principal,
-                newUser.getPassword(),
+                loginServiceModel.getPassword(),
                 principal.getAuthorities()
         );
 
         SecurityContextHolder.getContext()
                 .setAuthentication(authentication);
-
     }
 
     @Override

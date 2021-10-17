@@ -1,6 +1,8 @@
 package bg.softuni.webbookstore.web;
 
+import bg.softuni.webbookstore.model.binding.UserLoginBindingModel;
 import bg.softuni.webbookstore.model.binding.UserRegisterBindingModel;
+import bg.softuni.webbookstore.model.service.UserLoginServiceModel;
 import bg.softuni.webbookstore.model.service.UserRegisterServiceModel;
 import bg.softuni.webbookstore.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -32,15 +34,19 @@ public class UserController {
         return new UserRegisterBindingModel();
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
+    @ModelAttribute("userLoginBindingModel")
+    public UserLoginBindingModel userLoginBindingModel() {
+        return new UserLoginBindingModel();
     }
-
 
     @GetMapping("/register")
     public String register() {
         return "register";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
     }
 
     @PostMapping("/register")
@@ -67,10 +73,20 @@ public class UserController {
 
         userService.register(userRegisterServiceModel);
 
+        return "redirect:/users/login";
+    }
+
+    @PostMapping("/login")
+    public String loginConfirm(UserLoginBindingModel userLoginBindingModel) {
+
+        userService.login(modelMapper
+                .map(userLoginBindingModel, UserLoginServiceModel.class));
+
         return "redirect:/home";
     }
 
-    @PostMapping("/login-error")
+    // TODO - fix to work
+    @GetMapping("/login-error")
     public String failedLogin(@ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
                                       String username,
                               RedirectAttributes redirectAttributes) {
