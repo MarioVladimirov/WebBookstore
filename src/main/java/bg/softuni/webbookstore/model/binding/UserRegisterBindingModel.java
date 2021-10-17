@@ -1,30 +1,31 @@
 package bg.softuni.webbookstore.model.binding;
 
+import bg.softuni.webbookstore.model.validator.PasswordsMatch;
 import bg.softuni.webbookstore.model.validator.UniqueUsername;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+@PasswordsMatch(
+        password = "password",
+        confirmPassword = "confirmPassword"
+)
 public class UserRegisterBindingModel {
 
-    @NotEmpty(message = "Please enter your first name")
     @Size(min = 2, max = 20, message = "First name should be between 2 and 20 characters long")
     private String firstName;
 
-    @NotEmpty(message = "Please enter your last name")
     @Size(min = 2, max = 20, message = "Last name should be between 2 and 20 characters long")
     private String lastName;
 
     @UniqueUsername
-    @NotEmpty(message = "Please enter a username")
     @Size(min = 2, max = 20, message = "Username should be between 2 and 20 characters long")
     private String username;
 
-    @NotEmpty(message = "Please enter a password")
     @Size(min = 2, max = 20, message = "Password should be between 2 and 20 characters long")
     private String password;
 
-    @NotEmpty(message = "Please confirm your password")
+    @Size(min = 2, max = 20, message = "Password should be between 2 and 20 characters long")
     private String confirmPassword;
 
 
