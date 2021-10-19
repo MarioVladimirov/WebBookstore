@@ -7,6 +7,10 @@ body {
     background-color: #464646;
 }
 
+.navbar {
+    background-color: #0f2137;
+}
+
 #sidebar {
     position: absolute;
     left: 20px;
