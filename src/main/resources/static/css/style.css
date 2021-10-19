@@ -58,12 +58,13 @@ form > input.form-control {
     width: 400px !important;
 }
 
+div.form-group input:read-only, option:disabled {
+    background-color: #B8B8B8 !important;
+}
+
 /* Book cards */
-.book-card {
-    padding: 10px;
-    margin: 15px;
-    border-radius: 5px;
-    background-color: #ececec;
+.card {
+    background-color: #ececec !important;
 }
 
 .card-image {
@@ -83,11 +84,7 @@ form > input.form-control {
 
 /* Book Details Card */
 #book-wrapper, #shopping-cart-wrapper {
-    border-radius: 5px;
     background-color: #ececec;
-    position: relative;
-    margin: 10px;
-    padding: 20px;
 }
 
 #book-details {
@@ -139,10 +136,6 @@ form > input.form-control {
 .ph-img {
     height: 150px;
     width: 150px;
-}
-
-div.form-group input:read-only, option:disabled {
-    background-color: #B8B8B8 !important;
 }
 
 /* Footer */

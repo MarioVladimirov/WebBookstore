@@ -18,7 +18,7 @@
 
         <!-- Page Content -->
         <div id="content">
-            <div id="shopping-cart-wrapper">
+            <div id="shopping-cart-wrapper" class="rounded p-2 m-3">
                 <h3 class="text-center">My Shopping Cart:</h3>
                 <br/>
 
@@ -28,7 +28,7 @@
 
                 <div class="cart-items-container">
 
-                    <div th:each="cartItem : ${cartItems}"
+                    <article th:each="cartItem : ${cartItems}"
                          th:object="${cartItem}"
                          class="cart-item row m-1">
                         <div class="col-sm-8">
@@ -79,7 +79,7 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </article>
 
                 </div>
 
