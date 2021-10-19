@@ -5,89 +5,91 @@
 
 <head th:fragment="head">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="/images/favicon.png"/>
     <title>The Magic World of Books</title>
-    <script src="https://kit.fontawesome.com/4655d500f3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/reset-css.css"/>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <script src="https://kit.fontawesome.com/4655d500f3.js" crossorigin="anonymous"></script>
     <script src="/js/jquery-3.5.1.slim.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 </head>
 
 <body>
+<header th:fragment="navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #0f2137;">
 
-<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #0f2137;">
+        <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
 
-    <button type="button" id="sidebarCollapse" class="btn btn-info">
-        <i class="fas fa-align-left"></i>
-        <span>Toggle Sidebar</span>
-    </button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto col-12 justify-content-between align-items-center">
 
-        <ul class="navbar-nav mr-auto col-12 justify-content-between align-items-center">
-
-            <li class="nav-item greeting">
+                <li class="nav-item greeting">
                     <span sec:authorize="isAuthenticated()" class="navbar-text">
                         Hello, <span th:text="${#authentication.getPrincipal().getUsername()}">User</span>!
                     </span>
-                <span class="navbar-text">Welcome to The Magic World of Books!</span>
-            </li>
+                    <span class="navbar-text">Welcome to The Magic World of Books!</span>
+                </li>
 
-            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" th:href="@{/}" id="navbarDropdown" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Admin
-                </a>
-                <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                    <a class="dropdown-item" th:href="@{/books/add}">Add Book</a>
-                    <a class="dropdown-item" th:href="@{/authors/add}">Add Author</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" th:href="@{/}">Assign role</a>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <form id="searchForm" class="form-inline">
-                    <input id="searchBar" class="form-control mr-sm-4" type="search"
-                           placeholder="Search book by title or author" aria-label="Search">
-                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </li>
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" th:href="@{/}" id="authenticatedUserDropdown" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img th:src="@{/images/avatar.png}" alt="Avatar" class="avatar">
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a sec:authorize="!isAuthenticated()" class="dropdown-item" th:href="@{/users/login}">Login</a>
-                    <a sec:authorize="!isAuthenticated()" class="dropdown-item" th:href="@{/users/register}">Register</a>
-                    <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/users/profile}">My
-                        profile</a>
-                    <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/users/profile}">My
-                        orders</a>
-                    <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/users/logout}">
-                        <div class="form-inline my-2 my-lg-0 border px-3">
-                            <form th:action="@{/users/logout}"
-                                  method="POST">
-                                <button type="submit">Logout</button>
-                            </form>
-                        </div>
+                <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" th:href="@{/}" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Admin
                     </a>
-                </div>
-            </li>
+                    <div class="dropdown-menu" aria-labelledby="adminDropdown">
+                        <a class="dropdown-item" th:href="@{/books/add}">Add Book</a>
+                        <a class="dropdown-item" th:href="@{/authors/add}">Add Author</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/}">Assign role</a>
+                    </div>
+                </li>
 
-        </ul>
+                <li class="nav-item">
+                    <form id="searchForm" class="form-inline">
+                        <input id="searchBar" class="form-control mr-sm-4" type="search"
+                               placeholder="Search book by title or author" aria-label="Search">
+                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </li>
 
-    </div>
-</nav>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" th:href="@{/}" id="authenticatedUserDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img th:src="@{/images/avatar.png}" alt="Avatar" class="avatar">
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a sec:authorize="!isAuthenticated()" class="dropdown-item" th:href="@{/users/login}">Login</a>
+                        <a sec:authorize="!isAuthenticated()" class="dropdown-item" th:href="@{/users/register}">Register</a>
+                        <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/users/profile}">My
+                            profile</a>
+                        <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/users/profile}">My
+                            orders</a>
+                        <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/users/logout}">
+                            <div class="form-inline my-2 my-lg-0 border px-3">
+                                <form th:action="@{/users/logout}"
+                                      method="POST">
+                                    <button type="submit">Logout</button>
+                                </form>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+</header>
 
 <nav th:fragment="sidebar" id="sidebar">
     <div class="sidebar-header">

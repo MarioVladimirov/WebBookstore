@@ -7,10 +7,6 @@ body {
     background-color: #464646;
 }
 
-.page {
-    height: auto;
-}
-
 #sidebar {
     position: absolute;
     left: 20px;
@@ -70,18 +66,13 @@ form > input.form-control {
     background-color: #ececec;
 }
 
-.product-box .image-wrapper img.first {
+.card-image {
     position: relative;
+    max-width: 90%;
     height: 250px;
     width: 180px;
     display: block;
-}
-
-.product-box .image-wrapper img {
-    max-width: 90%;
     margin: auto;
-    border: none;
-    border-radius: 3px 3px 3px 3px;
     vertical-align: middle;
 }
 
@@ -121,7 +112,7 @@ form > input.form-control {
     grid-area: book-buttons;
 }
 
-@media screen and (max-width: 728px) {
+@media screen and (max-width: 768px) {
     #book-details {
         grid-template-areas:
              'book-cover'
@@ -139,7 +130,7 @@ form > input.form-control {
     margin: 10px;
 }
 
-#book-cover span img {
+#book-cover img {
     position: relative;
     height: 400px;
     width: auto;
