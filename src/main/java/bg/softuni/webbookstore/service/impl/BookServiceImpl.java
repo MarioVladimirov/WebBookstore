@@ -14,7 +14,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.ZoneId;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -78,6 +77,7 @@ public class BookServiceImpl implements BookService {
                         new IllegalArgumentException("Book not found"));
 
         bookEntity
+                .setIsbn(bookUpdateServiceModel.getIsbn())
                 .setDescription(bookUpdateServiceModel.getDescription())
                 .setImageUrl(bookUpdateServiceModel.getImageUrl())
                 .setPagesCount(bookUpdateServiceModel.getPagesCount())
@@ -201,28 +201,27 @@ public class BookServiceImpl implements BookService {
     }
 
     private Set<CategoryEntity> getCategoryEntities(Set<String> categories) {
-        Set<CategoryEntity> categoryEntities = new HashSet<>();
-        for (String category : categories) {
-            CategoryEnum categoryEnum = CategoryEnum.valueOf(
-                    category.toUpperCase().replaceAll(" ", "_"));
-            CategoryEntity categoryEntity = categoryRepository
-                    .findByCategory(categoryEnum)
-                    .orElseThrow(() -> new IllegalArgumentException(
-                            "Category with name " + category + " not found"
-                    ));
-            categoryEntities.add(categoryEntity);
-        }
-        return categoryEntities;
+        return categories
+                .stream()
+                .map(category -> {
+                    CategoryEnum categoryEnum = CategoryEnum.valueOf(
+                            category.toUpperCase().replaceAll(" ", "_"));
+
+                    return categoryRepository
+                            .findByCategory(categoryEnum)
+                            .orElseThrow(() -> new IllegalArgumentException(
+                                    "Category with name " + category + " not found"
+                            ));
+                })
+                .collect(Collectors.toSet());
     }
 
     private Set<String> getCategoriesAsStrings(Set<CategoryEntity> categoryEntities) {
-        Set<String> categoriesStr = new HashSet<>();
-        categoryEntities
+        return categoryEntities
                 .stream()
                 .map(categoryEntity -> categoryEntity.getCategory().name())
                 .map(s -> s.charAt(0) + s.substring(1).toLowerCase().replaceAll("_", " "))
-                .forEach(categoriesStr::add);
-        return categoriesStr;
+                .collect(Collectors.toSet());
     }
 
     private String getFullNameAsString(String firstName, String lastName) {

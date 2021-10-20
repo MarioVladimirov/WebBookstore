@@ -29,12 +29,17 @@
                     <div class="form-group col-md-6 mb-3">
                         <label for="isbn" class="text-white font-weight-bold">ISBN</label>
                         <input th:field="*{isbn}"
-                               readonly
+                               th:errorclass="is-invalid"
                                id="isbn"
                                name="isbn"
                                type="text"
                                class="form-control"
                                placeholder="ISBN"/>
+                        <p th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"
+                           id="isbnError"
+                           class="invalid-feedback errors alert alert-danger">
+                            ISBN is required.
+                        </p>
                     </div>
                     <div class="form-group col-md-6 mb-3">
                         <label for="title" class="text-white font-weight-bold">Title</label>
@@ -53,6 +58,7 @@
                         <select id="language"
                                 name="language"
                                 th:field="*{language}"
+                                th:errorclass="is-invalid"
                                 class="custom-select">
                             <option th:each="l : ${languages}"
                                     th:text="${l}"
@@ -118,6 +124,7 @@
                     <div class="form-group col-md-6 mb-3">
                         <label for="releaseYear" class="text-white font-weight-bold">Release Year</label>
                         <input th:field="*{releaseYear}"
+                               th:errorclass="is-invalid"
                                id="releaseYear"
                                name="releaseYear"
                                type="text"
@@ -187,6 +194,7 @@
                         <select id="publishingHouseName"
                                 name="publishingHouseName"
                                 th:field="*{publishingHouseName}"
+                                th:errorclass="is-invalid"
                                 class="custom-select">
                             <option th:each="p : ${publishingHouses}"
                                     th:text="${p}"

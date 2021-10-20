@@ -11,7 +11,6 @@ public class BookAddBindingModel {
 
     @UniqueByIsbn
     @NotBlank(message = "Please enter a valid isbn")
-    @NotEmpty(message = "Please enter a valid ISBN number")
     private String isbn;
 
     @NotBlank(message = "Please enter a valid title")
@@ -20,6 +19,7 @@ public class BookAddBindingModel {
 
     private String description;
 
+    //TODO - check if we need this validation, as it makes imageUrl mandatory
     @Pattern(regexp = "(https?:\\/\\/.*\\.(?:png|jpg))",
             message = "Please enter a valid image URL: 'https://{image path}.jpg' or 'https://{image path}.png'")
     private String imageUrl;

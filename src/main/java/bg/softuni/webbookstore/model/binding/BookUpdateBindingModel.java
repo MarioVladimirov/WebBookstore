@@ -1,6 +1,7 @@
 package bg.softuni.webbookstore.model.binding;
 
 import bg.softuni.webbookstore.model.validator.PastOrCurrentYear;
+import bg.softuni.webbookstore.model.validator.UniqueByIsbn;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
@@ -10,6 +11,7 @@ public class BookUpdateBindingModel {
 
     private Long id;
 
+    @NotBlank(message = "Please enter a valid isbn")
     private String isbn;
 
     private String title;

@@ -6,6 +6,7 @@ import java.util.Set;
 public class BookUpdateServiceModel {
 
     private Long id;
+    private String isbn;
     private String description;
     private String imageUrl;
     private Integer pagesCount;
@@ -26,6 +27,15 @@ public class BookUpdateServiceModel {
 
     public BookUpdateServiceModel setId(Long id) {
         this.id = id;
+        return this;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public BookUpdateServiceModel setIsbn(String isbn) {
+        this.isbn = isbn;
         return this;
     }
 

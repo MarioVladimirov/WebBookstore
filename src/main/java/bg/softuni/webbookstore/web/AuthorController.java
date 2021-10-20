@@ -44,8 +44,9 @@ public class AuthorController {
                              RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("authorAddBindingModel", authorAddBindingModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.authorAddBindingModel", bindingResult);
+            redirectAttributes
+                    .addFlashAttribute("authorAddBindingModel", authorAddBindingModel)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.authorAddBindingModel", bindingResult);
 
             return "redirect:/authors/add";
         }

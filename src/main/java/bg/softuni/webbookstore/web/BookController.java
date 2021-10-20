@@ -71,8 +71,9 @@ public class BookController {
                              @AuthenticationPrincipal UserDetails principal) {
 
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("bookAddBindingModel", bookAddBindingModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.bookAddBindingModel", bindingResult);
+            redirectAttributes
+                    .addFlashAttribute("bookAddBindingModel", bookAddBindingModel)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.bookAddBindingModel", bindingResult);
 
             return "redirect:/books/add";
         }
@@ -101,7 +102,7 @@ public class BookController {
 
     //DELETE
     @DeleteMapping("/{id}")
-    public String deleteOffer(@PathVariable Long id) {
+    public String delete(@PathVariable Long id) {
         bookService.delete(id);
 
         return "redirect:/books/all";
