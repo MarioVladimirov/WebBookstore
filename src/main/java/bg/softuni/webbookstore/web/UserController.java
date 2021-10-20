@@ -55,8 +55,9 @@ public class UserController {
                                   RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
+            redirectAttributes
+                    .addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
 
             return "redirect:/users/register";
         }
@@ -84,8 +85,9 @@ public class UserController {
                                       String username,
                               RedirectAttributes redirectAttributes) {
 
-        redirectAttributes.addFlashAttribute("badCredentials", true);
-        redirectAttributes.addFlashAttribute("username", username);
+        redirectAttributes
+                .addFlashAttribute("badCredentials", true)
+                .addFlashAttribute("username", username);
 
         return "redirect:/users/login";
     }
