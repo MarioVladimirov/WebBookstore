@@ -1,5 +1,7 @@
 package bg.softuni.webbookstore.model.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -8,7 +10,7 @@ public class BookUpdateServiceModel {
     private Long id;
     private String isbn;
     private String description;
-    private String imageUrl;
+    private MultipartFile image;
     private Integer pagesCount;
     private Integer copies;
     private Integer releaseYear;
@@ -48,12 +50,12 @@ public class BookUpdateServiceModel {
         return this;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public MultipartFile getImage() {
+        return image;
     }
 
-    public BookUpdateServiceModel setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public BookUpdateServiceModel setImage(MultipartFile image) {
+        this.image = image;
         return this;
     }
 

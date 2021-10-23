@@ -38,8 +38,8 @@
                                placeholder="ISBN"
                                aria-describedby="isbnError"/>
                         <small th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"
-                           id="isbnError"
-                           class="invalid-feedback errors alert alert-danger">
+                               id="isbnError"
+                               class="invalid-feedback errors alert alert-danger">
                             ISBN is required.
                         </small>
                     </div>
@@ -71,26 +71,25 @@
                             </option>
                         </select>
                         <small th:if="${#fields.hasErrors('language')}" th:errors="*{language}"
-                           id="languageError"
-                           class="invalid-feedback errors alert alert-danger">
+                               id="languageError"
+                               class="invalid-feedback errors alert alert-danger">
                             Language is required.
                         </small>
                     </div>
                     <div class="form-group col-md-6 mb-3">
-                        <label for="imageUrl" class="text-white font-weight-bold">Image Url</label>
-                        <input th:field="*{imageUrl}"
+                        <label for="image" class="text-white font-weight-bold">Image</label>
+                        <input th:field="*{image}"
                                th:errorclass="is-invalid"
-                               id="imageUrl"
-                               name="imageUrl"
+                               id="image"
+                               name="image"
                                type="file"
                                accept=".jpg, .jpeg, .png"
                                class="form-control-file rounded"
-                               placeholder="ImageUrl"
-                               aria-describedby="imageUrlError"/>
-                        <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"
-                           id="imageUrlError"
-                           class="invalid-feedback errors alert alert-danger">
-                            Image Url is required.
+                               aria-describedby="imageError"/>
+                        <small th:if="${#fields.hasErrors('image')}" th:errors="*{image}"
+                               id="imageError"
+                               class="invalid-feedback errors alert alert-danger">
+                            Image is required.
                         </small>
                     </div>
                 </div>
@@ -106,8 +105,8 @@
                                placeholder="Pages Count"
                                aria-describedby="pagesCountError"/>
                         <small th:if="${#fields.hasErrors('pagesCount')}" th:errors="*{pagesCount}"
-                           id="pagesCountError"
-                           class="invalid-feedback errors alert alert-danger">
+                               id="pagesCountError"
+                               class="invalid-feedback errors alert alert-danger">
                             Pages Count is required.
                         </small>
                     </div>
@@ -122,8 +121,8 @@
                                placeholder="Copies"
                                aria-describedby="copiesError"/>
                         <small th:if="${#fields.hasErrors('copies')}" th:errors="*{copies}"
-                           id="copiesError"
-                           class="invalid-feedback errors alert alert-danger">
+                               id="copiesError"
+                               class="invalid-feedback errors alert alert-danger">
                             Copies is required.
                         </small>
                     </div>
@@ -140,8 +139,8 @@
                                placeholder="Release Year"
                                aria-describedby="releaseYearError"/>
                         <small th:if="${#fields.hasErrors('releaseYear')}" th:errors="*{releaseYear}"
-                           id="releaseYearError"
-                           class="invalid-feedback errors alert alert-danger">
+                               id="releaseYearError"
+                               class="invalid-feedback errors alert alert-danger">
                             Release Year is required.
                         </small>
                     </div>
@@ -156,8 +155,8 @@
                                placeholder="Price"
                                aria-describedby="priceError"/>
                         <small th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
-                           id="priceError"
-                           class="invalid-feedback errors alert alert-danger">
+                               id="priceError"
+                               class="invalid-feedback errors alert alert-danger">
                             Price is required.
                         </small>
                     </div>
@@ -174,8 +173,8 @@
                                   placeholder="Description"
                                   aria-describedby="descriptionError"></textarea>
                         <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
-                           id="descriptionError"
-                           class="invalid-feedback errors alert alert-danger">
+                               id="descriptionError"
+                               class="invalid-feedback errors alert alert-danger">
                             Description is required.
                         </small>
                     </div>
@@ -194,8 +193,8 @@
                             </option>
                         </select>
                         <small th:if="${#fields.hasErrors('categories')}" th:errors="*{categories}"
-                           id="categoriesError"
-                           class="invalid-feedback errors alert alert-danger">
+                               id="categoriesError"
+                               class="invalid-feedback errors alert alert-danger">
                             Category is required.
                         </small>
                     </div>
@@ -216,8 +215,8 @@
                             </option>
                         </select>
                         <small th:if="${#fields.hasErrors('publishingHouseName')}" th:errors="*{publishingHouseName}"
-                           id="publishingHouseError"
-                           class="invalid-feedback errors alert alert-danger">
+                               id="publishingHouseError"
+                               class="invalid-feedback errors alert alert-danger">
                             Publishing House is required.
                         </small>
                     </div>

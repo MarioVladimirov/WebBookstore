@@ -83,20 +83,19 @@
                         </small>
                     </div>
                     <div class="form-group col-md-6 mb-3">
-                        <label for="imageUrl" class="text-white font-weight-bold">Image Url</label>
-                        <input th:field="*{imageUrl}"
+                        <label for="image" class="text-white font-weight-bold">Image</label>
+                        <input th:field="*{image}"
                                th:errorclass="is-invalid"
-                               id="imageUrl"
-                               name="imageUrl"
+                               id="image"
+                               name="image"
                                type="file"
                                accept=".jpg, .jpeg, .png"
                                class="form-control-file rounded"
-                               placeholder="ImageUrl"
-                               aria-describedby="imageUrlError"/>
-                        <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"
-                               id="imageUrlError"
+                               aria-describedby="imageError"/>
+                        <small th:if="${#fields.hasErrors('image')}" th:errors="*{image}"
+                               id="imageError"
                                class="invalid-feedback errors alert alert-danger">
-                            Image Url is required.
+                            Image is required.
                         </small>
                     </div>
                 </div>

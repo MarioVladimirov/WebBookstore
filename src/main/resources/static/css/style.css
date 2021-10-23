@@ -128,7 +128,7 @@ div.form-group input:read-only, option:disabled {
 #book-cover img {
     position: relative;
     height: 400px;
-    width: auto;
+    width: 260px;
 }
 
 .ph-img {

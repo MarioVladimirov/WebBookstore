@@ -6,6 +6,7 @@ import bg.softuni.webbookstore.model.service.BookUpdateServiceModel;
 import bg.softuni.webbookstore.model.view.BookDetailViewModel;
 import bg.softuni.webbookstore.model.view.BookSummaryViewModel;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface BookService {
@@ -17,7 +18,7 @@ public interface BookService {
 
     BookUpdateBindingModel findBookToEdit(Long id);
 
-    Long add(BookAddServiceModel bookAddServiceModel);
+    Long add(BookAddServiceModel bookAddServiceModel) throws IOException;
 
     boolean existsByIsbn(String isbn);
 
@@ -28,5 +29,5 @@ public interface BookService {
     void delete(Long id);
 
 
-    Long update(BookUpdateServiceModel bookUpdateServiceModel);
+    Long update(BookUpdateServiceModel bookUpdateServiceModel) throws IOException;
 }

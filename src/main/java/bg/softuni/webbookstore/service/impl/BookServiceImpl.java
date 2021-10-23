@@ -12,7 +12,9 @@ import bg.softuni.webbookstore.repository.*;
 import bg.softuni.webbookstore.service.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.Set;
@@ -26,14 +28,16 @@ public class BookServiceImpl implements BookService {
     private final CategoryRepository categoryRepository;
     private final PublishingHouseRepository publishingHouseRepository;
     private final AuthorRepository authorRepository;
+    private final CloudinaryService cloudinaryService;
     private final ModelMapper modelMapper;
 
-    public BookServiceImpl(BookRepository bookRepository, UserRepository userRepository, CategoryRepository categoryRepository, PublishingHouseRepository publishingHouseRepository, AuthorRepository authorRepository, ModelMapper modelMapper) {
+    public BookServiceImpl(BookRepository bookRepository, UserRepository userRepository, CategoryRepository categoryRepository, PublishingHouseRepository publishingHouseRepository, AuthorRepository authorRepository, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
         this.bookRepository = bookRepository;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
         this.publishingHouseRepository = publishingHouseRepository;
         this.authorRepository = authorRepository;
+        this.cloudinaryService = cloudinaryService;
         this.modelMapper = modelMapper;
     }
 
@@ -70,16 +74,20 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Long update(BookUpdateServiceModel bookUpdateServiceModel) {
+    public Long update(BookUpdateServiceModel bookUpdateServiceModel) throws IOException {
         BookEntity bookEntity = bookRepository
                 .findById(bookUpdateServiceModel.getId())
                 .orElseThrow(() ->
                         new IllegalArgumentException("Book not found"));
 
+        MultipartFile img = bookUpdateServiceModel.getImage();
+        if (!"".equals(img.getOriginalFilename())) {
+            bookEntity.setImageUrl(cloudinaryService.uploadImage(img));
+        }
+
         bookEntity
                 .setIsbn(bookUpdateServiceModel.getIsbn())
                 .setDescription(bookUpdateServiceModel.getDescription())
-                .setImageUrl(bookUpdateServiceModel.getImageUrl())
                 .setPagesCount(bookUpdateServiceModel.getPagesCount())
                 .setCopies(bookUpdateServiceModel.getCopies())
                 .setReleaseYear(bookUpdateServiceModel.getReleaseYear())
@@ -133,22 +141,23 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Long add(BookAddServiceModel bookAddServiceModel) {
+    public Long add(BookAddServiceModel bookAddServiceModel) throws IOException {
+
+        MultipartFile img = bookAddServiceModel.getImage();
 
         BookEntity bookEntity = modelMapper
-                .map(bookAddServiceModel, BookEntity.class);
-
-        // TODO - set image url
-        // .setImageUrl(bookAddServiceModel.getImageUrl().equals("")
-        // ? "default" : bookAddServiceModel.getImageUrl())
-
-        bookEntity
+                .map(bookAddServiceModel, BookEntity.class)
+                .setImageUrl(
+                        !"".equals(img.getOriginalFilename())
+                                ? cloudinaryService.uploadImage(img)
+                                : "https://res.cloudinary.com/nzlateva/image/upload/v1635019989/web-bookstore-app/book-cover-pics/default-book-cover_is5vlx.jpg"
+                )
                 .setLanguage(getLanguageEnum(bookAddServiceModel.getLanguage()))
                 .setCategories(getCategoryEntities(bookAddServiceModel.getCategories()))
                 .setPublishingHouse(getPublishingHouseEntity(bookAddServiceModel.getPublishingHouse()))
                 .setAuthor(getAuthorEntity(
-                        bookAddServiceModel.getAuthor().split(" ")[0],
-                        bookAddServiceModel.getAuthor().split(" ")[1]))
+                        bookAddServiceModel.getAuthor().split(" ", 2)[0],
+                        bookAddServiceModel.getAuthor().split(" ", 2)[1]))
                 .setCreator(getUserEntity(bookAddServiceModel.getCreator()));
 
         bookEntity = bookRepository.save(bookEntity);

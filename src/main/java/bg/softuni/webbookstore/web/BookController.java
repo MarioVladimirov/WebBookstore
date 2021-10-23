@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/books")
@@ -68,7 +69,7 @@ public class BookController {
     public String addConfirm(@Valid BookAddBindingModel bookAddBindingModel,
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes,
-                             @AuthenticationPrincipal UserDetails principal) {
+                             @AuthenticationPrincipal UserDetails principal) throws IOException {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes
@@ -139,7 +140,7 @@ public class BookController {
     public String editConfirm(@PathVariable Long id,
                               @Valid BookUpdateBindingModel bookUpdateBindingModel,
                               BindingResult bindingResult,
-                              RedirectAttributes redirectAttributes) {
+                              RedirectAttributes redirectAttributes) throws IOException {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes

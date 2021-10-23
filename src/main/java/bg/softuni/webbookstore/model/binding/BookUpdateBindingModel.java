@@ -1,7 +1,7 @@
 package bg.softuni.webbookstore.model.binding;
 
 import bg.softuni.webbookstore.model.validator.PastOrCurrentYear;
-import bg.softuni.webbookstore.model.validator.UniqueByIsbn;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
@@ -18,7 +18,7 @@ public class BookUpdateBindingModel {
 
     private String description;
 
-    private String imageUrl;
+    private MultipartFile image;
 
     @NotNull(message = "Pages count should be a positive number")
     @Positive(message = "Pages count should be a positive number")
@@ -86,12 +86,12 @@ public class BookUpdateBindingModel {
         return this;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public MultipartFile getImage() {
+        return image;
     }
 
-    public BookUpdateBindingModel setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public BookUpdateBindingModel setImage(MultipartFile image) {
+        this.image = image;
         return this;
     }
 

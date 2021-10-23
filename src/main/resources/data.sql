@@ -70,7 +70,7 @@ VALUES (6, 'Колибри',
 
 
 INSERT INTO authors (id, first_name, last_name, description, image_url)
-VALUES (1, 'Джон Р. Р.', 'Толкин',
+VALUES (1, 'Джон', 'Р. Р.Толкин',
         'Джон Роналд Руел Толкин, CBE (на английски: John Ronald Reuel Tolkien) е британски писател, смятан за основател на жанра фентъзи с романа си „Хобитът“ (The Hobbit) и неговото продължение трилогията „Властелинът на пръстените“ (The Lord of the Rings).',
         '/mages/author-pics/Tolkien.jpg');
 INSERT INTO authors (id, first_name, last_name, description)

@@ -43,9 +43,9 @@ public class AuthorServiceImpl implements AuthorService {
         AuthorEntity authorEntity = modelMapper
                 .map(authorAddServiceModel, AuthorEntity.class)
                 .setImageUrl(
-                        img != null
+                        !"".equals(img.getOriginalFilename())
                                 ? cloudinaryService.uploadImage(img)
-                                : "default-author"
+                                : "https://res.cloudinary.com/nzlateva/image/upload/v1635022179/web-bookstore-app/authors-pics/default-author-pic_geubje.png"
                 );
 
         authorEntity = authorRepository.save(authorEntity);
