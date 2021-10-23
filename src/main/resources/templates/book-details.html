@@ -23,8 +23,8 @@
             <article id="book-wrapper" class="rounded p-2 m-3"
                      th:object="${book}">
 
-                <section id="book-details" class="p-3 m-3 align-content-center">
-                    <section id="book-cover">
+                <section id="book-details" class="p-4 m-3 align-content-center">
+                    <section id="book-cover" class="text-center">
                         <img th:src="*{getImageUrl()}" alt="Thumbnail [100%x225]"
                              data-holder-rendered="true">
                     </section>
@@ -97,25 +97,25 @@
                         <th:block sec:authorize="isAuthenticated()">
                             <div class="btn-group">
                                 <a th:href="@{/books/details/{id}(id=*{id})}"
-                                   type="button" class="btn btn-info btn-md">
+                                   type="button" class="btn btn-info btn-md btn-block w-100">
                                     <i class="fas fa-shopping-cart"></i> Add to Cart</a>
                             </div>
                             <div class="btn-group">
                                 <a th:href="@{/books/details/{id}(id=*{id})}"
-                                   type="button" class="btn btn-info btn-md">
+                                   type="button" class="btn btn-info btn-md btn-block w-100">
                                     <i class="far fa-heart"></i> Add to Favourites</a>
                             </div>
                         </th:block>
                         <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                             <div class="btn-group">
                                 <a th:href="@{/books/edit/{id}(id=*{id})}"
-                                   type="button" class="btn btn-info btn-md">
+                                   type="button" class="btn btn-info btn-md btn-block w-100">
                                     <i class="far fa-edit"></i> Edit</a>
                             </div>
                             <div class="btn-group">
                                 <form th:action="@{/books/{id}(id=*{id})}"
                                       th:method="delete">
-                                    <button type="submit" class="btn btn-info btn-md">
+                                    <button type="submit" class="btn btn-danger btn-md btn-block w-100">
                                         <i class="fa fa-trash-o fa-lg"></i> Delete
                                     </button>
                                 </form>
@@ -124,14 +124,14 @@
                     </section>
                 </section>
 
-                <section id="description-info" class="p-3 m-3">
+                <section id="description-info" class="p-4 m-3">
                     <h3 class="text-center">Full Book Description: </h3>
                     <p class="text-justify" th:text="*{description}">
                         Description
                     </p>
                 </section>
 
-                <section class="p-3 m-3">
+                <section class="p-4 m-3">
                     <h5 class="text-center" th:text="|Publishing House: *{publishingHouse.getName()}|">
                     </h5>
                     <div class="clearfix align-items-center">
@@ -148,7 +148,7 @@
                     </div>
                 </section>
 
-                <section id="reviews-container" class="p-3 m-3">
+                <section id="reviews-container" class="p-4 m-3">
                     <!-- TODO - implement when we have reviews -->
                 </section>
             </article>

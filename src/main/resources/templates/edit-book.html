@@ -19,12 +19,12 @@
 
         <!-- Page Content -->
         <div id="content">
-
-            <h2 class="text-center text-white">Edit Book</h2>
             <form th:method="patch"
                   th:object="${bookUpdateBindingModel}"
                   th:action="@{/books/edit/{id}(id=*{id})}"
                   class="main-form mx-auto w-75 bg-blur">
+                <h2 class="text-white">Edit Book</h2>
+                <br>
                 <div class="row">
                     <div class="form-group col-md-6 mb-3">
                         <label for="isbn" class="text-white font-weight-bold">ISBN</label>
@@ -224,12 +224,8 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col col-md-4">
-                        <div class="button-holder d-flex">
-                            <input type="submit" class="btn btn-info btn-lg" value="Edit Book"/>
-                        </div>
-                    </div>
+                <div class="d-flex justify-content-center mt-5">
+                    <input type="submit" class="btn btn-info btn-md btn-block w-50" value="Edit Book"/>
                 </div>
             </form>
 
