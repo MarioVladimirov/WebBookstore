@@ -6,22 +6,26 @@ import bg.softuni.webbookstore.model.view.AuthorViewModel;
 import bg.softuni.webbookstore.repository.AuthorRepository;
 import bg.softuni.webbookstore.service.AuthorService;
 import bg.softuni.webbookstore.service.BookService;
+import bg.softuni.webbookstore.service.CloudinaryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepository authorRepository;
     private final BookService bookService;
+    private final CloudinaryService cloudinaryService;
     private final ModelMapper modelMapper;
 
-    public AuthorServiceImpl(AuthorRepository authorRepository, BookService bookService, ModelMapper modelMapper) {
+    public AuthorServiceImpl(AuthorRepository authorRepository, BookService bookService, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
         this.authorRepository = authorRepository;
         this.bookService = bookService;
+        this.cloudinaryService = cloudinaryService;
         this.modelMapper = modelMapper;
     }
 
@@ -32,10 +36,17 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Long add(AuthorAddServiceModel authorAddServiceModel) {
+    public Long add(AuthorAddServiceModel authorAddServiceModel) throws IOException {
+
+        MultipartFile img = authorAddServiceModel.getImage();
 
         AuthorEntity authorEntity = modelMapper
-                .map(authorAddServiceModel, AuthorEntity.class);
+                .map(authorAddServiceModel, AuthorEntity.class)
+                .setImageUrl(
+                        img != null
+                                ? cloudinaryService.uploadImage(img)
+                                : "default-author"
+                );
 
         authorEntity = authorRepository.save(authorEntity);
 

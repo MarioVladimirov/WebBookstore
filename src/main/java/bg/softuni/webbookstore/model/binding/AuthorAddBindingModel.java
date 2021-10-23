@@ -1,5 +1,7 @@
 package bg.softuni.webbookstore.model.binding;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -15,7 +17,7 @@ public class AuthorAddBindingModel {
 
     private String description;
 
-    private String imageUrl;
+    private MultipartFile image;
 
 
     public AuthorAddBindingModel() {
@@ -48,12 +50,12 @@ public class AuthorAddBindingModel {
         return this;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public MultipartFile getImage() {
+        return image;
     }
 
-    public AuthorAddBindingModel setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public AuthorAddBindingModel setImage(MultipartFile image) {
+        this.image = image;
         return this;
     }
 }

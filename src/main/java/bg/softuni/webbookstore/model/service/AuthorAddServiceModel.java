@@ -1,11 +1,13 @@
 package bg.softuni.webbookstore.model.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class AuthorAddServiceModel {
 
     private String firstName;
     private String lastName;
     private String description;
-    private String imageUrl;
+    private MultipartFile image;
 
 
     public AuthorAddServiceModel() {
@@ -38,12 +40,12 @@ public class AuthorAddServiceModel {
         return this;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public MultipartFile getImage() {
+        return image;
     }
 
-    public AuthorAddServiceModel setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public AuthorAddServiceModel setImage(MultipartFile image) {
+        this.image = image;
         return this;
     }
 }

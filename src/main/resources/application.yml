@@ -1,7 +1,7 @@
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: "jdbc:mysql://localhost:3306/web_bookstore?useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
+    url: "jdbc:mysql://localhost:3306/web_bookstore?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
     username: root
     password: ${MySQL_Pass}
   servlet:
@@ -24,11 +24,13 @@ spring:
       hibernate:
         format_sql: true
     defer-datasource-initialization: true
-  #Cloudinary Properties
-  #cloudinary:
-  #api-key:
-  #api-secret:
-  #cloud-name:
+
+
+cloudinary:
+  cloud-name: nzlateva
+  api-key: 365111573122239
+  api-secret: "${CLOUDINARY_SECRET}"
+
 
 logging:
   level:

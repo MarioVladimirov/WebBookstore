@@ -13,8 +13,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.google.code.gson:gson'
     implementation 'org.modelmapper:modelmapper:2.4.4'
+    implementation 'com.cloudinary:cloudinary:1.0.14'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
