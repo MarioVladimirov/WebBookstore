@@ -138,7 +138,9 @@ public class BookServiceImpl implements BookService {
         BookEntity bookEntity = modelMapper
                 .map(bookAddServiceModel, BookEntity.class);
 
-        //TODO - set image url
+        // TODO - set image url
+        // .setImageUrl(bookAddServiceModel.getImageUrl().equals("")
+        // ? "default" : bookAddServiceModel.getImageUrl())
 
         bookEntity
                 .setLanguage(getLanguageEnum(bookAddServiceModel.getLanguage()))

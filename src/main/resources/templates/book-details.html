@@ -23,7 +23,7 @@
             <article id="book-wrapper" class="rounded p-2 m-3"
                      th:object="${book}">
 
-                <div id="book-details" class="info-section align-content-center">
+                <section id="book-details" class="p-3 m-3 align-content-center">
                     <section id="book-cover">
                         <img th:src="*{getImageUrl()}" alt="Thumbnail [100%x225]"
                              data-holder-rendered="true">
@@ -31,74 +31,66 @@
 
                     <section id="book-info">
                         <h1 th:text="*{title}">Title</h1>
-                        <div class="attribute-list-content">
-                            <div class="text-left">
-                                <ul class="attribute-list">
-                                    <li>
-                                        <strong>Author: </strong>
-                                        <span>
-                                        <a th:text="*{author}" th:href="@{/authors/details/{id}(id=*{authorId})}">
-                                            Author name
-                                        </a>
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <strong>Publishing house: </strong>
-                                        <span>
-                                        <a th:text="*{publishingHouse.getName()}"
-                                           th:href="@{/publishinghouses/details/{id}(id=*{publishingHouse.getId()})}">
-                                            Publishing House
-                                        </a>
-                                    </span>
-                                    </li>
-                                    <li>
-                                        <strong>Language: </strong>
-                                        <span th:text="*{language}"></span>
-                                    </li>
-                                    <li>
-                                        <strong>ISBN: </strong>
-                                        <span th:text="*{isbn}"></span>
-                                    </li>
-                                    <li>
-                                        <strong>Release year: </strong>
-                                        <span th:text="*{releaseYear}"></span>
-                                    </li>
-                                    <li>
-                                        <strong>Pages count: </strong>
-                                        <span th:text="*{pagesCount}"></span>
-                                    </li>
-                                    <li>
-                                        <strong>Categories: </strong>
-                                        <span th:text="${#strings.setJoin(book.categories, ', ')}"></span>
-                                    </li>
-                                    <li>
-                                        <strong>Price: </strong>
-                                        <span th:text="|*{price} BGN|"></span>
-                                    </li>
+                        <ul class="attribute-list text-left">
+                            <li>
+                                <strong>Author: </strong>
+                                <a th:text="*{author}" th:href="@{/authors/details/{id}(id=*{authorId})}">
+                                    Author name
+                                </a>
+                            </li>
+                            <li>
+                                <strong>Publishing house: </strong>
+                                <a th:text="*{publishingHouse.getName()}"
+                                   th:href="@{/publishinghouses/details/{id}(id=*{publishingHouse.getId()})}">
+                                    Publishing House
+                                </a>
+                            </li>
+                            <li>
+                                <strong>Language: </strong>
+                                <span th:text="*{language}"></span>
+                            </li>
+                            <li>
+                                <strong>ISBN: </strong>
+                                <span th:text="*{isbn}"></span>
+                            </li>
+                            <li>
+                                <strong>Release year: </strong>
+                                <span th:text="*{releaseYear}"></span>
+                            </li>
+                            <li>
+                                <strong>Pages count: </strong>
+                                <span th:text="*{pagesCount}"></span>
+                            </li>
+                            <li>
+                                <strong>Categories: </strong>
+                                <span th:text="${#strings.setJoin(book.categories, ', ')}"></span>
+                            </li>
+                            <li>
+                                <strong>Price: </strong>
+                                <span th:text="|*{price} BGN|"></span>
+                            </li>
 
-                                    <br/>
+                            <br/>
 
-                                    <ul sec:authorize="hasRole('ROLE_ADMIN')">
-                                        <li>
-                                            <strong>Copies on stock: </strong>
-                                            <span th:text="*{copies}"></span>
-                                        </li>
-                                        <li>
-                                            <strong>Added on: </strong>
-                                            <span th:text="${#temporals.format(book.addedOn, 'dd/MM/yyyy HH:mm')}"></span>
-                                        </li>
-                                        <li>
-                                            <strong>Last modified on: </strong>
-                                            <span th:text="${#temporals.format(book.modified, 'dd/MM/yyyy HH:mm')}"></span>
-                                        </li>
-                                        <li>
-                                            <strong>Added by: </strong>
-                                            <span th:text="*{creator}"></span>
-                                        </li>
-                                    </ul>
-                                </ul>
-                            </div>
-                        </div>
+                            <ul sec:authorize="hasRole('ROLE_ADMIN')">
+                                <li>
+                                    <strong>Copies on stock: </strong>
+                                    <span th:text="*{copies}"></span>
+                                </li>
+                                <li>
+                                    <strong>Added on: </strong>
+                                    <span th:text="${#temporals.format(book.addedOn, 'dd/MM/yyyy HH:mm')}"></span>
+                                </li>
+                                <li>
+                                    <strong>Last modified on: </strong>
+                                    <span th:text="${#temporals.format(book.modified, 'dd/MM/yyyy HH:mm')}"></span>
+                                </li>
+                                <li>
+                                    <strong>Added by: </strong>
+                                    <span th:text="*{creator}"></span>
+                                </li>
+                            </ul>
+                        </ul>
                     </section>
 
                     <section id="book-buttons" class="d-flex flex-column justify-content-center">
@@ -130,16 +122,16 @@
                             </div>
                         </th:block>
                     </section>
-                </div>
+                </section>
 
-                <section id="description-info" class="info-section">
+                <section id="description-info" class="p-3 m-3">
                     <h3 class="text-center">Full Book Description: </h3>
                     <p class="text-justify" th:text="*{description}">
                         Description
                     </p>
                 </section>
 
-                <section class="info-section">
+                <section class="p-3 m-3">
                     <h5 class="text-center" th:text="|Publishing House: *{publishingHouse.getName()}|">
                     </h5>
                     <div class="clearfix align-items-center">
@@ -156,7 +148,7 @@
                     </div>
                 </section>
 
-                <section id="reviews-container" class="info-section">
+                <section id="reviews-container" class="p-3 m-3">
                     <!-- TODO - implement when we have reviews -->
                 </section>
             </article>

@@ -125,11 +125,6 @@ div.form-group input:read-only, option:disabled {
     margin: 5px;
 }
 
-.info-section {
-    padding: 20px;
-    margin: 10px;
-}
-
 #book-cover img {
     position: relative;
     height: 400px;
