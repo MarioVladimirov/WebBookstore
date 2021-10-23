@@ -20,6 +20,7 @@
         <!-- Page Content -->
         <div id="content">
             <form method="POST"
+                  enctype="multipart/form-data"
                   th:action="@{/books/add}"
                   th:object="${bookAddBindingModel}"
                   class="main-form mx-auto w-75 bg-blur">
@@ -34,12 +35,13 @@
                                name="isbn"
                                type="text"
                                class="form-control"
-                               placeholder="ISBN"/>
-                        <p th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"
-                           id="isbnError"
-                           class="invalid-feedback errors alert alert-danger">
+                               placeholder="ISBN"
+                               aria-describedby="isbnError"/>
+                        <small th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"
+                               id="isbnError"
+                               class="invalid-feedback errors alert alert-danger">
                             ISBN is required.
-                        </p>
+                        </small>
                     </div>
                     <div class="form-group col-md-6 mb-3">
                         <label for="title" class="text-white font-weight-bold">Title</label>
@@ -49,22 +51,24 @@
                                name="title"
                                type="text"
                                class="form-control"
-                               placeholder="Title"/>
-                        <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
-                           id="titleError"
-                           class="invalid-feedback errors alert alert-danger">
+                               placeholder="Title"
+                               aria-describedby="titleError"/>
+                        <small th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
+                               id="titleError"
+                               class="invalid-feedback errors alert alert-danger">
                             Title is required.
-                        </p>
+                        </small>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6 mb-3">
                         <label for="language" class="text-white font-weight-bold">Language</label>
-                        <select id="language"
-                                name="language"
-                                th:field="*{language}"
+                        <select th:field="*{language}"
                                 th:errorclass="is-invalid"
-                                class="custom-select">
+                                id="language"
+                                name="language"
+                                class="custom-select"
+                                aria-describedby="languageError">
                             <option value="" selected>Select language</option>
                             <option th:each="l : ${languages}"
                                     th:text="${l}"
@@ -72,11 +76,11 @@
                                     th:selected="${l} == *{language}">
                             </option>
                         </select>
-                        <p th:if="${#fields.hasErrors('language')}" th:errors="*{language}"
-                           id="languageError"
-                           class="invalid-feedback errors alert alert-danger">
+                        <small th:if="${#fields.hasErrors('language')}" th:errors="*{language}"
+                               id="languageError"
+                               class="invalid-feedback errors alert alert-danger">
                             Language is required.
-                        </p>
+                        </small>
                     </div>
                     <div class="form-group col-md-6 mb-3">
                         <label for="imageUrl" class="text-white font-weight-bold">Image Url</label>
@@ -84,14 +88,16 @@
                                th:errorclass="is-invalid"
                                id="imageUrl"
                                name="imageUrl"
-                               type="text"
-                               class="form-control"
-                               placeholder="ImageUrl"/>
-                        <p th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"
-                           id="imageUrlError"
-                           class="invalid-feedback errors alert alert-danger">
+                               type="file"
+                               accept=".jpg,.pdf"
+                               class="form-control-file rounded"
+                               placeholder="ImageUrl"
+                               aria-describedby="imageUrlError"/>
+                        <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"
+                               id="imageUrlError"
+                               class="invalid-feedback errors alert alert-danger">
                             Image Url is required.
-                        </p>
+                        </small>
                     </div>
                 </div>
                 <div class="row">
@@ -103,12 +109,13 @@
                                name="pagesCount"
                                type="text"
                                class="form-control"
-                               placeholder="Pages Count"/>
-                        <p th:if="${#fields.hasErrors('pagesCount')}" th:errors="*{pagesCount}"
-                           id="pagesCountError"
-                           class="invalid-feedback errors alert alert-danger">
+                               placeholder="Pages Count"
+                               aria-describedby="pagesCountError"/>
+                        <small th:if="${#fields.hasErrors('pagesCount')}" th:errors="*{pagesCount}"
+                               id="pagesCountError"
+                               class="invalid-feedback errors alert alert-danger">
                             Pages Count is required.
-                        </p>
+                        </small>
                     </div>
                     <div class="form-group col-md-6 mb-3">
                         <label for="copies" class="text-white font-weight-bold">Copies</label>
@@ -118,12 +125,13 @@
                                name="copies"
                                type="text"
                                class="form-control"
-                               placeholder="Copies"/>
-                        <p th:if="${#fields.hasErrors('copies')}" th:errors="*{copies}"
-                           id="copiesError"
-                           class="invalid-feedback errors alert alert-danger">
+                               placeholder="Copies"
+                               aria-describedby="copiesError"/>
+                        <small th:if="${#fields.hasErrors('copies')}" th:errors="*{copies}"
+                               id="copiesError"
+                               class="invalid-feedback errors alert alert-danger">
                             Copies is required.
-                        </p>
+                        </small>
                     </div>
                 </div>
                 <div class="row">
@@ -135,12 +143,13 @@
                                name="releaseYear"
                                type="text"
                                class="form-control"
-                               placeholder="Release Year"/>
-                        <p th:if="${#fields.hasErrors('releaseYear')}" th:errors="*{releaseYear}"
-                           id="releaseYearError"
-                           class="invalid-feedback errors alert alert-danger">
+                               placeholder="Release Year"
+                               aria-describedby="releaseYearError"/>
+                        <small th:if="${#fields.hasErrors('releaseYear')}" th:errors="*{releaseYear}"
+                               id="releaseYearError"
+                               class="invalid-feedback errors alert alert-danger">
                             Release Year is required.
-                        </p>
+                        </small>
                     </div>
                     <div class="form-group col-md-6 mb-3">
                         <label for="price" class="text-white font-weight-bold">Price</label>
@@ -150,12 +159,13 @@
                                name="price"
                                type="text"
                                class="form-control"
-                               placeholder="Price"/>
-                        <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
-                           id="priceError"
-                           class="invalid-feedback errors alert alert-danger">
+                               placeholder="Price"
+                               aria-describedby="priceError"/>
+                        <small th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+                               id="priceError"
+                               class="invalid-feedback errors alert alert-danger">
                             Price is required.
-                        </p>
+                        </small>
                     </div>
                 </div>
                 <div class="row">
@@ -167,42 +177,45 @@
                                   name="description"
                                   type="text"
                                   class="form-control"
-                                  placeholder="Description"></textarea>
-                        <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
-                           id="descriptionError"
-                           class="invalid-feedback errors alert alert-danger">
+                                  placeholder="Description"
+                                  aria-describedby="descriptionError"></textarea>
+                        <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+                               id="descriptionError"
+                               class="invalid-feedback errors alert alert-danger">
                             Description is required.
-                        </p>
+                        </small>
                     </div>
                     <div class="form-group col-md-6 mb-3">
                         <label for="categories" class="text-white font-weight-bold">Categories</label>
-                        <select id="categories"
-                                name="categories"
-                                th:field="*{categories}"
+                        <select th:field="*{categories}"
                                 th:errorclass="is-invalid"
+                                id="categories"
+                                name="categories"
                                 class="custom-select"
-                                multiple>
+                                multiple
+                                aria-describedby="categoriesError">
                             <option value="" selected>Select Categories</option>
                             <option th:each="c : ${categories}"
                                     th:text="${c}"
                                     th:value="${c}">
                             </option>
                         </select>
-                        <p th:if="${#fields.hasErrors('categories')}" th:errors="*{categories}"
-                           id="categoriesError"
-                           class="invalid-feedback errors alert alert-danger">
+                        <small th:if="${#fields.hasErrors('categories')}" th:errors="*{categories}"
+                               id="categoriesError"
+                               class="invalid-feedback errors alert alert-danger">
                             Category is required.
-                        </p>
+                        </small>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6 mb-3">
                         <label for="publishingHouse" class="text-white font-weight-bold">Publishing House</label>
-                        <select id="publishingHouse"
-                                name="publishingHouse"
-                                th:field="*{publishingHouse}"
+                        <select th:field="*{publishingHouse}"
                                 th:errorclass="is-invalid"
-                                class="custom-select">
+                                id="publishingHouse"
+                                name="publishingHouse"
+                                class="custom-select"
+                                aria-describedby="publishingHouseError">
                             <option value="" selected>Select Publishing House</option>
                             <option th:each="p : ${publishingHouses}"
                                     th:text="${p}"
@@ -210,19 +223,20 @@
                                     th:selected="${p} == *{publishingHouse}">
                             </option>
                         </select>
-                        <p th:if="${#fields.hasErrors('publishingHouse')}" th:errors="*{publishingHouse}"
-                           id="publishingHouseError"
-                           class="invalid-feedback errors alert alert-danger">
+                        <small th:if="${#fields.hasErrors('publishingHouse')}" th:errors="*{publishingHouse}"
+                               id="publishingHouseError"
+                               class="invalid-feedback errors alert alert-danger">
                             Publishing House is required.
-                        </p>
+                        </small>
                     </div>
                     <div class="form-group col-md-6 mb-3">
                         <label for="author" class="text-white font-weight-bold">Author</label>
-                        <select id="author"
-                                name="author"
-                                th:field="*{author}"
+                        <select th:field="*{author}"
                                 th:errorclass="is-invalid"
-                                class="custom-select">
+                                id="author"
+                                name="author"
+                                class="custom-select"
+                                aria-describedby="authorError">
                             <option value="" selected>Select Author</option>
                             <option th:each="a : ${authors}"
                                     th:text="${a}"
@@ -230,11 +244,11 @@
                                     th:selected="${a} == *{author}">
                             </option>
                         </select>
-                        <p th:if="${#fields.hasErrors('author')}" th:errors="*{author}"
-                           id="authorError"
-                           class="invalid-feedback errors alert alert-danger">
+                        <small th:if="${#fields.hasErrors('author')}" th:errors="*{author}"
+                               id="authorError"
+                               class="invalid-feedback errors alert alert-danger">
                             Author is required.
-                        </p>
+                        </small>
                     </div>
                 </div>
 

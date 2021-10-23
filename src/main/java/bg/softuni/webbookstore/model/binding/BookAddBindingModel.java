@@ -19,9 +19,6 @@ public class BookAddBindingModel {
 
     private String description;
 
-    //TODO - check if we need this validation, as it makes imageUrl mandatory
-    @Pattern(regexp = "(https?:\\/\\/.*\\.(?:png|jpg))",
-            message = "Please enter a valid image URL: 'https://{image path}.jpg' or 'https://{image path}.png'")
     private String imageUrl;
 
     @NotNull(message = "Pages count should be a positive number")
