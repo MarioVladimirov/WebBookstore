@@ -48,7 +48,6 @@ body {
 }
 
 form.main-form {
-    /*background-image: linear-gradient(to bottom right, rgba(70, 70, 70, 0.8), rgba(10, 10, 10, 0.8));*/
     background-position: center;
     padding: 25px 30px;
     border-radius: 15px;
@@ -113,7 +112,7 @@ div.form-group input:read-only, option:disabled {
     grid-area: book-buttons;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 925px) {
     #book-details {
         grid-template-areas:
              'book-cover'

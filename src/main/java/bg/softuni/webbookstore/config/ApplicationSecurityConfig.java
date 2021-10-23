@@ -33,7 +33,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                     .antMatchers("/", "/home", "/users/login", "/users/register",
-                        "/books/all", "/books/details/**").permitAll()
+                            "/books/api", "/books/all", "/books/details/**").permitAll()
                     .antMatchers("/books/add", "/authors/add").hasRole("ADMIN")
                     .antMatchers("/**").authenticated()
                 .and()
