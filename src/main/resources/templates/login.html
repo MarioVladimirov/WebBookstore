@@ -4,7 +4,7 @@
 
 <head th:replace="fragments/commons :: head"></head>
 
-<body>
+<body class="form-page">
 
 <!-- Navigation-->
 <header th:replace="fragments/commons :: navbar"></header>
@@ -19,7 +19,6 @@
 
         <!-- Page Content -->
         <div id="content">
-
             <form method="POST"
                   th:action="@{/users/login}"
                   class="main-form mx-auto w-50 bg-blur">
