@@ -18,7 +18,7 @@
         <nav th:replace="fragments/commons :: sidebar"></nav>
 
         <!-- Page Content -->
-        <div id="content">
+        <div id="content" class="container">
             <form th:method="patch"
                   enctype="multipart/form-data"
                   th:object="${bookUpdateBindingModel}"

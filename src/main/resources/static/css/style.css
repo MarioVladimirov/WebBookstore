@@ -12,7 +12,9 @@ body.form-page {
 }
 
 .navbar {
-    background-color: #0f2137;
+    /*background-color: #062B3A;*/
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(6, 37, 58, 1) 46%, rgba(3, 46, 55, 1) 100%);
 }
 
 #sidebar {
