@@ -71,5 +71,4 @@ public class AuthorController {
 
         return "author-details";
     }
-
 }

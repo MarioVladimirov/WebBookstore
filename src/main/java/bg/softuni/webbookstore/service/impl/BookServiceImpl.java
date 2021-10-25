@@ -171,16 +171,13 @@ public class BookServiceImpl implements BookService {
     }
 
     private BookSummaryViewModel getSummaryViewModel(BookEntity bookEntity) {
-        BookSummaryViewModel viewModel = modelMapper
-                .map(bookEntity, BookSummaryViewModel.class);
-
-        viewModel
+        return modelMapper
+                .map(bookEntity, BookSummaryViewModel.class)
                 .setCategories(getCategoriesAsStrings(bookEntity.getCategories()))
                 .setAuthor(getFullNameAsString(
                         bookEntity.getAuthor().getFirstName(),
-                        bookEntity.getAuthor().getLastName()));
-
-        return viewModel;
+                        bookEntity.getAuthor().getLastName()))
+                .setAuthorId(bookEntity.getAuthor().getId());
     }
 
     private UserEntity getUserEntity(String username) {

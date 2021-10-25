@@ -10,10 +10,10 @@
 <!-- Navigation-->
 <header th:replace="fragments/commons :: navbar"></header>
 
-<main class="page align-content-center">
+<main class="align-content-center">
 
     <!-- Main Content-->
-    <section class="container-fluid" id="wrapper">
+    <section class="container-fluid">
 
         <!-- Sidebar-->
         <nav th:replace="fragments/commons :: sidebar"></nav>
@@ -114,7 +114,7 @@
                             </div>
                             <div class="btn-group">
                                 <form th:action="@{/books/{id}(id=*{id})}"
-                                      th:method="delete">
+                                      th:method="delete" class="w-100">
                                     <button type="submit" class="btn btn-danger btn-md btn-block w-100">
                                         <i class="fa fa-trash-o fa-lg"></i> Delete
                                     </button>
@@ -136,11 +136,9 @@
                     </h5>
                     <div class="clearfix align-items-center">
                         <a th:href="@{/publishinghouses/details/{id}(id=*{publishingHouse.getId()})}">
-                            <span>
-                                <img class="ph-img float-md-left mr-3" th:src="*{publishingHouse.getImageUrl()}"
-                                     alt="Thumbnail [100%x225]"
-                                     data-holder-rendered="true">
-                            </span>
+                            <img class="ph-img float-md-left mr-3" th:src="*{publishingHouse.getImageUrl()}"
+                                 alt="Thumbnail [100%x225]"
+                                 data-holder-rendered="true">
                         </a>
                         <p class="text-justify" th:text="*{publishingHouse.getDescription()}">
                             Publishing House Description

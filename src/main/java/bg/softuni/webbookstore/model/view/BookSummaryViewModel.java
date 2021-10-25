@@ -11,6 +11,7 @@ public class BookSummaryViewModel {
     private BigDecimal price;
     private Set<String> categories;
     private String author;
+    private Long authorId;
 
 
     public BookSummaryViewModel() {
@@ -67,6 +68,15 @@ public class BookSummaryViewModel {
 
     public BookSummaryViewModel setAuthor(String author) {
         this.author = author;
+        return this;
+    }
+
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public BookSummaryViewModel setAuthorId(Long authorId) {
+        this.authorId = authorId;
         return this;
     }
 }

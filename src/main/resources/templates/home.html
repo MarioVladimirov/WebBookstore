@@ -9,9 +9,9 @@
 <!-- Navigation-->
 <header th:replace="fragments/commons :: navbar"></header>
 
-<main class="page align-content-center">
+<main class="align-content-center">
     <!-- Main Content-->
-    <section class="container-fluid" id="wrapper">
+    <section class="container-fluid">
 
         <!-- Sidebar-->
         <nav th:replace="fragments/commons :: sidebar"></nav>
@@ -38,7 +38,11 @@
                         <div class="card-body pt-1">
                             <div class="text-center">
                                 <h5 class="card-title" th:text="*{title}"></h5>
-                                <p class="card-text text-secondary" th:text="|Author: *{author}|"></p>
+                                <p class="card-text text-secondary">Author:
+                                    <a th:text="*{author}"
+                                       th:href="@{/authors/details/{id}(id=*{authorId})}">
+                                    </a>
+                                </p>
                                 <p class="card-text" th:text="|Price: *{price} BGN|"></p>
                             </div>
                         </div>

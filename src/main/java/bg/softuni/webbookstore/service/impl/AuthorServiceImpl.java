@@ -18,21 +18,18 @@ import java.util.List;
 public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepository authorRepository;
-    private final BookService bookService;
     private final CloudinaryService cloudinaryService;
     private final ModelMapper modelMapper;
 
-    public AuthorServiceImpl(AuthorRepository authorRepository, BookService bookService, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
+    public AuthorServiceImpl(AuthorRepository authorRepository, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
         this.authorRepository = authorRepository;
-        this.bookService = bookService;
         this.cloudinaryService = cloudinaryService;
         this.modelMapper = modelMapper;
     }
 
     @Override
     public List<String> findAllAuthorsNames() {
-        return authorRepository
-                .findAllAuthorsNames();
+        return authorRepository.findAllAuthorsNames();
     }
 
     @Override
@@ -45,7 +42,7 @@ public class AuthorServiceImpl implements AuthorService {
                 .setImageUrl(
                         !"".equals(img.getOriginalFilename())
                                 ? cloudinaryService.uploadImage(img)
-                                : "https://res.cloudinary.com/nzlateva/image/upload/v1635022179/web-bookstore-app/authors-pics/default-author-pic_geubje.png"
+                                : "https://res.cloudinary.com/nzlateva/image/upload/v1635173921/web-bookstore-app/authors-pics/default-author-pic_rc5wzc.png"
                 );
 
         authorEntity = authorRepository.save(authorEntity);
