@@ -29,13 +29,12 @@
                 <br>
 
                 <div class="form-group">
-                    <label for="firstName" class="text-white font-weight-bold">First Name</label>
+                    <label for="firstName" class="col-form-label text-white font-weight-bold">First Name</label>
                     <input th:field="*{firstName}"
                            th:errorclass="is-invalid"
                            id="firstName"
                            name="firstName"
                            type="text"
-                           min="2" max="20"
                            class="form-control"
                            placeholder="First name"
                            aria-describedby="firstNameError"/>
@@ -46,13 +45,12 @@
                     </small>
                 </div>
                 <div class="form-group">
-                    <label for="lastName" class="text-white font-weight-bold">Last Name</label>
+                    <label for="lastName" class="col-form-label text-white font-weight-bold">Last Name</label>
                     <input th:field="*{lastName}"
                            th:errorclass="is-invalid"
                            id="lastName"
                            name="lastName"
                            type="text"
-                           min="2" max="20"
                            class="form-control"
                            placeholder="First name"
                            aria-describedby="lastNameError"/>
@@ -64,13 +62,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="username" class="text-white font-weight-bold">Username</label>
+                    <label for="username" class="col-form-label text-white font-weight-bold">Username</label>
                     <input th:field="*{username}"
                            th:errorclass="is-invalid"
                            id="username"
                            name="username"
                            type="text"
-                           min="2" max="20"
                            class="form-control"
                            placeholder="Username"
                            aria-describedby="usernameError"/>
@@ -81,12 +78,11 @@
                     </small>
                 </div>
                 <div class="form-group">
-                    <label for="password" class="text-white font-weight-bold">Password</label>
+                    <label for="password" class="col-form-label text-white font-weight-bold">Password</label>
                     <input th:errorclass="is-invalid"
                            id="password"
                            name="password"
                            type="password"
-                           min="2" max="20"
                            class="form-control"
                            placeholder="Password"
                            aria-describedby="passwordError"/>
@@ -98,12 +94,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="confirmPassword" class="text-white font-weight-bold">Confirm password</label>
+                    <label for="confirmPassword" class="col-form-label text-white font-weight-bold">Confirm password</label>
                     <input th:errorclass="is-invalid"
                            id="confirmPassword"
                            name="confirmPassword"
                            type="password"
-                           min="2" max="20"
                            class="form-control"
                            placeholder="Confirm password"
                            aria-describedby="confirmPasswordError"/>

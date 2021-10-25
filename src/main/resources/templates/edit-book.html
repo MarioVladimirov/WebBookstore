@@ -29,7 +29,7 @@
                 <br>
                 <div class="row">
                     <div class="form-group col-md-6 mb-3">
-                        <label for="isbn" class="text-white font-weight-bold">ISBN</label>
+                        <label for="isbn" class="col-form-label text-white font-weight-bold">ISBN</label>
                         <input th:field="*{isbn}"
                                th:errorclass="is-invalid"
                                id="isbn"
@@ -45,7 +45,7 @@
                         </small>
                     </div>
                     <div class="form-group col-md-6 mb-3">
-                        <label for="title" class="text-white font-weight-bold">Title</label>
+                        <label for="title" class="col-form-label text-white font-weight-bold">Title</label>
                         <input th:field="*{title}"
                                readonly
                                id="title"
@@ -58,11 +58,11 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6 mb-3">
-                        <label for="language" class="text-white font-weight-bold">Language</label>
-                        <select id="language"
-                                name="language"
-                                th:field="*{language}"
+                        <label for="language" class="col-form-label text-white font-weight-bold">Language</label>
+                        <select th:field="*{language}"
                                 th:errorclass="is-invalid"
+                                id="language"
+                                name="language"
                                 class="custom-select"
                                 aria-describedby="languageError">
                             <option th:each="l : ${languages}"
@@ -78,7 +78,7 @@
                         </small>
                     </div>
                     <div class="form-group col-md-6 mb-3">
-                        <label for="image" class="text-white font-weight-bold">Image</label>
+                        <label for="image" class="col-form-label text-white font-weight-bold">Image</label>
                         <input th:field="*{image}"
                                th:errorclass="is-invalid"
                                id="image"
@@ -96,7 +96,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6 mb-3">
-                        <label for="pagesCount" class="text-white font-weight-bold">Pages Count</label>
+                        <label for="pagesCount" class="col-form-label text-white font-weight-bold">Pages Count</label>
                         <input th:field="*{pagesCount}"
                                th:errorclass="is-invalid"
                                id="pagesCount"
@@ -112,7 +112,7 @@
                         </small>
                     </div>
                     <div class="form-group col-md-6 mb-3">
-                        <label for="copies" class="text-white font-weight-bold">Copies</label>
+                        <label for="copies" class="col-form-label text-white font-weight-bold">Copies</label>
                         <input th:field="*{copies}"
                                th:errorclass="is-invalid"
                                id="copies"
@@ -130,7 +130,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6 mb-3">
-                        <label for="releaseYear" class="text-white font-weight-bold">Release Year</label>
+                        <label for="releaseYear" class="col-form-label text-white font-weight-bold">Release Year</label>
                         <input th:field="*{releaseYear}"
                                th:errorclass="is-invalid"
                                id="releaseYear"
@@ -146,7 +146,7 @@
                         </small>
                     </div>
                     <div class="form-group col-md-6 mb-3">
-                        <label for="price" class="text-white font-weight-bold">Price</label>
+                        <label for="price" class="col-form-label text-white font-weight-bold">Price</label>
                         <input th:field="*{price}"
                                th:errorclass="is-invalid"
                                id="price"
@@ -164,7 +164,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6 mb-3">
-                        <label for="description" class="text-white font-weight-bold">Description</label>
+                        <label for="description" class="col-form-label text-white font-weight-bold">Description</label>
                         <textarea th:field="*{description}"
                                   th:errorclass="is-invalid"
                                   id="description"
@@ -180,11 +180,11 @@
                         </small>
                     </div>
                     <div class="form-group col-md-6 mb-3">
-                        <label for="categories" class="text-white font-weight-bold">Categories</label>
-                        <select id="categories"
-                                name="categories"
-                                th:field="*{categories}"
+                        <label for="categories" class="col-form-label text-white font-weight-bold">Categories</label>
+                        <select th:field="*{categories}"
                                 th:errorclass="is-invalid"
+                                id="categories"
+                                name="categories"
                                 class="custom-select"
                                 multiple
                                 aria-describedby="categoriesError">
@@ -202,11 +202,12 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6 mb-3">
-                        <label for="publishingHouseName" class="text-white font-weight-bold">Publishing House</label>
-                        <select id="publishingHouseName"
-                                name="publishingHouseName"
-                                th:field="*{publishingHouseName}"
+                        <label for="publishingHouseName" class="col-form-label text-white font-weight-bold">Publishing
+                            House</label>
+                        <select th:field="*{publishingHouseName}"
                                 th:errorclass="is-invalid"
+                                id="publishingHouseName"
+                                name="publishingHouseName"
                                 class="custom-select"
                                 aria-describedby="publishingHouseError">
                             <option th:each="p : ${publishingHouses}"
@@ -222,10 +223,10 @@
                         </small>
                     </div>
                     <div class="form-group col-md-6 mb-3">
-                        <label for="author" class="text-white font-weight-bold">Author</label>
-                        <select id="author"
+                        <label for="author" class="col-form-label text-white font-weight-bold">Author</label>
+                        <select th:field="*{author}"
+                                id="author"
                                 name="author"
-                                th:field="*{author}"
                                 class="custom-select">
                             <option disabled
                                     th:each="a : ${authors}"

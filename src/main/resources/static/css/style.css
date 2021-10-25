@@ -124,7 +124,7 @@ div.form-group input:read-only, option:disabled {
     grid-area: book-buttons;
 }
 
-@media screen and (max-width: 925px) {
+@media screen and (max-width: 992px) {
     #book-details {
         grid-template-areas:
              'book-cover'
