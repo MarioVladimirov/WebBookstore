@@ -86,6 +86,7 @@ public class BookController {
 
         Long bookId = bookService.add(bookAddServiceModel);
 
+        redirectAttributes.addFlashAttribute("addedSuccessfully", true);
         return "redirect:/books/details/" + bookId;
     }
 
@@ -156,6 +157,7 @@ public class BookController {
 
         bookService.update(updateServiceModel);
 
+        redirectAttributes.addFlashAttribute("updatedSuccessfully", true);
         return "redirect:/books/details/" + id;
     }
 }

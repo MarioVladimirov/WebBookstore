@@ -150,6 +150,7 @@ div.form-group input:read-only, option:disabled {
 /* Author View */
 #author-image img {
     position: relative;
+    border: grey 1px solid ;
     height: 400px;
     width: 280px;
 }
@@ -209,6 +210,13 @@ div.form-group input:read-only, option:disabled {
              'publishing-house-image'
              'publishing-house-info';
     }
+}
+
+.alert {
+    display: none;
+}
+.alert.visible {
+    display: block;
 }
 
 /* Footer */

@@ -57,6 +57,7 @@ public class AuthorController {
 
         Long authorId = authorService.add(authorAddServiceModel);
 
+        redirectAttributes.addFlashAttribute("addedSuccessfully", true);
         return "redirect:/authors/details/" + authorId;
     }
 
