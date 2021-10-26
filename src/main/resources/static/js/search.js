@@ -47,7 +47,7 @@ sidebar.addEventListener('click', (e) => {
 });
 
 // TODO - make book-card div the same as in home
-const displayBooks = (books) => {
+function displayBooks(books) {
     booksList.innerHTML = books
         .map((b) => {
             return `<article class="card rounded p-2 m-3 col-sm-6 col-md-3">

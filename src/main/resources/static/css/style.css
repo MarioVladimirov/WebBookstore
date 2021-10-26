@@ -132,7 +132,7 @@ div.form-group input:read-only, option:disabled {
     }
 }
 
-#book-buttons a.btn.btn-info, #book-buttons button.btn.btn-danger {
+#book-buttons a.btn.btn-info, #book-buttons div form {
     margin: 5px;
 }
 
