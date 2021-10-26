@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PublishingHouseServiceImpl implements PublishingHouseService {
@@ -27,12 +28,10 @@ public class PublishingHouseServiceImpl implements PublishingHouseService {
     }
 
     @Override
-    public PublishingHouseViewModel findById(Long id) {
-        PublishingHouseEntity publishingHouse = publishingHouseRepository
+    public Optional<PublishingHouseViewModel> findById(Long id) {
+        return publishingHouseRepository
                 .findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Publishing House not found"));
-
-        return modelMapper
-                .map(publishingHouse, PublishingHouseViewModel.class);
+                .map(publishingHouseEntity -> modelMapper
+                        .map(publishingHouseEntity, PublishingHouseViewModel.class));
     }
 }

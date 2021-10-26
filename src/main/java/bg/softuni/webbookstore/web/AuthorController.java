@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/authors")
@@ -65,9 +66,10 @@ public class AuthorController {
     public String details(@PathVariable Long id,
                           Model model) {
 
-        AuthorViewModel viewModel = authorService.findById(id);
+        Optional<AuthorViewModel> viewModel = authorService.findById(id);
 
-        model.addAttribute("author", viewModel);
+        //TODO - error handling if empty optional
+        model.addAttribute("author", viewModel.get());
         model.addAttribute("books", bookService.findBooksByAuthor(id));
 
         return "author-details";

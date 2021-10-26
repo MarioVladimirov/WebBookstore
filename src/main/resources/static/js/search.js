@@ -51,15 +51,15 @@ function displayBooks(books) {
     booksList.innerHTML = books
         .map((b) => {
             return `<article class="card rounded p-2 m-3 col-sm-6 col-md-3">
-                    <a href="/books/details/${b.id}">
+                    <a href="/books/${b.id}">
                         <img class="card-image" src="${b.imageUrl}" alt="Thumbnail [100%x225]"
                              data-holder-rendered="true">
                         <div class="btn-group d-flex justify-content-end">
-                            <a href="/books/details/${b.id}"
+                            <a href="/books/${b.id}"
                                type="button" class="btn btn-md">
                                 <i class="far fa-heart"></i>
                             </a>
-                            <a href="/books/details/${b.id}"
+                            <a href="/books/${b.id}"
                                type="button" class="btn btn-md">
                                 <i class="fas fa-shopping-cart"></i>
                             </a>

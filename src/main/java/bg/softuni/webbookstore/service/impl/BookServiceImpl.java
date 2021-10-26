@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -42,7 +43,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookSummaryViewModel> getAllBooks() {
+    public List<BookSummaryViewModel> findAllBooks() {
         return bookRepository
                 .findAll()
                 .stream()
@@ -69,8 +70,42 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void delete(Long id) {
-        bookRepository.deleteById(id);
+    public Long add(BookAddServiceModel bookAddServiceModel) throws IOException {
+
+        MultipartFile img = bookAddServiceModel.getImage();
+
+        BookEntity bookEntity = modelMapper
+                .map(bookAddServiceModel, BookEntity.class)
+                .setImageUrl(
+                        !"".equals(img.getOriginalFilename())
+                                ? cloudinaryService.uploadImage(img)
+                                : "https://res.cloudinary.com/nzlateva/image/upload/v1635019989/web-bookstore-app/book-cover-pics/default-book-cover_is5vlx.jpg"
+                )
+                .setLanguage(getLanguageEnum(bookAddServiceModel.getLanguage()))
+                .setCategories(getCategoryEntities(bookAddServiceModel.getCategories()))
+                .setPublishingHouse(getPublishingHouseEntity(bookAddServiceModel.getPublishingHouse()))
+                .setAuthor(getAuthorEntity(
+                        bookAddServiceModel.getAuthor().split(" ", 2)[0],
+                        bookAddServiceModel.getAuthor().split(" ", 2)[1]))
+                .setCreator(getUserEntity(bookAddServiceModel.getCreator()));
+
+        bookEntity = bookRepository.save(bookEntity);
+
+        return bookEntity.getId();
+    }
+
+    @Override
+    public Optional<BookDetailViewModel> findBookDetails(Long id) {
+        return bookRepository
+                .findById(id)
+                .map(this::getBookDetailViewModel);
+    }
+
+    @Override
+    public Optional<BookUpdateBindingModel> findBookToEdit(Long id) {
+        return bookRepository
+                .findById(id)
+                .map(this::getBookToEdit);
     }
 
     @Override
@@ -102,73 +137,15 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDetailViewModel findBookDetails(Long id) {
-        BookEntity bookEntity = bookRepository
-                .findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Book not found"));
-
-        BookDetailViewModel viewModel = modelMapper
-                .map(bookEntity, BookDetailViewModel.class);
-
-        viewModel
-                .setAddedOn(bookEntity.getAddedOn().atZone(ZoneId.systemDefault()))
-                .setModified(bookEntity.getModified().atZone(ZoneId.systemDefault()))
-                .setCategories(getCategoriesAsStrings(bookEntity.getCategories()))
-                .setAuthor(getFullNameAsString(
-                        bookEntity.getAuthor().getFirstName(), bookEntity.getAuthor().getLastName()))
-                .setAuthorId(bookEntity.getAuthor().getId())
-                .setCreator(getFullNameAsString(
-                        bookEntity.getCreator().getFirstName(), bookEntity.getCreator().getLastName()));
-
-        return viewModel;
-    }
-
-    @Override
-    public BookUpdateBindingModel findBookToEdit(Long id) {
-        BookEntity bookEntity = bookRepository
-                .findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Book not found"));
-
-        BookUpdateBindingModel updateBindingModel = modelMapper
-                .map(bookEntity, BookUpdateBindingModel.class);
-
-        updateBindingModel
-                .setCategories(getCategoriesAsStrings(bookEntity.getCategories()))
-                .setAuthor(getFullNameAsString(
-                        bookEntity.getAuthor().getFirstName(), bookEntity.getAuthor().getLastName()));
-
-        return updateBindingModel;
-    }
-
-    @Override
-    public Long add(BookAddServiceModel bookAddServiceModel) throws IOException {
-
-        MultipartFile img = bookAddServiceModel.getImage();
-
-        BookEntity bookEntity = modelMapper
-                .map(bookAddServiceModel, BookEntity.class)
-                .setImageUrl(
-                        !"".equals(img.getOriginalFilename())
-                                ? cloudinaryService.uploadImage(img)
-                                : "https://res.cloudinary.com/nzlateva/image/upload/v1635019989/web-bookstore-app/book-cover-pics/default-book-cover_is5vlx.jpg"
-                )
-                .setLanguage(getLanguageEnum(bookAddServiceModel.getLanguage()))
-                .setCategories(getCategoryEntities(bookAddServiceModel.getCategories()))
-                .setPublishingHouse(getPublishingHouseEntity(bookAddServiceModel.getPublishingHouse()))
-                .setAuthor(getAuthorEntity(
-                        bookAddServiceModel.getAuthor().split(" ", 2)[0],
-                        bookAddServiceModel.getAuthor().split(" ", 2)[1]))
-                .setCreator(getUserEntity(bookAddServiceModel.getCreator()));
-
-        bookEntity = bookRepository.save(bookEntity);
-
-        return bookEntity.getId();
+    public void delete(Long id) {
+        bookRepository.deleteById(id);
     }
 
     @Override
     public boolean existsByIsbn(String isbn) {
         return bookRepository.existsByIsbn(isbn);
     }
+
 
     private BookSummaryViewModel getSummaryViewModel(BookEntity bookEntity) {
         return modelMapper
@@ -178,6 +155,30 @@ public class BookServiceImpl implements BookService {
                         bookEntity.getAuthor().getFirstName(),
                         bookEntity.getAuthor().getLastName()))
                 .setAuthorId(bookEntity.getAuthor().getId());
+    }
+
+    private BookDetailViewModel getBookDetailViewModel(BookEntity bookEntity) {
+        return modelMapper
+                .map(bookEntity, BookDetailViewModel.class)
+                .setAddedOn(bookEntity.getAddedOn().atZone(ZoneId.systemDefault()))
+                .setModified(bookEntity.getModified().atZone(ZoneId.systemDefault()))
+                .setCategories(getCategoriesAsStrings(bookEntity.getCategories()))
+                .setAuthor(getFullNameAsString(
+                        bookEntity.getAuthor().getFirstName(),
+                        bookEntity.getAuthor().getLastName()))
+                .setAuthorId(bookEntity.getAuthor().getId())
+                .setCreator(getFullNameAsString(
+                        bookEntity.getCreator().getFirstName(),
+                        bookEntity.getCreator().getLastName()));
+    }
+
+    private BookUpdateBindingModel getBookToEdit(BookEntity bookEntity) {
+        return modelMapper
+                .map(bookEntity, BookUpdateBindingModel.class)
+                .setCategories(getCategoriesAsStrings(bookEntity.getCategories()))
+                .setAuthor(getFullNameAsString(
+                        bookEntity.getAuthor().getFirstName(),
+                        bookEntity.getAuthor().getLastName()));
     }
 
     private UserEntity getUserEntity(String username) {

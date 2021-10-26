@@ -5,7 +5,6 @@ import bg.softuni.webbookstore.model.service.AuthorAddServiceModel;
 import bg.softuni.webbookstore.model.view.AuthorViewModel;
 import bg.softuni.webbookstore.repository.AuthorRepository;
 import bg.softuni.webbookstore.service.AuthorService;
-import bg.softuni.webbookstore.service.BookService;
 import bg.softuni.webbookstore.service.CloudinaryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -13,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -51,12 +51,10 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public AuthorViewModel findById(Long id) {
-        AuthorEntity authorEntity = authorRepository
+    public Optional<AuthorViewModel> findById(Long id) {
+        return authorRepository
                 .findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Author not found"));
-
-        return modelMapper
-                .map(authorEntity, AuthorViewModel.class);
+                .map(authorEntity -> modelMapper
+                        .map(authorEntity, AuthorViewModel.class));
     }
 }

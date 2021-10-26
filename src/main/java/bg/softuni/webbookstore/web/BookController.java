@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/books")
@@ -51,7 +52,7 @@ public class BookController {
     //GET
     @GetMapping("/all")
     public String allBooks(Model model) {
-        model.addAttribute("books", bookService.getAllBooks());
+        model.addAttribute("books", bookService.findAllBooks());
         return "home";
     }
 
@@ -95,19 +96,12 @@ public class BookController {
     public String details(@PathVariable Long id,
                           Model model) {
 
-        BookDetailViewModel detailViewModel = bookService.findBookDetails(id);
+        Optional<BookDetailViewModel> detailViewModel = bookService.findBookDetails(id);
 
-        model.addAttribute("book", detailViewModel);
+        //TODO - error handling if empty optional
+        model.addAttribute("book", detailViewModel.get());
 
         return "book-details";
-    }
-
-    //DELETE
-    @DeleteMapping("/{id}")
-    public String delete(@PathVariable Long id) {
-        bookService.delete(id);
-
-        return "redirect:/books/all";
     }
 
     //UPDATE
@@ -115,9 +109,10 @@ public class BookController {
     public String edit(@PathVariable Long id,
                        Model model) {
 
-        BookUpdateBindingModel bookUpdateBindingModel = bookService.findBookToEdit(id);
+        Optional<BookUpdateBindingModel> bookUpdateBindingModel = bookService.findBookToEdit(id);
 
-        model.addAttribute("bookUpdateBindingModel", bookUpdateBindingModel);
+        //TODO - error handling if empty optional
+        model.addAttribute("bookUpdateBindingModel", bookUpdateBindingModel.get());
         model.addAttribute("languages", LanguageEnum.values());
         model.addAttribute("categories", CategoryEnum.values());
         model.addAttribute("publishingHouses", publishingHouseService.findAllPublishingHouseNames());
@@ -159,5 +154,13 @@ public class BookController {
 
         redirectAttributes.addFlashAttribute("updatedSuccessfully", true);
         return "redirect:/books/" + id;
+    }
+
+    //DELETE
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Long id) {
+        bookService.delete(id);
+
+        return "redirect:/books/all";
     }
 }

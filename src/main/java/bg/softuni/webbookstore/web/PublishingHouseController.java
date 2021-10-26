@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/publishinghouses")
 public class PublishingHouseController {
@@ -25,7 +27,7 @@ public class PublishingHouseController {
     public String details(@PathVariable Long id,
                           Model model) {
 
-        PublishingHouseViewModel viewModel = publishingHouseService.findById(id);
+        Optional<PublishingHouseViewModel> viewModel = publishingHouseService.findById(id);
 
         model.addAttribute("publishingHouse", viewModel);
         model.addAttribute("books", bookService.findBooksByPublishingHouse(id));
