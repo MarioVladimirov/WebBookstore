@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="col-4">
-                            <a th:href="@{/books/details/{id}(id=*{book.getId()})}">
+                            <a th:href="@{/books/{id}(id=*{book.getId()})}">
                                 <img class="img-fluid"
                                      th:src="*{book.getImageUrl()}"
                                      th:title="*{book.getTitle()}">

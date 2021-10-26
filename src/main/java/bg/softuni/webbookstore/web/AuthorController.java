@@ -58,10 +58,10 @@ public class AuthorController {
         Long authorId = authorService.add(authorAddServiceModel);
 
         redirectAttributes.addFlashAttribute("addedSuccessfully", true);
-        return "redirect:/authors/details/" + authorId;
+        return "redirect:/authors/" + authorId;
     }
 
-    @GetMapping("/details/{id}")
+    @GetMapping("/{id}")
     public String details(@PathVariable Long id,
                           Model model) {
 

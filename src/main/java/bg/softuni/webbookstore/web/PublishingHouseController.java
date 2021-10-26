@@ -3,7 +3,6 @@ package bg.softuni.webbookstore.web;
 import bg.softuni.webbookstore.model.view.PublishingHouseViewModel;
 import bg.softuni.webbookstore.service.BookService;
 import bg.softuni.webbookstore.service.PublishingHouseService;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +21,7 @@ public class PublishingHouseController {
         this.bookService = bookService;
     }
 
-    @GetMapping("/details/{id}")
+    @GetMapping("/{id}")
     public String details(@PathVariable Long id,
                           Model model) {
 

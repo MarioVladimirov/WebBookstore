@@ -87,11 +87,11 @@ public class BookController {
         Long bookId = bookService.add(bookAddServiceModel);
 
         redirectAttributes.addFlashAttribute("addedSuccessfully", true);
-        return "redirect:/books/details/" + bookId;
+        return "redirect:/books/" + bookId;
     }
 
     //DETAILS
-    @GetMapping("/details/{id}")
+    @GetMapping("/{id}")
     public String details(@PathVariable Long id,
                           Model model) {
 
@@ -158,6 +158,6 @@ public class BookController {
         bookService.update(updateServiceModel);
 
         redirectAttributes.addFlashAttribute("updatedSuccessfully", true);
-        return "redirect:/books/details/" + id;
+        return "redirect:/books/" + id;
     }
 }

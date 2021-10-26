@@ -29,5 +29,4 @@ public class BookRestController {
                 .ok()
                 .body(bookSummaryViewModels);
     }
-
 }

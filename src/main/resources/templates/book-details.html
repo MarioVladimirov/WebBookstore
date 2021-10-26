@@ -50,14 +50,14 @@
                         <ul class="attribute-list text-left">
                             <li>
                                 <strong>Author: </strong>
-                                <a th:text="*{author}" th:href="@{/authors/details/{id}(id=*{authorId})}">
+                                <a th:text="*{author}" th:href="@{/authors/{id}(id=*{authorId})}">
                                     Author name
                                 </a>
                             </li>
                             <li>
                                 <strong>Publishing house: </strong>
                                 <a th:text="*{publishingHouse.getName()}"
-                                   th:href="@{/publishinghouses/details/{id}(id=*{publishingHouse.getId()})}">
+                                   th:href="@{/publishinghouses/{id}(id=*{publishingHouse.getId()})}">
                                     Publishing House
                                 </a>
                             </li>
@@ -112,12 +112,12 @@
                     <section id="book-buttons" class="d-flex flex-column justify-content-center">
                         <th:block sec:authorize="isAuthenticated()">
                             <div class="btn-group">
-                                <a th:href="@{/books/details/{id}(id=*{id})}"
+                                <a th:href="@{/books/{id}(id=*{id})}"
                                    type="button" class="btn btn-info btn-md btn-block w-100">
                                     <i class="fas fa-shopping-cart"></i> Add to Cart</a>
                             </div>
                             <div class="btn-group">
-                                <a th:href="@{/books/details/{id}(id=*{id})}"
+                                <a th:href="@{/books/{id}(id=*{id})}"
                                    type="button" class="btn btn-info btn-md btn-block w-100">
                                     <i class="far fa-heart"></i> Add to Favourites</a>
                             </div>
@@ -151,7 +151,7 @@
                     <h5 class="text-center" th:text="|Publishing House: *{publishingHouse.getName()}|">
                     </h5>
                     <div class="clearfix align-items-center">
-                        <a th:href="@{/publishinghouses/details/{id}(id=*{publishingHouse.getId()})}">
+                        <a th:href="@{/publishinghouses/{id}(id=*{publishingHouse.getId()})}">
                             <img class="ph-img float-md-left mr-3" th:src="*{publishingHouse.getImageUrl()}"
                                  alt="Thumbnail [100%x225]"
                                  data-holder-rendered="true">
