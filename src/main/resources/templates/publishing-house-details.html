@@ -38,40 +38,7 @@
                 </section>
             </article>
 
-            <div class="row d-flex justify-content-center">
-                <article th:each="b : ${books}"
-                         th:object="${b}"
-                         class="card rounded p-2 m-3 col-sm-6 col-md-3">
-                    <a th:href="@{/books/{id}(id=*{id})}"
-                       th:title="*{title}">
-                        <img class="card-image rounded" th:src="*{getImageUrl()}" alt="Thumbnail [100%x225]"
-                             data-holder-rendered="true">
-                        <div class="btn-group d-flex justify-content-end">
-                            <a th:href="@{/books/{id}(id=*{id})}"
-                               type="button" class="btn btn-md"
-                               title="Add to Favorites">
-                                <i class="far fa-heart"></i>
-                            </a>
-                            <a th:href="@{/books/{id}(id=*{id})}"
-                               type="button" class="btn btn-md"
-                               title="Add to Cart">
-                                <i class="fas fa-shopping-cart"></i>
-                            </a>
-                        </div>
-                        <div class="card-body pt-1">
-                            <div class="text-center">
-                                <h5 class="card-title" th:text="*{title}"></h5>
-                                <p class="card-text text-secondary">Author:
-                                    <a th:text="*{author}"
-                                       th:href="@{/authors/{id}(id=*{authorId})}">
-                                    </a>
-                                </p>
-                                <p class="card-text" th:text="|Price: *{price} BGN|"></p>
-                            </div>
-                        </div>
-                    </a>
-                </article>
-            </div>
+            <div th:replace="fragments/book-cards-list"></div>
 
         </div>
     </section>

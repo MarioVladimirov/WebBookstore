@@ -29,7 +29,8 @@ public class PublishingHouseController {
 
         Optional<PublishingHouseViewModel> viewModel = publishingHouseService.findById(id);
 
-        model.addAttribute("publishingHouse", viewModel);
+        //TODO - error handling if empty optional
+        model.addAttribute("publishingHouse", viewModel.get());
         model.addAttribute("books", bookService.findBooksByPublishingHouse(id));
 
         return "publishing-house-details";
