@@ -18,6 +18,12 @@ public class UserEntity extends BaseEntity {
     private String username;
 
     @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String address;
+
+    @Column(nullable = false)
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -51,6 +57,24 @@ public class UserEntity extends BaseEntity {
 
     public UserEntity setUsername(String username) {
         this.username = username;
+        return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public UserEntity setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public UserEntity setAddress(String address) {
+        this.address = address;
         return this;
     }
 

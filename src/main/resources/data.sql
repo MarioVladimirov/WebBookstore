@@ -3,11 +3,13 @@ VALUES (1, 'ADMIN');
 INSERT INTO roles (id, role)
 VALUES (2, 'USER');
 
-INSERT INTO users (id, first_name, last_name, username, password)
+INSERT INTO users (id, first_name, last_name, username, email, address, password)
 VALUES (1, 'Admin', 'Adminov', 'admin',
+        'admin.adminov@abv.bg', 'Sofia, Alexander Malinov Str.',
         '713ced98f52887220162f4a73fc4109ac9a76bb919a888ffb41fed4f922148b158f84bdef58778a3');
-INSERT INTO users (id, first_name, last_name, username, password)
+INSERT INTO users (id, first_name, last_name, username, email, address, password)
 VALUES (2, 'User', 'Userov', 'user',
+        'user.userov@abv.bg', 'Sofia, Alexander Malinov Str.',
         '713ced98f52887220162f4a73fc4109ac9a76bb919a888ffb41fed4f922148b158f84bdef58778a3');
 
 INSERT INTO users_roles (`user_entity_id`, `roles_id`)

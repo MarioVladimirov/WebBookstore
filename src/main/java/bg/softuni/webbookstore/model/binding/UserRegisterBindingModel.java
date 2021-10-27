@@ -3,6 +3,7 @@ package bg.softuni.webbookstore.model.binding;
 import bg.softuni.webbookstore.model.validator.PasswordsMatch;
 import bg.softuni.webbookstore.model.validator.UniqueUsername;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -25,6 +26,13 @@ public class UserRegisterBindingModel {
     @NotBlank(message = "Please enter a valid username")
     @Size(min = 2, max = 20, message = "Username should be between 2 and 20 characters long")
     private String username;
+
+    @NotBlank(message = "Please enter a valid email")
+    @Email(message = "Please enter a valid email")
+    private String email;
+
+    @NotBlank(message = "Please enter your full address for delivery")
+    private String address;
 
     @NotBlank(message = "Please enter a valid password")
     @Size(min = 2, max = 20, message = "Password should be between 2 and 20 characters long")
@@ -62,6 +70,24 @@ public class UserRegisterBindingModel {
 
     public UserRegisterBindingModel setUsername(String username) {
         this.username = username;
+        return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public UserRegisterBindingModel setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public UserRegisterBindingModel setAddress(String address) {
+        this.address = address;
         return this;
     }
 

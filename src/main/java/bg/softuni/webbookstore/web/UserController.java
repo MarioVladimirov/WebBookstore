@@ -106,7 +106,8 @@ public class UserController {
     public String showProfile(Model model,
                               @AuthenticationPrincipal UserDetails principal) {
 
-        Optional<UserViewModel> viewModel = userService.findByUsername(principal.getUsername());
+        Optional<UserViewModel> viewModel = userService
+                .findByUsername(principal.getUsername());
 
         //TODO - error handling if empty optional
         model.addAttribute("user", viewModel.get());
