@@ -19,9 +19,12 @@
 
         <!-- Page Content -->
         <div id="content">
+
+            <h2 class="text-white text-center">Shopping Cart</h2>
+            <hr class="hr-3 w-75 bg-white">
+            <br>
+
             <div id="shopping-cart-wrapper" class="rounded p-2 m-3">
-                <h3 class="text-center">My Shopping Cart:</h3>
-                <br/>
 
                 <div th:if="${#lists.isEmpty(cartItems)}">
                     <h5 class="text-center">You have not chosen any books yet</h5>

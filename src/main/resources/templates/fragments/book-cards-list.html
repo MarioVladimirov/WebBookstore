@@ -15,16 +15,16 @@
            th:title="*{title}">
             <img class="card-image rounded" th:src="*{getImageUrl()}" alt="Thumbnail [100%x225]"
                  data-holder-rendered="true">
-            <div class="btn-group d-flex justify-content-end">
+            <div class="btn-group d-flex justify-content-end mt-2 mr-3">
                 <a th:href="@{/wishlist/add/{id}(id=*{id})}"
-                   type="button" class="btn btn-md"
+                   type="button" class="btn btn-sm"
                    title="Add to Favorites">
-                    <i class="far fa-heart"></i>
+                    <i class="far fa-heart fa-lg"></i>
                 </a>
                 <a th:href="@{/books/{id}(id=*{id})}"
-                   type="button" class="btn btn-md"
+                   type="button" class="btn btn-sm"
                    title="Add to Cart">
-                    <i class="fas fa-shopping-cart"></i>
+                    <i class="fas fa-shopping-cart fa-lg"></i>
                 </a>
             </div>
             <div class="card-body pt-1">

@@ -23,6 +23,9 @@
             <hr class="hr-3 w-75 bg-white">
             <br>
 
+            <h5 th:text="|${booksCount} Books|" class="text-white text-center"></h5>
+            <br>
+
             <div class="row d-flex justify-content-center mt-3">
                 <article th:each="b : ${books}"
                          th:object="${b}"
@@ -31,16 +34,16 @@
                        th:title="*{title}">
                         <img class="card-image rounded" th:src="*{getImageUrl()}" alt="Thumbnail [100%x225]"
                              data-holder-rendered="true">
-                        <div class="btn-group d-flex justify-content-end">
+                        <div class="btn-group d-flex justify-content-end mt-2 mr-3">
                             <a th:href="@{/wishlist/remove/{id}(id=*{id})}"
-                               type="button" class="btn btn-md"
-                               title="Remove from wishlist">
+                               type="button" class="btn btn-sm"
+                               title="Remove from Wishlist">
                                 <i class="fa fa-trash-o fa-lg"></i>
                             </a>
                             <a th:href="@{/books/{id}(id=*{id})}"
-                               type="button" class="btn btn-md"
+                               type="button" class="btn btn-sm"
                                title="Add to Cart">
-                                <i class="fas fa-shopping-cart"></i>
+                                <i class="fas fa-shopping-cart fa-lg"></i>
                             </a>
                         </div>
                         <div class="card-body pt-1">

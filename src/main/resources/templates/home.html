@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="fragments/commons :: head"></head>
 
@@ -18,6 +19,12 @@
 
         <!-- Page Content -->
         <div id="content" class="container">
+
+            <h5 sec:authorize="isAuthenticated()" class="text-white text-center mt-4"
+                th:text="|Hello, ${#authentication.getPrincipal().getUsername()}! Welcome to The Magic World of Books!|">
+            </h5>
+            <hr class="hr-3 w-75 bg-white mb-3">
+
             <div th:replace="fragments/book-cards-list" id="booksList"></div>
         </div>
     </section>
