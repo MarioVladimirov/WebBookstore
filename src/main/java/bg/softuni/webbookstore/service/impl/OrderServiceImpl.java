@@ -23,12 +23,30 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<OrderViewModel> findAllOrdersByCustomer(String username) {
+        return orderRepository
+                .findByCustomerUsernameOrderByDateDesc(username)
+                .stream()
+                .map(this::getOrderViewModel)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<OrderViewModel> findLastFiveOrdersByCustomer(String username) {
         return orderRepository
                 .findTop5ByCustomerUsernameOrderByDateDesc(username)
                 .stream()
                 .map(this::getOrderViewModel)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public OrderViewModel findById(Long id) {
+        return orderRepository
+                .findById(id)
+                .map(this::getOrderViewModel)
+                .orElseThrow(() ->
+                        new IllegalStateException("Order not found"));
     }
 
     private OrderViewModel getOrderViewModel(OrderEntity orderEntity) {
