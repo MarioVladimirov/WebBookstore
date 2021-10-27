@@ -31,6 +31,11 @@ body.form-page {
     padding-top: 90px;
 }
 
+.navbar {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
 .avatar {
     vertical-align: middle;
     width: 40px;
