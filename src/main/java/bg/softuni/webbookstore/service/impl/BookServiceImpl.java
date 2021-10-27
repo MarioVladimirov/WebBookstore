@@ -10,6 +10,7 @@ import bg.softuni.webbookstore.model.view.BookDetailViewModel;
 import bg.softuni.webbookstore.model.view.BookSummaryViewModel;
 import bg.softuni.webbookstore.repository.*;
 import bg.softuni.webbookstore.service.*;
+import bg.softuni.webbookstore.utils.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -162,8 +163,8 @@ public class BookServiceImpl implements BookService {
     private BookSummaryViewModel getSummaryViewModel(BookEntity bookEntity) {
         return modelMapper
                 .map(bookEntity, BookSummaryViewModel.class)
-                .setCategories(getCategoriesAsStrings(bookEntity.getCategories()))
-                .setAuthor(getFullNameAsString(
+                .setCategories(StringUtils.getCategoriesAsStrings(bookEntity.getCategories()))
+                .setAuthor(StringUtils.getFullNameAsString(
                         bookEntity.getAuthor().getFirstName(),
                         bookEntity.getAuthor().getLastName()))
                 .setAuthorId(bookEntity.getAuthor().getId());
@@ -174,12 +175,12 @@ public class BookServiceImpl implements BookService {
                 .map(bookEntity, BookDetailViewModel.class)
                 .setAddedOn(bookEntity.getAddedOn().atZone(ZoneId.systemDefault()))
                 .setModified(bookEntity.getModified().atZone(ZoneId.systemDefault()))
-                .setCategories(getCategoriesAsStrings(bookEntity.getCategories()))
-                .setAuthor(getFullNameAsString(
+                .setCategories(StringUtils.getCategoriesAsStrings(bookEntity.getCategories()))
+                .setAuthor(StringUtils.getFullNameAsString(
                         bookEntity.getAuthor().getFirstName(),
                         bookEntity.getAuthor().getLastName()))
                 .setAuthorId(bookEntity.getAuthor().getId())
-                .setCreator(getFullNameAsString(
+                .setCreator(StringUtils.getFullNameAsString(
                         bookEntity.getCreator().getFirstName(),
                         bookEntity.getCreator().getLastName()));
     }
@@ -187,10 +188,11 @@ public class BookServiceImpl implements BookService {
     private BookUpdateBindingModel getBookToEdit(BookEntity bookEntity) {
         return modelMapper
                 .map(bookEntity, BookUpdateBindingModel.class)
-                .setCategories(getCategoriesAsStrings(bookEntity.getCategories()))
-                .setAuthor(getFullNameAsString(
+                .setCategories(StringUtils.getCategoriesAsStrings(bookEntity.getCategories()))
+                .setAuthor(StringUtils.getFullNameAsString(
                         bookEntity.getAuthor().getFirstName(),
-                        bookEntity.getAuthor().getLastName()));
+                        bookEntity.getAuthor().getLastName())
+                );
     }
 
     private UserEntity getUserEntity(String username) {
@@ -236,17 +238,4 @@ public class BookServiceImpl implements BookService {
                 })
                 .collect(Collectors.toSet());
     }
-
-    private Set<String> getCategoriesAsStrings(Set<CategoryEntity> categoryEntities) {
-        return categoryEntities
-                .stream()
-                .map(categoryEntity -> categoryEntity.getCategory().name())
-                .map(s -> s.charAt(0) + s.substring(1).toLowerCase().replaceAll("_", " "))
-                .collect(Collectors.toSet());
-    }
-
-    private String getFullNameAsString(String firstName, String lastName) {
-        return firstName + " " + lastName;
-    }
-
 }

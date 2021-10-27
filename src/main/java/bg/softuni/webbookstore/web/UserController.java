@@ -4,9 +4,10 @@ import bg.softuni.webbookstore.model.binding.UserLoginBindingModel;
 import bg.softuni.webbookstore.model.binding.UserRegisterBindingModel;
 import bg.softuni.webbookstore.model.service.UserLoginServiceModel;
 import bg.softuni.webbookstore.model.service.UserRegisterServiceModel;
-import bg.softuni.webbookstore.model.view.BookSummaryViewModel;
+import bg.softuni.webbookstore.model.view.OrderViewModel;
 import bg.softuni.webbookstore.model.view.UserViewModel;
 import bg.softuni.webbookstore.service.BookService;
+import bg.softuni.webbookstore.service.OrderService;
 import bg.softuni.webbookstore.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -30,12 +31,12 @@ import java.util.Optional;
 public class UserController {
 
     private final UserService userService;
-    private final BookService bookService;
+    private final OrderService orderService;
     private final ModelMapper modelMapper;
 
-    public UserController(UserService userService, BookService bookService, ModelMapper modelMapper) {
+    public UserController(UserService userService, OrderService orderService, ModelMapper modelMapper) {
         this.userService = userService;
-        this.bookService = bookService;
+        this.orderService = orderService;
         this.modelMapper = modelMapper;
     }
 
@@ -110,9 +111,9 @@ public class UserController {
                 .findByUsername(principal.getUsername());
 
         //TODO - error handling if empty optional
-        //TODO - get 5 last orders by date
         model.addAttribute("user", viewModel.get());
-        model.addAttribute("lastFiveOrders", null);
+        model.addAttribute("lastFiveOrders", orderService
+                .findLastFiveOrdersByCustomer(principal.getUsername()));
 
         return "profile";
     }
