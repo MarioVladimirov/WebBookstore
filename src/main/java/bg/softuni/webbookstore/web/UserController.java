@@ -110,7 +110,9 @@ public class UserController {
                 .findByUsername(principal.getUsername());
 
         //TODO - error handling if empty optional
+        //TODO - get 5 last orders by date
         model.addAttribute("user", viewModel.get());
+        model.addAttribute("lastFiveOrders", null);
 
         return "profile";
     }
