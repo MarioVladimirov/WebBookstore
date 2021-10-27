@@ -4,10 +4,16 @@ import bg.softuni.webbookstore.model.binding.UserLoginBindingModel;
 import bg.softuni.webbookstore.model.binding.UserRegisterBindingModel;
 import bg.softuni.webbookstore.model.service.UserLoginServiceModel;
 import bg.softuni.webbookstore.model.service.UserRegisterServiceModel;
+import bg.softuni.webbookstore.model.view.BookSummaryViewModel;
+import bg.softuni.webbookstore.model.view.UserViewModel;
+import bg.softuni.webbookstore.service.BookService;
 import bg.softuni.webbookstore.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,16 +22,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
+    private final BookService bookService;
     private final ModelMapper modelMapper;
 
-    public UserController(UserService userService, ModelMapper modelMapper) {
+    public UserController(UserService userService, BookService bookService, ModelMapper modelMapper) {
         this.userService = userService;
+        this.bookService = bookService;
         this.modelMapper = modelMapper;
     }
 
@@ -90,5 +100,17 @@ public class UserController {
                 .addFlashAttribute("username", username);
 
         return "redirect:/users/login";
+    }
+
+    @GetMapping("/profile")
+    public String showProfile(Model model,
+                              @AuthenticationPrincipal UserDetails principal) {
+
+        Optional<UserViewModel> viewModel = userService.findByUsername(principal.getUsername());
+
+        //TODO - error handling if empty optional
+        model.addAttribute("user", viewModel.get());
+
+        return "profile";
     }
 }

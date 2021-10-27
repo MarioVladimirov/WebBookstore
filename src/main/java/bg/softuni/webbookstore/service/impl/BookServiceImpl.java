@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
+    private final WishlistRepository wishlistRepository;
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
     private final PublishingHouseRepository publishingHouseRepository;
@@ -32,8 +33,9 @@ public class BookServiceImpl implements BookService {
     private final CloudinaryService cloudinaryService;
     private final ModelMapper modelMapper;
 
-    public BookServiceImpl(BookRepository bookRepository, UserRepository userRepository, CategoryRepository categoryRepository, PublishingHouseRepository publishingHouseRepository, AuthorRepository authorRepository, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
+    public BookServiceImpl(BookRepository bookRepository, WishlistRepository wishlistRepository, UserRepository userRepository, CategoryRepository categoryRepository, PublishingHouseRepository publishingHouseRepository, AuthorRepository authorRepository, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
         this.bookRepository = bookRepository;
+        this.wishlistRepository = wishlistRepository;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
         this.publishingHouseRepository = publishingHouseRepository;
@@ -66,6 +68,16 @@ public class BookServiceImpl implements BookService {
                 .findByPublishingHouseId(id)
                 .stream()
                 .map(this::getSummaryViewModel)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BookSummaryViewModel> getWishListBooksByCustomer(String username) {
+        return wishlistRepository
+                .findByCustomerUsername(username)
+                .stream()
+                .map(wishlistItemEntity ->
+                        getSummaryViewModel(wishlistItemEntity.getBook()))
                 .collect(Collectors.toList());
     }
 

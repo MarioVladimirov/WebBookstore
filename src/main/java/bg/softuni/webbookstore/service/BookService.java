@@ -18,6 +18,8 @@ public interface BookService {
 
     List<BookSummaryViewModel> findBooksByPublishingHouse(Long id);
 
+    List<BookSummaryViewModel> getWishListBooksByCustomer(String username);
+
     Long add(BookAddServiceModel bookAddServiceModel) throws IOException;
 
     Optional<BookDetailViewModel> findBookDetails(Long id);

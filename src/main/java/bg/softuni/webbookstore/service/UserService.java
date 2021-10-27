@@ -2,6 +2,9 @@ package bg.softuni.webbookstore.service;
 
 import bg.softuni.webbookstore.model.service.UserLoginServiceModel;
 import bg.softuni.webbookstore.model.service.UserRegisterServiceModel;
+import bg.softuni.webbookstore.model.view.UserViewModel;
+
+import java.util.Optional;
 
 public interface UserService {
 
@@ -10,5 +13,7 @@ public interface UserService {
     void login(UserLoginServiceModel loginServiceModel);
 
     boolean userNameExists(String username);
+
+    Optional<UserViewModel> findByUsername(String username);
 
 }

@@ -16,7 +16,7 @@
             <img class="card-image rounded" th:src="*{getImageUrl()}" alt="Thumbnail [100%x225]"
                  data-holder-rendered="true">
             <div class="btn-group d-flex justify-content-end">
-                <a th:href="@{/books/{id}(id=*{id})}"
+                <a th:href="@{/wishlist/add/{id}(id=*{id})}"
                    type="button" class="btn btn-md"
                    title="Add to Favorites">
                     <i class="far fa-heart"></i>
