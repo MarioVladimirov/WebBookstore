@@ -19,8 +19,8 @@
 
         <!-- Page Content -->
         <div id="content" class="container">
-            <form th:method="patch"
-                  enctype="multipart/form-data"
+            <form enctype="multipart/form-data"
+                  th:method="patch"
                   th:object="${bookUpdateBindingModel}"
                   th:action="@{/books/edit/{id}(id=*{id})}"
                   class="main-form mx-auto w-75 bg-blur">

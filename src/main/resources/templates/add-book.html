@@ -19,8 +19,8 @@
 
         <!-- Page Content -->
         <div id="content" class="container">
-            <form method="POST"
-                  enctype="multipart/form-data"
+            <form enctype="multipart/form-data"
+                  th:method="POST"
                   th:action="@{/books/add}"
                   th:object="${bookAddBindingModel}"
                   class="main-form mx-auto w-75 bg-blur">
@@ -209,7 +209,8 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6 mb-3">
-                        <label for="publishingHouse" class="col-form-label text-white font-weight-bold">Publishing House</label>
+                        <label for="publishingHouse" class="col-form-label text-white font-weight-bold">Publishing
+                            House</label>
                         <select th:field="*{publishingHouse}"
                                 th:errorclass="is-invalid"
                                 id="publishingHouse"

@@ -20,7 +20,7 @@
         <!-- Page Content -->
         <div id="content" class="container">
 
-            <form method="POST"
+            <form th:method="POST"
                   th:action="@{/users/register}"
                   th:object="${userRegisterBindingModel}"
                   class="main-form mx-auto w-50 bg-blur">

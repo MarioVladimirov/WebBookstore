@@ -19,8 +19,8 @@
 
         <!-- Page Content -->
         <div id="content" class="container">
-            <form method="POST"
-                  enctype="multipart/form-data"
+            <form enctype="multipart/form-data"
+                  th:method="POST"
                   th:action="@{/authors/add}"
                   th:object="${authorAddBindingModel}"
                   class="main-form mx-auto w-50 bg-blur">

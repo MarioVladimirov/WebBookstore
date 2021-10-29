@@ -86,7 +86,8 @@
                             <a class="dropdown-item" th:href="@{/users/logout}">
                                 <div class="form-inline my-2 my-lg-0 border px-3">
                                     <form th:action="@{/users/logout}"
-                                          method="POST">
+                                          th:method="POST">
+                                        <input class="nav-link" type="submit" value="Logout">
                                         <button type="submit">Logout</button>
                                     </form>
                                 </div>
