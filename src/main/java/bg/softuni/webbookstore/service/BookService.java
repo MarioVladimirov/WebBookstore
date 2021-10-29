@@ -20,6 +20,8 @@ public interface BookService {
 
     List<BookSummaryViewModel> getWishListBooksByCustomer(String username);
 
+    String findBookTitleById(Long id);
+
     Long add(BookAddServiceModel bookAddServiceModel) throws IOException;
 
     Optional<BookDetailViewModel> findBookDetails(Long id);

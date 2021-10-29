@@ -83,6 +83,15 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public String findBookTitleById(Long id) {
+        return bookRepository
+                .findById(id)
+                .orElseThrow(() ->
+                        new IllegalStateException("Book not found"))
+                .getTitle();
+    }
+
+    @Override
     public Long add(BookAddServiceModel bookAddServiceModel) throws IOException {
 
         MultipartFile img = bookAddServiceModel.getImage();

@@ -221,6 +221,13 @@ div.form-group input:read-only, option:disabled {
     display: block;
 }
 
+.user-reviews-container {
+    display: none;
+}
+.user-reviews-container.visible {
+    display: block;
+}
+
 /* Footer */
 .footer {
     margin-top: 20px;

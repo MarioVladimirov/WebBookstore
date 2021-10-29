@@ -163,8 +163,19 @@
                     </div>
                 </section>
 
-                <section id="reviews-container" class="p-4 m-3">
+                <section id="book-reviews" class="p-4 m-3">
                     <!-- TODO - implement when we have reviews -->
+                    <h5 class="text-center">Reviews</h5>
+<!--                    <div th:if="${#lists.isEmpty(reviews)}" class="mb-3">-->
+<!--                        <h5 class="text-left text-secondary">Be the first one to write a review</h5>-->
+<!--                        <h6 class="text-left text-secondary">There are no reviews yet</h6>-->
+<!--                    </div>-->
+                    <a th:href="@{/reviews/add/{id}(id=*{id})}"
+                       type="button" class="btn btn-info btn-md">
+                        Add Review
+                    </a>
+                    <div class="row d-flex justify-content-center" id="book-reviews-container">
+                    </div>
                 </section>
             </article>
         </div>

@@ -16,6 +16,8 @@ formElements
         .addEventListener('mouseout', removeBorderStyle));
 
 
+
+// Functions
 function toggleAlert() {
     this.parentElement.classList.toggle('visible');
 }

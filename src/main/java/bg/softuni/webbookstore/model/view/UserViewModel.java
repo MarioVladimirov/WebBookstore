@@ -2,12 +2,22 @@ package bg.softuni.webbookstore.model.view;
 
 public class UserViewModel {
 
+    private Long id;
     private String firstName;
     private String lastName;
     private String email;
     private String address;
 
     public UserViewModel() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public UserViewModel setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public String getFirstName() {
