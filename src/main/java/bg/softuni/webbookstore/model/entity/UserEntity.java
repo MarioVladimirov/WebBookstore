@@ -2,7 +2,9 @@ package bg.softuni.webbookstore.model.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -27,7 +29,7 @@ public class UserEntity extends BaseEntity {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<UserRoleEntity> roles = new ArrayList<>();
+    private Set<UserRoleEntity> roles = new HashSet<>();
 
 
     public UserEntity() {
@@ -87,11 +89,11 @@ public class UserEntity extends BaseEntity {
         return this;
     }
 
-    public List<UserRoleEntity> getRoles() {
+    public Set<UserRoleEntity> getRoles() {
         return roles;
     }
 
-    public UserEntity setRoles(List<UserRoleEntity> roles) {
+    public UserEntity setRoles(Set<UserRoleEntity> roles) {
         this.roles = roles;
         return this;
     }

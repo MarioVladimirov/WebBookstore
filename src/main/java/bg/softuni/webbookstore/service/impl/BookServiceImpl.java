@@ -57,7 +57,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<BookSummaryViewModel> findBooksByAuthor(Long id) {
         return bookRepository
-                .findByAuthorId(id)
+                .findByAuthorIdOrderByAddedOnDesc(id)
                 .stream()
                 .map(this::getSummaryViewModel)
                 .collect(Collectors.toList());
@@ -66,7 +66,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<BookSummaryViewModel> findBooksByPublishingHouse(Long id) {
         return bookRepository
-                .findByPublishingHouseId(id)
+                .findByPublishingHouseIdOrderByAddedOnDesc(id)
                 .stream()
                 .map(this::getSummaryViewModel)
                 .collect(Collectors.toList());
