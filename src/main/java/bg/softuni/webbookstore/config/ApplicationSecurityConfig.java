@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,7 +34,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/", "/home", "/users/login", "/users/register",
                             "/books/api", "/books/all", "/books/details/**").permitAll()
                     .antMatchers("/books/add", "/authors/add").hasRole("ADMIN")
-                    .antMatchers("/**").authenticated()
+                    .anyRequest().authenticated()
                 .and()
                 .formLogin()
                     .loginPage("/users/login")
@@ -48,12 +47,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutUrl("/users/logout")
                     .logoutSuccessUrl("/")
                     .invalidateHttpSession(true)
-                    .deleteCookies("JSESSIONID");
+                    .deleteCookies("JSESSIONID")
+                .and()
+                    .csrf().disable();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
         auth
                 .userDetailsService(bookstoreUserService)
                 .passwordEncoder(passwordEncoder);

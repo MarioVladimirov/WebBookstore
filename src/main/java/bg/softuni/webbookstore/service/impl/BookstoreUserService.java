@@ -2,6 +2,7 @@ package bg.softuni.webbookstore.service.impl;
 
 import bg.softuni.webbookstore.model.entity.UserEntity;
 import bg.softuni.webbookstore.repository.UserRepository;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,7 +36,7 @@ public class BookstoreUserService implements UserDetailsService {
 
     private UserDetails mapToUserDetails(UserEntity userEntity) {
 
-        List<SimpleGrantedAuthority> authorities = userEntity
+        List<GrantedAuthority> authorities = userEntity
                 .getRoles()
                 .stream()
                 .map(ur -> new SimpleGrantedAuthority("ROLE_" + ur.getRole().name()))
