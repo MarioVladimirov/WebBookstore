@@ -27,6 +27,7 @@
                 <h2 class="text-white">Add New Book</h2>
                 <hr class="hr-3 w-100 bg-white">
                 <br>
+
                 <div class="row">
                     <div class="form-group col-md-6 mb-3">
                         <label for="isbn" class="col-form-label text-white font-weight-bold">ISBN</label>
@@ -58,45 +59,6 @@
                                id="titleError"
                                class="invalid-feedback errors alert alert-danger">
                             Title is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6 mb-3">
-                        <label for="language" class="col-form-label text-white font-weight-bold">Language</label>
-                        <select th:field="*{language}"
-                                th:errorclass="is-invalid"
-                                id="language"
-                                name="language"
-                                class="custom-select"
-                                aria-describedby="languageError">
-                            <option value="" selected>Select language</option>
-                            <option th:each="l : ${languages}"
-                                    th:text="${l}"
-                                    th:value="${l}"
-                                    th:selected="${l} == *{language}">
-                            </option>
-                        </select>
-                        <small th:if="${#fields.hasErrors('language')}" th:errors="*{language}"
-                               id="languageError"
-                               class="invalid-feedback errors alert alert-danger">
-                            Language is required.
-                        </small>
-                    </div>
-                    <div class="form-group col-md-6 mb-3">
-                        <label for="image" class="col-form-label text-white font-weight-bold">Image</label>
-                        <input th:field="*{image}"
-                               th:errorclass="is-invalid"
-                               id="image"
-                               name="image"
-                               type="file"
-                               accept=".jpg, .jpeg, .png"
-                               class="form-control-file rounded"
-                               aria-describedby="imageError"/>
-                        <small th:if="${#fields.hasErrors('image')}" th:errors="*{image}"
-                               id="imageError"
-                               class="invalid-feedback errors alert alert-danger">
-                            Image is required.
                         </small>
                     </div>
                 </div>
@@ -170,45 +132,6 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6 mb-3">
-                        <label for="description" class="col-form-label text-white font-weight-bold">Description</label>
-                        <textarea th:field="*{description}"
-                                  th:errorclass="is-invalid"
-                                  id="description"
-                                  name="description"
-                                  type="text"
-                                  class="form-control"
-                                  placeholder="Description"
-                                  aria-describedby="descriptionError"></textarea>
-                        <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
-                               id="descriptionError"
-                               class="invalid-feedback errors alert alert-danger">
-                            Description is required.
-                        </small>
-                    </div>
-                    <div class="form-group col-md-6 mb-3">
-                        <label for="categories" class="col-form-label text-white font-weight-bold">Categories</label>
-                        <select th:field="*{categories}"
-                                th:errorclass="is-invalid"
-                                id="categories"
-                                name="categories"
-                                class="custom-select"
-                                multiple
-                                aria-describedby="categoriesError">
-                            <option value="" selected>Select Categories</option>
-                            <option th:each="c : ${categories}"
-                                    th:text="${c}"
-                                    th:value="${c}">
-                            </option>
-                        </select>
-                        <small th:if="${#fields.hasErrors('categories')}" th:errors="*{categories}"
-                               id="categoriesError"
-                               class="invalid-feedback errors alert alert-danger">
-                            Category is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6 mb-3">
                         <label for="publishingHouse" class="col-form-label text-white font-weight-bold">Publishing
                             House</label>
                         <select th:field="*{publishingHouse}"
@@ -251,6 +174,80 @@
                             Author is required.
                         </small>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="col-form-label text-white font-weight-bold">Description</label>
+                    <textarea th:field="*{description}"
+                              th:errorclass="is-invalid"
+                              id="description"
+                              name="description"
+                              type="text"
+                              class="form-control"
+                              placeholder="Description"
+                              aria-describedby="descriptionError"></textarea>
+                    <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+                           id="descriptionError"
+                           class="invalid-feedback errors alert alert-danger">
+                        Description is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="image" class="col-form-label text-white font-weight-bold">Image</label>
+                    <input th:field="*{image}"
+                           th:errorclass="is-invalid"
+                           id="image"
+                           name="image"
+                           type="file"
+                           accept=".jpg, .jpeg, .png"
+                           class="form-control-file rounded"
+                           aria-describedby="imageError"/>
+                    <small th:if="${#fields.hasErrors('image')}" th:errors="*{image}"
+                           id="imageError"
+                           class="invalid-feedback errors alert alert-danger">
+                        Image is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="language" class="col-form-label text-white font-weight-bold">Language</label>
+                    <select th:field="*{language}"
+                            th:errorclass="is-invalid"
+                            id="language"
+                            name="language"
+                            class="custom-select"
+                            aria-describedby="languageError">
+                        <option value="" selected>Select language</option>
+                        <option th:each="l : ${languages}"
+                                th:text="${l}"
+                                th:value="${l}"
+                                th:selected="${l} == *{language}">
+                        </option>
+                    </select>
+                    <small th:if="${#fields.hasErrors('language')}" th:errors="*{language}"
+                           id="languageError"
+                           class="invalid-feedback errors alert alert-danger">
+                        Language is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="categories" class="col-form-label text-white font-weight-bold">Categories</label>
+                    <select th:field="*{categories}"
+                            th:errorclass="is-invalid"
+                            id="categories"
+                            name="categories"
+                            class="custom-select"
+                            multiple
+                            aria-describedby="categoriesError">
+                        <option value="" selected>Select Categories</option>
+                        <option th:each="c : ${categories}"
+                                th:text="${c}"
+                                th:value="${c}">
+                        </option>
+                    </select>
+                    <small th:if="${#fields.hasErrors('categories')}" th:errors="*{categories}"
+                           id="categoriesError"
+                           class="invalid-feedback errors alert alert-danger">
+                        Category is required.
+                    </small>
                 </div>
 
                 <div class="d-flex justify-content-center mt-5">

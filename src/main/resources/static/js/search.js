@@ -5,7 +5,7 @@ const sidebar = document.getElementById('categoriesSubmenu')
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const allBooks = [];
+    booksList.innerHTML = '';
     const searchingCharacters = document
         .getElementById('searchBar').value.toLowerCase();
 
@@ -15,11 +15,9 @@ searchForm.addEventListener('submit', (e) => {
                 for (let book of books) {
                     if (book.title.toLowerCase().includes(searchingCharacters)
                         || book.author.toLowerCase().includes(searchingCharacters)) {
-
-                        allBooks.push(book);
+                        booksList.appendChild(createBookArticle(book));
                     }
                 }
-                displayBooks(allBooks);
             }
         );
 });
@@ -27,7 +25,7 @@ searchForm.addEventListener('submit', (e) => {
 sidebar.addEventListener('click', (e) => {
     e.preventDefault();
 
-    const allBooks = [];
+    booksList.innerHTML = '';
     const searchCategory = e.target.getAttribute('value');
 
     fetch("http://localhost:8080/books/api")
@@ -36,22 +34,20 @@ sidebar.addEventListener('click', (e) => {
                 for (const book of books) {
                     for (const category of book.categories) {
                         if (category === searchCategory) {
-                            allBooks.push(book);
+                            booksList.appendChild(createBookArticle(book));
                             break;
                         }
                     }
                 }
-                displayBooks(allBooks);
             }
         );
 });
 
 // TODO - make book-card div the same as in home
-function displayBooks(books) {
-    booksList.innerHTML = books
-        .map((b) => {
-            return `<article class="card rounded p-2 m-3 col-sm-6 col-md-3">
-                    <a href="/books/${b.id}">
+function createBookArticle(b) {
+    let article = document.createElement('article');
+    article.classList.add('card', 'rounded', 'p-2', 'm-3', 'col-sm-6', 'col-md-3');
+    article.innerHTML = `<a href="/books/${b.id}">
                         <img class="card-image" src="${b.imageUrl}" alt="Thumbnail [100%x225]"
                              data-holder-rendered="true">
                         <div class="btn-group d-flex justify-content-end">
@@ -71,8 +67,6 @@ function displayBooks(books) {
                                 <p class="card-text">${b.price.toFixed(2)} BGN</p>
                             </div>
                         </div>
-                    </a>
-                </article>`
-        })
-        .join('');
+                    </a>`;
+    return article;
 }
