@@ -52,8 +52,8 @@ public class ReviewServiceImpl implements ReviewService {
     public Long add(ReviewAddServiceModel serviceModel) {
         ReviewEntity reviewEntity = modelMapper
                 .map(serviceModel, ReviewEntity.class)
-                .setAuthor(getUserEntityByUsername(serviceModel.getAuthor()))
-                .setBook(getBookEntityById(serviceModel.getBookNum()));
+                .setAuthor(getUserEntity(serviceModel.getAuthor()))
+                .setBook(getBookEntity(serviceModel.getBookNum()));
 
         ReviewEntity newEntity = reviewRepository.save(reviewEntity);
 
@@ -65,7 +65,7 @@ public class ReviewServiceImpl implements ReviewService {
                 .map(reviewEntity, ReviewViewModel.class);
     }
 
-    private UserEntity getUserEntityByUsername(String username) {
+    private UserEntity getUserEntity(String username) {
         return userRepository
                 .findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException(
@@ -73,7 +73,7 @@ public class ReviewServiceImpl implements ReviewService {
                 );
     }
 
-    private BookEntity getBookEntityById(Long id) {
+    private BookEntity getBookEntity(Long id) {
         return bookRepository
                 .findById(id)
                 .orElseThrow(() -> new IllegalArgumentException(
