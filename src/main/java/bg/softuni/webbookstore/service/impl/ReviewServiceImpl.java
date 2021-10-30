@@ -10,6 +10,7 @@ import bg.softuni.webbookstore.repository.ReviewRepository;
 import bg.softuni.webbookstore.repository.UserRepository;
 import bg.softuni.webbookstore.service.ReviewService;
 import org.modelmapper.ModelMapper;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -64,10 +65,8 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     private ReviewViewModel getReviewModel(ReviewEntity reviewEntity) {
-        //TODO
         return modelMapper
-                .map(reviewEntity, ReviewViewModel.class)
-                .setAddedOn(reviewEntity.getAddedOn().atZone(ZoneId.systemDefault()));
+                .map(reviewEntity, ReviewViewModel.class);
     }
 
     private UserEntity getUserEntity(String username) {

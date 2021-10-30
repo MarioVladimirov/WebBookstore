@@ -9,13 +9,13 @@ reviewsBtn.addEventListener('click', toggle);
 function toggle(e) {
     e.preventDefault();
 
-    if (this.textContent === 'Show My Reviews') {
+    if (this.innerText === 'Show My Reviews') {
         showUserReviews();
     } else {
         userReviewsContainer.innerHTML = '';
     }
 
-    this.textContent = this.textContent === 'Show My Reviews'
+    this.innerText = this.innerText === 'Show My Reviews'
         ? 'Hide My Reviews'
         : 'Show My Reviews';
 }
@@ -72,7 +72,9 @@ function createBookReviewElement(review) {
                             <h5 class="card-title">${review.title}</h5>
                             <p class="card-text"><strong>Rating: </strong>${review.rating}</p>
                             <p class="card-text">${review.textContent}</p>
-                            <footer class="blockquote-footer">Added by ${review.nickname} at ${review.addedOn}</footer>
+                            <footer class="blockquote-footer">Added by ${review.nickname} at 
+                                <time datetime="2001-05-15T19:00">May 15</time>
+                            </footer>
                         </div>`;
 
     return article;
@@ -81,12 +83,19 @@ function createBookReviewElement(review) {
 function createUserReviewElement(review) {
     let article = document.createElement('article');
     article.classList.add('card', 'row', 'mt-2', 'w-100');
+
+    let dateTime = review.addedOn.slice(0, 19)
+        .replace('T', ' ');
+
     article.innerHTML = `<h5 class="card-header">${review.bookTitle}</h5>
                         <div class="card-body">
                             <h5 class="card-title">${review.title}</h5>
                             <p class="card-text"><strong>Rating: </strong>${review.rating}</p>
                             <p class="card-text">${review.textContent}</p>
-                            <footer class="blockquote-footer">Added by ${review.nickname} at ${review.addedOn}</footer>
+                            <footer class="blockquote-footer">Added by 
+                                <strong>${review.nickname}</strong> 
+                                on <strong>${dateTime}</strong>
+                            </footer>
                         </div>`;
 
     return article;
