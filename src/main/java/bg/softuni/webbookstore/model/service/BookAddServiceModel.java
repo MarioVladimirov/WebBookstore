@@ -2,6 +2,7 @@ package bg.softuni.webbookstore.model.service;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -18,7 +19,8 @@ public class BookAddServiceModel {
     private String language;
     private Set<String> categories;
     private String publishingHouse;
-    private String author;
+    private String authorFirstName;
+    private String authorLastName;
     private String creator;
 
 
@@ -124,21 +126,30 @@ public class BookAddServiceModel {
         return this;
     }
 
+    public String getAuthorFirstName() {
+        return authorFirstName;
+    }
+
+    public BookAddServiceModel setAuthorFirstName(String authorFirstName) {
+        this.authorFirstName = authorFirstName;
+        return this;
+    }
+
+    public String getAuthorLastName() {
+        return authorLastName;
+    }
+
+    public BookAddServiceModel setAuthorLastName(String authorLastName) {
+        this.authorLastName = authorLastName;
+        return this;
+    }
+
     public String getCreator() {
         return creator;
     }
 
     public BookAddServiceModel setCreator(String creator) {
         this.creator = creator;
-        return this;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public BookAddServiceModel setAuthor(String author) {
-        this.author = author;
         return this;
     }
 }

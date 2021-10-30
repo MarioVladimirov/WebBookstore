@@ -62,7 +62,7 @@ public class BookController {
         model.addAttribute("languages", LanguageEnum.values());
         model.addAttribute("categories", CategoryEnum.values());
         model.addAttribute("publishingHouses", publishingHouseService.findAllPublishingHouseNames());
-        model.addAttribute("authors", authorService.findAllAuthorsNames());
+//        model.addAttribute("authors", authorService.findAllAuthorsNames());
         return "add-book";
     }
 

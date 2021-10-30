@@ -132,46 +132,35 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6 mb-3">
-                        <label for="publishingHouse" class="col-form-label text-white font-weight-bold">Publishing
-                            House</label>
-                        <select th:field="*{publishingHouse}"
-                                th:errorclass="is-invalid"
-                                id="publishingHouse"
-                                name="publishingHouse"
-                                class="custom-select"
-                                aria-describedby="publishingHouseError">
-                            <option value="" selected>Select Publishing House</option>
-                            <option th:each="p : ${publishingHouses}"
-                                    th:text="${p}"
-                                    th:value="${p}"
-                                    th:selected="${p} == *{publishingHouse}">
-                            </option>
-                        </select>
-                        <small th:if="${#fields.hasErrors('publishingHouse')}" th:errors="*{publishingHouse}"
-                               id="publishingHouseError"
+                        <label for="authorFirstName" class="col-form-label text-white font-weight-bold">Author First Name</label>
+                        <input th:field="*{authorFirstName}"
+                               th:errorclass="is-invalid"
+                               id="authorFirstName"
+                               name="authorFirstName"
+                               type="text"
+                               class="form-control"
+                               placeholder="authorFirstName"
+                               aria-describedby="authorFirstNameError"/>
+                        <small th:if="${#fields.hasErrors('authorFirstName')}" th:errors="*{authorFirstName}"
+                               id="authorFirstNameError"
                                class="invalid-feedback errors alert alert-danger">
-                            Publishing House is required.
+                            Author First Name is required.
                         </small>
                     </div>
                     <div class="form-group col-md-6 mb-3">
-                        <label for="author" class="col-form-label text-white font-weight-bold">Author</label>
-                        <select th:field="*{author}"
-                                th:errorclass="is-invalid"
-                                id="author"
-                                name="author"
-                                class="custom-select"
-                                aria-describedby="authorError">
-                            <option value="" selected>Select Author</option>
-                            <option th:each="a : ${authors}"
-                                    th:text="${a}"
-                                    th:value="${a}"
-                                    th:selected="${a} == *{author}">
-                            </option>
-                        </select>
-                        <small th:if="${#fields.hasErrors('author')}" th:errors="*{author}"
-                               id="authorError"
+                        <label for="authorLastName" class="col-form-label text-white font-weight-bold">Author Last Name</label>
+                        <input th:field="*{authorLastName}"
+                               th:errorclass="is-invalid"
+                               id="authorLastName"
+                               name="authorLastName"
+                               type="text"
+                               class="form-control"
+                               placeholder="authorLastName"
+                               aria-describedby="authorLastNameError"/>
+                        <small th:if="${#fields.hasErrors('authorLastName')}" th:errors="*{authorLastName}"
+                               id="authorLastNameError"
                                class="invalid-feedback errors alert alert-danger">
-                            Author is required.
+                            Author Last Name is required.
                         </small>
                     </div>
                 </div>
@@ -226,6 +215,28 @@
                            id="languageError"
                            class="invalid-feedback errors alert alert-danger">
                         Language is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="publishingHouse" class="col-form-label text-white font-weight-bold">Publishing
+                        House</label>
+                    <select th:field="*{publishingHouse}"
+                            th:errorclass="is-invalid"
+                            id="publishingHouse"
+                            name="publishingHouse"
+                            class="custom-select"
+                            aria-describedby="publishingHouseError">
+                        <option value="" selected>Select Publishing House</option>
+                        <option th:each="p : ${publishingHouses}"
+                                th:text="${p}"
+                                th:value="${p}"
+                                th:selected="${p} == *{publishingHouse}">
+                        </option>
+                    </select>
+                    <small th:if="${#fields.hasErrors('publishingHouse')}" th:errors="*{publishingHouse}"
+                           id="publishingHouseError"
+                           class="invalid-feedback errors alert alert-danger">
+                        Publishing House is required.
                     </small>
                 </div>
                 <div class="form-group">

@@ -107,8 +107,8 @@ public class BookServiceImpl implements BookService {
                 .setCategories(getCategoryEntities(bookAddServiceModel.getCategories()))
                 .setPublishingHouse(getPublishingHouseEntity(bookAddServiceModel.getPublishingHouse()))
                 .setAuthor(getAuthorEntity(
-                        bookAddServiceModel.getAuthor().split(" ", 2)[0],
-                        bookAddServiceModel.getAuthor().split(" ", 2)[1]))
+                        bookAddServiceModel.getAuthorFirstName(),
+                        bookAddServiceModel.getAuthorLastName()))
                 .setCreator(getUserEntity(bookAddServiceModel.getCreator()));
 
         bookEntity = bookRepository.save(bookEntity);
@@ -215,9 +215,15 @@ public class BookServiceImpl implements BookService {
     private AuthorEntity getAuthorEntity(String firstName, String lastName) {
         return authorRepository
                 .findByFirstNameAndLastName(firstName, lastName)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        String.format("Author with name %s %s not found",
-                                firstName, lastName)));
+                .orElseGet(() -> {
+                    AuthorEntity newAuthor = new AuthorEntity()
+                            .setFirstName(firstName)
+                            .setLastName(lastName)
+                            .setImageUrl("https://res.cloudinary.com/nzlateva/image/upload/v1635173921/web-bookstore-app/authors-pics/default-author-pic_rc5wzc.png");
+                    return authorRepository.save(newAuthor);
+                });
+
+
     }
 
     private PublishingHouseEntity getPublishingHouseEntity(String publishingHouseName) {

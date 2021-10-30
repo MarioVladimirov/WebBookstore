@@ -33,7 +33,7 @@ public class OrderController {
     public String orderDetails(@PathVariable Long id,
                                Model model) {
 
-        //TODO - add books ordered with current order to model
+        //TODO - add books bought with the current order
         model.addAttribute("order", orderService.findById(id));
         model.addAttribute("books", null);
 

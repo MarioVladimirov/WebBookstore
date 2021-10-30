@@ -46,9 +46,11 @@ public class BookAddBindingModel {
     @NotEmpty(message = "Please select publishing house")
     private String publishingHouse;
 
-    @NotEmpty(message = "Please select author or create a new one")
-    private String author;
+    @NotBlank(message = "Please enter author first name")
+    private String authorFirstName;
 
+    @NotBlank(message = "Please enter author last name")
+    private String authorLastName;
 
     public BookAddBindingModel() {
     }
@@ -152,13 +154,21 @@ public class BookAddBindingModel {
         return this;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getAuthorFirstName() {
+        return authorFirstName;
     }
 
-    public BookAddBindingModel setAuthor(String author) {
-        this.author = author;
+    public BookAddBindingModel setAuthorFirstName(String authorFirstName) {
+        this.authorFirstName = authorFirstName;
         return this;
     }
 
+    public String getAuthorLastName() {
+        return authorLastName;
+    }
+
+    public BookAddBindingModel setAuthorLastName(String authorLastName) {
+        this.authorLastName = authorLastName;
+        return this;
+    }
 }

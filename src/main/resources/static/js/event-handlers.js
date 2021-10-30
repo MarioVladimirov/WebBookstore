@@ -7,6 +7,7 @@ document.getElementById('book-added-alert')
 document.getElementById('book-updated-alert')
     .addEventListener('click', toggleAlert);
 
+<!-- TODO - fix -->
 let formElements = [...document.getElementsByTagName('form')];
 formElements
     .forEach(form => form
