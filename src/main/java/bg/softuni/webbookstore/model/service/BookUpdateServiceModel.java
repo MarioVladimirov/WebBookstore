@@ -18,7 +18,8 @@ public class BookUpdateServiceModel {
     private String language;
     private Set<String> categories;
     private String publishingHouseName;
-
+    private String authorFirstName;
+    private String authorLastName;
 
     public BookUpdateServiceModel() {
     }
@@ -119,6 +120,24 @@ public class BookUpdateServiceModel {
 
     public BookUpdateServiceModel setPublishingHouseName(String publishingHouseName) {
         this.publishingHouseName = publishingHouseName;
+        return this;
+    }
+
+    public String getAuthorFirstName() {
+        return authorFirstName;
+    }
+
+    public BookUpdateServiceModel setAuthorFirstName(String authorFirstName) {
+        this.authorFirstName = authorFirstName;
+        return this;
+    }
+
+    public String getAuthorLastName() {
+        return authorLastName;
+    }
+
+    public BookUpdateServiceModel setAuthorLastName(String authorLastName) {
+        this.authorLastName = authorLastName;
         return this;
     }
 }

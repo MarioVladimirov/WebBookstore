@@ -151,7 +151,10 @@ public class BookServiceImpl implements BookService {
                 .setPrice(bookUpdateServiceModel.getPrice())
                 .setLanguage(getLanguageEnum(bookUpdateServiceModel.getLanguage()))
                 .setCategories(getCategoryEntities(bookUpdateServiceModel.getCategories()))
-                .setPublishingHouse(getPublishingHouseEntity(bookUpdateServiceModel.getPublishingHouseName()));
+                .setPublishingHouse(getPublishingHouseEntity(bookUpdateServiceModel.getPublishingHouseName()))
+                .setAuthor(getAuthorEntity(
+                        bookUpdateServiceModel.getAuthorFirstName(),
+                        bookUpdateServiceModel.getAuthorLastName()));
 
         bookRepository.save(bookEntity);
 
@@ -197,11 +200,7 @@ public class BookServiceImpl implements BookService {
     private BookUpdateBindingModel getBookToEdit(BookEntity bookEntity) {
         return modelMapper
                 .map(bookEntity, BookUpdateBindingModel.class)
-                .setCategories(StringUtils.getCategoriesAsStrings(bookEntity.getCategories()))
-                .setAuthor(StringUtils.getFullNameAsString(
-                        bookEntity.getAuthor().getFirstName(),
-                        bookEntity.getAuthor().getLastName())
-                );
+                .setCategories(StringUtils.getCategoriesAsStrings(bookEntity.getCategories()));
     }
 
     private UserEntity getUserEntity(String username) {
@@ -222,8 +221,6 @@ public class BookServiceImpl implements BookService {
                             .setImageUrl("https://res.cloudinary.com/nzlateva/image/upload/v1635173921/web-bookstore-app/authors-pics/default-author-pic_rc5wzc.png");
                     return authorRepository.save(newAuthor);
                 });
-
-
     }
 
     private PublishingHouseEntity getPublishingHouseEntity(String publishingHouseName) {
