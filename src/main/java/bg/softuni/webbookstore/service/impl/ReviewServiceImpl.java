@@ -10,11 +10,8 @@ import bg.softuni.webbookstore.repository.ReviewRepository;
 import bg.softuni.webbookstore.repository.UserRepository;
 import bg.softuni.webbookstore.service.ReviewService;
 import org.modelmapper.ModelMapper;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,9 +52,8 @@ public class ReviewServiceImpl implements ReviewService {
     public Long add(ReviewAddServiceModel serviceModel) {
         ReviewEntity reviewEntity = modelMapper
                 .map(serviceModel, ReviewEntity.class)
-                .setAuthor(getUserEntity(serviceModel.getAuthor()))
-                .setBook(getBookEntity(serviceModel.getBookId()))
-                .setAddedOn(Instant.now());
+                .setAuthor(getUserEntityByUsername(serviceModel.getAuthor()))
+                .setBook(getBookEntityById(serviceModel.getBookNum()));
 
         ReviewEntity newEntity = reviewRepository.save(reviewEntity);
 
@@ -69,7 +65,7 @@ public class ReviewServiceImpl implements ReviewService {
                 .map(reviewEntity, ReviewViewModel.class);
     }
 
-    private UserEntity getUserEntity(String username) {
+    private UserEntity getUserEntityByUsername(String username) {
         return userRepository
                 .findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException(
@@ -77,7 +73,7 @@ public class ReviewServiceImpl implements ReviewService {
                 );
     }
 
-    private BookEntity getBookEntity(Long id) {
+    private BookEntity getBookEntityById(Long id) {
         return bookRepository
                 .findById(id)
                 .orElseThrow(() -> new IllegalArgumentException(

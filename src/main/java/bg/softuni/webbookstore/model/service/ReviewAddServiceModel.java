@@ -2,7 +2,7 @@ package bg.softuni.webbookstore.model.service;
 
 public class ReviewAddServiceModel {
 
-    private Long bookId;
+    private Long bookNum;
     private String nickname;
     private String title;
     private String textContent;
@@ -12,12 +12,12 @@ public class ReviewAddServiceModel {
     public ReviewAddServiceModel() {
     }
 
-    public Long getBookId() {
-        return bookId;
+    public Long getBookNum() {
+        return bookNum;
     }
 
-    public ReviewAddServiceModel setBookId(Long bookId) {
-        this.bookId = bookId;
+    public ReviewAddServiceModel setBookNum(Long bookNum) {
+        this.bookNum = bookNum;
         return this;
     }
 

@@ -59,6 +59,7 @@ public class ReviewController {
 
         ReviewAddServiceModel serviceModel = modelMapper
                 .map(reviewAddBindingModel, ReviewAddServiceModel.class)
+                .setBookNum(reviewAddBindingModel.getBookId())
                 .setAuthor(principal.getUsername());
 
         reviewService.add(serviceModel);
