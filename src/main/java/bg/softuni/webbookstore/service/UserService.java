@@ -4,6 +4,7 @@ import bg.softuni.webbookstore.model.service.UserLoginServiceModel;
 import bg.softuni.webbookstore.model.service.UserRegisterServiceModel;
 import bg.softuni.webbookstore.model.view.UserViewModel;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
@@ -16,4 +17,5 @@ public interface UserService {
 
     Optional<UserViewModel> findByUsername(String username);
 
+    List<String> findAllUsernames();
 }
