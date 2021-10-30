@@ -87,7 +87,9 @@ function createUserReviewElement(review) {
     let dateTime = review.addedOn.slice(0, 19)
         .replace('T', ' ');
 
-    article.innerHTML = `<h5 class="card-header">${review.bookTitle}</h5>
+    article.innerHTML = `<h5 class="card-header">
+                            <a href="/books/${review.bookId}">${review.bookTitle}</a>
+                        </h5>
                         <div class="card-body">
                             <h5 class="card-title">${review.title}</h5>
                             <p class="card-text"><strong>Rating: </strong>${review.rating}</p>
