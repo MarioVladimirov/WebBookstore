@@ -93,9 +93,9 @@ public class ReviewEntity extends BaseEntity {
         return this;
     }
 
-    @PrePersist
-    public void onCreate() {
-        this.setAddedOn(Instant.now());
-    }
+//    @PrePersist
+//    public void onCreate() {
+//        this.setAddedOn(Instant.now());
+//    }
 }
 

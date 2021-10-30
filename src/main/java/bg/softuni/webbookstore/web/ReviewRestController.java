@@ -25,22 +25,22 @@ public class ReviewRestController {
     @GetMapping("/api")
     public ResponseEntity<List<ReviewViewModel>> getAllBooks() {
 
-        List<ReviewViewModel> reviewViewModelsViewModels = reviewService.findAllReviews();
+        List<ReviewViewModel> reviewViewModels = reviewService.findAllReviews();
 
         return ResponseEntity
                 .ok()
-                .body(reviewViewModelsViewModels);
+                .body(reviewViewModels);
     }
 
     @GetMapping("/api/user")
     public ResponseEntity<List<ReviewViewModel>> getAllBooksByUser(
             @AuthenticationPrincipal UserDetails principal) {
 
-        List<ReviewViewModel> reviewViewModelsViewModels = reviewService
+        List<ReviewViewModel> reviewViewModels = reviewService
                 .findAllReviewsByUser(principal.getUsername());
 
         return ResponseEntity
                 .ok()
-                .body(reviewViewModelsViewModels);
+                .body(reviewViewModels);
     }
 }
