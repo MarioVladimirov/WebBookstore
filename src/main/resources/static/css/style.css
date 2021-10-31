@@ -97,7 +97,7 @@ div.form-group input:read-only, option:disabled {
     line-height: 20px;
 }
 
-#book-wrapper, #shopping-cart-wrapper,
+#book-wrapper, .shopping-cart-wrapper,
 #author-wrapper, #publishing-house-wrapper,
 #user-details-wrapper, #orders-wrapper {
     background-color: #ececec;
@@ -352,5 +352,66 @@ div.form-group input:read-only, option:disabled {
     }
 }
 
+/* Shopping Cart */
+.cart {
+    padding: 4vh 5vh;
+}
 
+@media(max-width:767px) {
+    .cart {
+        padding: 4vh;
+        border-bottom-left-radius: unset;
+        border-top-right-radius: 1rem
+    }
+}
 
+.summary {
+    background-color: #ddd;
+    border-radius: 1rem;
+    padding: 4vh;
+    color: rgb(65, 65, 65)
+}
+
+@media(max-width:767px) {
+
+}
+
+.summary .col-2 {
+    padding: 0
+}
+
+.summary .col-10 {
+    padding: 0
+}
+
+.row {
+    margin: 0
+}
+
+.main {
+    margin: 0;
+    padding: 2vh 0;
+    width: 100%
+}
+
+.col-2,
+.col {
+    padding: 0 1vh
+}
+
+.close {
+    margin-left: auto;
+    font-size: 0.7rem
+}
+
+img {
+    width: 4.5rem
+}
+
+h5 {
+    margin-top: 4vh
+}
+
+hr {
+    margin-top: 1.25rem
+}

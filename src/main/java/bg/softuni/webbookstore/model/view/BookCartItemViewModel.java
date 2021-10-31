@@ -8,6 +8,9 @@ public class BookCartItemViewModel {
     private String title;
     private String imageUrl;
     private BigDecimal price;
+    private Long authorId;
+    private String authorFirstName;
+    private String authorLastName;
 
 
     public BookCartItemViewModel() {
@@ -49,4 +52,30 @@ public class BookCartItemViewModel {
         return this;
     }
 
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public BookCartItemViewModel setAuthorId(Long authorId) {
+        this.authorId = authorId;
+        return this;
+    }
+
+    public String getAuthorFirstName() {
+        return authorFirstName;
+    }
+
+    public BookCartItemViewModel setAuthorFirstName(String authorFirstName) {
+        this.authorFirstName = authorFirstName;
+        return this;
+    }
+
+    public String getAuthorLastName() {
+        return authorLastName;
+    }
+
+    public BookCartItemViewModel setAuthorLastName(String authorLastName) {
+        this.authorLastName = authorLastName;
+        return this;
+    }
 }

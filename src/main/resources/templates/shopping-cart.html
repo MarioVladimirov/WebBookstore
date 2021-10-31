@@ -24,73 +24,79 @@
             <hr class="hr-3 w-75 bg-white">
             <br>
 
-            <div id="shopping-cart-wrapper" class="rounded p-2 m-3">
+            <div th:if="${#lists.isEmpty(cartItems)}"
+                 class="rounded p-2 m-3 shopping-cart-wrapper">
+                <h4 class="text-center my-4">You have not chosen any books yet</h4>
+                <h5 class="text-center text-secondary mb-5">Add a book to your Shopping Cart</h5>
+                <div class="row d-flex justify-content-center">
+                    <a th:href="@{/books/all}"
+                       type="button" class="btn btn-info btn-md btn-block w-25 my-3">
+                        Go to Homepage
+                    </a>
+                </div>
+            </div>
 
-                <div th:if="${#lists.isEmpty(cartItems)}">
-                    <h3 class="text-center mb-4">You have not chosen any books yet</h3>
-                    <h4 class="text-center text-secondary mb-5">Add a book to your Shopping Cart</h4>
-                    <div class="row d-flex justify-content-center">
+            <div th:unless="${#lists.isEmpty(cartItems)}"
+                 class="row rounded p-2 m-3 shopping-cart-wrapper">
+                <div class="cart cart-items-container col-md-8">
+                    <div th:each="item : ${cartItems}"
+                         th:object="${item}"
+                         class="row border-top border-bottom">
+                        <div class="row main align-items-center">
+                            <div class="col-md-2">
+                                <a th:href="@{/books/{id}(id=*{book.id})}"
+                                   th:title="*{book.title}">
+                                    <img class="img-fluid" th:src="*{book.imageUrl}">
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a th:href="@{/books/{id}(id=*{book.id})}"
+                                   th:title="*{book.title}">
+                                    <p class="card-title text-dark" th:text="*{book.title}"></p>
+                                </a>
+                                <p class="card-text text-secondary">Author:
+                                    <a th:text="|*{book.authorFirstName} *{book.authorLastName}|"
+                                       th:href="@{/authors/{id}(id=*{book.authorId})}">
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="col-md-2 d-flex justify-content-center">
+                                <a href="#" class="mx-1">-</a>
+                                <div class="border border-secondary rounded px-2 mx-1" th:text="*{quantity}">1</div>
+                                <a href="#" class="mx-1">+</a>
+                            </div>
+                            <div class="col-md-3 text-center" th:text="|*{book.price} BGN|">
+
+                            </div>
+                            <div class="col-md-2"><span class="close">&#10005;</span></div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 mb-3">
                         <a th:href="@{/books/all}"
-                           type="button" class="btn btn-info btn-lg btn-block w-25 my-3">
-                            Go to Homepage
+                           class="btn btn-link">
+                            &leftarrow; Back to homepage
                         </a>
                     </div>
                 </div>
 
-                <div class="cart-items-container">
-                    <article th:each="cartItem : ${cartItems}"
-                             th:object="${cartItem}"
-                             class="cart-item row m-1">
-                        <div class="col-sm-8">
-                            <div class="row border rounded">
-                                <div class="col-1">
-                                    <div class="btn-group">
-                                        <a th:href="@{/cart/{id}(id=*{id})}"
-                                           type="button" class="btn btn-md">
-                                            <i class="fa fa-trash-o fa-lg"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <a th:href="@{/books/{id}(id=*{book.getId()})}">
-                                <img class="img-fluid"
-                                     th:src="*{book.getImageUrl()}"
-                                     th:title="*{book.getTitle()}">
-                            </a>
-                        </div>
-                        <div class="col-6">
-                            <div>
-                                <strong th:text="*{book.getTitle()}"></strong>
-                            </div>
-                            <div th:replace="~{fragments :: quantity-control(*{quantity}, *{book.getId()})}">
-                            </div>
-                            <div>
-                                <span>x</span>
-                                <span th:text="*{book.getPrice()}"></span> lv.
-                            </div>
-                            <div>
-                                <span>=</span><span class="h5">Subtotal</span>
-                            </div>
-                        </div>
-                        <div class="row m-1">&nbsp;</div>
-
-                        <div class="col-sm-4" th:unless="${#lists.isEmpty(cartItems)}">
-                            <div>
-                                <span class="h3">Estimated total:</span>
-                            </div>
-                            <div class="mt-2">
-                                <span class="h2">[Total amount]</span>
-                            </div>
-                            <div class="mt-2">
-                                <button class="btn btn btn-info btn-md">
-                                    Check Out
-                                </button>
-                            </div>
-                        </div>
-                    </article>
+                <div class="col-md-4 summary">
+                    <div>
+                        <h5><b>Summary</b></h5>
+                    </div>
+                    <hr>
+                    <div class="row align-items-center">
+                        <div class="col align-items-center">ITEMS:</div>
+                        <div class="col text-right">3</div>
+                    </div>
+                    <hr>
+                    <div class="row align-items-center">
+                        <div class="col">TOTAL PRICE:</div>
+                        <div class="col text-right">137.00 BGN</div>
+                    </div>
+                    <button class="btn btn-info btn-md btn-block w-100 mt-5 mb-3">ORDER</button>
                 </div>
+
             </div>
         </div>
     </section>
