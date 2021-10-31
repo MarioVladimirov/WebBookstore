@@ -65,8 +65,9 @@
                                 <div class="border border-secondary rounded px-2 mx-1" th:text="*{quantity}">1</div>
                                 <a href="#" class="mx-1">+</a>
                             </div>
-                            <div class="col-md-3 text-center" th:text="|*{book.price} BGN|">
 
+                            <div class="col-md-3 text-center"
+                                 th:text="|*{calculatePrice()} BGN|">
                             </div>
                             <div class="col-md-2"><span class="close">&#10005;</span></div>
                         </div>
@@ -92,7 +93,8 @@
                     <hr>
                     <div class="row align-items-center">
                         <div class="col">TOTAL PRICE:</div>
-                        <div class="col text-right">137.00 BGN</div>
+                        <div class="col text-right"
+                             th:text="| BGN|"></div>
                     </div>
                     <button class="btn btn-info btn-md btn-block w-100 mt-5 mb-3">ORDER</button>
                 </div>
@@ -101,6 +103,12 @@
         </div>
     </section>
 </main>
+
+<script type="text/javascript">
+    function decreaseQuantity() {
+
+    }
+</script>
 
 <!-- Footer-->
 <footer th:replace="fragments/commons :: footer"></footer>

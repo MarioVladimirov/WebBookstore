@@ -8,6 +8,7 @@ public class BookSummaryViewModel {
     private Long id;
     private String title;
     private String imageUrl;
+    private Integer copies;
     private BigDecimal price;
     private Set<String> categories;
     private String author;
@@ -41,6 +42,15 @@ public class BookSummaryViewModel {
 
     public BookSummaryViewModel setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public Integer getCopies() {
+        return copies;
+    }
+
+    public BookSummaryViewModel setCopies(Integer copies) {
+        this.copies = copies;
         return this;
     }
 

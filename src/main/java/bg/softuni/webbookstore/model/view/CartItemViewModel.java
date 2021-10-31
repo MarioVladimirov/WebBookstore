@@ -1,5 +1,7 @@
 package bg.softuni.webbookstore.model.view;
 
+import java.math.BigDecimal;
+
 public class CartItemViewModel {
 
     private Long id;
@@ -35,5 +37,9 @@ public class CartItemViewModel {
     public CartItemViewModel setQuantity(Integer quantity) {
         this.quantity = quantity;
         return this;
+    }
+
+    public BigDecimal calculatePrice() {
+        return this.book.getPrice().multiply(BigDecimal.valueOf(this.quantity));
     }
 }

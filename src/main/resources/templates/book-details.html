@@ -86,6 +86,10 @@
                                 <strong>Price: </strong>
                                 <span th:text="|*{price} BGN|"></span>
                             </li>
+                            <li>
+                                <strong th:if="*{getCopies() > 0}" th:class="text-success">On stock</strong>
+                                <strong th:if="*{getCopies() == 0}" th:class="text-secondary">Out of Stock</strong>
+                            </li>
 
                             <br/>
 
@@ -112,7 +116,7 @@
 
                     <section id="book-buttons" class="d-flex flex-column justify-content-center">
                         <th:block sec:authorize="isAuthenticated()">
-                            <div class="btn-group">
+                            <div th:if="*{getCopies() > 0}" class="btn-group">
                                 <a th:href="@{/books/{id}(id=*{id})}"
                                    type="button" class="btn btn-info btn-md btn-block w-100">
                                     <i class="fas fa-shopping-cart"></i> Add to Cart</a>

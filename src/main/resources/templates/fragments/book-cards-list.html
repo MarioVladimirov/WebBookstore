@@ -15,30 +15,38 @@
            th:title="*{title}">
             <img class="card-image rounded" th:src="*{getImageUrl()}" alt="Thumbnail [100%x225]"
                  data-holder-rendered="true">
-            <div class="btn-group d-flex justify-content-end mt-2 mr-3">
-                <a th:href="@{/wishlist/add/{id}(id=*{id})}"
-                   type="button" class="btn btn-sm"
-                   title="Add to Favorites">
-                    <i class="far fa-heart fa-lg"></i>
-                </a>
-                <a th:href="@{/books/{id}(id=*{id})}"
-                   type="button" class="btn btn-sm"
-                   title="Add to Cart">
-                    <i class="fas fa-shopping-cart fa-lg"></i>
-                </a>
-            </div>
-            <div class="card-body pt-1">
-                <div class="text-center">
-                    <h5 class="card-title" th:text="*{title}"></h5>
-                    <p class="card-text text-secondary">Author:
-                        <a th:text="*{author}"
-                           th:href="@{/authors/{id}(id=*{authorId})}">
-                        </a>
-                    </p>
-                    <p class="card-text" th:text="|Price: *{price} BGN|"></p>
-                </div>
-            </div>
         </a>
+        <div class="row btn-group d-flex justify-content-end my-2 mx-3 border-bottom border-info">
+            <strong th:if="*{getCopies() > 0}"
+                    class="text-success col-md-8">
+                On stock
+            </strong>
+            <strong th:if="*{getCopies() == 0}"
+                    class="text-secondary col-md-8">
+                Out of Stock
+            </strong>
+            <a th:href="@{/wishlist/add/{id}(id=*{id})}"
+               type="button" class="btn btn-sm col-md-2"
+               title="Add to Favorites">
+                <i class="far fa-heart fa-lg"></i>
+            </a>
+            <a th:if="*{getCopies() > 0}" th:href="@{/books/{id}(id=*{id})}"
+               type="button" class="btn btn-sm col-md-2"
+               title="Add to Cart">
+                <i class="fas fa-shopping-cart fa-lg"></i>
+            </a>
+        </div>
+        <div class="card-body pt-2">
+            <div class="text-center">
+                <h5 class="card-title" th:text="*{title}"></h5>
+                <p class="card-text text-secondary">Author:
+                    <a th:text="*{author}"
+                       th:href="@{/authors/{id}(id=*{authorId})}">
+                    </a>
+                </p>
+                <p class="card-text" th:text="|Price: *{price} BGN|"></p>
+            </div>
+        </div>
     </article>
 </div>
 
