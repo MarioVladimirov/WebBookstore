@@ -1,6 +1,7 @@
 package bg.softuni.webbookstore.service.impl;
 
 import bg.softuni.webbookstore.model.entity.BookEntity;
+import bg.softuni.webbookstore.model.entity.CartItemEntity;
 import bg.softuni.webbookstore.model.entity.UserEntity;
 import bg.softuni.webbookstore.model.entity.WishlistItemEntity;
 import bg.softuni.webbookstore.repository.BookRepository;
@@ -9,6 +10,8 @@ import bg.softuni.webbookstore.repository.WishlistRepository;
 import bg.softuni.webbookstore.service.WishlistService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class WishlistServiceImpl implements WishlistService {
@@ -27,21 +30,26 @@ public class WishlistServiceImpl implements WishlistService {
 
     @Override
     public void addToWishlist(Long id, String username) {
-        BookEntity bookEntity = bookRepository
-                .findById(id)
-                .orElseThrow(() ->
-                        new IllegalStateException("Book not found"));
+        Optional<WishlistItemEntity> wishlistItem = wishlistRepository
+                .findByBookIdAndCustomerUsername(id, username);
 
-        UserEntity userEntity = userRepository
-                .findByUsername(username)
-                .orElseThrow(() ->
-                        new IllegalStateException("User not found"));
+        if (wishlistItem.isEmpty()) {
+            BookEntity book = bookRepository
+                    .findById(id)
+                    .orElseThrow(() ->
+                            new IllegalStateException("Book not found"));
 
-        WishlistItemEntity wishlistItemEntity = new WishlistItemEntity()
-                .setBook(bookEntity)
-                .setCustomer(userEntity);
+            UserEntity customer = userRepository
+                    .findByUsername(username)
+                    .orElseThrow(() ->
+                            new IllegalStateException("User not found"));
 
-        wishlistRepository.save(wishlistItemEntity);
+            WishlistItemEntity wishlistItemEntity = new WishlistItemEntity()
+                    .setBook(book)
+                    .setCustomer(customer);
+
+            wishlistRepository.save(wishlistItemEntity);
+        }
     }
 
     @Override

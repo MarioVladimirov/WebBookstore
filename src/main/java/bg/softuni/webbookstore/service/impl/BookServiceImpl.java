@@ -75,7 +75,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<BookSummaryViewModel> getWishListBooksByCustomer(String username) {
         return wishlistRepository
-                .findByCustomerUsername(username)
+                .findAllByCustomerUsername(username)
                 .stream()
                 .map(wishlistItemEntity ->
                         getSummaryViewModel(wishlistItemEntity.getBook()))
@@ -169,6 +169,28 @@ public class BookServiceImpl implements BookService {
     @Override
     public boolean existsByIsbn(String isbn) {
         return bookRepository.existsByIsbn(isbn);
+    }
+
+    @Override
+    public void increaseWithOneCopy(Long id) {
+        BookEntity bookEntity = bookRepository
+                .findById(id)
+                .orElseThrow(() ->
+                        new IllegalStateException("Book not found"));
+
+        bookEntity.setCopies(bookEntity.getCopies() + 1);
+        bookRepository.save(bookEntity);
+    }
+
+    @Override
+    public void decreaseWithOneCopy(Long id) {
+        BookEntity bookEntity = bookRepository
+                .findById(id)
+                .orElseThrow(() ->
+                        new IllegalStateException("Book not found"));
+
+        bookEntity.setCopies(bookEntity.getCopies() - 1);
+        bookRepository.save(bookEntity);
     }
 
 

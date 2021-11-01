@@ -29,11 +29,7 @@ public class WishlistController {
     public String showWishlist(Model model,
                                @AuthenticationPrincipal UserDetails principal) {
 
-        List<BookSummaryViewModel> wishlist = bookService
-                .getWishListBooksByCustomer(principal.getUsername());
-
-        model.addAttribute("booksCount", wishlist.size());
-        model.addAttribute("books", wishlist);
+        getWishListBooksByCustomer(model, principal);
 
         return "wishlist";
     }
@@ -45,11 +41,7 @@ public class WishlistController {
 
         wishlistService.addToWishlist(id, principal.getUsername());
 
-        List<BookSummaryViewModel> wishlist = bookService
-                .getWishListBooksByCustomer(principal.getUsername());
-
-        model.addAttribute("booksCount", wishlist.size());
-        model.addAttribute("books", wishlist);
+        getWishListBooksByCustomer(model, principal);
 
         return "redirect:/home";
     }
@@ -61,12 +53,16 @@ public class WishlistController {
 
         wishlistService.removeFromWishlist(id, principal.getUsername());
 
+        getWishListBooksByCustomer(model, principal);
+
+        return "redirect:/wishlist";
+    }
+
+    private void getWishListBooksByCustomer(Model model, @AuthenticationPrincipal UserDetails principal) {
         List<BookSummaryViewModel> wishlist = bookService
                 .getWishListBooksByCustomer(principal.getUsername());
 
         model.addAttribute("booksCount", wishlist.size());
         model.addAttribute("books", wishlist);
-
-        return "redirect:/wishlist";
     }
 }

@@ -33,4 +33,8 @@ public interface BookService {
     void delete(Long id);
 
     boolean existsByIsbn(String isbn);
+
+    void increaseWithOneCopy(Long id);
+
+    void decreaseWithOneCopy(Long id);
 }

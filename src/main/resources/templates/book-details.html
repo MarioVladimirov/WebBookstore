@@ -117,7 +117,7 @@
                     <section id="book-buttons" class="d-flex flex-column justify-content-center">
                         <th:block sec:authorize="isAuthenticated()">
                             <div th:if="*{getCopies() > 0}" class="btn-group">
-                                <a th:href="@{/books/{id}(id=*{id})}"
+                                <a th:href="@{/cart/add/{id}(id=*{id})}" id="addToCartBtn"
                                    type="button" class="btn btn-info btn-md btn-block w-100">
                                     <i class="fas fa-shopping-cart"></i> Add to Cart</a>
                             </div>
@@ -201,6 +201,10 @@
         </div>
     </section>
 </main>
+
+<script type="text/javascript">
+    let bookId = "[[${book.id}]]";
+</script>
 
 <!-- Footer-->
 <footer th:replace="fragments/commons :: footer"></footer>

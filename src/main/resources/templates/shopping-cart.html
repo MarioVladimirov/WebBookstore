@@ -60,16 +60,21 @@
                                     </a>
                                 </p>
                             </div>
-                            <div class="col-md-2 d-flex justify-content-center">
-                                <a href="#" class="mx-1">-</a>
-                                <div class="border border-secondary rounded px-2 mx-1" th:text="*{quantity}">1</div>
-                                <a href="#" class="mx-1">+</a>
+                            <div class="col-md-2 d-flex justify-content-center align-items-center">
+                                <a th:pid="*{book.id}" th:href="@{/cart/decrease-quantity/{id}(id=*{book.id})}" id="minusButton" class="mx-1">-</a>
+                                <input class="form-control text-center border border-secondary rounded px-2 mx-1"
+                                       th:value="*{quantity}"
+                                       type="text"
+                                       onkeydown="return false;"
+                                       style="max-width: 55px"
+                                       th:id="'quantity' + *{getBook().getId()}"/>
+                                <a th:pid="*{book.id}" th:href="@{/cart/add/{id}(id=*{book.id})}" id="plusButton" class="mx-1">+</a>
                             </div>
 
                             <div class="col-md-3 text-center"
                                  th:text="|*{calculatePrice()} BGN|">
                             </div>
-                            <div class="col-md-2"><span class="close">&#10005;</span></div>
+                            <a th:href="@{/cart/remove/{id}(id=*{book.id})}" class="col-md-2"><span class="close">&#10005;</span></a>
                         </div>
                     </div>
 
@@ -103,12 +108,6 @@
         </div>
     </section>
 </main>
-
-<script type="text/javascript">
-    function decreaseQuantity() {
-
-    }
-</script>
 
 <!-- Footer-->
 <footer th:replace="fragments/commons :: footer"></footer>

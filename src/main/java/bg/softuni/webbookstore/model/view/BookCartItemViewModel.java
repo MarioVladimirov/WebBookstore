@@ -7,7 +7,6 @@ public class BookCartItemViewModel {
     private Long id;
     private String title;
     private String imageUrl;
-    private Integer copies;
     private BigDecimal price;
     private Long authorId;
     private String authorFirstName;
@@ -41,15 +40,6 @@ public class BookCartItemViewModel {
 
     public BookCartItemViewModel setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-        return this;
-    }
-
-    public Integer getCopies() {
-        return copies;
-    }
-
-    public BookCartItemViewModel setCopies(Integer copies) {
-        this.copies = copies;
         return this;
     }
 
