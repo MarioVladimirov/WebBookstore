@@ -37,6 +37,7 @@
                                id="isbn"
                                name="isbn"
                                type="text"
+                               required
                                class="form-control"
                                placeholder="ISBN"
                                aria-describedby="isbnError"/>
@@ -66,6 +67,8 @@
                                id="pagesCount"
                                name="pagesCount"
                                type="number"
+                               required
+                               min="1"
                                class="form-control"
                                placeholder="Pages Count"
                                aria-describedby="pagesCountError"/>
@@ -82,6 +85,8 @@
                                id="copies"
                                name="copies"
                                type="number"
+                               required
+                               min="1"
                                class="form-control"
                                placeholder="Copies"
                                aria-describedby="copiesError"/>
@@ -100,6 +105,7 @@
                                id="releaseYear"
                                name="releaseYear"
                                type="number"
+                               required
                                class="form-control"
                                placeholder="Release Year"
                                aria-describedby="releaseYearError"/>
@@ -116,6 +122,8 @@
                                id="price"
                                name="price"
                                type="text"
+                               required
+                               min="1"
                                class="form-control"
                                placeholder="Price"
                                aria-describedby="priceError"/>
@@ -135,6 +143,7 @@
                                id="authorFirstName"
                                name="authorFirstName"
                                type="text"
+                               required
                                class="form-control"
                                placeholder="authorFirstName"
                                aria-describedby="authorFirstNameError"/>
@@ -152,6 +161,7 @@
                                id="authorLastName"
                                name="authorLastName"
                                type="text"
+                               required
                                class="form-control"
                                placeholder="authorLastName"
                                aria-describedby="authorLastNameError"/>
@@ -200,6 +210,7 @@
                             th:errorclass="is-invalid"
                             id="language"
                             name="language"
+                            required
                             class="custom-select"
                             aria-describedby="languageError">
                         <option th:each="l : ${languages}"
@@ -221,6 +232,7 @@
                             th:errorclass="is-invalid"
                             id="publishingHouseName"
                             name="publishingHouseName"
+                            required
                             class="custom-select"
                             aria-describedby="publishingHouseError">
                         <option th:each="p : ${publishingHouses}"
@@ -241,6 +253,7 @@
                             th:errorclass="is-invalid"
                             id="categories"
                             name="categories"
+                            required
                             class="custom-select"
                             multiple
                             aria-describedby="categoriesError">
