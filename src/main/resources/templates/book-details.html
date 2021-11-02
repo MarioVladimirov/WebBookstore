@@ -159,17 +159,20 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="deleteConfirmModalLabel">Delete
                                                         Book</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
+                                                    <button type="button" class="close btn-close"
+                                                            data-bs-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&#10005;</span>
+                                                    </button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p>Are you sure you want to delete this book?</p>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close
+                                                    <button type="button" class="btn btn-secondary btn-close m-1 w-25"
+                                                            data-bs-dismiss="modal">No
                                                     </button>
-                                                    <button type="button" class="btn btn-primary">Delete</button>
+                                                    <button type="submit" class="btn btn-primary m-1 w-25">Yes</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -218,6 +221,20 @@
 
 <script type="text/javascript">
     let bookId = "[[${book.id}]]";
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.btn.btn-danger').on('click', function () {
+            $("#deleteConfirmModal").modal("toggle");
+        });
+    });
+
+    $(document).ready(function () {
+        $('.btn-close').on('click', function () {
+            $("#deleteConfirmModal").modal("toggle");
+        });
+    });
 </script>
 
 <!-- Footer-->
