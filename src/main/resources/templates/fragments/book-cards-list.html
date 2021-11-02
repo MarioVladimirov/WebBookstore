@@ -31,8 +31,9 @@
                title="Add to Favorites">
                 <i class="far fa-heart fa-lg"></i>
             </a>
-            <a th:if="*{getCopies() > 0}" th:href="@{/cart/add/{id}(id=*{id})}"
+            <a th:href="@{/cart/add/{id}(id=*{id})}"
                type="button" class="btn btn-sm col-md-2"
+               th:classappend="*{getCopies() == 0}? 'disabled'"
                title="Add to Cart">
                 <i class="fas fa-shopping-cart fa-lg"></i>
             </a>

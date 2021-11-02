@@ -117,27 +117,36 @@
 
                     <section id="book-buttons" class="d-flex flex-column justify-content-center">
                         <th:block sec:authorize="isAuthenticated()">
-                            <div th:if="*{getCopies() > 0}" class="btn-group">
+                            <div class="btn-group">
                                 <a th:href="@{/cart/add/{id}(id=*{id})}" id="addToCartBtn"
-                                   type="button" class="btn btn-info btn-md btn-block w-100">
+                                   type="button"
+                                   title="Add to Cart"
+                                   class="btn btn-info btn-md btn-block w-100"
+                                   th:classappend="*{getCopies() == 0}? 'disabled'">
                                     <i class="fas fa-shopping-cart"></i> Add to Cart</a>
                             </div>
                             <div class="btn-group">
                                 <a th:href="@{/wishlist/add/{id}(id=*{id})}"
-                                   type="button" class="btn btn-info btn-md btn-block w-100">
+                                   type="button"
+                                   title="Add to Favorites"
+                                   class="btn btn-info btn-md btn-block w-100">
                                     <i class="far fa-heart"></i> Add to Favourites</a>
                             </div>
                         </th:block>
                         <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                             <div class="btn-group">
                                 <a th:href="@{/books/edit/{id}(id=*{id})}"
-                                   type="button" class="btn btn-info btn-md btn-block w-100">
+                                   type="button"
+                                   title="Edit Book"
+                                   class="btn btn-info btn-md btn-block w-100">
                                     <i class="far fa-edit"></i> Edit</a>
                             </div>
                             <div class="btn-group">
                                 <form th:action="@{/books/{id}(id=*{id})}"
                                       th:method="delete" class="w-100">
-                                    <button type="button" class="btn btn-danger btn-md btn-block w-100"
+                                    <button type="button"
+                                            title="Delete Book"
+                                            class="btn btn-danger btn-md btn-block w-100"
                                             data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">
                                         <i class="fa fa-trash-o fa-lg"></i> Delete
                                     </button>
@@ -148,14 +157,18 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="deleteConfirmModalLabel">Delete Book</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <h5 class="modal-title" id="deleteConfirmModalLabel">Delete
+                                                        Book</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p>Are you sure you want to delete this book?</p>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close
+                                                    </button>
                                                     <button type="button" class="btn btn-primary">Delete</button>
                                                 </div>
                                             </div>
