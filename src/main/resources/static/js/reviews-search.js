@@ -2,7 +2,7 @@ let reviewsBtn = document.querySelector('#user-reviews a');
 let userReviewsContainer = document.getElementById('user-reviews-container');
 let bookReviewsContainer = document.getElementById('book-reviews-container');
 
-document.addEventListener('load', showBookReviews);
+window.addEventListener('load', showBookReviews);
 
 reviewsBtn.addEventListener('click', toggle);
 
