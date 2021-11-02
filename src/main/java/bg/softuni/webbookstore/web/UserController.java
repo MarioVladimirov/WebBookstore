@@ -90,8 +90,7 @@ public class UserController {
         return "redirect:/home";
     }
 
-    // TODO - fix to work
-    @GetMapping("/login-error")
+    @PostMapping("/login-error")
     public String failedLogin(@ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
                                       String username,
                               RedirectAttributes redirectAttributes) {

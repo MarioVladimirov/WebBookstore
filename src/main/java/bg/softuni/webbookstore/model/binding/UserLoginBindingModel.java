@@ -1,8 +1,5 @@
 package bg.softuni.webbookstore.model.binding;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-
 public class UserLoginBindingModel {
 
     private String username;

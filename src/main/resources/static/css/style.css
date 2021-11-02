@@ -214,10 +214,10 @@ div.form-group input:read-only, option:disabled {
     }
 }
 
-.alert {
+.alert-success {
     display: none;
 }
-.alert.visible {
+.alert-success.visible {
     display: block;
 }
 
