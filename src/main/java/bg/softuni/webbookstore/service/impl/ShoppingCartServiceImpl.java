@@ -120,4 +120,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 .deleteAll(cartItemRepository
                         .findAllByCustomerUsername(username));
     }
+
+    @Override
+    public void deleteBookFromAllShoppingCarts(Long bookId) {
+        cartItemRepository
+                .deleteAll(cartItemRepository
+                        .findAllByBookId(bookId));
+    }
 }

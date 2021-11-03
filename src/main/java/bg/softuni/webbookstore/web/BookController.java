@@ -10,6 +10,7 @@ import bg.softuni.webbookstore.model.view.BookDetailViewModel;
 import bg.softuni.webbookstore.service.AuthorService;
 import bg.softuni.webbookstore.service.BookService;
 import bg.softuni.webbookstore.service.PublishingHouseService;
+import bg.softuni.webbookstore.service.ShoppingCartService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,12 +31,14 @@ public class BookController {
     private final BookService bookService;
     private final PublishingHouseService publishingHouseService;
     private final AuthorService authorService;
+    private final ShoppingCartService shoppingCartService;
     private final ModelMapper modelMapper;
 
-    public BookController(BookService bookService, PublishingHouseService publishingHouseService, AuthorService authorService, ModelMapper modelMapper) {
+    public BookController(BookService bookService, PublishingHouseService publishingHouseService, AuthorService authorService, ShoppingCartService shoppingCartService, ModelMapper modelMapper) {
         this.bookService = bookService;
         this.publishingHouseService = publishingHouseService;
         this.authorService = authorService;
+        this.shoppingCartService = shoppingCartService;
         this.modelMapper = modelMapper;
     }
 
@@ -157,8 +160,8 @@ public class BookController {
     //DELETE
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {
+        shoppingCartService.deleteBookFromAllShoppingCarts(id);
         bookService.delete(id);
-
         return "redirect:/books/all";
     }
 }

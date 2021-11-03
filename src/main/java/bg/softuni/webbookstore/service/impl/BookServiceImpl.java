@@ -31,16 +31,18 @@ public class BookServiceImpl implements BookService {
     private final CategoryRepository categoryRepository;
     private final PublishingHouseRepository publishingHouseRepository;
     private final AuthorRepository authorRepository;
+    private final CartItemRepository cartItemRepository;
     private final CloudinaryService cloudinaryService;
     private final ModelMapper modelMapper;
 
-    public BookServiceImpl(BookRepository bookRepository, WishlistRepository wishlistRepository, UserRepository userRepository, CategoryRepository categoryRepository, PublishingHouseRepository publishingHouseRepository, AuthorRepository authorRepository, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
+    public BookServiceImpl(BookRepository bookRepository, WishlistRepository wishlistRepository, UserRepository userRepository, CategoryRepository categoryRepository, PublishingHouseRepository publishingHouseRepository, AuthorRepository authorRepository, CartItemRepository cartItemRepository, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
         this.bookRepository = bookRepository;
         this.wishlistRepository = wishlistRepository;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
         this.publishingHouseRepository = publishingHouseRepository;
         this.authorRepository = authorRepository;
+        this.cartItemRepository = cartItemRepository;
         this.cloudinaryService = cloudinaryService;
         this.modelMapper = modelMapper;
     }
