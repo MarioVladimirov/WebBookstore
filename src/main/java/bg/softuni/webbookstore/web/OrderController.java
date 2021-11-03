@@ -1,5 +1,6 @@
 package bg.softuni.webbookstore.web;
 
+import bg.softuni.webbookstore.model.view.OrderViewModel;
 import bg.softuni.webbookstore.service.OrderService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/orders")
@@ -38,5 +40,14 @@ public class OrderController {
         model.addAttribute("books", null);
 
         return "order-details";
+    }
+
+    @GetMapping("/create")
+    public String createOrder(@AuthenticationPrincipal UserDetails principal) {
+
+        Long orderId = orderService
+                .createOrder(principal.getUsername());
+
+        return "redirect:/orders/" + orderId;
     }
 }

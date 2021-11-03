@@ -114,4 +114,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         }
     }
 
+    @Override
+    public void deleteOrderedItems(String username) {
+        cartItemRepository
+                .deleteAll(cartItemRepository
+                        .findAllByCustomerUsername(username));
+    }
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -73,10 +74,26 @@ public class ShoppingCartController {
         return "redirect:/cart";
     }
 
-    private void getCartItemsByCustomer(Model model, @AuthenticationPrincipal UserDetails principal) {
+    private void getCartItemsByCustomer(Model model,
+                                        @AuthenticationPrincipal UserDetails principal) {
+
         List<CartItemViewModel> cartItemViewModels = shoppingCartService
                 .getCartItemsByCustomer(principal.getUsername());
 
+        int itemsCounts = cartItemViewModels
+                .stream()
+                .map(CartItemViewModel::getQuantity)
+                .mapToInt(Integer::intValue)
+                .sum();
+
+        BigDecimal totalPrice = cartItemViewModels
+                .stream()
+                .map(CartItemViewModel::calculatePrice)
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.valueOf(0));
+
         model.addAttribute("cartItems", cartItemViewModels);
+        model.addAttribute("itemsCounts", itemsCounts);
+        model.addAttribute("totalPrice", totalPrice);
     }
 }

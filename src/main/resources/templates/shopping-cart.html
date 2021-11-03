@@ -62,14 +62,16 @@
                                 </p>
                             </div>
                             <div class="col-md-2 d-flex justify-content-center align-items-center">
-                                <a th:pid="*{book.id}" th:href="@{/cart/decrease-quantity/{id}(id=*{book.id})}" id="minusButton" class="mx-1">-</a>
+                                <a th:pid="*{book.id}" th:href="@{/cart/decrease-quantity/{id}(id=*{book.id})}"
+                                   id="minusButton" class="mx-1">-</a>
                                 <input class="form-control text-center border border-secondary rounded px-2 mx-1"
                                        th:value="*{quantity}"
                                        type="text"
                                        onkeydown="return false;"
                                        style="max-width: 55px"
                                        th:id="'quantity' + *{getBook().getId()}"/>
-                                <a th:pid="*{book.id}" th:href="@{/cart/add/{id}(id=*{book.id})}" id="plusButton" class="mx-1">+</a>
+                                <a th:pid="*{book.id}" th:href="@{/cart/add/{id}(id=*{book.id})}" id="plusButton"
+                                   class="mx-1">+</a>
                             </div>
 
                             <div class="col-md-3 text-center"
@@ -94,15 +96,21 @@
                     <hr>
                     <div class="row align-items-center">
                         <div class="col align-items-center">ITEMS:</div>
-                        <div class="col text-right">3</div>
+                        <div class="col text-right"
+                             th:text="${itemsCounts}">3
+                        </div>
                     </div>
                     <hr>
                     <div class="row align-items-center">
                         <div class="col">TOTAL PRICE:</div>
                         <div class="col text-right"
-                             th:text="| BGN|"></div>
+                             th:text="|${totalPrice} BGN|"></div>
                     </div>
-                    <button class="btn btn-info btn-md btn-block w-100 mt-5 mb-3">ORDER</button>
+                    <a th:href="@{/orders/create}"
+                       type="button"
+                       class="btn btn-info btn-md btn-block w-100 mt-5 mb-3">
+                        ORDER
+                    </a>
                 </div>
 
             </div>
