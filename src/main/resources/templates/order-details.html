@@ -47,39 +47,52 @@
 
                 <section id="ordered-items" class="p-4 m-3">
                     <h5 class="font-weight-bold border-bottom">Ordered Books:</h5>
-                    <div class="cart ordered-items-container align-items-center">
-                        <div th:each="book : ${order.orderedBooks}"
-                             th:object="${book}"
-                             class="row border-top border-bottom">
-                            <div class="row main align-items-center">
-                                <div class="col-md-2">
-                                    <a th:href="@{/books/{id}(id=*{bookId})}"
-                                       th:title="*{bookTitle}">
-                                        <img class="img-fluid" th:src="*{bookImageUrl}">
-                                    </a>
-                                </div>
-                                <div class="col-md-3">
-                                    <a th:href="@{/books/{id}(id=*{bookId})}"
-                                       th:title="*{bookTitle}">
-                                        <p class="card-title text-dark" th:text="*{bookTitle}"></p>
-                                    </a>
-                                </div>
-                                <div class="col-md-3 text-center"
-                                     th:text="|*{bookPrice} BGN|">
-                                </div>
-                                <div class="col-md-1 text-center"
-                                     th:text="|x *{quantity}|">
-                                </div>
-                                <div class="col-md-3 text-center"
-                                     th:text="|*{totalPrice} BGN|">
-                                </div>
-                            </div>
-                        </div>
 
+                    <div class="table-responsive rounded">
+                        <table class="table table-light table-striped table-hover">
+                            <thead class="bg-dark text-white font-weight-bold">
+                            <tr>
+                                <th scope="col" class="col-md-4">Book</th>
+                                <th scope="col" class="col-md-3 text-center">Single Price</th>
+                                <th scope="col" class="col-md-2 text-center">Quantity</th>
+                                <th scope="col" class="col-md-3 text-center">Total Price</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="book : ${order.orderedBooks}"
+                                th:object="${book}">
+                                <td class="col-md-4">
+                                    <div class="row justify-content-start">
+                                        <div class="pr-3">
+                                            <a th:href="@{/books/{id}(id=*{bookId})}"
+                                               th:title="*{bookTitle}">
+                                                <img class="img-fluid" th:src="*{bookImageUrl}">
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <a th:href="@{/books/{id}(id=*{bookId})}"
+                                               th:title="*{bookTitle}">
+                                                <p class="card-title text-dark" th:text="*{bookTitle}"></p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="col-md-3 text-center"
+                                    th:text="|*{bookPrice} BGN|">
+                                </td>
+                                <td class="col-md-2 text-center"
+                                    th:text="|x *{quantity}|">
+                                </td>
+                                <td class="col-md-3 text-center"
+                                    th:text="|*{totalPrice} BGN|">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                     <div class="row d-flex justify-content-end">
-                        <strong th:text="|Total Price: *{price} BGN|"></strong>
+                        <strong th:text="|Total: *{price} BGN|"></strong>
                     </div>
                 </section>
             </div>
