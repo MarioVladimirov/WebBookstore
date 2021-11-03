@@ -39,7 +39,16 @@
 
             <div th:unless="${#lists.isEmpty(cartItems)}"
                  class="row rounded p-2 m-3 shopping-cart-wrapper">
+
                 <div class="cart cart-items-container col-md-8">
+                    <div class="row">
+                        <div class="row main bg-dark text-white font-weight-bold rounded-top">
+                            <div class="col-md-5">Book</div>
+                            <div class="col-md-3 text-center">Single Price</div>
+                            <div class="col-md-2 text-center">Quantity</div>
+                            <div class="col-md-2 text-center">Total Price</div>
+                        </div>
+                    </div>
                     <div th:each="item : ${cartItems}"
                          th:object="${item}"
                          class="row border-top border-bottom">
@@ -80,11 +89,9 @@
                                 <a th:pid="*{book.id}" th:href="@{/cart/add/{id}(id=*{book.id})}" id="plusButton"
                                    class="mx-1">+</a>
                             </div>
-
                             <div class="col-md-2 text-center"
                                  th:text="|*{calculatePrice()} BGN|">
                             </div>
-
                         </div>
                     </div>
 
