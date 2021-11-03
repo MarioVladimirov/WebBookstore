@@ -45,6 +45,10 @@
                          class="row border-top border-bottom">
                         <div class="row main align-items-center">
                             <div class="col-md-2">
+                                <a th:href="@{/cart/remove/{id}(id=*{book.id})}"
+                                   title="Remove"
+                                   class="col-md-2"><span class="close">&#10005;</span>
+                                </a>
                                 <a th:href="@{/books/{id}(id=*{book.id})}"
                                    th:title="*{book.title}">
                                     <img class="img-fluid" th:src="*{book.imageUrl}">
@@ -61,6 +65,9 @@
                                     </a>
                                 </p>
                             </div>
+                            <div class="col-md-3 text-center"
+                                 th:text="|*{book.price} BGN|">
+                            </div>
                             <div class="col-md-2 d-flex justify-content-center align-items-center">
                                 <a th:pid="*{book.id}" th:href="@{/cart/decrease-quantity/{id}(id=*{book.id})}"
                                    id="minusButton" class="mx-1">-</a>
@@ -74,10 +81,10 @@
                                    class="mx-1">+</a>
                             </div>
 
-                            <div class="col-md-3 text-center"
+                            <div class="col-md-2 text-center"
                                  th:text="|*{calculatePrice()} BGN|">
                             </div>
-                            <a th:href="@{/cart/remove/{id}(id=*{book.id})}" class="col-md-2"><span class="close">&#10005;</span></a>
+
                         </div>
                     </div>
 

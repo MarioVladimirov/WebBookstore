@@ -10,7 +10,7 @@ public interface OrderService {
 
     List<OrderViewModel> findLastFiveOrdersByCustomer(String username);
 
-    OrderViewModel findById(Long id);
-
     Long createOrder(String username);
+
+    OrderViewModel findById(Long id);
 }

@@ -4,6 +4,8 @@ import bg.softuni.webbookstore.model.entity.enums.StatusEnum;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 public class OrderViewModel {
 
@@ -12,6 +14,8 @@ public class OrderViewModel {
     private BigDecimal price;
     private StatusEnum status;
     private String customerFullName;
+    private String customerAddress;
+    private Set<OrderItemViewModel> orderedBooks;
 
 
     public OrderViewModel() {
@@ -59,6 +63,24 @@ public class OrderViewModel {
 
     public OrderViewModel setCustomerFullName(String customerFullName) {
         this.customerFullName = customerFullName;
+        return this;
+    }
+
+    public String getCustomerAddress() {
+        return customerAddress;
+    }
+
+    public OrderViewModel setCustomerAddress(String customerAddress) {
+        this.customerAddress = customerAddress;
+        return this;
+    }
+
+    public Set<OrderItemViewModel> getOrderedBooks() {
+        return orderedBooks;
+    }
+
+    public OrderViewModel setOrderedBooks(Set<OrderItemViewModel> orderedBooks) {
+        this.orderedBooks = orderedBooks;
         return this;
     }
 }

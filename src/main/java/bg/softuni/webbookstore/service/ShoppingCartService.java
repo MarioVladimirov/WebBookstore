@@ -14,5 +14,5 @@ public interface ShoppingCartService {
 
     void decreaseQuantity(Long id, String username);
 
-    void deleteOrderedItems(String username);
+    void deleteOrderedCardItems(String username);
 }

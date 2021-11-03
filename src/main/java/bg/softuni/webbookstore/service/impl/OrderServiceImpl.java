@@ -1,10 +1,13 @@
 package bg.softuni.webbookstore.service.impl;
 
 import bg.softuni.webbookstore.model.entity.OrderEntity;
+import bg.softuni.webbookstore.model.entity.OrderItemEntity;
 import bg.softuni.webbookstore.model.entity.UserEntity;
 import bg.softuni.webbookstore.model.entity.enums.StatusEnum;
 import bg.softuni.webbookstore.model.view.CartItemViewModel;
 import bg.softuni.webbookstore.model.view.OrderViewModel;
+import bg.softuni.webbookstore.repository.BookRepository;
+import bg.softuni.webbookstore.repository.OrderItemRepository;
 import bg.softuni.webbookstore.repository.OrderRepository;
 import bg.softuni.webbookstore.repository.UserRepository;
 import bg.softuni.webbookstore.service.OrderService;
@@ -22,14 +25,18 @@ import java.util.stream.Collectors;
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
-    private final ShoppingCartService shoppingCartService;
+    private final OrderItemRepository orderItemRepository;
     private final UserRepository userRepository;
+    private final BookRepository bookRepository;
+    private final ShoppingCartService shoppingCartService;
     private final ModelMapper modelMapper;
 
-    public OrderServiceImpl(OrderRepository orderRepository, ShoppingCartService shoppingCartService, UserRepository userRepository, ModelMapper modelMapper) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderItemRepository orderItemRepository, UserRepository userRepository, BookRepository bookRepository, ShoppingCartService shoppingCartService, ModelMapper modelMapper) {
         this.orderRepository = orderRepository;
-        this.shoppingCartService = shoppingCartService;
+        this.orderItemRepository = orderItemRepository;
         this.userRepository = userRepository;
+        this.bookRepository = bookRepository;
+        this.shoppingCartService = shoppingCartService;
         this.modelMapper = modelMapper;
     }
 
@@ -52,15 +59,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderViewModel findById(Long id) {
-        return orderRepository
-                .findById(id)
-                .map(this::getOrderViewModel)
-                .orElseThrow(() ->
-                        new IllegalStateException("Order not found"));
-    }
-
-    @Override
     public Long createOrder(String username) {
 
         List<CartItemViewModel> itemsToOrder = shoppingCartService
@@ -78,11 +76,36 @@ public class OrderServiceImpl implements OrderService {
                 .setStatus(StatusEnum.ORDERED)
                 .setCustomer(getUserEntity(username));
 
-        shoppingCartService.deleteOrderedItems(username);
-
         OrderEntity newOrder = orderRepository.save(orderEntity);
 
+        itemsToOrder
+                .stream()
+                .map(this::getOrderItemEntity)
+                .map(orderItemEntity -> orderItemEntity.setOrder(newOrder))
+                .forEach(orderItemRepository::save);
+
+        shoppingCartService.deleteOrderedCardItems(username);
+
         return newOrder.getId();
+    }
+
+    @Override
+    public OrderViewModel findById(Long id) {
+        return orderRepository
+                .findById(id)
+                .map(this::getOrderViewModel)
+                .orElseThrow(() ->
+                        new IllegalStateException("Order not found"));
+    }
+
+
+    private OrderItemEntity getOrderItemEntity(CartItemViewModel cartItem) {
+        return new OrderItemEntity()
+                .setQuantity(cartItem.getQuantity())
+                .setBook(bookRepository
+                        .findById(cartItem.getBook().getId())
+                        .orElseThrow(() ->
+                                new IllegalStateException("Book not found")));
     }
 
     private OrderViewModel getOrderViewModel(OrderEntity orderEntity) {

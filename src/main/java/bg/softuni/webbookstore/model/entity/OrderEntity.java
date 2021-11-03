@@ -5,6 +5,8 @@ import bg.softuni.webbookstore.model.entity.enums.StatusEnum;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "orders")
@@ -22,6 +24,9 @@ public class OrderEntity extends BaseEntity {
 
     @ManyToOne
     private UserEntity customer;
+
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+    Set<OrderItemEntity> orderedBooks;
 
     public OrderEntity() {
     }
@@ -59,6 +64,15 @@ public class OrderEntity extends BaseEntity {
 
     public OrderEntity setCustomer(UserEntity customer) {
         this.customer = customer;
+        return this;
+    }
+
+    public Set<OrderItemEntity> getOrderedBooks() {
+        return orderedBooks;
+    }
+
+    public OrderEntity setOrderedBooks(Set<OrderItemEntity> orderedBooks) {
+        this.orderedBooks = orderedBooks;
         return this;
     }
 }
