@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/commons :: head"></head>
+
+<body>
+
+<!-- Navigation-->
+<header th:replace="fragments/commons :: navbar"></header>
+
+<main class="align-content-center">
+
+    <!-- Main Content-->
+    <section class="container-fluid">
+
+        <!-- Sidebar-->
+        <nav th:replace="fragments/commons :: sidebar"></nav>
+
+        <!-- Page Content -->
+        <div id="content">
+
+            <h2 class="text-white text-center">Orders Statistics</h2>
+            <hr class="hr-3 w-75 bg-white">
+            <br>
+
+            <div id="stats-wrapper" class="rounded p-2 m-3">
+                <h3 class="text-center mt-5">Total orders:
+                    <th:block th:text="${stats.getTotalRequests()}"></th:block>
+                </h3>
+                <h3 class="text-center mt-5">Orders above 50 BGN:
+                    <th:block th:text="${stats.getAuthenticatedRequests()}"></th:block>
+                </h3>
+                <h3 class="text-center mt-5">Orders below 50 BGN:
+                    <th:block th:text="${stats.getOrdersBelowFiftyBGN()}"></th:block>
+                </h3>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer-->
+<footer th:replace="fragments/commons :: footer"></footer>
+
+</body>
+</html>

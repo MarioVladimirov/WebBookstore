@@ -116,6 +116,13 @@
                 </a>
             </li>
             <li>
+                <a sec:authorize="hasRole('ROLE_ADMIN')"
+                   th:href="@{/statistics}">
+                    <i class="fas fa-sitemap"></i>
+                    Statistics
+                </a>
+            </li>
+            <li>
                 <a th:href="@{/books/all}">
                     <i class="fas fa-book-open"></i>
                     All Books

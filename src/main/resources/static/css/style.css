@@ -100,7 +100,7 @@ div.form-group input:read-only, option:disabled {
 #book-wrapper, .shopping-cart-wrapper,
 #author-wrapper, #publishing-house-wrapper,
 #user-details-wrapper, #orders-wrapper,
-#order-view-wrapper {
+#order-view-wrapper, #stats-wrapper {
     background-color: #ececec;
 }
 

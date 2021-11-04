@@ -7,10 +7,7 @@ import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
 import bg.softuni.webbookstore.model.service.BookAddServiceModel;
 import bg.softuni.webbookstore.model.service.BookUpdateServiceModel;
 import bg.softuni.webbookstore.model.view.BookDetailViewModel;
-import bg.softuni.webbookstore.service.AuthorService;
-import bg.softuni.webbookstore.service.BookService;
-import bg.softuni.webbookstore.service.PublishingHouseService;
-import bg.softuni.webbookstore.service.ShoppingCartService;
+import bg.softuni.webbookstore.service.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,13 +29,15 @@ public class BookController {
     private final PublishingHouseService publishingHouseService;
     private final AuthorService authorService;
     private final ShoppingCartService shoppingCartService;
+    private final PagesCountService pagesCountService;
     private final ModelMapper modelMapper;
 
-    public BookController(BookService bookService, PublishingHouseService publishingHouseService, AuthorService authorService, ShoppingCartService shoppingCartService, ModelMapper modelMapper) {
+    public BookController(BookService bookService, PublishingHouseService publishingHouseService, AuthorService authorService, ShoppingCartService shoppingCartService, PagesCountService pagesCountService, ModelMapper modelMapper) {
         this.bookService = bookService;
         this.publishingHouseService = publishingHouseService;
         this.authorService = authorService;
         this.shoppingCartService = shoppingCartService;
+        this.pagesCountService = pagesCountService;
         this.modelMapper = modelMapper;
     }
 
@@ -102,6 +101,7 @@ public class BookController {
 
         //TODO - error handling if empty optional
         model.addAttribute("book", detailViewModel.get());
+        model.addAttribute("viewsCount", pagesCountService.getPageViewsCount("/books/" + id));
 
         return "book-details";
     }
