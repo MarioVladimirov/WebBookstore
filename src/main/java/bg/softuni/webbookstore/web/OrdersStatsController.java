@@ -16,7 +16,7 @@ public class OrdersStatsController {
 
     @GetMapping("/stats/orders")
     public String statistics(Model model) {
-        model.addAttribute("ordersStats", ordersStatsService.getOrdersStats());
+        model.addAttribute("stats", ordersStatsService.getOrdersStats());
         return "orders-stats";
     }
 }

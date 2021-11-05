@@ -25,16 +25,25 @@
             <hr class="hr-3 w-75 bg-white">
             <br>
 
-            <div id="stats-wrapper" class="rounded p-2 m-3">
-                <h3 class="text-center mt-5">Total requests:
-                    <th:block th:text="${stats.getTotalRequests()}"></th:block>
-                </h3>
-                <h3 class="text-center mt-5">Authenticated Requests:
-                    <th:block th:text="${stats.getAuthenticatedRequests()}"></th:block>
-                </h3>
-                <h3 class="text-center mt-5">Anonymous Requests:
-                    <th:block th:text="${stats.getAnonymousRequests()}"></th:block>
-                </h3>
+            <div class="container">
+                <div class="table-responsive rounded">
+                    <table class="table table-dark table-bordered mx-auto text-center">
+                        <thead>
+                        <tr>
+                            <th scope="col">Total Requests</th>
+                            <th scope="col">Authorized</th>
+                            <th scope="col">Unauthorized</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td th:text="${stats.getTotalRequests()}">Total Requests</td>
+                            <td th:text="${stats.getAuthenticatedRequests()}">Authorized</td>
+                            <td th:text="${stats.getAnonymousRequests()}">Unauthorized</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </section>
