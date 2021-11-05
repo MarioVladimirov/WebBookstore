@@ -12,13 +12,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
+public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final BookstoreUserService bookstoreUserService;
     private final PasswordEncoder passwordEncoder;
 
 
-    public ApplicationSecurityConfig(BookstoreUserService bookstoreUserService, PasswordEncoder passwordEncoder) {
+    public ApplicationSecurityConfiguration(BookstoreUserService bookstoreUserService, PasswordEncoder passwordEncoder) {
         this.bookstoreUserService = bookstoreUserService;
         this.passwordEncoder = passwordEncoder;
     }
@@ -33,7 +33,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                     .antMatchers("/books/add", "/books/edit/**", "/books/delete/**",
                         "/authors/add", "/authors/edit/**", "/authors/delete/**",
-                        "/roles/**", "/statistics").hasRole("ADMIN")
+                        "/roles/**", "/stats/*").hasRole("ADMIN")
                     .antMatchers("/", "/home", "/users/login", "/users/register",
                             "/books/*", "/reviews/api").permitAll()
                     .anyRequest().authenticated()

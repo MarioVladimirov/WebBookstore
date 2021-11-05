@@ -3,14 +3,13 @@ package bg.softuni.webbookstore.model.view;
 import bg.softuni.webbookstore.model.entity.enums.StatusEnum;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 public class OrderViewModel {
 
     private Long id;
-    private LocalDate date;
+    private LocalDateTime orderTime;
     private BigDecimal price;
     private StatusEnum status;
     private String customerFullName;
@@ -30,12 +29,12 @@ public class OrderViewModel {
         return this;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDateTime getOrderTime() {
+        return orderTime;
     }
 
-    public OrderViewModel setDate(LocalDate date) {
-        this.date = date;
+    public OrderViewModel setOrderTime(LocalDateTime orderTime) {
+        this.orderTime = orderTime;
         return this;
     }
 

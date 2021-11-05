@@ -19,7 +19,7 @@ public class StatsView {
     }
 
 
-    public int getOrdersBelowFiftyBGN() {
+    public int getAnonymousRequests() {
         return anonymousRequests;
     }
 }

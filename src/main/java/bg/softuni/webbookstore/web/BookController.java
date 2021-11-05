@@ -29,15 +29,15 @@ public class BookController {
     private final PublishingHouseService publishingHouseService;
     private final AuthorService authorService;
     private final ShoppingCartService shoppingCartService;
-    private final PagesCountService pagesCountService;
+    private final PagesViewCountService pagesViewCountService;
     private final ModelMapper modelMapper;
 
-    public BookController(BookService bookService, PublishingHouseService publishingHouseService, AuthorService authorService, ShoppingCartService shoppingCartService, PagesCountService pagesCountService, ModelMapper modelMapper) {
+    public BookController(BookService bookService, PublishingHouseService publishingHouseService, AuthorService authorService, ShoppingCartService shoppingCartService, PagesViewCountService pagesViewCountService, ModelMapper modelMapper) {
         this.bookService = bookService;
         this.publishingHouseService = publishingHouseService;
         this.authorService = authorService;
         this.shoppingCartService = shoppingCartService;
-        this.pagesCountService = pagesCountService;
+        this.pagesViewCountService = pagesViewCountService;
         this.modelMapper = modelMapper;
     }
 
@@ -101,7 +101,7 @@ public class BookController {
 
         //TODO - error handling if empty optional
         model.addAttribute("book", detailViewModel.get());
-        model.addAttribute("viewsCount", pagesCountService.getPageViewsCount("/books/" + id));
+        model.addAttribute("viewsCount", pagesViewCountService.getPageViewsCount("/books/" + id));
 
         return "book-details";
     }

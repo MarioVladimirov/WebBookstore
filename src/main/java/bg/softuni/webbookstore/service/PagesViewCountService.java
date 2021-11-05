@@ -1,6 +1,6 @@
 package bg.softuni.webbookstore.service;
 
-public interface PagesCountService {
+public interface PagesViewCountService {
 
     void onRequest(String requestURI);
 

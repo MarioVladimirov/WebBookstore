@@ -1,6 +1,6 @@
 package bg.softuni.webbookstore.web.interceptor;
 
-import bg.softuni.webbookstore.service.PagesCountService;
+import bg.softuni.webbookstore.service.PagesViewCountService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -10,15 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class PagesViewsCountInterceptor implements HandlerInterceptor {
 
-    private final PagesCountService pagesCountService;
+    private final PagesViewCountService pagesViewCountService;
 
-    public PagesViewsCountInterceptor(PagesCountService pagesCountService) {
-        this.pagesCountService = pagesCountService;
+    public PagesViewsCountInterceptor(PagesViewCountService pagesViewCountService) {
+        this.pagesViewCountService = pagesViewCountService;
     }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        pagesCountService.onRequest(request.getRequestURI());
+        pagesViewCountService.onRequest(request.getRequestURI());
         return true;
     }
 }

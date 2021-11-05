@@ -1,13 +1,13 @@
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: "jdbc:mysql://localhost:3306/web_bookstore?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
+    url: jdbc:mysql://localhost:3306/web_bookstore?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
     username: root
     password: ${MySQL_Pass}
   servlet:
     multipart:
-      max-file-size: 1MB
-      max-request-size: 5MB
+      max-file-size: 10MB
+      max-request-size: 10MB
   mvc:
     hiddenmethod:
       filter:
@@ -29,7 +29,7 @@ spring:
 cloudinary:
   cloud-name: nzlateva
   api-key: 365111573122239
-  api-secret: "${CLOUDINARY_SECRET}"
+  api-secret: ${CLOUDINARY_SECRET}
 
 
 logging:

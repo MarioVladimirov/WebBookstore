@@ -14,6 +14,7 @@ public class CloudinaryServiceImpl implements CloudinaryService {
 
     private static final String TEMP_FILE = "temp-file";
     private static final String URL = "url";
+    public static final String PUBLIC_ID = "publicId";
 
     private final Cloudinary cloudinary;
 
@@ -31,5 +32,10 @@ public class CloudinaryServiceImpl implements CloudinaryService {
                 .upload(file, Collections.emptyMap())
                 .get(URL)
                 .toString();
+    }
+
+    @Override
+    public boolean deleteImage(String publicId) {
+        return true;
     }
 }

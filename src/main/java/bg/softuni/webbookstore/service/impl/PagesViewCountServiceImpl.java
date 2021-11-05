@@ -1,18 +1,17 @@
 package bg.softuni.webbookstore.service.impl;
 
-import bg.softuni.webbookstore.service.PagesCountService;
+import bg.softuni.webbookstore.service.PagesViewCountService;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class PagesCountServiceImpl implements PagesCountService {
+public class PagesViewCountServiceImpl implements PagesViewCountService {
 
     private Map<String, Integer> pagesViewsCount;
 
-    public PagesCountServiceImpl() {
+    public PagesViewCountServiceImpl() {
         pagesViewsCount = new HashMap<>();
     }
 

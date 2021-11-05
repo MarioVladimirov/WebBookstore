@@ -4,8 +4,7 @@ import bg.softuni.webbookstore.model.entity.enums.StatusEnum;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -13,7 +12,7 @@ import java.util.Set;
 public class OrderEntity extends BaseEntity {
 
     @Column(nullable = false)
-    private LocalDate date;
+    private LocalDateTime orderTime;
 
     @Column(nullable = false)
     private BigDecimal price;
@@ -31,12 +30,12 @@ public class OrderEntity extends BaseEntity {
     public OrderEntity() {
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDateTime getOrderTime() {
+        return orderTime;
     }
 
-    public OrderEntity setDate(LocalDate date) {
-        this.date = date;
+    public OrderEntity setOrderTime(LocalDateTime orderTime) {
+        this.orderTime = orderTime;
         return this;
     }
 

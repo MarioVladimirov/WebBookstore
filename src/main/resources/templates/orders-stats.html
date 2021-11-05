@@ -27,13 +27,13 @@
 
             <div id="stats-wrapper" class="rounded p-2 m-3">
                 <h3 class="text-center mt-5">Total orders:
-                    <th:block th:text="${stats.getTotalRequests()}"></th:block>
+                    <th:block th:text="${ordersStats.getTotalOrders()}"></th:block>
                 </h3>
                 <h3 class="text-center mt-5">Orders above 50 BGN:
-                    <th:block th:text="${stats.getAuthenticatedRequests()}"></th:block>
+                    <th:block th:text="${ordersStats.getOrdersAboveFiftyBGN()}"></th:block>
                 </h3>
                 <h3 class="text-center mt-5">Orders below 50 BGN:
-                    <th:block th:text="${stats.getOrdersBelowFiftyBGN()}"></th:block>
+                    <th:block th:text="${ordersStats.getOrdersBelowFiftyBGN()}"></th:block>
                 </h3>
             </div>
         </div>

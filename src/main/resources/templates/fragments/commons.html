@@ -116,17 +116,29 @@
                 </a>
             </li>
             <li>
-                <a sec:authorize="hasRole('ROLE_ADMIN')"
-                   th:href="@{/statistics}">
-                    <i class="fas fa-sitemap"></i>
-                    Statistics
-                </a>
-            </li>
-            <li>
                 <a th:href="@{/books/all}">
                     <i class="fas fa-book-open"></i>
                     All Books
                 </a>
+            </li>
+            <li>
+                <a sec:authorize="hasRole('ROLE_ADMIN')"
+                   href="#statsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fas fa-sitemap"></i>
+                    Statistics
+                </a>
+                <ul class="collapse list-unstyled" id="statsSubmenu">
+                    <li>
+                        <a th:href="@{/stats/requests}">
+                            &ensp;Requests
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/stats/orders}">
+                            &ensp;Orders
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="#categoriesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -135,7 +147,7 @@
                 </a>
                 <ul class="collapse list-unstyled" id="categoriesSubmenu">
                     <li th:each="c : ${T(bg.softuni.webbookstore.model.entity.enums.CategoryEnum).values()}">
-                        <a href="/" th:text="${c}" th:value="${c}">
+                        <a href="/" th:text="|&ensp;${c}|" th:value="${c}">
                             Category
                         </a>
                     </li>

@@ -17,7 +17,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderViewModel> findAllOrdersByCustomer(String username) {
         return orderRepository
-                .findByCustomerUsernameOrderByDateDesc(username)
+                .findByCustomerUsernameOrderByOrderTimeDesc(username)
                 .stream()
                 .map(this::getOrderViewModel)
                 .collect(Collectors.toList());
@@ -52,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderViewModel> findLastFiveOrdersByCustomer(String username) {
         return orderRepository
-                .findTop5ByCustomerUsernameOrderByDateDesc(username)
+                .findTop5ByCustomerUsernameOrderByOrderTimeDesc(username)
                 .stream()
                 .map(this::getOrderViewModel)
                 .collect(Collectors.toList());
@@ -71,7 +71,7 @@ public class OrderServiceImpl implements OrderService {
                 .orElse(BigDecimal.valueOf(0));
 
         OrderEntity orderEntity = new OrderEntity()
-                .setDate(LocalDate.now())
+                .setOrderTime(LocalDateTime.now())
                 .setPrice(totalPrice)
                 .setStatus(StatusEnum.ORDERED)
                 .setCustomer(getUserEntity(username));

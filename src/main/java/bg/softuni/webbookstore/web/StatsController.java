@@ -14,9 +14,9 @@ public class StatsController {
         this.statsService = statsService;
     }
 
-    @GetMapping("/statistics")
+    @GetMapping("/stats/requests")
     public String statistics(Model model) {
         model.addAttribute("stats", statsService.getStats());
-        return "stats";
+        return "requests-stats";
     }
 }

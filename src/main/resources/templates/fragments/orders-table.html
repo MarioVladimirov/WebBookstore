@@ -14,7 +14,7 @@
         <tr>
             <th scope="col">Order #</th>
             <th scope="col">Date</th>
-            <th scope="col">Delivered To</th>
+            <th scope="col">Delivery To</th>
             <th scope="col">Price</th>
             <th scope="col">Status</th>
             <th scope="col">Action</th>
@@ -24,7 +24,7 @@
         <tr th:each="o : ${orders}"
             th:object="${o}">
             <td th:text="*{id}">Order Id</td>
-            <td th:text="*{date}">Date</td>
+            <td th:text="*{orderTime}">Order Time</td>
             <td th:text="*{customerFullName}">Delivered To</td>
             <td th:text="|*{price} BGN|">Price</td>
             <td th:text="*{status}">Status</td>
