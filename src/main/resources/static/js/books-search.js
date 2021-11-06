@@ -43,30 +43,60 @@ sidebar.addEventListener('click', (e) => {
         );
 });
 
-// TODO - make book-card div the same as in home
 function createBookArticle(b) {
     let article = document.createElement('article');
     article.classList.add('card', 'rounded', 'p-2', 'm-3', 'col-sm-6', 'col-md-3');
-    article.innerHTML = `<a href="/books/${b.id}">
-                        <img class="card-image" src="${b.imageUrl}" alt="Thumbnail [100%x225]"
-                             data-holder-rendered="true">
-                        <div class="btn-group d-flex justify-content-end">
-                            <a href="/books/${b.id}"
-                               type="button" class="btn btn-md">
-                                <i class="far fa-heart"></i>
-                            </a>
-                            <a href="/books/${b.id}"
-                               type="button" class="btn btn-md">
-                                <i class="fas fa-shopping-cart"></i>
-                            </a>
-                        </div>
-                        <div class="card-body pt-1">
-                            <div class="text-center">
-                                <h5 class="card-title">${b.title}</h5>
-                                <p class="card-text text-secondary">${b.author}</p>
-                                <p class="card-text">${b.price.toFixed(2)} BGN</p>
-                            </div>
-                        </div>
-                    </a>`;
+    article.innerHTML =
+        `<a href="/books/${b.id}"
+           title="${b.title}">
+            <img class="card-image rounded" src="${b.pictureUrl}" alt="Thumbnail [100%x225]"
+                 data-holder-rendered="true">
+        </a>
+        <div class="row btn-group d-flex justify-content-end my-2 mx-3 border-bottom border-info">
+            
+            <a href="/wishlist/add/${b.id}"
+               type="button" class="btn btn-sm col-md-2"
+               title="Add to Favorites">
+                <i class="far fa-heart fa-lg"></i>
+            </a>
+            <a href="/cart/add/${b.id}"
+               type="button" class="btn btn-sm col-md-2"
+               title="Add to Cart">
+                <i class="fas fa-shopping-cart fa-lg"></i>
+            </a>
+        </div>
+        <div class="card-body pt-2">
+            <div class="text-center">
+                <h5 class="card-title">${b.title}</h5>
+                <p class="card-text text-secondary">Author:
+                    <a href="/authors/${b.authorId}">
+                        ${b.author}
+                    </a>
+                </p>
+                <p class="card-text">${b.price.toFixed(2)} BGN</p>
+            </div>
+        </div>`;
+
+    article
+        .querySelector('.btn-group')
+        .prepend(showOnStockDiv(b.copies));
+
+    if (b.copies === 0) {
+        article.querySelector('a[href="/cart/add/${b.id}"]')
+            .classList.add('disabled');
+    }
+
     return article;
+}
+
+function showOnStockDiv(copies) {
+    let strongEl = document.createElement('strong');
+    strongEl.classList.add('text-success', 'col-md-8');
+    if (copies === 0) {
+        strongEl.textContent = 'Out of Stock';
+    } else {
+        strongEl.textContent = 'On Stock';
+    }
+
+    return strongEl;
 }
