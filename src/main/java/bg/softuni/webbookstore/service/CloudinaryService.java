@@ -9,5 +9,5 @@ public interface CloudinaryService {
 
     CloudinaryImage uploadImage(MultipartFile multipartFile) throws IOException;
 
-    boolean deleteImage(String imageUrl);
+    void deleteImage(String imageUrl);
 }

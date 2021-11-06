@@ -49,20 +49,10 @@ public class CloudinaryServiceImpl implements CloudinaryService {
     }
 
     @Override
-    public boolean deleteImage(String publicId) {
+    public void deleteImage(String publicId) {
         try {
             this.cloudinary.uploader().destroy(publicId, Collections.emptyMap());
-        } catch (IOException e) {
-            return false;
+        } catch (IOException ignored) {
         }
-        return true;
-
-//        try {
-//            String publicId = imageUrl.substring(imageUrl.lastIndexOf("/") + 1, imageUrl.lastIndexOf("."));
-//            this.cloudinary.uploader().destroy(publicId, Collections.emptyMap());
-//        } catch (IOException e) {
-//            return false;
-//        }
-//        return true;
     }
 }
