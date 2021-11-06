@@ -11,7 +11,7 @@ public class BookDetailViewModel {
     private String isbn;
     private String title;
     private String description;
-    private String imageUrl;
+    private String pictureUrl;
     private ZonedDateTime addedOn;
     private ZonedDateTime modified;
     private Integer pagesCount;
@@ -64,12 +64,12 @@ public class BookDetailViewModel {
         return this;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getPictureUrl() {
+        return pictureUrl;
     }
 
-    public BookDetailViewModel setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public BookDetailViewModel setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
         return this;
     }
 

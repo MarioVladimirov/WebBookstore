@@ -22,8 +22,8 @@ public class BookEntity extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "image_url", columnDefinition = "TEXT")
-    private String imageUrl;
+    @ManyToOne
+    private PictureEntity picture;
 
     @Column(name = "added_on", nullable = false)
     private Instant addedOn;
@@ -90,12 +90,12 @@ public class BookEntity extends BaseEntity {
         return this;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public PictureEntity getPicture() {
+        return picture;
     }
 
-    public BookEntity setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public BookEntity setPicture(PictureEntity picture) {
+        this.picture = picture;
         return this;
     }
 

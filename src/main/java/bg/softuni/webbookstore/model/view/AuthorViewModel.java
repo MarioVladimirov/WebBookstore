@@ -5,7 +5,7 @@ public class AuthorViewModel {
     private String firstName;
     private String lastName;
     private String description;
-    private String imageUrl;
+    private String pictureUrl;
 
     public AuthorViewModel() {
     }
@@ -37,12 +37,12 @@ public class AuthorViewModel {
         return this;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getPictureUrl() {
+        return pictureUrl;
     }
 
-    public AuthorViewModel setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public AuthorViewModel setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
         return this;
     }
 }

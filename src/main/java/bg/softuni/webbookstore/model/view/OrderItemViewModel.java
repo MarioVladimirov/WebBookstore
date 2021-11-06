@@ -6,7 +6,7 @@ public class OrderItemViewModel {
 
     private Long bookId;
     private String bookTitle;
-    private String bookImageUrl;
+    private String bookPictureUrl;
     private BigDecimal bookPrice;
     private BigDecimal totalPrice;
     private Integer quantity;
@@ -32,12 +32,12 @@ public class OrderItemViewModel {
         return this;
     }
 
-    public String getBookImageUrl() {
-        return bookImageUrl;
+    public String getBookPictureUrl() {
+        return bookPictureUrl;
     }
 
-    public OrderItemViewModel setBookImageUrl(String bookImageUrl) {
-        this.bookImageUrl = bookImageUrl;
+    public OrderItemViewModel setBookPictureUrl(String bookPictureUrl) {
+        this.bookPictureUrl = bookPictureUrl;
         return this;
     }
 

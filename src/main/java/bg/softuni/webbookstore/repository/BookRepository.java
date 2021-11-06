@@ -12,7 +12,7 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
 
     boolean existsByIsbn(String isbn);
 
-    Optional<BookEntity> findByIsbn(String isbn);
+    boolean existsByPictureId(Long pictureId);
 
     List<BookEntity> findByAuthorIdOrderByAddedOnDesc(Long id);
 

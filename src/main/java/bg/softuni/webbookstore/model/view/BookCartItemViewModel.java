@@ -6,7 +6,7 @@ public class BookCartItemViewModel {
 
     private Long id;
     private String title;
-    private String imageUrl;
+    private String pictureUrl;
     private BigDecimal price;
     private Long authorId;
     private String authorFirstName;
@@ -34,12 +34,12 @@ public class BookCartItemViewModel {
         return this;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getPictureUrl() {
+        return pictureUrl;
     }
 
-    public BookCartItemViewModel setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public BookCartItemViewModel setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
         return this;
     }
 

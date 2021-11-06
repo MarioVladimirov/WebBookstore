@@ -1,30 +1,40 @@
 package bg.softuni.webbookstore.config;
 
-import com.cloudinary.Cloudinary;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@ConfigurationProperties(prefix = "cloudinary")
 public class CloudConfiguration {
 
-    @Value("${cloudinary.cloud-name}")
     private String cloudName;
-    @Value("${cloudinary.api-key}")
     private String apiKey;
-    @Value("${cloudinary.api-secret}")
     private String apiSecret;
 
-    @Bean
-    public Cloudinary cloudinary() {
-        Map<String, Object> config = new HashMap<>();
-        config.put("cloud_name", cloudName);
-        config.put("api_key", apiKey);
-        config.put("api_secret", apiSecret);
-        return new Cloudinary(config);
+    public String getCloudName() {
+        return cloudName;
+    }
+
+    public CloudConfiguration setCloudName(String cloudName) {
+        this.cloudName = cloudName;
+        return this;
+    }
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public CloudConfiguration setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+        return this;
+    }
+
+    public String getApiSecret() {
+        return apiSecret;
+    }
+
+    public CloudConfiguration setApiSecret(String apiSecret) {
+        this.apiSecret = apiSecret;
+        return this;
     }
 }

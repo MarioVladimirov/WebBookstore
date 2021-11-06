@@ -111,7 +111,7 @@ public class UserController {
 
         //TODO - error handling if empty optional
         model.addAttribute("user", viewModel.get());
-        model.addAttribute("lastFiveOrders", orderService
+        model.addAttribute("orders", orderService
                 .findLastFiveOrdersByCustomer(principal.getUsername()));
 
         return "profile";

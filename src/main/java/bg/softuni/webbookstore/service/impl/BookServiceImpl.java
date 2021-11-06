@@ -1,6 +1,7 @@
 package bg.softuni.webbookstore.service.impl;
 
 import bg.softuni.webbookstore.model.binding.BookUpdateBindingModel;
+import bg.softuni.webbookstore.model.cloudinary.CloudinaryImage;
 import bg.softuni.webbookstore.model.entity.*;
 import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
 import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
@@ -25,7 +26,11 @@ import java.util.stream.Collectors;
 @Service
 public class BookServiceImpl implements BookService {
 
+    private static final String DEFAULT_BOOK_IMAGE_URL = "/images/default-book-cover.png";
+    private static final String DEFAULT_AUTHOR_IMAGE_URL = "/images/default-author-pic.png";
+
     private final BookRepository bookRepository;
+    private final PictureRepository pictureRepository;
     private final WishlistRepository wishlistRepository;
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
@@ -35,8 +40,9 @@ public class BookServiceImpl implements BookService {
     private final CloudinaryService cloudinaryService;
     private final ModelMapper modelMapper;
 
-    public BookServiceImpl(BookRepository bookRepository, WishlistRepository wishlistRepository, UserRepository userRepository, CategoryRepository categoryRepository, PublishingHouseRepository publishingHouseRepository, AuthorRepository authorRepository, CartItemRepository cartItemRepository, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
+    public BookServiceImpl(BookRepository bookRepository, PictureRepository pictureRepository, WishlistRepository wishlistRepository, UserRepository userRepository, CategoryRepository categoryRepository, PublishingHouseRepository publishingHouseRepository, AuthorRepository authorRepository, CartItemRepository cartItemRepository, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
         this.bookRepository = bookRepository;
+        this.pictureRepository = pictureRepository;
         this.wishlistRepository = wishlistRepository;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
@@ -100,11 +106,7 @@ public class BookServiceImpl implements BookService {
 
         BookEntity bookEntity = modelMapper
                 .map(bookAddServiceModel, BookEntity.class)
-                .setImageUrl(
-                        !"".equals(img.getOriginalFilename())
-                                ? cloudinaryService.uploadImage(img)
-                                : "https://res.cloudinary.com/nzlateva/image/upload/v1635019989/web-bookstore-app/book-cover-pics/default-book-cover_is5vlx.jpg"
-                )
+                .setPicture(getPictureEntity(img))
                 .setLanguage(getLanguageEnum(bookAddServiceModel.getLanguage()))
                 .setCategories(getCategoryEntities(bookAddServiceModel.getCategories()))
                 .setPublishingHouse(getPublishingHouseEntity(bookAddServiceModel.getPublishingHouse()))
@@ -141,7 +143,8 @@ public class BookServiceImpl implements BookService {
 
         MultipartFile img = bookUpdateServiceModel.getImage();
         if (!"".equals(img.getOriginalFilename())) {
-            bookEntity.setImageUrl(cloudinaryService.uploadImage(img));
+            deleteOldPicture(bookEntity.getId());
+            bookEntity.setPicture(getPictureEntity(img));
         }
 
         bookEntity
@@ -165,7 +168,23 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void delete(Long id) {
+        deleteOldPicture(id);
         bookRepository.deleteById(id);
+    }
+
+    private void deleteOldPicture(Long bookId) {
+        BookEntity bookEntity = bookRepository.findById(bookId).orElseThrow(() ->
+                new IllegalStateException("Book not found"));
+
+        if (bookEntity.getPicture().getPublicId() != null) {
+            cloudinaryService.deleteImage(bookEntity.getPicture().getPublicId());
+        }
+        Long pictureId = bookEntity.getPicture().getId();
+        bookEntity.setPicture(null);
+        bookRepository.save(bookEntity);
+        if (!bookRepository.existsByPictureId(pictureId)) {
+            pictureRepository.deleteById(pictureId);
+        }
     }
 
     @Override
@@ -242,7 +261,7 @@ public class BookServiceImpl implements BookService {
                     AuthorEntity newAuthor = new AuthorEntity()
                             .setFirstName(firstName)
                             .setLastName(lastName)
-                            .setImageUrl("https://res.cloudinary.com/nzlateva/image/upload/v1635173921/web-bookstore-app/authors-pics/default-author-pic_rc5wzc.png");
+                            .setPicture(pictureRepository.save(new PictureEntity(DEFAULT_AUTHOR_IMAGE_URL)));
                     return authorRepository.save(newAuthor);
                 });
     }
@@ -273,5 +292,16 @@ public class BookServiceImpl implements BookService {
                             ));
                 })
                 .collect(Collectors.toSet());
+    }
+
+    private PictureEntity getPictureEntity(MultipartFile img) throws IOException {
+        if (!"".equals(img.getOriginalFilename())) {
+            final CloudinaryImage uploaded = cloudinaryService.uploadImage(img);
+            return pictureRepository.save(new PictureEntity()
+                    .setUrl(uploaded.getUrl())
+                    .setPublicId(uploaded.getPublicId()));
+        } else {
+            return pictureRepository.save(new PictureEntity(DEFAULT_BOOK_IMAGE_URL));
+        }
     }
 }

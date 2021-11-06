@@ -16,8 +16,8 @@ public class AuthorEntity extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "image_url", columnDefinition = "TEXT")
-    private String imageUrl;
+    @ManyToOne
+    private PictureEntity picture;
 
     @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
     private List<BookEntity> books;
@@ -53,12 +53,12 @@ public class AuthorEntity extends BaseEntity {
         return this;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public PictureEntity getPicture() {
+        return picture;
     }
 
-    public AuthorEntity setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public AuthorEntity setPicture(PictureEntity picture) {
+        this.picture = picture;
         return this;
     }
 
