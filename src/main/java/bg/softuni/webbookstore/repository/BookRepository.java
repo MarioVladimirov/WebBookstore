@@ -10,11 +10,15 @@ import java.util.Optional;
 @Repository
 public interface BookRepository extends JpaRepository<BookEntity, Long> {
 
+    Optional<BookEntity> findByIdAndActiveTrue(Long id);
+
     boolean existsByIsbn(String isbn);
 
     boolean existsByPictureId(Long pictureId);
 
-    List<BookEntity> findByAuthorIdOrderByAddedOnDesc(Long id);
+    List<BookEntity> findAllByActiveTrueOrderByAddedOnDesc();
 
-    List<BookEntity> findByPublishingHouseIdOrderByAddedOnDesc(Long id);
+    List<BookEntity> findAllByActiveTrueAndAuthorIdOrderByAddedOnDesc(Long id);
+
+    List<BookEntity> findAllByActiveTrueAndPublishingHouseIdOrderByAddedOnDesc(Long id);
 }

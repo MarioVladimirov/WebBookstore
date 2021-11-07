@@ -1,10 +1,10 @@
 package bg.softuni.webbookstore.service;
 
-import bg.softuni.webbookstore.model.view.StatsView;
+import bg.softuni.webbookstore.model.view.RequestsStatsView;
 
 public interface StatsService {
 
     void onRequest();
 
-    StatsView getStats();
+    RequestsStatsView getStats();
 }

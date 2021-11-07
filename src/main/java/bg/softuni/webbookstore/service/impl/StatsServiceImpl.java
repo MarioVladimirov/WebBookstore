@@ -1,6 +1,6 @@
 package bg.softuni.webbookstore.service.impl;
 
-import bg.softuni.webbookstore.model.view.StatsView;
+import bg.softuni.webbookstore.model.view.RequestsStatsView;
 import bg.softuni.webbookstore.service.StatsService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,7 +26,7 @@ public class StatsServiceImpl implements StatsService {
     }
 
     @Override
-    public StatsView getStats() {
-        return new StatsView(authenticatedRequests, anonymousRequests);
+    public RequestsStatsView getStats() {
+        return new RequestsStatsView(authenticatedRequests, anonymousRequests);
     }
 }

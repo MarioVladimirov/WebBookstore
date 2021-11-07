@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Component
-public class StatsInterceptor implements HandlerInterceptor {
+public class RequestsStatsInterceptor implements HandlerInterceptor {
 
     private final StatsService statsService;
 
-    public StatsInterceptor(StatsService statsService) {
+    public RequestsStatsInterceptor(StatsService statsService) {
         this.statsService = statsService;
     }
 

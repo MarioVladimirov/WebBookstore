@@ -31,24 +31,24 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
     private final PictureRepository pictureRepository;
+    private final ReviewRepository reviewRepository;
     private final WishlistRepository wishlistRepository;
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
     private final PublishingHouseRepository publishingHouseRepository;
     private final AuthorRepository authorRepository;
-    private final CartItemRepository cartItemRepository;
     private final CloudinaryService cloudinaryService;
     private final ModelMapper modelMapper;
 
-    public BookServiceImpl(BookRepository bookRepository, PictureRepository pictureRepository, WishlistRepository wishlistRepository, UserRepository userRepository, CategoryRepository categoryRepository, PublishingHouseRepository publishingHouseRepository, AuthorRepository authorRepository, CartItemRepository cartItemRepository, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
+    public BookServiceImpl(BookRepository bookRepository, PictureRepository pictureRepository, ReviewRepository reviewRepository, WishlistRepository wishlistRepository, UserRepository userRepository, CategoryRepository categoryRepository, PublishingHouseRepository publishingHouseRepository, AuthorRepository authorRepository, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
         this.bookRepository = bookRepository;
         this.pictureRepository = pictureRepository;
+        this.reviewRepository = reviewRepository;
         this.wishlistRepository = wishlistRepository;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
         this.publishingHouseRepository = publishingHouseRepository;
         this.authorRepository = authorRepository;
-        this.cartItemRepository = cartItemRepository;
         this.cloudinaryService = cloudinaryService;
         this.modelMapper = modelMapper;
     }
@@ -56,7 +56,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<BookSummaryViewModel> findAllBooks() {
         return bookRepository
-                .findAll()
+                .findAllByActiveTrueOrderByAddedOnDesc()
                 .stream()
                 .map(this::getSummaryViewModel)
                 .collect(Collectors.toList());
@@ -65,7 +65,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<BookSummaryViewModel> findBooksByAuthor(Long id) {
         return bookRepository
-                .findByAuthorIdOrderByAddedOnDesc(id)
+                .findAllByActiveTrueAndAuthorIdOrderByAddedOnDesc(id)
                 .stream()
                 .map(this::getSummaryViewModel)
                 .collect(Collectors.toList());
@@ -74,7 +74,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<BookSummaryViewModel> findBooksByPublishingHouse(Long id) {
         return bookRepository
-                .findByPublishingHouseIdOrderByAddedOnDesc(id)
+                .findAllByActiveTrueAndPublishingHouseIdOrderByAddedOnDesc(id)
                 .stream()
                 .map(this::getSummaryViewModel)
                 .collect(Collectors.toList());
@@ -106,6 +106,7 @@ public class BookServiceImpl implements BookService {
 
         BookEntity bookEntity = modelMapper
                 .map(bookAddServiceModel, BookEntity.class)
+                .setActive(true)
                 .setPicture(getPictureEntity(img))
                 .setLanguage(getLanguageEnum(bookAddServiceModel.getLanguage()))
                 .setCategories(getCategoryEntities(bookAddServiceModel.getCategories()))
@@ -123,21 +124,21 @@ public class BookServiceImpl implements BookService {
     @Override
     public Optional<BookDetailViewModel> findBookDetails(Long id) {
         return bookRepository
-                .findById(id)
+                .findByIdAndActiveTrue(id)
                 .map(this::getBookDetailViewModel);
     }
 
     @Override
     public Optional<BookUpdateBindingModel> findBookToEdit(Long id) {
         return bookRepository
-                .findById(id)
+                .findByIdAndActiveTrue(id)
                 .map(this::getBookToEdit);
     }
 
     @Override
     public Long update(BookUpdateServiceModel bookUpdateServiceModel) throws IOException {
         BookEntity bookEntity = bookRepository
-                .findById(bookUpdateServiceModel.getId())
+                .findByIdAndActiveTrue(bookUpdateServiceModel.getId())
                 .orElseThrow(() ->
                         new IllegalArgumentException("Book not found"));
 
@@ -168,23 +169,13 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void delete(Long id) {
-        deleteOldPicture(id);
-        bookRepository.deleteById(id);
-    }
-
-    private void deleteOldPicture(Long bookId) {
-        BookEntity bookEntity = bookRepository.findById(bookId).orElseThrow(() ->
-                new IllegalStateException("Book not found"));
-
-        if (bookEntity.getPicture().getPublicId() != null) {
-            cloudinaryService.deleteImage(bookEntity.getPicture().getPublicId());
-        }
-        Long pictureId = bookEntity.getPicture().getId();
-        bookEntity.setPicture(null);
+        BookEntity bookEntity = bookRepository
+                .findByIdAndActiveTrue(id)
+                .orElseThrow(() ->
+                        new IllegalStateException("Book not found"));
+        reviewRepository.deleteAllByBookId(id);
+        bookEntity.setActive(false);
         bookRepository.save(bookEntity);
-        if (!bookRepository.existsByPictureId(pictureId)) {
-            pictureRepository.deleteById(pictureId);
-        }
     }
 
     @Override
@@ -195,7 +186,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public void increaseWithOneCopy(Long id) {
         BookEntity bookEntity = bookRepository
-                .findById(id)
+                .findByIdAndActiveTrue(id)
                 .orElseThrow(() ->
                         new IllegalStateException("Book not found"));
 
@@ -206,14 +197,13 @@ public class BookServiceImpl implements BookService {
     @Override
     public void decreaseWithOneCopy(Long id) {
         BookEntity bookEntity = bookRepository
-                .findById(id)
+                .findByIdAndActiveTrue(id)
                 .orElseThrow(() ->
                         new IllegalStateException("Book not found"));
 
         bookEntity.setCopies(bookEntity.getCopies() - 1);
         bookRepository.save(bookEntity);
     }
-
 
     private BookSummaryViewModel getSummaryViewModel(BookEntity bookEntity) {
         return modelMapper
@@ -302,6 +292,23 @@ public class BookServiceImpl implements BookService {
                     .setPublicId(uploaded.getPublicId()));
         } else {
             return pictureRepository.save(new PictureEntity(DEFAULT_BOOK_IMAGE_URL));
+        }
+    }
+
+    private void deleteOldPicture(Long bookId) {
+        BookEntity bookEntity = bookRepository
+                .findByIdAndActiveTrue(bookId)
+                .orElseThrow(() ->
+                        new IllegalStateException("Book not found"));
+
+        if (bookEntity.getPicture().getPublicId() != null) {
+            cloudinaryService.deleteImage(bookEntity.getPicture().getPublicId());
+        }
+        Long pictureId = bookEntity.getPicture().getId();
+        bookEntity.setPicture(null);
+        bookRepository.save(bookEntity);
+        if (!bookRepository.existsByPictureId(pictureId)) {
+            pictureRepository.deleteById(pictureId);
         }
     }
 }

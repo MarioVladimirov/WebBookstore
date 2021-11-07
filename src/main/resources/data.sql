@@ -128,16 +128,16 @@ VALUES (5, 'Фредрик', 'Бакман',
         7);
 
 
-INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, pages_count, copies, release_year,
+INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, active, pages_count, copies, release_year,
                    price, language,
                    publishing_house_id, author_id, creator_id)
 VALUES (1, '9547394169', 'Братя Карамазови',
         'Шедьоврите на световната литература са кардиналите, които крепят огромното и невидимо мироздание на човешкия дух. Във всяко време, когато са поставени на изпитание нравствените устои на отделната личност или цели нации, великата творба е като спасителна слънчева стълба в бездната на отчаянието, хаоса и неверието. Романът "Братя Карамазови" е един от най-ярките в творчеството на Фьодор Достоевски и заема своето достойно място в така нареченото Петокнижие на автора, редом с "Идиот", "Престъпление и наказание", "Бесове"... В него характерната за Достоевски тема за страданието и просветлението е особено мащабно застъпена, а образите, които великият майстор е изваял с перото си, са се превърнали в емблематични за всяко поколение.',
         1,
         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
-        934, 3, 2003, 30.00, 'BULGARIAN',
+        true, 934, 3, 2003, 30.00, 'BULGARIAN',
         4, 3, 1);
-INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, pages_count, copies, release_year,
+INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, active, pages_count, copies, release_year,
                    price, language,
                    publishing_house_id, author_id, creator_id)
 VALUES (2, '9789545841958', 'Хрониките на Амбър 1',
@@ -145,16 +145,16 @@ VALUES (2, '9789545841958', 'Хрониките на Амбър 1',
 Амбър е единственият истински свят, който се отразява в безброй огледални светове Сенки, подвластни на Принцовете на Амбър. Кралското семейство е разединено от завист и подозрения. Изчезването на родоначалника Оберон е засилило вътрешните конфликти и тронът е уязвим за узурпатори. Станете свидетели на титаничната битка за надмощие на Земята и в Царството на Хаоса, където силите на Амбър и Хаоса водят непрестанна борба за власт посредством заговори и смели ходове.',
         2,
         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
-        576, 5, 2014, 29.99, 'BULGARIAN',
+        true, 576, 5, 2014, 29.99, 'BULGARIAN',
         3, 2, 1);
-INSERT INTO books (id, isbn, title, picture_id, added_on, modified, pages_count, copies, release_year, price, language,
+INSERT INTO books (id, isbn, title, picture_id, added_on, modified, active, pages_count, copies, release_year, price, language,
                    publishing_house_id, author_id, creator_id)
 VALUES (3, '9549513971', 'Събрани разкази; т.5',
         3,
         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
-        288, 2, 2001, 7.00, 'BULGARIAN',
+        true, 288, 2, 2001, 7.00, 'BULGARIAN',
         5, 4, 1);
-INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, pages_count, copies, release_year,
+INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, active, pages_count, copies, release_year,
                    price, language,
                    publishing_house_id, author_id, creator_id)
 VALUES (4, '9789545841705', 'Властелинът на Пръстените',
@@ -163,9 +163,9 @@ VALUES (4, '9789545841705', 'Властелинът на Пръстените',
 Пред вас е пълното издание на един невероятен роман, който не ще ви даде миг покой до последната страница… и дълги години след това.',
         4,
         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
-        1088, 4, 2001, 46.99, 'BULGARIAN',
+        true, 1088, 4, 2001, 46.99, 'BULGARIAN',
         3, 1, 1);
-INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, pages_count, copies, release_year,
+INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, active, pages_count, copies, release_year,
                    price, language,
                    publishing_house_id, author_id, creator_id)
 VALUES (5, '978954091017Х', 'Престъпление и наказание',
@@ -173,9 +173,9 @@ VALUES (5, '978954091017Х', 'Престъпление и наказание',
 Поредицата „Шедьовър" представя на българския читател образци на световната литература. В този том, драги читателю, ти предстои среща с един от великите романи на Достоевски - „Престъпление и наказание". Всичко ли е позволено на човека, мъртъв ли е неговият вътрешен бог? Всяко престъпление е човешко, а наказанието следва невидимите проявления на божествената воля, която спасява човешкото у човека.',
         1,
         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
-        512, 1, 2011, 30.00, 'BULGARIAN',
+        true, 512, 1, 2011, 30.00, 'BULGARIAN',
         4, 3, 1);
-INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, pages_count, copies, release_year,
+INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, active, pages_count, copies, release_year,
                    price, language,
                    publishing_house_id, author_id, creator_id)
 VALUES (6, '9789542815075', 'Човек на име Уве',
@@ -185,7 +185,7 @@ VALUES (6, '9789542815075', 'Човек на име Уве',
 Една сутрин бъбрива млада двойка с две весели дъщерички се нанасят в съседна къща и случайно смачкват пощенската му кутия. Случката води до комичния и трогателен разказ за безпризорна котка, неочаквано приятелство и древното изкуство да дадеш на заден с ремарке. Всичко, което се случва, ще промени киселия старец и ще разтърси до основи кварталното сдружение на обитателите.',
         5,
         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
-        294, 5, 2014, 14.00, 'BULGARIAN',
+        true, 294, 5, 2014, 14.00, 'BULGARIAN',
         1, 5, 1);
 
 

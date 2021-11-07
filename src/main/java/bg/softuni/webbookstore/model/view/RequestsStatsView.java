@@ -1,11 +1,11 @@
 package bg.softuni.webbookstore.model.view;
 
-public class StatsView {
+public class RequestsStatsView {
 
     private int authenticatedRequests;
     private int anonymousRequests;
 
-    public StatsView(int authenticatedRequests, int anonymousRequests) {
+    public RequestsStatsView(int authenticatedRequests, int anonymousRequests) {
         this.authenticatedRequests = authenticatedRequests;
         this.anonymousRequests = anonymousRequests;
     }

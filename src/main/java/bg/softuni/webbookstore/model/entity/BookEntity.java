@@ -31,6 +31,9 @@ public class BookEntity extends BaseEntity {
     @Column(nullable = false)
     private Instant modified;
 
+    @Column(nullable = false)
+    private Boolean active;
+
     @Column(name = "pages_count", nullable = false)
     private Integer pagesCount;
 
@@ -114,6 +117,15 @@ public class BookEntity extends BaseEntity {
 
     public BookEntity setModified(Instant modified) {
         this.modified = modified;
+        return this;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public BookEntity setActive(Boolean active) {
+        this.active = active;
         return this;
     }
 

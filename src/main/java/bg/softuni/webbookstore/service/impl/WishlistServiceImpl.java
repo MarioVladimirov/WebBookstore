@@ -62,4 +62,11 @@ public class WishlistServiceImpl implements WishlistService {
         wishlistRepository
                 .deleteById(wishlistItemEntity.getId());
     }
+
+    @Override
+    public void deleteFromAllWishlists(Long bookId) {
+        wishlistRepository
+                .deleteAll(wishlistRepository
+                        .findAllByBookId(bookId));
+    }
 }

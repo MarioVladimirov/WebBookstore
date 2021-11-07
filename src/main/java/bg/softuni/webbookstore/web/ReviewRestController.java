@@ -1,14 +1,11 @@
 package bg.softuni.webbookstore.web;
 
-import bg.softuni.webbookstore.model.view.BookSummaryViewModel;
 import bg.softuni.webbookstore.model.view.ReviewViewModel;
 import bg.softuni.webbookstore.service.ReviewService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,7 +20,7 @@ public class ReviewRestController {
     }
 
     @GetMapping("/api")
-    public ResponseEntity<List<ReviewViewModel>> getAllBooks() {
+    public ResponseEntity<List<ReviewViewModel>> getAllReviewsByBook() {
 
         List<ReviewViewModel> reviewViewModels = reviewService.findAllReviews();
 
@@ -33,7 +30,7 @@ public class ReviewRestController {
     }
 
     @GetMapping("/api/user")
-    public ResponseEntity<List<ReviewViewModel>> getAllBooksByUser(
+    public ResponseEntity<List<ReviewViewModel>> getAllReviewsByUser(
             @AuthenticationPrincipal UserDetails principal) {
 
         List<ReviewViewModel> reviewViewModels = reviewService
