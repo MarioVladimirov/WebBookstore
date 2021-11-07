@@ -223,7 +223,7 @@
 </main>
 
 <script src="/js/modal.js" type="text/javascript"></script>
-<script th:src="@{/js/reviews-search.js}" th:id="*{id}" type="text/javascript" defer></script>
+<script th:src="@{/js/reviews-search.js(id=*{id})}" type="text/javascript" defer></script>
 
 <!-- Footer-->
 <footer th:replace="fragments/commons :: footer"></footer>

@@ -65,15 +65,20 @@
                                     <div class="row justify-content-start">
                                         <div class="pr-3">
                                             <a th:href="@{/books/{id}(id=*{bookId})}"
-                                               th:title="*{bookTitle}">
+                                               th:title="*{bookTitle}"
+                                               th:classappend="*{bookActive == false} ? 'link-disabled'">
                                                 <img class="img-fluid" th:src="*{bookPictureUrl}">
                                             </a>
                                         </div>
                                         <div>
                                             <a th:href="@{/books/{id}(id=*{bookId})}"
-                                               th:title="*{bookTitle}">
+                                               th:title="*{bookTitle}"
+                                               th:classappend="*{bookActive == false} ? 'link-disabled'">
                                                 <p class="card-title text-dark" th:text="*{bookTitle}"></p>
                                             </a>
+                                            <small th:if="*{bookActive == false}" class="text-secondary">
+                                                Book not available in store
+                                            </small>
                                         </div>
                                     </div>
                                 </td>

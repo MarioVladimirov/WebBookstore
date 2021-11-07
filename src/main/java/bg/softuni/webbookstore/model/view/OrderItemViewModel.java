@@ -7,6 +7,7 @@ public class OrderItemViewModel {
     private Long bookId;
     private String bookTitle;
     private String bookPictureUrl;
+    private Boolean bookActive;
     private BigDecimal bookPrice;
     private BigDecimal totalPrice;
     private Integer quantity;
@@ -38,6 +39,15 @@ public class OrderItemViewModel {
 
     public OrderItemViewModel setBookPictureUrl(String bookPictureUrl) {
         this.bookPictureUrl = bookPictureUrl;
+        return this;
+    }
+
+    public Boolean getBookActive() {
+        return bookActive;
+    }
+
+    public OrderItemViewModel setBookActive(Boolean bookActive) {
+        this.bookActive = bookActive;
         return this;
     }
 

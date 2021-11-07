@@ -33,7 +33,7 @@
             </a>
             <a th:href="@{/cart/add/{id}(id=*{id})}"
                type="button" class="btn btn-sm col-md-2"
-               th:classappend="*{getCopies() == 0}? 'disabled'"
+               th:classappend="*{getCopies() == 0} ? 'disabled'"
                title="Add to Cart">
                 <i class="fas fa-shopping-cart fa-lg"></i>
             </a>

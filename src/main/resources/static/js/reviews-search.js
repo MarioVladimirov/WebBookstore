@@ -23,7 +23,7 @@ function toggle(e) {
 function showBookReviews() {
     bookReviewsContainer.innerHTML = '';
 
-    let bookId = document.currentScript.getAttribute('id');
+    // let bookId = document.currentScript.getAttribute('id');
 
     fetch("http://localhost:8080/reviews/api")
         .then(response => response.json())
@@ -37,8 +37,8 @@ function showBookReviews() {
                     return;
                 }
 
-                let bookReviews = reviews
-                    .filter(r => r.bookId == bookId);
+                // let bookReviews = reviews
+                //     .filter(r => r.bookId === bookId);
 
                 displayReviews(bookReviewsContainer, createBookReviewElement, ...bookReviews);
             }

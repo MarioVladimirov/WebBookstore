@@ -418,3 +418,9 @@ img {
 .summary hr {
     margin-top: 1.25rem
 }
+
+.link-disabled {
+    opacity: .4;
+    cursor: default !important;
+    pointer-events: none;
+}
