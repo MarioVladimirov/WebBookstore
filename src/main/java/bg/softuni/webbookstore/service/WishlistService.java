@@ -6,5 +6,5 @@ public interface WishlistService {
 
     void removeFromWishlist(Long id, String username);
 
-    void deleteFromAllWishlists(Long bookId);
+    void deleteBookFromAllWishlists(Long bookId);
 }

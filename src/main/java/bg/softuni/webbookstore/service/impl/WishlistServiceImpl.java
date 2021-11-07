@@ -60,9 +60,8 @@ public class WishlistServiceImpl implements WishlistService {
     }
 
     @Override
-    public void deleteFromAllWishlists(Long bookId) {
+    public void deleteBookFromAllWishlists(Long bookId) {
         wishlistRepository
-                .deleteAll(wishlistRepository
-                        .findAllByBookId(bookId));
+                .deleteAllByBookId(bookId);
     }
 }

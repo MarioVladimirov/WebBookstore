@@ -164,7 +164,7 @@ public class BookController {
     //DELETE
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {
-        wishlistService.deleteFromAllWishlists(id);
+        wishlistService.deleteBookFromAllWishlists(id);
         shoppingCartService.deleteBookFromAllShoppingCarts(id);
         reviewService.deleteAllReviewsForBook(id);
         bookService.delete(id);

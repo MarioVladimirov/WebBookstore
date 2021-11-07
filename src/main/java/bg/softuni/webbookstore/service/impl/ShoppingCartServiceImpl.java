@@ -117,14 +117,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public void deleteOrderedCardItems(String username) {
         cartItemRepository
-                .deleteAll(cartItemRepository
-                        .findAllByCustomerUsername(username));
+                .deleteAllByCustomerUsername(username);
     }
 
     @Override
     public void deleteBookFromAllShoppingCarts(Long bookId) {
         cartItemRepository
-                .deleteAll(cartItemRepository
-                        .findAllByBookId(bookId));
+                .deleteAllByBookId(bookId);
     }
 }
