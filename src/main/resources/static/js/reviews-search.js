@@ -23,7 +23,7 @@ function toggle(e) {
 function showBookReviews() {
     bookReviewsContainer.innerHTML = '';
 
-    let bookId = document.currentScript.getAttribute('book-id');
+    let bookId = document.currentScript.getAttribute('id');
 
     fetch("http://localhost:8080/reviews/api")
         .then(response => response.json())

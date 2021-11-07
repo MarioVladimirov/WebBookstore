@@ -60,6 +60,11 @@ public class ReviewServiceImpl implements ReviewService {
         return newEntity.getId();
     }
 
+    @Override
+    public void deleteAllReviewsForBook(Long bookId) {
+        reviewRepository.deleteAllByBookId(bookId);
+    }
+
     private ReviewViewModel getReviewModel(ReviewEntity reviewEntity) {
         return modelMapper
                 .map(reviewEntity, ReviewViewModel.class);

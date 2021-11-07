@@ -30,15 +30,17 @@ public class BookController {
     private final AuthorService authorService;
     private final ShoppingCartService shoppingCartService;
     private final WishlistService wishlistService;
+    private final ReviewService reviewService;
     private final PagesViewCountService pagesViewCountService;
     private final ModelMapper modelMapper;
 
-    public BookController(BookService bookService, PublishingHouseService publishingHouseService, AuthorService authorService, ShoppingCartService shoppingCartService, WishlistService wishlistService, PagesViewCountService pagesViewCountService, ModelMapper modelMapper) {
+    public BookController(BookService bookService, PublishingHouseService publishingHouseService, AuthorService authorService, ShoppingCartService shoppingCartService, WishlistService wishlistService, ReviewService reviewService, PagesViewCountService pagesViewCountService, ModelMapper modelMapper) {
         this.bookService = bookService;
         this.publishingHouseService = publishingHouseService;
         this.authorService = authorService;
         this.shoppingCartService = shoppingCartService;
         this.wishlistService = wishlistService;
+        this.reviewService = reviewService;
         this.pagesViewCountService = pagesViewCountService;
         this.modelMapper = modelMapper;
     }
@@ -164,6 +166,7 @@ public class BookController {
     public String delete(@PathVariable Long id) {
         wishlistService.deleteFromAllWishlists(id);
         shoppingCartService.deleteBookFromAllShoppingCarts(id);
+        reviewService.deleteAllReviewsForBook(id);
         bookService.delete(id);
         return "redirect:/books/all";
     }

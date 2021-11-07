@@ -1,9 +1,7 @@
 package bg.softuni.webbookstore.web;
 
 import bg.softuni.webbookstore.model.view.CartItemViewModel;
-import bg.softuni.webbookstore.service.BookService;
 import bg.softuni.webbookstore.service.ShoppingCartService;
-import bg.softuni.webbookstore.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -20,13 +18,9 @@ import java.util.List;
 public class ShoppingCartController {
 
     private final ShoppingCartService shoppingCartService;
-    private final BookService bookService;
-    private final UserService userService;
 
-    public ShoppingCartController(ShoppingCartService shoppingCartService, BookService bookService, UserService userService) {
+    public ShoppingCartController(ShoppingCartService shoppingCartService) {
         this.shoppingCartService = shoppingCartService;
-        this.bookService = bookService;
-        this.userService = userService;
     }
 
     @GetMapping()

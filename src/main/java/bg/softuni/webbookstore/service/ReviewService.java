@@ -12,4 +12,6 @@ public interface ReviewService {
     List<ReviewViewModel> findAllReviewsByUser(String username);
 
     Long add(ReviewAddServiceModel serviceModel);
+
+    void deleteAllReviewsForBook(Long bookId);
 }

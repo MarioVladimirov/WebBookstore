@@ -1,14 +1,12 @@
 package bg.softuni.webbookstore.service.impl;
 
 import bg.softuni.webbookstore.model.entity.BookEntity;
-import bg.softuni.webbookstore.model.entity.CartItemEntity;
 import bg.softuni.webbookstore.model.entity.UserEntity;
 import bg.softuni.webbookstore.model.entity.WishlistItemEntity;
 import bg.softuni.webbookstore.repository.BookRepository;
 import bg.softuni.webbookstore.repository.UserRepository;
 import bg.softuni.webbookstore.repository.WishlistRepository;
 import bg.softuni.webbookstore.service.WishlistService;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,13 +17,11 @@ public class WishlistServiceImpl implements WishlistService {
     private final WishlistRepository wishlistRepository;
     private final BookRepository bookRepository;
     private final UserRepository userRepository;
-    private final ModelMapper modelMapper;
 
-    public WishlistServiceImpl(WishlistRepository wishlistRepository, BookRepository bookRepository, UserRepository userRepository, ModelMapper modelMapper) {
+    public WishlistServiceImpl(WishlistRepository wishlistRepository, BookRepository bookRepository, UserRepository userRepository) {
         this.wishlistRepository = wishlistRepository;
         this.bookRepository = bookRepository;
         this.userRepository = userRepository;
-        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -35,7 +31,7 @@ public class WishlistServiceImpl implements WishlistService {
 
         if (wishlistItem.isEmpty()) {
             BookEntity book = bookRepository
-                    .findById(id)
+                    .findByIdAndActiveTrue(id)
                     .orElseThrow(() ->
                             new IllegalStateException("Book not found"));
 

@@ -93,7 +93,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public String findBookTitleById(Long id) {
         return bookRepository
-                .findById(id)
+                .findByIdAndActiveTrue(id)
                 .orElseThrow(() ->
                         new IllegalStateException("Book not found"))
                 .getTitle();
@@ -173,7 +173,6 @@ public class BookServiceImpl implements BookService {
                 .findByIdAndActiveTrue(id)
                 .orElseThrow(() ->
                         new IllegalStateException("Book not found"));
-        reviewRepository.deleteAllByBookId(id);
         bookEntity.setActive(false);
         bookRepository.save(bookEntity);
     }
