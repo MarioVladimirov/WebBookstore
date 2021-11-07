@@ -23,12 +23,16 @@ function toggle(e) {
 function showBookReviews() {
     bookReviewsContainer.innerHTML = '';
 
-    // let bookId = document.currentScript.getAttribute('id');
+    let url = window.location.href;
+    let id = url.substring(url.lastIndexOf('/') + 1);
+    let bookId = Number.parseInt(id);
 
     fetch("http://localhost:8080/reviews/api")
         .then(response => response.json())
         .then(reviews => {
-                if (reviews.length === 0) {
+                let bookReviews = reviews.filter(r => r.bookId === bookId);
+
+                if (bookReviews.length === 0) {
                     bookReviewsContainer.innerHTML =
                         `<div class="mb-3">
                             <h5 class="text-left text-secondary">Be the first one to write a review</h5>
@@ -36,9 +40,6 @@ function showBookReviews() {
                          </div>`;
                     return;
                 }
-
-                // let bookReviews = reviews
-                //     .filter(r => r.bookId === bookId);
 
                 displayReviews(bookReviewsContainer, createBookReviewElement, ...bookReviews);
             }
@@ -71,14 +72,13 @@ function displayReviews(container, func, ...reviews) {
 }
 
 function createBookReviewElement(review) {
-    if (review.bookId == bookId) {
-        let article = document.createElement('article');
-        article.classList.add('card', 'row', 'mt-2', 'w-100');
+    let article = document.createElement('article');
+    article.classList.add('card', 'row', 'mt-2', 'w-100');
 
-        let dateTime = review.addedOn.slice(0, 19)
-            .replace('T', ' ');
+    let dateTime = review.addedOn.slice(0, 19)
+        .replace('T', ' ');
 
-        article.innerHTML = `<div class="card-body">
+    article.innerHTML = `<div class="card-body">
                             <h5 class="card-title">${review.title}</h5>
                             <p class="card-text"><strong>Rating: </strong>${review.rating}</p>
                             <p class="card-text">${review.textContent}</p>
@@ -88,8 +88,8 @@ function createBookReviewElement(review) {
                             </footer>
                         </div>`;
 
-        return article;
-    }
+    return article;
+
 }
 
 function createUserReviewElement(review) {
