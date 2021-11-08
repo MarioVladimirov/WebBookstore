@@ -35,6 +35,6 @@ public class UserRoleController {
 
         userRoleService.assignUserRole(username, UserRoleEnum.valueOf(role.toUpperCase()));
 
-        return "redirect:/home";
+        return "redirect:/books/all";
     }
 }

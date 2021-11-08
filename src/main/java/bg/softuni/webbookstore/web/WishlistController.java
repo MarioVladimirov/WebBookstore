@@ -43,7 +43,7 @@ public class WishlistController {
 
         getWishListBooksByCustomer(model, principal);
 
-        return "redirect:/home";
+        return "redirect:/books/all";
     }
 
     @GetMapping("/remove/{id}")

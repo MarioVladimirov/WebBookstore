@@ -59,7 +59,7 @@ public class BookController {
     @GetMapping("/all")
     public String allBooks(Model model) {
         model.addAttribute("books", bookService.findAllBooks());
-        return "home";
+        return "all-books";
     }
 
     //CREATE

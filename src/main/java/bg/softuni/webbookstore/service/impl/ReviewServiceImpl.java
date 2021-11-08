@@ -12,6 +12,7 @@ import bg.softuni.webbookstore.service.ReviewService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -67,7 +68,8 @@ public class ReviewServiceImpl implements ReviewService {
 
     private ReviewViewModel getReviewModel(ReviewEntity reviewEntity) {
         return modelMapper
-                .map(reviewEntity, ReviewViewModel.class);
+                .map(reviewEntity, ReviewViewModel.class)
+                .setAddedOn(reviewEntity.getAddedOn().atZone(ZoneId.systemDefault()));
     }
 
     private UserEntity getUserEntity(String username) {

@@ -1,6 +1,7 @@
 package bg.softuni.webbookstore.model.view;
 
 import java.time.Instant;
+import java.time.ZonedDateTime;
 
 public class ReviewViewModel {
 
@@ -8,7 +9,7 @@ public class ReviewViewModel {
     private String title;
     private String textContent;
     private Integer rating;
-    private Instant addedOn;
+    private ZonedDateTime addedOn;
     private String bookTitle;
     private Long bookId;
 
@@ -52,11 +53,11 @@ public class ReviewViewModel {
         return this;
     }
 
-    public Instant getAddedOn() {
+    public ZonedDateTime getAddedOn() {
         return addedOn;
     }
 
-    public ReviewViewModel setAddedOn(Instant addedOn) {
+    public ReviewViewModel setAddedOn(ZonedDateTime addedOn) {
         this.addedOn = addedOn;
         return this;
     }

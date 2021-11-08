@@ -34,7 +34,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                     .antMatchers("/books/add", "/books/edit/**", "/books/delete/**",
                         "/authors/add", "/authors/edit/**", "/authors/delete/**",
                         "/roles/**", "/stats/*").hasRole("ADMIN")
-                    .antMatchers("/", "/home", "/users/login", "/users/register",
+                    .antMatchers("/", "/users/login", "/users/register",
                             "/books/*", "/reviews/api").permitAll()
                     .anyRequest().authenticated()
                 .and()
@@ -42,7 +42,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                     .loginPage("/users/login")
                     .usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
                     .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
-                    .defaultSuccessUrl("/home")
+                    .defaultSuccessUrl("/books/all")
                     .failureForwardUrl("/users/login-error")
                 .and()
                 .logout()

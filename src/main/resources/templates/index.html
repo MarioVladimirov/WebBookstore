@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/commons :: head"></head>
+
+<body>
+
+<!-- Navigation-->
+<header th:replace="fragments/commons :: navbar"></header>
+
+<main class="align-content-center">
+    <!-- Main Content-->
+    <section class="container-fluid">
+
+        <!-- Sidebar-->
+        <nav th:replace="fragments/commons :: sidebar"></nav>
+
+        <!-- Page Content -->
+        <div id="content" class="container">
+            <div class="jumbotron text-center mx-5">
+                <h1 class="display-4">Welcome to XXXX!</h1>
+                <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra
+                    attention to featured content or information.</p>
+                <hr class="my-4">
+                <p>Want to dive into our world of stories?</p>
+                <div class="row d-flex justify-content-center">
+                    <a th:href="@{/books/all}"
+                       type="button" class="btn btn-info btn-md btn-block w-25 my-3">
+                        Search books
+                    </a>
+                </div>
+            </div>
+            <h5 class="text-white text-center font-weight-bold mb-3">Newest Books in Store</h5>
+            <hr class="hr-3 w-75 bg-white">
+            <div th:replace="fragments/book-cards-list"></div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer-->
+<footer th:replace="fragments/commons :: footer"></footer>
+
+</body>
+</html>

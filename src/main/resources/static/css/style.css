@@ -77,6 +77,11 @@ div.form-group input:read-only, option:disabled {
     background-color: #B8B8B8 !important;
 }
 
+.jumbotron {
+    padding: 4vw;
+    margin: 4vh;
+}
+
 /* Book cards */
 .card {
     background-color: #ececec !important;

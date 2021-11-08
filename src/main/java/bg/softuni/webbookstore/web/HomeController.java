@@ -15,15 +15,8 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("books", bookService.findAllBooks());
-        return "home";
-    }
-
-    @GetMapping("/home")
     public String home(Model model) {
-        model.addAttribute("books", bookService.findAllBooks());
-        return "home";
+        model.addAttribute("books", bookService.findTopThreeNewestBooks());
+        return "index";
     }
-
 }

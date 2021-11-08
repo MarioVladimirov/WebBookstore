@@ -87,7 +87,7 @@ public class UserController {
         userService.login(modelMapper
                 .map(userLoginBindingModel, UserLoginServiceModel.class));
 
-        return "redirect:/home";
+        return "redirect:/books/all";
     }
 
     @PostMapping("/login-error")

@@ -1,7 +1,9 @@
 package bg.softuni.webbookstore.model.entity;
 
 import javax.persistence.*;
+import java.time.Clock;
 import java.time.Instant;
+import java.time.ZoneId;
 
 @Entity
 @Table(name = "reviews")

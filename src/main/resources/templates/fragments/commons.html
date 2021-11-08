@@ -110,15 +110,29 @@
 
         <ul class="list-unstyled components">
             <li class="active">
-                <a th:href="@{/home}">
-                    <i class="fas fa-home"></i>
-                    Home
-                </a>
-            </li>
-            <li>
                 <a th:href="@{/books/all}">
                     <i class="fas fa-book-open"></i>
                     All Books
+                </a>
+            </li>
+            <li>
+                <a href="#categoriesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fas fa-list-ul"></i>
+                    Categories
+                </a>
+                <ul class="collapse list-unstyled" id="categoriesSubmenu">
+                    <li th:each="c : ${T(bg.softuni.webbookstore.model.entity.enums.CategoryEnum).values()}">
+                        <a href="/" th:text="|&ensp;${c}|" th:value="${c}">
+                            Category
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a sec:authorize="hasRole('ROLE_ADMIN')"
+                   th:href="@{/dashboard}">
+                    <i class="fas fa-chart-bar"></i>
+                    Dashboard
                 </a>
             </li>
             <li>
@@ -136,19 +150,6 @@
                     <li>
                         <a th:href="@{/stats/orders}">
                             &ensp;Orders
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#categoriesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                    <i class="fas fa-list-ul"></i>
-                    Categories
-                </a>
-                <ul class="collapse list-unstyled" id="categoriesSubmenu">
-                    <li th:each="c : ${T(bg.softuni.webbookstore.model.entity.enums.CategoryEnum).values()}">
-                        <a href="/" th:text="|&ensp;${c}|" th:value="${c}">
-                            Category
                         </a>
                     </li>
                 </ul>

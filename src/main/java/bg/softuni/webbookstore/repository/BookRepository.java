@@ -18,6 +18,8 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
 
     List<BookEntity> findAllByActiveTrueOrderByAddedOnDesc();
 
+    List<BookEntity> findTop3ByActiveTrueOrderByAddedOnDesc();
+
     List<BookEntity> findAllByActiveTrueAndAuthorIdOrderByAddedOnDesc(Long id);
 
     List<BookEntity> findAllByActiveTrueAndPublishingHouseIdOrderByAddedOnDesc(Long id);

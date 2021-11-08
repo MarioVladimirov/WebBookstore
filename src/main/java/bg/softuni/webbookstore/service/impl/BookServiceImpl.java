@@ -63,6 +63,15 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<BookSummaryViewModel> findTopThreeNewestBooks() {
+        return bookRepository
+                .findTop3ByActiveTrueOrderByAddedOnDesc()
+                .stream()
+                .map(this::getSummaryViewModel)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<BookSummaryViewModel> findBooksByAuthor(Long id) {
         return bookRepository
                 .findAllByActiveTrueAndAuthorIdOrderByAddedOnDesc(id)

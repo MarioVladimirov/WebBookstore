@@ -14,6 +14,8 @@ public interface BookService {
 
     List<BookSummaryViewModel> findAllBooks();
 
+    List<BookSummaryViewModel> findTopThreeNewestBooks();
+
     List<BookSummaryViewModel> findBooksByAuthor(Long id);
 
     List<BookSummaryViewModel> findBooksByPublishingHouse(Long id);
