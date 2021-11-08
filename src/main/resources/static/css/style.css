@@ -5,6 +5,7 @@ body {
     background-attachment: fixed;
     background-size: cover;
     background-color: #464646;
+    color: #0b2e50;
 }
 
 body.form-page {
