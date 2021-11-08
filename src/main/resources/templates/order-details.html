@@ -29,7 +29,7 @@
                         </h4>
                         <h5>
                             <strong>Order Time: </strong>
-                            <span th:text="*{orderTime}"></span>
+                            <span th:text="${#temporals.format(order.orderTime, 'yyyy-MM-dd HH:mm')}"></span>
                         </h5>
                         <h5>
                             <strong>Status: </strong>
