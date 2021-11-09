@@ -17,6 +17,7 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("books", bookService.findTopThreeNewestBooks());
+        model.addAttribute("mostPopular", bookService.findTopThreeMostPopularBooks());
         return "index";
     }
 }

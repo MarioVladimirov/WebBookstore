@@ -13,6 +13,7 @@ import bg.softuni.webbookstore.repository.*;
 import bg.softuni.webbookstore.service.*;
 import bg.softuni.webbookstore.utils.StringUtils;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,7 +32,6 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
     private final PictureRepository pictureRepository;
-    private final ReviewRepository reviewRepository;
     private final WishlistRepository wishlistRepository;
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
@@ -40,10 +40,9 @@ public class BookServiceImpl implements BookService {
     private final CloudinaryService cloudinaryService;
     private final ModelMapper modelMapper;
 
-    public BookServiceImpl(BookRepository bookRepository, PictureRepository pictureRepository, ReviewRepository reviewRepository, WishlistRepository wishlistRepository, UserRepository userRepository, CategoryRepository categoryRepository, PublishingHouseRepository publishingHouseRepository, AuthorRepository authorRepository, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
+    public BookServiceImpl(BookRepository bookRepository, PictureRepository pictureRepository, WishlistRepository wishlistRepository, UserRepository userRepository, CategoryRepository categoryRepository, PublishingHouseRepository publishingHouseRepository, AuthorRepository authorRepository, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
         this.bookRepository = bookRepository;
         this.pictureRepository = pictureRepository;
-        this.reviewRepository = reviewRepository;
         this.wishlistRepository = wishlistRepository;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
@@ -66,6 +65,15 @@ public class BookServiceImpl implements BookService {
     public List<BookSummaryViewModel> findTopThreeNewestBooks() {
         return bookRepository
                 .findTop3ByActiveTrueOrderByAddedOnDesc()
+                .stream()
+                .map(this::getSummaryViewModel)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BookSummaryViewModel> findTopThreeMostPopularBooks() {
+        return bookRepository
+                .findTop3MostPopularBySoldCopiesAndReviewsCount(PageRequest.of(0, 3))
                 .stream()
                 .map(this::getSummaryViewModel)
                 .collect(Collectors.toList());
