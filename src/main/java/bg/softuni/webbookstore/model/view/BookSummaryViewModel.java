@@ -10,6 +10,7 @@ public class BookSummaryViewModel {
     private String pictureUrl;
     private Integer copies;
     private BigDecimal price;
+    private String language;
     private Set<String> categories;
     private String author;
     private Long authorId;
@@ -60,6 +61,15 @@ public class BookSummaryViewModel {
 
     public BookSummaryViewModel setPrice(BigDecimal price) {
         this.price = price;
+        return this;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public BookSummaryViewModel setLanguage(String language) {
+        this.language = language;
         return this;
     }
 

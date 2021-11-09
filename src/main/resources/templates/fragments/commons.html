@@ -129,6 +129,19 @@
                 </ul>
             </li>
             <li>
+                <a href="#languagesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fas fa-list-ul"></i>
+                    Languages
+                </a>
+                <ul class="collapse list-unstyled" id="languagesSubmenu">
+                    <li th:each="l : ${T(bg.softuni.webbookstore.model.entity.enums.LanguageEnum).values()}">
+                        <a href="/" th:text="|&ensp;${l}|" th:value="${l}">
+                            Language
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
                 <a sec:authorize="hasRole('ROLE_ADMIN')"
                    th:href="@{/dashboard}">
                     <i class="fas fa-chart-bar"></i>

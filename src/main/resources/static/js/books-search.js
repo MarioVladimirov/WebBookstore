@@ -1,6 +1,7 @@
-const booksList = document.getElementById('booksList')
-const searchForm = document.getElementById('searchForm')
-const sidebar = document.getElementById('categoriesSubmenu')
+const booksList = document.getElementById('booksList');
+const searchForm = document.getElementById('searchForm');
+const categoriesSubmenu = document.getElementById('categoriesSubmenu');
+const languagesSubmenu = document.getElementById('languagesSubmenu');
 
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -9,10 +10,10 @@ searchForm.addEventListener('submit', (e) => {
     const searchingCharacters = document
         .getElementById('searchBar').value.toLowerCase();
 
-    fetch("http://localhost:8080/books/api")
+    fetch("http://localhost:8080/books/api", {redirect: "manual"})
         .then(response => response.json())
         .then(books => {
-                for (let book of books) {
+                for (const book of books) {
                     if (book.title.toLowerCase().includes(searchingCharacters)
                         || book.author.toLowerCase().includes(searchingCharacters)) {
                         booksList.appendChild(createBookArticle(book));
@@ -22,7 +23,7 @@ searchForm.addEventListener('submit', (e) => {
         );
 });
 
-sidebar.addEventListener('click', (e) => {
+categoriesSubmenu.addEventListener('click', (e) => {
     e.preventDefault();
 
     booksList.innerHTML = '';
@@ -37,6 +38,24 @@ sidebar.addEventListener('click', (e) => {
                             booksList.appendChild(createBookArticle(book));
                             break;
                         }
+                    }
+                }
+            }
+        );
+});
+
+languagesSubmenu.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    booksList.innerHTML = '';
+    const searchLanguage = e.target.getAttribute('value');
+
+    fetch("http://localhost:8080/books/api")
+        .then(response => response.json())
+        .then(books => {
+                for (const book of books) {
+                    if (book.language === searchLanguage) {
+                        booksList.appendChild(createBookArticle(book));
                     }
                 }
             }
