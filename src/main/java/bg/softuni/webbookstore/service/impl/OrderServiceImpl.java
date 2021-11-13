@@ -13,6 +13,7 @@ import bg.softuni.webbookstore.repository.UserRepository;
 import bg.softuni.webbookstore.service.OrderService;
 import bg.softuni.webbookstore.service.ShoppingCartService;
 import bg.softuni.webbookstore.utils.StringUtils;
+import bg.softuni.webbookstore.web.exception.EmptyOrderException;
 import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -66,6 +67,10 @@ public class OrderServiceImpl implements OrderService {
         List<CartItemViewModel> itemsToOrder = shoppingCartService
                 .getCartItemsByCustomer(username);
 
+        if (itemsToOrder.size() == 0) {
+            throw new EmptyOrderException("There are no items in this order. Please chose some books first.");
+        }
+
         BigDecimal totalPrice = itemsToOrder
                 .stream()
                 .map(CartItemViewModel::calculatePrice)
@@ -103,9 +108,9 @@ public class OrderServiceImpl implements OrderService {
         return new OrderItemEntity()
                 .setQuantity(cartItem.getQuantity())
                 .setBook(bookRepository
-                        .findById(cartItem.getBook().getId())
+                        .findByIdAndActiveTrue(cartItem.getBook().getId())
                         .orElseThrow(() ->
-                                new IllegalStateException("Book not found")));
+                                new ObjectNotFoundException("book")));
     }
 
     private OrderViewModel getOrderViewModel(OrderEntity orderEntity) {
@@ -119,8 +124,6 @@ public class OrderServiceImpl implements OrderService {
     private UserEntity getUserEntity(String username) {
         return userRepository
                 .findByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "Creator " + username + " could not be found")
-                );
+                .orElseThrow(() -> new ObjectNotFoundException("user"));
     }
 }

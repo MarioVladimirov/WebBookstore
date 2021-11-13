@@ -158,7 +158,7 @@ public class BookServiceImpl implements BookService {
         BookEntity bookEntity = bookRepository
                 .findByIdAndActiveTrue(bookUpdateServiceModel.getId())
                 .orElseThrow(() ->
-                        new IllegalArgumentException("Book not found"));
+                        new ObjectNotFoundException("book"));
 
         MultipartFile img = bookUpdateServiceModel.getImage();
         if (!"".equals(img.getOriginalFilename())) {
@@ -190,7 +190,7 @@ public class BookServiceImpl implements BookService {
         BookEntity bookEntity = bookRepository
                 .findByIdAndActiveTrue(id)
                 .orElseThrow(() ->
-                        new IllegalStateException("Book not found"));
+                        new ObjectNotFoundException("book"));
         bookEntity.setActive(false);
         bookRepository.save(bookEntity);
     }
@@ -205,7 +205,7 @@ public class BookServiceImpl implements BookService {
         BookEntity bookEntity = bookRepository
                 .findByIdAndActiveTrue(id)
                 .orElseThrow(() ->
-                        new IllegalStateException("Book not found"));
+                        new ObjectNotFoundException("book"));
 
         bookEntity.setCopies(bookEntity.getCopies() + 1);
         bookRepository.save(bookEntity);
@@ -216,7 +216,7 @@ public class BookServiceImpl implements BookService {
         BookEntity bookEntity = bookRepository
                 .findByIdAndActiveTrue(id)
                 .orElseThrow(() ->
-                        new IllegalStateException("Book not found"));
+                        new ObjectNotFoundException("book"));
 
         bookEntity.setCopies(bookEntity.getCopies() - 1);
         bookRepository.save(bookEntity);
@@ -256,9 +256,7 @@ public class BookServiceImpl implements BookService {
     private UserEntity getUserEntity(String username) {
         return userRepository
                 .findByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "Creator " + username + " could not be found")
-                );
+                .orElseThrow(() -> new ObjectNotFoundException("user"));
     }
 
     private AuthorEntity getAuthorEntity(String firstName, String lastName) {
@@ -276,9 +274,7 @@ public class BookServiceImpl implements BookService {
     private PublishingHouseEntity getPublishingHouseEntity(String publishingHouseName) {
         return publishingHouseRepository
                 .findByName(publishingHouseName)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "Publishing house " + publishingHouseName + " not found"
-                ));
+                .orElseThrow(() -> new ObjectNotFoundException("publishing house"));
     }
 
     private LanguageEnum getLanguageEnum(String language) {
@@ -294,9 +290,7 @@ public class BookServiceImpl implements BookService {
 
                     return categoryRepository
                             .findByCategory(categoryEnum)
-                            .orElseThrow(() -> new IllegalArgumentException(
-                                    "Category with name " + category + " not found"
-                            ));
+                            .orElseThrow(() -> new ObjectNotFoundException("category"));
                 })
                 .collect(Collectors.toSet());
     }
@@ -315,8 +309,7 @@ public class BookServiceImpl implements BookService {
     private void deleteOldPicture(Long bookId) {
         BookEntity bookEntity = bookRepository
                 .findByIdAndActiveTrue(bookId)
-                .orElseThrow(() ->
-                        new IllegalStateException("Book not found"));
+                .orElseThrow(() -> new ObjectNotFoundException("book"));
 
         if (bookEntity.getPicture().getPublicId() != null) {
             cloudinaryService.deleteImage(bookEntity.getPicture().getPublicId());

@@ -9,6 +9,7 @@ import bg.softuni.webbookstore.repository.CartItemRepository;
 import bg.softuni.webbookstore.repository.UserRepository;
 import bg.softuni.webbookstore.service.BookService;
 import bg.softuni.webbookstore.service.ShoppingCartService;
+import bg.softuni.webbookstore.web.exception.NoMoreCopiesAvailableException;
 import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -59,7 +60,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 cartItemEntity.get().setQuantity(newQuantity);
                 cartItemRepository.save(cartItemEntity.get());
             } else {
-                throw new IllegalStateException("Sorry, no more copies are currently available to order");
+                throw new NoMoreCopiesAvailableException("Sorry, no more copies are currently available to order");
             }
         } else {
             BookEntity book = bookRepository

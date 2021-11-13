@@ -1,13 +1,11 @@
 package bg.softuni.webbookstore.service.impl;
 
-import bg.softuni.webbookstore.model.entity.BookEntity;
 import bg.softuni.webbookstore.model.entity.UserEntity;
 import bg.softuni.webbookstore.model.entity.UserRoleEntity;
 import bg.softuni.webbookstore.model.entity.enums.UserRoleEnum;
 import bg.softuni.webbookstore.model.service.UserLoginServiceModel;
 import bg.softuni.webbookstore.model.service.UserRegisterServiceModel;
 import bg.softuni.webbookstore.model.view.UserViewModel;
-import bg.softuni.webbookstore.repository.BookRepository;
 import bg.softuni.webbookstore.repository.UserRepository;
 import bg.softuni.webbookstore.repository.UserRoleRepository;
 import bg.softuni.webbookstore.service.UserService;
@@ -27,15 +25,13 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
-    private final BookRepository bookRepository;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
     private final BookstoreUserService bookstoreUserService;
 
-    public UserServiceImpl(UserRepository userRepository, UserRoleRepository userRoleRepository, BookRepository bookRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper, BookstoreUserService bookstoreUserService) {
+    public UserServiceImpl(UserRepository userRepository, UserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper, BookstoreUserService bookstoreUserService) {
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
-        this.bookRepository = bookRepository;
         this.passwordEncoder = passwordEncoder;
         this.modelMapper = modelMapper;
         this.bookstoreUserService = bookstoreUserService;

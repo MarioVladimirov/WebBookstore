@@ -4,6 +4,7 @@ import bg.softuni.webbookstore.model.entity.OrderEntity;
 import bg.softuni.webbookstore.model.view.OrdersStatsView;
 import bg.softuni.webbookstore.repository.OrderRepository;
 import bg.softuni.webbookstore.service.OrdersStatsService;
+import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -24,7 +25,7 @@ public class OrdersStatsServiceImpl implements OrdersStatsService {
             OrderEntity lastOrder = orderRepository
                     .findTopByOrderByOrderTimeDesc()
                     .orElseThrow(() ->
-                            new IllegalStateException("Order not found"));
+                            new ObjectNotFoundException("order"));
 
             if (lastOrder.getPrice().compareTo(BigDecimal.valueOf(50)) >= 0) {
                 ordersAboveFiftyBGN++;

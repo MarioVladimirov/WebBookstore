@@ -9,6 +9,7 @@ import bg.softuni.webbookstore.repository.BookRepository;
 import bg.softuni.webbookstore.repository.ReviewRepository;
 import bg.softuni.webbookstore.repository.UserRepository;
 import bg.softuni.webbookstore.service.ReviewService;
+import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -75,16 +76,12 @@ public class ReviewServiceImpl implements ReviewService {
     private UserEntity getUserEntity(String username) {
         return userRepository
                 .findByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "Creator " + username + " could not be found")
-                );
+                .orElseThrow(() -> new ObjectNotFoundException("user"));
     }
 
     private BookEntity getBookEntity(Long id) {
         return bookRepository
-                .findById(id)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "Book could not be found")
-                );
+                .findByIdAndActiveTrue(id)
+                .orElseThrow(() -> new ObjectNotFoundException("book"));
     }
 }

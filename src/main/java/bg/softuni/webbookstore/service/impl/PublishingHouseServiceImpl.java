@@ -1,6 +1,5 @@
 package bg.softuni.webbookstore.service.impl;
 
-import bg.softuni.webbookstore.model.entity.PublishingHouseEntity;
 import bg.softuni.webbookstore.model.view.PublishingHouseViewModel;
 import bg.softuni.webbookstore.repository.PublishingHouseRepository;
 import bg.softuni.webbookstore.service.PublishingHouseService;
