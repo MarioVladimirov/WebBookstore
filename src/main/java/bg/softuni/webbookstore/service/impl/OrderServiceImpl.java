@@ -13,12 +13,14 @@ import bg.softuni.webbookstore.repository.UserRepository;
 import bg.softuni.webbookstore.service.OrderService;
 import bg.softuni.webbookstore.service.ShoppingCartService;
 import bg.softuni.webbookstore.utils.StringUtils;
+import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -90,12 +92,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderViewModel findById(Long id) {
+    public Optional<OrderViewModel> findById(Long id) {
         return orderRepository
                 .findById(id)
-                .map(this::getOrderViewModel)
-                .orElseThrow(() ->
-                        new IllegalStateException("Order not found"));
+                .map(this::getOrderViewModel);
     }
 
 

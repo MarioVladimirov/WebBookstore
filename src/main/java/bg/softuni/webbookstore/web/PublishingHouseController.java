@@ -3,6 +3,7 @@ package bg.softuni.webbookstore.web;
 import bg.softuni.webbookstore.model.view.PublishingHouseViewModel;
 import bg.softuni.webbookstore.service.BookService;
 import bg.softuni.webbookstore.service.PublishingHouseService;
+import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,10 +28,12 @@ public class PublishingHouseController {
     public String details(@PathVariable Long id,
                           Model model) {
 
-        Optional<PublishingHouseViewModel> viewModel = publishingHouseService.findById(id);
+        PublishingHouseViewModel viewModel = publishingHouseService
+                .findById(id)
+                .orElseThrow(() ->
+                        new ObjectNotFoundException("publishing house"));
 
-        //TODO - error handling if empty optional
-        model.addAttribute("publishingHouse", viewModel.get());
+        model.addAttribute("publishingHouse", viewModel);
         model.addAttribute("books", bookService.findBooksByPublishingHouse(id));
 
         return "publishing-house-details";

@@ -9,6 +9,7 @@ import bg.softuni.webbookstore.repository.CartItemRepository;
 import bg.softuni.webbookstore.repository.UserRepository;
 import bg.softuni.webbookstore.service.BookService;
 import bg.softuni.webbookstore.service.ShoppingCartService;
+import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -61,14 +62,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 throw new IllegalStateException("Sorry, no more copies are currently available to order");
             }
         } else {
-            BookEntity book = bookRepository.findById(id)
+            BookEntity book = bookRepository
+                    .findByIdAndActiveTrue(id)
                     .orElseThrow(() ->
-                            new IllegalStateException("Book not found"));
+                            new ObjectNotFoundException("book"));
             bookService.decreaseWithOneCopy(id);
 
             UserEntity customer = userRepository.findByUsername(username)
                     .orElseThrow(() ->
-                            new IllegalStateException("Customer not found"));
+                            new ObjectNotFoundException("customer"));
 
             CartItemEntity newCartItemEntity = new CartItemEntity()
                     .setQuantity(1)
@@ -84,7 +86,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         CartItemEntity cartItemEntity = cartItemRepository
                 .findByBookIdAndCustomerUsername(id, username)
                 .orElseThrow(() ->
-                        new IllegalStateException("Item not found"));
+                        new ObjectNotFoundException("cart item"));
 
         BookEntity book = cartItemEntity.getBook();
         book.setCopies(
@@ -101,7 +103,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         CartItemEntity cartItemEntity = cartItemRepository
                 .findByBookIdAndCustomerUsername(id, username)
                 .orElseThrow(() ->
-                        new IllegalStateException("Item not found"));
+                        new ObjectNotFoundException("cart item"));
 
         if (cartItemEntity.getQuantity() > 1) {
             BookEntity book = cartItemEntity.getBook();

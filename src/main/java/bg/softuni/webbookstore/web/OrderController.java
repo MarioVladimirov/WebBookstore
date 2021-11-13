@@ -1,6 +1,8 @@
 package bg.softuni.webbookstore.web;
 
+import bg.softuni.webbookstore.model.view.OrderViewModel;
 import bg.softuni.webbookstore.service.OrderService;
+import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -33,7 +35,12 @@ public class OrderController {
     public String orderDetails(@PathVariable Long id,
                                Model model) {
 
-        model.addAttribute("order", orderService.findById(id));
+        OrderViewModel orderViewModel = orderService
+                .findById(id)
+                .orElseThrow(() ->
+                        new ObjectNotFoundException("order"));
+
+        model.addAttribute("order", orderViewModel);
 
         return "order-details";
     }

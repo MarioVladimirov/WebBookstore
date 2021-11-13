@@ -45,9 +45,9 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/remove/{id}")
-    public String removeFromWishlist(@PathVariable Long id,
-                                     Model model,
-                                     @AuthenticationPrincipal UserDetails principal) {
+    public String removeFromCart(@PathVariable Long id,
+                                 Model model,
+                                 @AuthenticationPrincipal UserDetails principal) {
 
         shoppingCartService.removeFromCart(id, principal.getUsername());
 

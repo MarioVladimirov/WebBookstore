@@ -13,7 +13,6 @@ body.form-page {
 }
 
 .navbar {
-    /*background-color: #062B3A;*/
     background: rgb(2, 0, 36);
     background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(6, 37, 58, 1) 46%, rgba(3, 46, 55, 1) 100%);
 }
@@ -154,6 +153,11 @@ div.form-group input:read-only, option:disabled {
 .ph-img {
     height: 150px;
     width: 150px;
+}
+
+.error-img {
+    height: 200px;
+    width: 200px;
 }
 
 /* Author View */

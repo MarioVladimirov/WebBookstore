@@ -25,6 +25,7 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
     @Query("SELECT b FROM BookEntity b " +
             "LEFT JOIN OrderItemEntity o ON b.id = o.book.id " +
             "LEFT JOIN ReviewEntity r ON b.id = r.book.id " +
+            "WHERE b.active = true " +
             "GROUP BY b.id " +
             "ORDER BY COUNT(o.id) DESC, COUNT(r.id) DESC, b.addedOn DESC")
     List<BookEntity> findTop3MostPopularBySoldCopiesAndReviewsCount(Pageable pageable);

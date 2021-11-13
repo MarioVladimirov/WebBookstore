@@ -8,6 +8,7 @@ import bg.softuni.webbookstore.model.service.BookAddServiceModel;
 import bg.softuni.webbookstore.model.service.BookUpdateServiceModel;
 import bg.softuni.webbookstore.model.view.BookDetailViewModel;
 import bg.softuni.webbookstore.service.*;
+import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +20,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/books")
@@ -101,10 +101,12 @@ public class BookController {
     public String details(@PathVariable Long id,
                           Model model) {
 
-        Optional<BookDetailViewModel> detailViewModel = bookService.findBookDetails(id);
+        BookDetailViewModel detailViewModel = bookService
+                .findBookDetails(id)
+                .orElseThrow(() ->
+                        new ObjectNotFoundException("book"));
 
-        //TODO - error handling if empty optional
-        model.addAttribute("book", detailViewModel.get());
+        model.addAttribute("book", detailViewModel);
         model.addAttribute("viewsCount", pagesViewCountService.getPageViewsCount("/books/" + id));
 
         return "book-details";
@@ -115,10 +117,12 @@ public class BookController {
     public String edit(@PathVariable Long id,
                        Model model) {
 
-        Optional<BookUpdateBindingModel> bookUpdateBindingModel = bookService.findBookToEdit(id);
+        BookUpdateBindingModel bookUpdateBindingModel = bookService
+                .findBookToEdit(id)
+                .orElseThrow(() ->
+                        new ObjectNotFoundException("book"));
 
-        //TODO - error handling if empty optional
-        model.addAttribute("bookUpdateBindingModel", bookUpdateBindingModel.get());
+        model.addAttribute("bookUpdateBindingModel", bookUpdateBindingModel);
         model.addAttribute("languages", LanguageEnum.values());
         model.addAttribute("categories", CategoryEnum.values());
         model.addAttribute("publishingHouses", publishingHouseService.findAllPublishingHouseNames());

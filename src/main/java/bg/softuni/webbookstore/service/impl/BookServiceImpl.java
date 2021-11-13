@@ -12,6 +12,7 @@ import bg.softuni.webbookstore.model.view.BookSummaryViewModel;
 import bg.softuni.webbookstore.repository.*;
 import bg.softuni.webbookstore.service.*;
 import bg.softuni.webbookstore.utils.StringUtils;
+import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -112,7 +113,7 @@ public class BookServiceImpl implements BookService {
         return bookRepository
                 .findByIdAndActiveTrue(id)
                 .orElseThrow(() ->
-                        new IllegalStateException("Book not found"))
+                        new ObjectNotFoundException("book"))
                 .getTitle();
     }
 

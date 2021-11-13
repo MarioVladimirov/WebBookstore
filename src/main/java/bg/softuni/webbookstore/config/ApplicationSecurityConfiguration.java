@@ -1,5 +1,6 @@
 package bg.softuni.webbookstore.config;
 
+import bg.softuni.webbookstore.model.entity.enums.UserRoleEnum;
 import bg.softuni.webbookstore.service.impl.BookstoreUserService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
@@ -33,7 +34,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                     .antMatchers("/books/add", "/books/edit/**", "/books/delete/**",
                         "/authors/add", "/authors/edit/**", "/authors/delete/**",
-                        "/roles/**", "/stats/*").hasRole("ADMIN")
+                        "/roles/**", "/stats/*").hasRole(UserRoleEnum.ADMIN.name())
                     .antMatchers("/", "/users/login", "/users/register",
                             "/books/*", "/reviews/api").permitAll()
                     .anyRequest().authenticated()

@@ -6,6 +6,7 @@ import bg.softuni.webbookstore.model.entity.enums.UserRoleEnum;
 import bg.softuni.webbookstore.repository.UserRepository;
 import bg.softuni.webbookstore.repository.UserRoleRepository;
 import bg.softuni.webbookstore.service.UserRoleService;
+import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -26,12 +27,12 @@ public class UserRoleServiceImpl implements UserRoleService {
         UserEntity userEntity = userRepository
                 .findByUsername(username)
                 .orElseThrow(() ->
-                        new IllegalStateException("User not found"));
+                        new ObjectNotFoundException("user"));
 
         UserRoleEntity roleEntity = userRoleRepository
                 .findByRole(roleEnum)
                 .orElseThrow(() ->
-                        new IllegalStateException("Role not found"));
+                        new ObjectNotFoundException("user role"));
 
         userEntity.addRole(roleEntity);
         userRepository.save(userEntity);

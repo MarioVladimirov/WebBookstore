@@ -3,6 +3,7 @@ package bg.softuni.webbookstore.service;
 import bg.softuni.webbookstore.model.view.OrderViewModel;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface OrderService {
 
@@ -12,5 +13,5 @@ public interface OrderService {
 
     Long createOrder(String username);
 
-    OrderViewModel findById(Long id);
+    Optional<OrderViewModel> findById(Long id);
 }

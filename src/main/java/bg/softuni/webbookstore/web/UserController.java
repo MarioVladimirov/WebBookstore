@@ -4,11 +4,10 @@ import bg.softuni.webbookstore.model.binding.UserLoginBindingModel;
 import bg.softuni.webbookstore.model.binding.UserRegisterBindingModel;
 import bg.softuni.webbookstore.model.service.UserLoginServiceModel;
 import bg.softuni.webbookstore.model.service.UserRegisterServiceModel;
-import bg.softuni.webbookstore.model.view.OrderViewModel;
 import bg.softuni.webbookstore.model.view.UserViewModel;
-import bg.softuni.webbookstore.service.BookService;
 import bg.softuni.webbookstore.service.OrderService;
 import bg.softuni.webbookstore.service.UserService;
+import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,8 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/users")
@@ -106,11 +103,12 @@ public class UserController {
     public String showProfile(Model model,
                               @AuthenticationPrincipal UserDetails principal) {
 
-        Optional<UserViewModel> viewModel = userService
-                .findByUsername(principal.getUsername());
+        UserViewModel viewModel = userService
+                .findByUsername(principal.getUsername())
+                .orElseThrow(() ->
+                        new ObjectNotFoundException("user"));
 
-        //TODO - error handling if empty optional
-        model.addAttribute("user", viewModel.get());
+        model.addAttribute("user", viewModel);
         model.addAttribute("orders", orderService
                 .findLastFiveOrdersByCustomer(principal.getUsername()));
 

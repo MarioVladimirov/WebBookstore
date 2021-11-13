@@ -5,6 +5,7 @@ import bg.softuni.webbookstore.model.service.AuthorAddServiceModel;
 import bg.softuni.webbookstore.model.view.AuthorViewModel;
 import bg.softuni.webbookstore.service.AuthorService;
 import bg.softuni.webbookstore.service.BookService;
+import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/authors")
@@ -66,10 +66,12 @@ public class AuthorController {
     public String details(@PathVariable Long id,
                           Model model) {
 
-        Optional<AuthorViewModel> viewModel = authorService.findById(id);
+        AuthorViewModel viewModel = authorService
+                .findById(id)
+                .orElseThrow(() ->
+                        new ObjectNotFoundException("author"));
 
-        //TODO - error handling if empty optional
-        model.addAttribute("author", viewModel.get());
+        model.addAttribute("author", viewModel);
         model.addAttribute("books", bookService.findBooksByAuthor(id));
 
         return "author-details";

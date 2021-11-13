@@ -7,6 +7,7 @@ import bg.softuni.webbookstore.repository.BookRepository;
 import bg.softuni.webbookstore.repository.UserRepository;
 import bg.softuni.webbookstore.repository.WishlistRepository;
 import bg.softuni.webbookstore.service.WishlistService;
+import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -33,12 +34,12 @@ public class WishlistServiceImpl implements WishlistService {
             BookEntity book = bookRepository
                     .findByIdAndActiveTrue(id)
                     .orElseThrow(() ->
-                            new IllegalStateException("Book not found"));
+                            new ObjectNotFoundException("book"));
 
             UserEntity customer = userRepository
                     .findByUsername(username)
                     .orElseThrow(() ->
-                            new IllegalStateException("User not found"));
+                            new ObjectNotFoundException("user"));
 
             WishlistItemEntity wishlistItemEntity = new WishlistItemEntity()
                     .setBook(book)
@@ -53,7 +54,7 @@ public class WishlistServiceImpl implements WishlistService {
         WishlistItemEntity wishlistItemEntity = wishlistRepository
                 .findByBookIdAndCustomerUsername(id, username)
                 .orElseThrow(() ->
-                        new IllegalStateException("Book not found"));
+                        new ObjectNotFoundException("wishlist item"));
 
         wishlistRepository
                 .deleteById(wishlistItemEntity.getId());
