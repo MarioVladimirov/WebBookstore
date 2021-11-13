@@ -9,6 +9,7 @@ import bg.softuni.webbookstore.model.view.UserViewModel;
 import bg.softuni.webbookstore.repository.UserRepository;
 import bg.softuni.webbookstore.repository.UserRoleRepository;
 import bg.softuni.webbookstore.service.UserService;
+import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -47,9 +48,8 @@ public class UserServiceImpl implements UserService {
 
         UserRoleEntity userRole = userRoleRepository
                 .findByRole(UserRoleEnum.USER)
-                .orElseThrow(
-                        () -> new IllegalStateException("USER role not found!")
-                );
+                .orElseThrow(() -> new ObjectNotFoundException("user role"));
+
         newUser.addRole(userRole);
 
         userRepository.save(newUser);

@@ -37,7 +37,7 @@ public class ReviewServiceImpl implements ReviewService {
         return reviewRepository
                 .findAll()
                 .stream()
-                .map(this::getReviewModel)
+                .map(this::getReviewViewModel)
                 .collect(Collectors.toList());
     }
 
@@ -46,7 +46,7 @@ public class ReviewServiceImpl implements ReviewService {
         return reviewRepository
                 .findAllByAuthorUsername(username)
                 .stream()
-                .map(this::getReviewModel)
+                .map(this::getReviewViewModel)
                 .collect(Collectors.toList());
     }
 
@@ -67,7 +67,7 @@ public class ReviewServiceImpl implements ReviewService {
         reviewRepository.deleteAllByBookId(bookId);
     }
 
-    private ReviewViewModel getReviewModel(ReviewEntity reviewEntity) {
+    private ReviewViewModel getReviewViewModel(ReviewEntity reviewEntity) {
         return modelMapper
                 .map(reviewEntity, ReviewViewModel.class)
                 .setAddedOn(reviewEntity.getAddedOn().atZone(ZoneId.systemDefault()));

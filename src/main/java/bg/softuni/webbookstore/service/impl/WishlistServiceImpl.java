@@ -33,13 +33,11 @@ public class WishlistServiceImpl implements WishlistService {
         if (wishlistItem.isEmpty()) {
             BookEntity book = bookRepository
                     .findByIdAndActiveTrue(id)
-                    .orElseThrow(() ->
-                            new ObjectNotFoundException("book"));
+                    .orElseThrow(() -> new ObjectNotFoundException("book"));
 
             UserEntity customer = userRepository
                     .findByUsername(username)
-                    .orElseThrow(() ->
-                            new ObjectNotFoundException("user"));
+                    .orElseThrow(() -> new ObjectNotFoundException("user"));
 
             WishlistItemEntity wishlistItemEntity = new WishlistItemEntity()
                     .setBook(book)
@@ -53,8 +51,7 @@ public class WishlistServiceImpl implements WishlistService {
     public void removeFromWishlist(Long id, String username) {
         WishlistItemEntity wishlistItemEntity = wishlistRepository
                 .findByBookIdAndCustomerUsername(id, username)
-                .orElseThrow(() ->
-                        new ObjectNotFoundException("wishlist item"));
+                .orElseThrow(() -> new ObjectNotFoundException("wishlist item"));
 
         wishlistRepository
                 .deleteById(wishlistItemEntity.getId());

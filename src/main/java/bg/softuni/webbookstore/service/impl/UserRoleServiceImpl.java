@@ -9,8 +9,6 @@ import bg.softuni.webbookstore.service.UserRoleService;
 import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class UserRoleServiceImpl implements UserRoleService {
 
