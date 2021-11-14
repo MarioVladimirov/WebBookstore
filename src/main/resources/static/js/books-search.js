@@ -10,7 +10,7 @@ searchForm.addEventListener('submit', (e) => {
     const searchingCharacters = document
         .getElementById('searchBar').value.toLowerCase();
 
-    fetch("http://localhost:8080/books/api", {redirect: "manual"})
+    fetch("http://localhost:8080/books/api")
         .then(response => response.json())
         .then(books => {
                 for (const book of books) {
