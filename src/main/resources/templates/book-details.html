@@ -125,7 +125,7 @@
                                    type="button"
                                    title="Add to Cart"
                                    class="btn btn-info btn-md btn-block w-100"
-                                   th:classappend="*{getCopies() == 0}? 'disabled'">
+                                   th:classappend="*{getCopies()} == 0 ? 'disabled' : ''">
                                     <i class="fas fa-shopping-cart"></i> Add to Cart</a>
                             </div>
                             <div class="btn-group">

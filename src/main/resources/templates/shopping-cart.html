@@ -49,6 +49,7 @@
                             <div class="col-md-2 text-center">Total Price</div>
                         </div>
                     </div>
+
                     <div th:each="item : ${cartItems}"
                          th:object="${item}"
                          class="row border-top border-bottom">
@@ -87,7 +88,11 @@
                                        style="max-width: 55px"
                                        th:id="'quantity' + *{getBook().getId()}"/>
                                 <a th:bookId="*{book.id}" th:href="@{/cart/add/{id}(id=*{book.id})}"
-                                   id="plusButton" class="mx-1">+</a>
+                                   id="plusButton" class="mx-1"
+                                   tabindex="0" role="button"
+                                   data-toggle="popover" data-trigger="focus"
+                                   data-title="No more copies in stock"
+                                   data-content="We are really sorry, no more copies are currently available to order">+</a>
                             </div>
                             <div class="col-md-2 text-center"
                                  th:text="|*{calculatePrice()} BGN|">
@@ -136,6 +141,7 @@
 <footer th:replace="fragments/commons :: footer"></footer>
 
 <script th:src="@{/js/shopping.js}" type="text/javascript"></script>
+<script th:src="@{/js/modal.js}" type="text/javascript"></script>
 
 </body>
 </html>

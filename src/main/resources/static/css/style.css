@@ -73,7 +73,8 @@ form > input.form-control {
     width: 400px !important;
 }
 
-input:hover, textarea:hover, select:hover {
+form input:hover,
+textarea:hover, select:hover {
     outline: 3px solid #122b54;
 }
 

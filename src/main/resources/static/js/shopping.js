@@ -8,15 +8,24 @@
 //         }
 //     });
 // });
-//
+
 // $(document).ready(function () {
-//     $('a[id="plusButton"]').on('click', function () {
-//         let productId = $(this).attr('pid');
-//         let quantityInput = $('#quantity' + productId);
-//         let newQuantity = parseInt(quantityInput.val()) + 1;
-//         if (newQuantity > 0) {
-//             quantityInput.val(newQuantity);
-//         }
+//     $('a[id="plusButton"]').on('click', function (e) {
+//         const bookId = parseInt($(this).attr('bookId'));
+//         fetch("http://localhost:8080/books/api")
+//             .then(response => response.json())
+//             .then(books => {
+//                 const book = books.filter(b => b.id === bookId)[0];
+//                 if (book) {
+//                     const quantityInput = $('#quantity' + bookId);
+//                     let newQuantity = parseInt(quantityInput.val()) + 1;
+//                     if (newQuantity <= book.copies + parseInt(quantityInput.val())) {
+//                         quantityInput.val(newQuantity);
+//                     } else {
+//                         $('[data-toggle="popover"]').popover('show');
+//                     }
+//                 }
+//             });
 //     });
 // });
 
@@ -25,13 +34,13 @@ window.addEventListener('load', function () {
     document.querySelectorAll('a[id="minusButton"]')
         .forEach(a =>
             a.addEventListener('click', function () {
-                let bookId = $(this).attr('bookId');
+                const bookId = parseInt($(this).attr('bookId'));
                 fetch("http://localhost:8080/books/api")
                     .then(response => response.json())
                     .then(books => {
-                        let book = books.filter(b => b.id === bookId);
+                        const book = books.filter(b => b.id === bookId)[0];
                         if (book) {
-                            let quantityInput = $('#quantity' + bookId);
+                            const quantityInput = $('#quantity' + bookId);
                             let newQuantity = parseInt(quantityInput.val()) - 1;
                             if (newQuantity > 0) {
                                 quantityInput.val(newQuantity);
@@ -45,16 +54,22 @@ window.addEventListener('load', function () {
 window.addEventListener('load', function () {
     document.querySelectorAll('a[id="plusButton"]')
         .forEach(a =>
-            a.addEventListener('click', function () {
-                let bookId = $(this).attr('bookId');
+            a.addEventListener('click', function (e) {
+                e.preventDefault();
+                const bookId = parseInt($(this).attr('bookId'));
                 fetch("http://localhost:8080/books/api")
                     .then(response => response.json())
                     .then(books => {
-                        let book = books.filter(b => b.id === bookId);
+                        const book = books.filter(b => b.id === bookId)[0];
                         if (book) {
-                            let quantityInput = $('#quantity' + bookId);
+                            const quantityInput = $('#quantity' + bookId);
                             let newQuantity = parseInt(quantityInput.val()) + 1;
-                            quantityInput.val(newQuantity);
+                            if (newQuantity <= book.copies + parseInt(quantityInput.val())) {
+                                quantityInput.val(newQuantity);
+                                window.location = this.href;
+                            } else {
+                                $(this).attr('data-toggle', 'popover').popover('show');
+                            }
                         }
                     });
             })
@@ -62,6 +77,9 @@ window.addEventListener('load', function () {
 });
 
 
+$('.popover-dismiss').popover({
+    trigger: 'focus'
+})
 
 
 
