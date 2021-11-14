@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static bg.softuni.webbookstore.constant.GlobalConstants.*;
+
 @Service
 public class WishlistServiceImpl implements WishlistService {
 
@@ -33,11 +35,11 @@ public class WishlistServiceImpl implements WishlistService {
         if (wishlistItem.isEmpty()) {
             BookEntity book = bookRepository
                     .findByIdAndActiveTrue(id)
-                    .orElseThrow(() -> new ObjectNotFoundException("book"));
+                    .orElseThrow(() -> new ObjectNotFoundException(OBJECT_NAME_BOOK));
 
             UserEntity customer = userRepository
                     .findByUsername(username)
-                    .orElseThrow(() -> new ObjectNotFoundException("user"));
+                    .orElseThrow(() -> new ObjectNotFoundException(OBJECT_NAME_USER));
 
             WishlistItemEntity wishlistItemEntity = new WishlistItemEntity()
                     .setBook(book)
@@ -51,7 +53,7 @@ public class WishlistServiceImpl implements WishlistService {
     public void removeFromWishlist(Long id, String username) {
         WishlistItemEntity wishlistItemEntity = wishlistRepository
                 .findByBookIdAndCustomerUsername(id, username)
-                .orElseThrow(() -> new ObjectNotFoundException("wishlist item"));
+                .orElseThrow(() -> new ObjectNotFoundException(OBJECT_NAME_WISHLIST_ITEM));
 
         wishlistRepository
                 .deleteById(wishlistItemEntity.getId());

@@ -1,5 +1,6 @@
 package bg.softuni.webbookstore.web;
 
+import bg.softuni.webbookstore.constant.GlobalConstants;
 import bg.softuni.webbookstore.model.binding.UserLoginBindingModel;
 import bg.softuni.webbookstore.model.binding.UserRegisterBindingModel;
 import bg.softuni.webbookstore.model.service.UserLoginServiceModel;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+
+import static bg.softuni.webbookstore.constant.GlobalConstants.*;
 
 @Controller
 @RequestMapping("/users")
@@ -106,7 +109,7 @@ public class UserController {
         UserViewModel viewModel = userService
                 .findByUsername(principal.getUsername())
                 .orElseThrow(() ->
-                        new ObjectNotFoundException("user"));
+                        new ObjectNotFoundException(OBJECT_NAME_USER));
 
         model.addAttribute("user", viewModel);
         model.addAttribute("orders", orderService

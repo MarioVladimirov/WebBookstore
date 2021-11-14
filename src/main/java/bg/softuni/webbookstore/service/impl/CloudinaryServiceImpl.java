@@ -11,12 +11,12 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
+import static bg.softuni.webbookstore.constant.GlobalConstants.*;
+
 @Service
 public class CloudinaryServiceImpl implements CloudinaryService {
 
-    private static final String TEMP_FILE = "temp-file";
-    private static final String URL = "url";
-    private static final String PUBLIC_ID = "public_id";
+
 
     private final Cloudinary cloudinary;
 

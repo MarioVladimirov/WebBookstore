@@ -24,8 +24,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static bg.softuni.webbookstore.constant.GlobalConstants.*;
+
 @Service
 public class OrderServiceImpl implements OrderService {
+
 
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
@@ -68,7 +71,7 @@ public class OrderServiceImpl implements OrderService {
                 .getCartItemsByCustomer(username);
 
         if (itemsToOrder.size() == 0) {
-            throw new EmptyOrderException("There are no items in this order. Please chose some books first.");
+            throw new EmptyOrderException(EMPTY_ORDER_ERROR_MESSAGE);
         }
 
         BigDecimal totalPrice = itemsToOrder

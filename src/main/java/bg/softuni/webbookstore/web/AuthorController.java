@@ -16,6 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.io.IOException;
 
+import static bg.softuni.webbookstore.constant.GlobalConstants.*;
+
 @Controller
 @RequestMapping("/authors")
 public class AuthorController {
@@ -69,7 +71,7 @@ public class AuthorController {
         AuthorViewModel viewModel = authorService
                 .findById(id)
                 .orElseThrow(() ->
-                        new ObjectNotFoundException("author"));
+                        new ObjectNotFoundException(OBJECT_NAME_AUTHOR));
 
         model.addAttribute("author", viewModel);
         model.addAttribute("books", bookService.findBooksByAuthor(id));

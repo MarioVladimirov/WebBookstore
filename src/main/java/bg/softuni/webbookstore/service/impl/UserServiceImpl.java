@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static bg.softuni.webbookstore.constant.GlobalConstants.*;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -48,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
         UserRoleEntity userRole = userRoleRepository
                 .findByRole(UserRoleEnum.USER)
-                .orElseThrow(() -> new ObjectNotFoundException("user role"));
+                .orElseThrow(() -> new ObjectNotFoundException(OBJECT_NAME_USER_ROLE));
 
         newUser.addRole(userRole);
 

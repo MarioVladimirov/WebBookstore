@@ -21,6 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.io.IOException;
 
+import static bg.softuni.webbookstore.constant.GlobalConstants.*;
+
 @Controller
 @RequestMapping("/books")
 public class BookController {
@@ -104,10 +106,10 @@ public class BookController {
         BookDetailViewModel detailViewModel = bookService
                 .findBookDetails(id)
                 .orElseThrow(() ->
-                        new ObjectNotFoundException("book"));
+                        new ObjectNotFoundException(OBJECT_NAME_BOOK));
 
         model.addAttribute("book", detailViewModel);
-        model.addAttribute("viewsCount", pagesViewCountService.getPageViewsCount("/books/" + id));
+        model.addAttribute("viewsCount", pagesViewCountService.getPageViewsCount(String.format(VIEWS_COUNT_URI, id)));
 
         return "book-details";
     }
@@ -120,7 +122,7 @@ public class BookController {
         BookUpdateBindingModel bookUpdateBindingModel = bookService
                 .findBookToEdit(id)
                 .orElseThrow(() ->
-                        new ObjectNotFoundException("book"));
+                        new ObjectNotFoundException(OBJECT_NAME_BOOK));
 
         model.addAttribute("bookUpdateBindingModel", bookUpdateBindingModel);
         model.addAttribute("languages", LanguageEnum.values());

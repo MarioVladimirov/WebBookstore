@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Optional;
 
+import static bg.softuni.webbookstore.constant.GlobalConstants.*;
+
 @Controller
 @RequestMapping("/publishinghouses")
 public class PublishingHouseController {
@@ -31,7 +33,7 @@ public class PublishingHouseController {
         PublishingHouseViewModel viewModel = publishingHouseService
                 .findById(id)
                 .orElseThrow(() ->
-                        new ObjectNotFoundException("publishing house"));
+                        new ObjectNotFoundException(OBJECT_NAME_PUBLISHING_HOUSE));
 
         model.addAttribute("publishingHouse", viewModel);
         model.addAttribute("books", bookService.findBooksByPublishingHouse(id));

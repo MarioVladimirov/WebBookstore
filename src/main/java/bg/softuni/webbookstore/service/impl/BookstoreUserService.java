@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static bg.softuni.webbookstore.constant.GlobalConstants.*;
+
 @Component
 public class BookstoreUserService implements UserDetailsService {
 
@@ -28,8 +30,9 @@ public class BookstoreUserService implements UserDetailsService {
         UserEntity userEntity = userRepository
                 .findByUsername(username)
                 .orElseThrow(
-                        () -> new UsernameNotFoundException("User with name" + username + "not found!")
-                );
+                        () -> new UsernameNotFoundException(
+                                String.format(USERNAME_NOT_FOUND_MESSAGE, username)
+                        ));
 
         return mapToUserDetails(userEntity);
     }

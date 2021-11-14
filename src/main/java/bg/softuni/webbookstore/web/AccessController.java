@@ -8,7 +8,7 @@ public class AccessController {
 
     @GetMapping("/unauthorized")
     public String unauthorized(){
-        return "unauthorized";
+        return "errors/unauthorized";
     }
 
 }

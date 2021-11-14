@@ -9,6 +9,8 @@ import bg.softuni.webbookstore.service.UserRoleService;
 import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
+import static bg.softuni.webbookstore.constant.GlobalConstants.*;
+
 @Service
 public class UserRoleServiceImpl implements UserRoleService {
 
@@ -25,12 +27,12 @@ public class UserRoleServiceImpl implements UserRoleService {
         UserEntity userEntity = userRepository
                 .findByUsername(username)
                 .orElseThrow(() ->
-                        new ObjectNotFoundException("user"));
+                        new ObjectNotFoundException(OBJECT_NAME_USER));
 
         UserRoleEntity roleEntity = userRoleRepository
                 .findByRole(roleEnum)
                 .orElseThrow(() ->
-                        new ObjectNotFoundException("user role"));
+                        new ObjectNotFoundException(OBJECT_NAME_USER_ROLE));
 
         userEntity.addRole(roleEntity);
         userRepository.save(userEntity);

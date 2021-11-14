@@ -17,10 +17,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import static bg.softuni.webbookstore.constant.GlobalConstants.*;
+
 @Service
 public class AuthorServiceImpl implements AuthorService {
-
-    private static final String DEFAULT_IMAGE_URL = "/images/default-author-pic.png";
 
     private final AuthorRepository authorRepository;
     private final PictureRepository pictureRepository;
@@ -70,7 +70,7 @@ public class AuthorServiceImpl implements AuthorService {
                             .setPublicId(uploaded.getPublicId())
             );
         } else {
-            return pictureRepository.save(new PictureEntity(DEFAULT_IMAGE_URL));
+            return pictureRepository.save(new PictureEntity(DEFAULT_AUTHOR_IMAGE_URL));
         }
     }
 }

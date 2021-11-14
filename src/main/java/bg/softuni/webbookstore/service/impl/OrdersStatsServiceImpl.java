@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
+import static bg.softuni.webbookstore.constant.GlobalConstants.*;
+
 @Service
 public class OrdersStatsServiceImpl implements OrdersStatsService {
 
@@ -21,11 +23,11 @@ public class OrdersStatsServiceImpl implements OrdersStatsService {
 
     @Override
     public void onRequest(String requestURI) {
-        if (requestURI.contains("/orders/create")) {
+        if (requestURI.contains(ORDER_STATS_URI)) {
             OrderEntity lastOrder = orderRepository
                     .findTopByOrderByOrderTimeDesc()
                     .orElseThrow(() ->
-                            new ObjectNotFoundException("order"));
+                            new ObjectNotFoundException(OBJECT_NAME_ORDER));
 
             if (lastOrder.getPrice().compareTo(BigDecimal.valueOf(50)) >= 0) {
                 ordersAboveFiftyBGN++;

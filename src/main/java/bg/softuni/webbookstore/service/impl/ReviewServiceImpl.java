@@ -17,6 +17,8 @@ import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static bg.softuni.webbookstore.constant.GlobalConstants.*;
+
 @Service
 public class ReviewServiceImpl implements ReviewService {
 
@@ -76,12 +78,12 @@ public class ReviewServiceImpl implements ReviewService {
     private UserEntity getUserEntity(String username) {
         return userRepository
                 .findByUsername(username)
-                .orElseThrow(() -> new ObjectNotFoundException("user"));
+                .orElseThrow(() -> new ObjectNotFoundException(OBJECT_NAME_USER));
     }
 
     private BookEntity getBookEntity(Long id) {
         return bookRepository
                 .findByIdAndActiveTrue(id)
-                .orElseThrow(() -> new ObjectNotFoundException("book"));
+                .orElseThrow(() -> new ObjectNotFoundException(OBJECT_NAME_BOOK));
     }
 }

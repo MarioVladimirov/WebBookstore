@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static bg.softuni.webbookstore.constant.GlobalConstants.*;
+
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
@@ -63,12 +65,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             BookEntity book = bookRepository
                     .findByIdAndActiveTrue(id)
                     .orElseThrow(() ->
-                            new ObjectNotFoundException("book"));
+                            new ObjectNotFoundException(OBJECT_NAME_BOOK));
             bookService.decreaseWithOneCopy(id);
 
             UserEntity customer = userRepository.findByUsername(username)
                     .orElseThrow(() ->
-                            new ObjectNotFoundException("customer"));
+                            new ObjectNotFoundException(OBJECT_NAME_USER));
 
             CartItemEntity newCartItemEntity = new CartItemEntity()
                     .setQuantity(1)
@@ -84,7 +86,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         CartItemEntity cartItemEntity = cartItemRepository
                 .findByBookIdAndCustomerUsername(id, username)
                 .orElseThrow(() ->
-                        new ObjectNotFoundException("cart item"));
+                        new ObjectNotFoundException(OBJECT_NAME_CART_ITEM));
 
         BookEntity book = cartItemEntity.getBook();
         book.setCopies(
@@ -101,7 +103,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         CartItemEntity cartItemEntity = cartItemRepository
                 .findByBookIdAndCustomerUsername(id, username)
                 .orElseThrow(() ->
-                        new ObjectNotFoundException("cart item"));
+                        new ObjectNotFoundException(OBJECT_NAME_CART_ITEM));
 
         if (cartItemEntity.getQuantity() > 1) {
             BookEntity book = cartItemEntity.getBook();
