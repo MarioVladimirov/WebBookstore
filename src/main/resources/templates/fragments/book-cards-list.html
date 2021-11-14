@@ -20,11 +20,11 @@
         <div class="row btn-group d-flex justify-content-end my-2 mx-3 border-bottom border-info">
             <strong th:if="*{getCopies() > 0}"
                     class="text-success col-md-8">
-                On stock
+                In stock
             </strong>
             <strong th:if="*{getCopies() == 0}"
                     class="text-secondary col-md-8">
-                Out of Stock
+                Out of stock
             </strong>
             <a th:href="@{/wishlist/add/{id}(id=*{id})}"
                type="button" class="btn btn-sm col-md-2"
@@ -32,6 +32,7 @@
                 <i class="far fa-heart fa-lg"></i>
             </a>
             <a th:href="@{/cart/add/{id}(id=*{id})}"
+               id="addToCardBtn"
                type="button" class="btn btn-sm col-md-2"
                th:classappend="*{getCopies()} == 0 ? 'disabled' : ''"
                title="Add to Cart">

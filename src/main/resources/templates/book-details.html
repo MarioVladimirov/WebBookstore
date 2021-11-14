@@ -87,15 +87,15 @@
                                 <span th:text="|*{price} BGN|"></span>
                             </li>
                             <li>
-                                <strong th:if="*{getCopies() > 0}" th:class="text-success">On stock</strong>
-                                <strong th:if="*{getCopies() == 0}" th:class="text-secondary">Out of Stock</strong>
+                                <strong th:if="*{getCopies() > 0}" th:class="text-success">In stock</strong>
+                                <strong th:if="*{getCopies() == 0}" th:class="text-secondary">Out of stock</strong>
                             </li>
 
                             <br/>
 
                             <ul sec:authorize="hasRole('ROLE_ADMIN')">
                                 <li>
-                                    <strong>Copies on stock: </strong>
+                                    <strong>Copies in stock: </strong>
                                     <span th:text="*{copies}"></span>
                                 </li>
                                 <li>

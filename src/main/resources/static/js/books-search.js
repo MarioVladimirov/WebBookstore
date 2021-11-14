@@ -79,6 +79,7 @@ function createBookArticle(b) {
                 <i class="far fa-heart fa-lg"></i>
             </a>
             <a href="/cart/add/${b.id}"
+               id="addToCardBtn"
                type="button" class="btn btn-sm col-md-2"
                title="Add to Cart">
                 <i class="fas fa-shopping-cart fa-lg"></i>
@@ -98,23 +99,24 @@ function createBookArticle(b) {
 
     article
         .querySelector('.btn-group')
-        .prepend(showOnStockDiv(b.copies));
+        .prepend(showInStockDiv(b.copies));
 
     if (b.copies === 0) {
-        article.querySelector('a[href="/cart/add/${b.id}"]')
+        article.querySelector('a[id="addToCardBtn"]')
             .classList.add('disabled');
     }
 
     return article;
 }
 
-function showOnStockDiv(copies) {
+function showInStockDiv(copies) {
     let strongEl = document.createElement('strong');
-    strongEl.classList.add('text-success', 'col-md-8');
     if (copies === 0) {
-        strongEl.textContent = 'Out of Stock';
+        strongEl.textContent = 'Out of stock';
+        strongEl.classList.add('text-secondary', 'col-md-8');
     } else {
-        strongEl.textContent = 'On Stock';
+        strongEl.textContent = 'In stock';
+        strongEl.classList.add('text-success', 'col-md-8');
     }
 
     return strongEl;
