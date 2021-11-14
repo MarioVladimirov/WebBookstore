@@ -73,6 +73,10 @@ form > input.form-control {
     width: 400px !important;
 }
 
+input:hover, textarea:hover, select:hover {
+    outline: 3px solid #122b54;
+}
+
 div.form-group input:read-only, option:disabled {
     background-color: #B8B8B8 !important;
 }
