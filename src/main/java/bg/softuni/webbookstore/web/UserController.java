@@ -1,6 +1,5 @@
 package bg.softuni.webbookstore.web;
 
-import bg.softuni.webbookstore.constant.GlobalConstants;
 import bg.softuni.webbookstore.model.binding.UserLoginBindingModel;
 import bg.softuni.webbookstore.model.binding.UserRegisterBindingModel;
 import bg.softuni.webbookstore.model.service.UserLoginServiceModel;

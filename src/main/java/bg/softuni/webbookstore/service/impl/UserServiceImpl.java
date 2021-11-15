@@ -13,6 +13,7 @@ import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -90,5 +91,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<String> findAllUsernames() {
         return userRepository.findAllUsernames();
+    }
+
+    @Override
+    public boolean isAdmin(String username) {
+        Optional<UserEntity> user = userRepository
+                .findByUsername(username);
+
+        if (user.isEmpty()) {
+            return false;
+        } else {
+            return user
+                    .get()
+                    .getRoles()
+                    .stream()
+                    .map(UserRoleEntity::getRole)
+                    .anyMatch(r -> r == UserRoleEnum.ADMIN);
+        }
     }
 }

@@ -10,6 +10,7 @@ import bg.softuni.webbookstore.model.view.BookDetailViewModel;
 import bg.softuni.webbookstore.service.*;
 import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -115,6 +116,7 @@ public class BookController {
     }
 
     //UPDATE
+    @PreAuthorize("isAdmin()")
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id,
                        Model model) {
@@ -132,6 +134,7 @@ public class BookController {
         return "edit-book";
     }
 
+    @PreAuthorize("isAdmin()")
     @GetMapping("/edit/{id}/errors")
     public String editConfirmErrors(@PathVariable Long id, Model model) {
 
@@ -143,6 +146,7 @@ public class BookController {
         return "edit-book";
     }
 
+    @PreAuthorize("isAdmin()")
     @PatchMapping("/edit/{id}")
     public String editConfirm(@PathVariable Long id,
                               @Valid BookUpdateBindingModel bookUpdateBindingModel,
@@ -168,6 +172,7 @@ public class BookController {
     }
 
     //DELETE
+    @PreAuthorize("isAdmin()")
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {
         wishlistService.deleteBookFromAllWishlists(id);

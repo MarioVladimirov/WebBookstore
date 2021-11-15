@@ -1,26 +1,29 @@
 package bg.softuni.webbookstore.config;
 
 import bg.softuni.webbookstore.model.entity.enums.UserRoleEnum;
-import bg.softuni.webbookstore.service.impl.BookstoreUserService;
+import bg.softuni.webbookstore.web.exception.CustomAccessDeniedHandler;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final BookstoreUserService bookstoreUserService;
+    private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
 
 
-    public ApplicationSecurityConfiguration(BookstoreUserService bookstoreUserService, PasswordEncoder passwordEncoder) {
-        this.bookstoreUserService = bookstoreUserService;
+    public ApplicationSecurityConfiguration(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+        this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -32,8 +35,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
         http
                 .authorizeRequests()
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                    .antMatchers("/books/add", "/books/edit/**", "/books/delete/**",
-                        "/authors/add", "/authors/edit/**", "/authors/delete/**",
+                    .antMatchers("/books/add", "/authors/add",
                         "/roles/**", "/stats/*").hasRole(UserRoleEnum.ADMIN.name())
                     .antMatchers("/", "/users/login", "/users/register",
                             "/books/*", "/reviews/api").permitAll()
@@ -53,13 +55,18 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                     .deleteCookies("JSESSIONID")
                 .and()
                 .exceptionHandling()
-                    .accessDeniedPage("/unauthorized");
+                    .accessDeniedHandler(accessDeniedHandler());
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(bookstoreUserService)
+                .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder);
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return new CustomAccessDeniedHandler();
     }
 }
