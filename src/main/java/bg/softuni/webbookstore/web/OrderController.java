@@ -1,6 +1,7 @@
 package bg.softuni.webbookstore.web;
 
 import bg.softuni.webbookstore.model.entity.enums.OrderStatusEnum;
+import bg.softuni.webbookstore.model.view.OrderItemViewModel;
 import bg.softuni.webbookstore.model.view.OrderViewModel;
 import bg.softuni.webbookstore.service.LogService;
 import bg.softuni.webbookstore.service.OrderService;
@@ -60,9 +61,14 @@ public class OrderController {
                 .orElseThrow(() ->
                         new ObjectNotFoundException(OBJECT_NAME_ORDER));
 
-        logService.findOrderStatusChangeLogs(id);
+        boolean canProceed = orderViewModel
+                .getOrderedBooks()
+                .stream()
+                .anyMatch(OrderItemViewModel::getBookActive)
+                && !orderViewModel.getStatus().equals(OrderStatusEnum.DELIVERED);
 
         model.addAttribute("order", orderViewModel);
+        model.addAttribute("canProceed", canProceed);
         model.addAttribute("orderLogs", logService.findOrderStatusChangeLogs(id));
 
         return "order-details";

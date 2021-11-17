@@ -39,7 +39,7 @@
                         <a sec:authorize="hasRole('ROLE_ADMIN')"
                            th:href="@{/orders/proceed/{id}(id=*{id})}"
                            class="btn btn-info btn-md btn-block"
-                           th:classappend="${#strings.equals(order.getStatus(), 'DELIVERED')} ? 'disabled' : ''">
+                           th:classappend="${canProceed} ? '' : 'disabled'">
                             Proceed Order
                         </a>
                     </section>
