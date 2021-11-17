@@ -34,7 +34,7 @@
 
                         <div th:replace="fragments/orders-table"></div>
 
-                        <div th:if="${#lists.isEmpty(lastFiveOrders)}">
+                        <div th:if="${#lists.isEmpty(orders)}">
                             <h5 class="text-center">You have no orders yet</h5>
                         </div>
 

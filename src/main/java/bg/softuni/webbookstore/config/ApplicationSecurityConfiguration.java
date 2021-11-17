@@ -36,7 +36,8 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .authorizeRequests()
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                     .antMatchers("/books/add", "/authors/add",
-                        "/roles/**", "/stats/*").hasRole(UserRoleEnum.ADMIN.name())
+                            "/roles/**", "/stats/*",
+                            "/orders/all", "/orders/change-status", "/orders/proceed/*").hasRole(UserRoleEnum.ADMIN.name())
                     .antMatchers("/", "/users/login", "/users/register",
                             "/books/*", "/reviews/api").permitAll()
                     .anyRequest().authenticated()

@@ -1,5 +1,6 @@
 package bg.softuni.webbookstore.config;
 
+import bg.softuni.webbookstore.service.OrderService;
 import bg.softuni.webbookstore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,8 +22,8 @@ public class SecurityConfiguration extends GlobalMethodSecurityConfiguration {
     }
 
     @Bean
-    public BookstoreMethodSecurityExpressionHandler createExpressionHandler(UserService userService) {
-        return new BookstoreMethodSecurityExpressionHandler(userService);
+    public BookstoreMethodSecurityExpressionHandler createExpressionHandler(UserService userService, OrderService orderService) {
+        return new BookstoreMethodSecurityExpressionHandler(userService, orderService);
     }
 
 }

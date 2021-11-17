@@ -1,6 +1,6 @@
 package bg.softuni.webbookstore.model.entity;
 
-import bg.softuni.webbookstore.model.entity.enums.StatusEnum;
+import bg.softuni.webbookstore.model.entity.enums.OrderStatusEnum;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -19,7 +19,7 @@ public class OrderEntity extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private StatusEnum status;
+    private OrderStatusEnum status;
 
     @ManyToOne
     private UserEntity customer;
@@ -48,11 +48,11 @@ public class OrderEntity extends BaseEntity {
         return this;
     }
 
-    public StatusEnum getStatus() {
+    public OrderStatusEnum getStatus() {
         return status;
     }
 
-    public OrderEntity setStatus(StatusEnum status) {
+    public OrderEntity setStatus(OrderStatusEnum status) {
         this.status = status;
         return this;
     }

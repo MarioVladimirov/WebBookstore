@@ -1,6 +1,6 @@
 package bg.softuni.webbookstore.model.view;
 
-import bg.softuni.webbookstore.model.entity.enums.StatusEnum;
+import bg.softuni.webbookstore.model.entity.enums.OrderStatusEnum;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -11,7 +11,7 @@ public class OrderViewModel {
     private Long id;
     private LocalDateTime orderTime;
     private BigDecimal price;
-    private StatusEnum status;
+    private OrderStatusEnum status;
     private String customerFullName;
     private String customerAddress;
     private Set<OrderItemViewModel> orderedBooks;
@@ -47,11 +47,11 @@ public class OrderViewModel {
         return this;
     }
 
-    public StatusEnum getStatus() {
+    public OrderStatusEnum getStatus() {
         return status;
     }
 
-    public OrderViewModel setStatus(StatusEnum status) {
+    public OrderViewModel setStatus(OrderStatusEnum status) {
         this.status = status;
         return this;
     }

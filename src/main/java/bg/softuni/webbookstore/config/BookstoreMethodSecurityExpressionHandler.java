@@ -1,5 +1,6 @@
 package bg.softuni.webbookstore.config;
 
+import bg.softuni.webbookstore.service.OrderService;
 import bg.softuni.webbookstore.service.UserService;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
@@ -11,9 +12,11 @@ public class BookstoreMethodSecurityExpressionHandler extends
         DefaultMethodSecurityExpressionHandler {
 
     private final UserService userService;
+    private final OrderService orderService;
 
-    public BookstoreMethodSecurityExpressionHandler(UserService userService) {
+    public BookstoreMethodSecurityExpressionHandler(UserService userService, OrderService orderService) {
         this.userService = userService;
+        this.orderService = orderService;
     }
 
     @Override
@@ -23,6 +26,7 @@ public class BookstoreMethodSecurityExpressionHandler extends
         OwnerSecurityExpressionRoot root = new OwnerSecurityExpressionRoot(authentication);
 
         root.setUserService(userService);
+        root.setOrderService(orderService);
         root.setPermissionEvaluator(getPermissionEvaluator());
         root.setTrustResolver(new AuthenticationTrustResolverImpl());
         root.setRoleHierarchy(getRoleHierarchy());

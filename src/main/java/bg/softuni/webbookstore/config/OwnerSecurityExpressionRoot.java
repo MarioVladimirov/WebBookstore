@@ -1,5 +1,6 @@
 package bg.softuni.webbookstore.config;
 
+import bg.softuni.webbookstore.service.OrderService;
 import bg.softuni.webbookstore.service.UserService;
 import org.springframework.security.access.expression.SecurityExpressionRoot;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionOperations;
@@ -10,6 +11,7 @@ public class OwnerSecurityExpressionRoot extends SecurityExpressionRoot implemen
         MethodSecurityExpressionOperations {
 
     private UserService userService;
+    private OrderService orderService;
     private Object filterObject;
     private Object returnObject;
 
@@ -30,8 +32,19 @@ public class OwnerSecurityExpressionRoot extends SecurityExpressionRoot implemen
         return false;
     }
 
+    public boolean isOwner(Long id) {
+        String userName = currentUserName();
+        if (userName != null) {
+            return orderService.isOwner(userName, id);
+        }
+        return false;
+    }
+
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+    public void setOrderService(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     public String currentUserName() {
