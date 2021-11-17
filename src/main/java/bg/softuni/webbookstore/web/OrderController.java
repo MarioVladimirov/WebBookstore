@@ -2,9 +2,12 @@ package bg.softuni.webbookstore.web;
 
 import bg.softuni.webbookstore.model.entity.enums.OrderStatusEnum;
 import bg.softuni.webbookstore.model.view.OrderViewModel;
+import bg.softuni.webbookstore.service.LogService;
 import bg.softuni.webbookstore.service.OrderService;
+import bg.softuni.webbookstore.service.events.OrderStatusChangeEvent;
 import bg.softuni.webbookstore.web.exception.EmptyOrderException;
 import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,9 +24,13 @@ import static bg.softuni.webbookstore.constant.GlobalConstants.*;
 public class OrderController {
 
     private final OrderService orderService;
+    private final LogService logService;
+    private final ApplicationEventPublisher eventPublisher;
 
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderService orderService, LogService logService, ApplicationEventPublisher eventPublisher) {
         this.orderService = orderService;
+        this.logService = logService;
+        this.eventPublisher = eventPublisher;
     }
 
     @GetMapping("/all")
@@ -35,7 +42,7 @@ public class OrderController {
 
     @GetMapping("/my-orders")
     public String ordersByCustomer(Model model,
-                         @AuthenticationPrincipal UserDetails principal) {
+                                   @AuthenticationPrincipal UserDetails principal) {
 
         model.addAttribute("orders", orderService
                 .findAllOrdersByCustomer(principal.getUsername()));
@@ -53,7 +60,10 @@ public class OrderController {
                 .orElseThrow(() ->
                         new ObjectNotFoundException(OBJECT_NAME_ORDER));
 
+        logService.findOrderStatusChangeLogs(id);
+
         model.addAttribute("order", orderViewModel);
+        model.addAttribute("orderLogs", logService.findOrderStatusChangeLogs(id));
 
         return "order-details";
     }
@@ -63,6 +73,7 @@ public class OrderController {
 
         Long orderId = orderService
                 .createOrder(principal.getUsername());
+        publishOrderStatusChangeEvent(orderId);
 
         return "redirect:/orders/" + orderId;
     }
@@ -84,9 +95,10 @@ public class OrderController {
     @PreAuthorize("isAdmin()")
     @PostMapping("/change-status")
     public String changeStatusConfirm(@RequestParam Long orderId,
-                                @RequestParam String status) {
+                                      @RequestParam String status) {
 
         orderService.updateStatus(orderId, OrderStatusEnum.valueOf(status.toUpperCase()));
+        publishOrderStatusChangeEvent(orderId);
 
         return "redirect:/orders/" + orderId;
     }
@@ -95,6 +107,13 @@ public class OrderController {
     @GetMapping("/proceed/{id}")
     public String proceedOrder(@PathVariable Long id) {
         orderService.proceedOrder(id);
+        publishOrderStatusChangeEvent(id);
+
         return "redirect:/orders/" + id;
+    }
+
+    private void publishOrderStatusChangeEvent(Long orderId) {
+        OrderStatusChangeEvent event = new OrderStatusChangeEvent(this, orderId);
+        eventPublisher.publishEvent(event);
     }
 }

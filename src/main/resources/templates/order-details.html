@@ -52,8 +52,21 @@
                     </section>
                 </div>
 
+                <section id="order-history" class="p-4 m-3">
+                    <h5 class="font-weight-bold border-bottom">Order History</h5>
+                    <div th:each="orderLog : ${orderLogs}"
+                         th:object="${orderLog}">
+                        <div class="row">
+                            <div th:text="${#temporals.format(orderLog.changeTime, 'yyyy-MM-dd HH:mm')}"
+                                 class="col"></div>
+                            <div th:text="*{status}" class="col"></div>
+                        </div>
+                        <br>
+                    </div>
+                </section>
+
                 <section id="ordered-items" class="p-4 m-3">
-                    <h5 class="font-weight-bold border-bottom">Ordered Books:</h5>
+                    <h5 class="font-weight-bold border-bottom">Ordered Books</h5>
 
                     <div class="table-responsive rounded">
                         <table class="table table-light table-striped table-hover">
