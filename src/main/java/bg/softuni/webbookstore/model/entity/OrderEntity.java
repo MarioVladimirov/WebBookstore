@@ -24,7 +24,7 @@ public class OrderEntity extends BaseEntity {
     @ManyToOne
     private UserEntity customer;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     Set<OrderItemEntity> orderedBooks;
 
     public OrderEntity() {

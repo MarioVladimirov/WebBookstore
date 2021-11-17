@@ -10,6 +10,7 @@ import bg.softuni.webbookstore.web.exception.EmptyOrderException;
 import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -103,8 +104,12 @@ public class OrderController {
     public String changeStatusConfirm(@RequestParam Long orderId,
                                       @RequestParam String status) {
 
-        orderService.updateStatus(orderId, OrderStatusEnum.valueOf(status.toUpperCase()));
-        publishOrderStatusChangeEvent(orderId);
+        if (orderService.canChangeStatus(orderId)) {
+            orderService.updateStatus(orderId, OrderStatusEnum.valueOf(status.toUpperCase()));
+            publishOrderStatusChangeEvent(orderId);
+        } else {
+            throw new EmptyOrderException(CANNOT_UPDATE_ORDER_STATUS_EX_MESSAGE);
+        }
 
         return "redirect:/orders/" + orderId;
     }
@@ -112,8 +117,13 @@ public class OrderController {
     @PreAuthorize("isAdmin()")
     @GetMapping("/proceed/{id}")
     public String proceedOrder(@PathVariable Long id) {
-        orderService.proceedOrder(id);
-        publishOrderStatusChangeEvent(id);
+
+        if (orderService.canChangeStatus(id)) {
+            orderService.proceedOrder(id);
+            publishOrderStatusChangeEvent(id);
+        } else {
+            throw new EmptyOrderException(CANNOT_UPDATE_ORDER_STATUS_EX_MESSAGE);
+        }
 
         return "redirect:/orders/" + id;
     }

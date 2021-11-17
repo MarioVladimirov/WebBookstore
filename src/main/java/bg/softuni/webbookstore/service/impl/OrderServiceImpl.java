@@ -17,7 +17,6 @@ import bg.softuni.webbookstore.utils.StringUtils;
 import bg.softuni.webbookstore.web.exception.EmptyOrderException;
 import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -84,7 +83,7 @@ public class OrderServiceImpl implements OrderService {
                 .getCartItemsByCustomer(username);
 
         if (itemsToOrder.size() == 0) {
-            throw new EmptyOrderException(EMPTY_ORDER_ERROR_MESSAGE);
+            throw new EmptyOrderException(EMPTY_ORDER_ERROR_EX_MESSAGE);
         }
 
         BigDecimal totalPrice = itemsToOrder
@@ -158,6 +157,19 @@ public class OrderServiceImpl implements OrderService {
             orderEntity.setStatus(newStatus);
             orderRepository.save(orderEntity);
         }
+    }
+
+    @Override
+    public boolean canChangeStatus(Long orderId) {
+        OrderEntity orderEntity = orderRepository
+                .findById(orderId)
+                .orElseThrow(() -> new ObjectNotFoundException(OBJECT_NAME_ORDER));
+
+        return orderEntity
+                .getOrderedBooks()
+                .stream()
+                .anyMatch(orderItemEntity -> orderItemEntity.getBook().getActive())
+                && !orderEntity.getStatus().equals(OrderStatusEnum.DELIVERED);
     }
 
 

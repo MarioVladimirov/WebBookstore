@@ -24,4 +24,6 @@ public interface OrderService {
     void updateStatus(Long orderId, OrderStatusEnum status);
 
     void proceedOrder(Long id);
+
+    boolean canChangeStatus(Long orderId);
 }
