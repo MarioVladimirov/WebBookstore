@@ -1,6 +1,7 @@
 package bg.softuni.webbookstore.config;
 
 import bg.softuni.webbookstore.service.OrderService;
+import bg.softuni.webbookstore.service.ReviewService;
 import bg.softuni.webbookstore.service.UserService;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;

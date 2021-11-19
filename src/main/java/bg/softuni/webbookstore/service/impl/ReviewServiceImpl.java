@@ -9,12 +9,14 @@ import bg.softuni.webbookstore.repository.BookRepository;
 import bg.softuni.webbookstore.repository.ReviewRepository;
 import bg.softuni.webbookstore.repository.UserRepository;
 import bg.softuni.webbookstore.service.ReviewService;
+import bg.softuni.webbookstore.service.UserService;
 import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static bg.softuni.webbookstore.constant.GlobalConstants.*;
@@ -65,9 +67,15 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    public void delete(Long id) {
+        reviewRepository.deleteById(id);
+    }
+
+    @Override
     public void deleteAllReviewsForBook(Long bookId) {
         reviewRepository.deleteAllByBookId(bookId);
     }
+
 
     private ReviewViewModel getReviewViewModel(ReviewEntity reviewEntity) {
         return modelMapper

@@ -1,6 +1,7 @@
 let reviewsBtn = document.querySelector('#user-reviews a');
 let userReviewsContainer = document.getElementById('user-reviews-container');
 let bookReviewsContainer = document.getElementById('book-reviews-container');
+let isAdmin = document.getElementById('isAdmin');
 
 window.addEventListener('load', showBookReviews);
 
@@ -28,7 +29,6 @@ function showBookReviews() {
     fetch("http://localhost:8080/reviews/api/" + bookId)
         .then(response => response.json())
         .then(reviews => {
-
                 if (reviews.length === 0) {
                     bookReviewsContainer.innerHTML =
                         `<div class="mb-3">
@@ -82,19 +82,14 @@ function createBookReviewElement(review) {
                             <footer class="blockquote-footer">Added by 
                                 <strong>${review.nickname}</strong> 
                                 on <strong>${dateTime}</strong>
-                                <form action="/reviews/${review.id}"
-                                      method="delete">
-                                    <button type="button"
-                                            title="Delete Review"
-                                            class="btn btn-danger btn-sm">
-                                        <i class="fa fa-trash-o fa-lg"></i> Delete Review
-                                    </button>
-                                </form>
                             </footer>
                         </div>`;
 
-    return article;
+    if (isAdmin) {
+        appendDeleteForm(article, review.id, review.bookId);
+    }
 
+    return article;
 }
 
 function createUserReviewElement(review) {
@@ -117,5 +112,21 @@ function createUserReviewElement(review) {
                             </footer>
                         </div>`;
 
+    appendDeleteForm(article, review.id, review.bookId);
+
     return article;
+}
+
+// TODO - fix delete functionality
+function appendDeleteForm(article, reviewId, bookId) {
+    let form = document.createElement('form');
+    form.action = "/reviews/" + bookId + "/" + reviewId;
+    form.method = "post";
+    form.innerHTML = `<button id="deleteBtn" type="button"
+                         title="Delete Review"
+                         class="btn btn-link">
+                            Delete Review
+                      </button>`;
+
+    article.querySelector('footer').appendChild(form);
 }

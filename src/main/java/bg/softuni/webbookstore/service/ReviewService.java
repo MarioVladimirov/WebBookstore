@@ -13,5 +13,7 @@ public interface ReviewService {
 
     Long add(ReviewAddServiceModel serviceModel);
 
+    void delete(Long id);
+
     void deleteAllReviewsForBook(Long bookId);
 }

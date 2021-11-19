@@ -250,6 +250,10 @@ div.form-group input:read-only, option:disabled {
     display: block;
 }
 
+#deleteBtn {
+
+}
+
 /* Footer */
 .footer {
     margin-top: 20px;

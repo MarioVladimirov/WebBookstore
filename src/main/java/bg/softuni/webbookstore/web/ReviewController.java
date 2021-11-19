@@ -5,6 +5,7 @@ import bg.softuni.webbookstore.model.service.ReviewAddServiceModel;
 import bg.softuni.webbookstore.service.BookService;
 import bg.softuni.webbookstore.service.ReviewService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -65,5 +66,12 @@ public class ReviewController {
         reviewService.add(serviceModel);
 
         return "redirect:/books/" + reviewAddBindingModel.getBookId();
+    }
+
+    @PreAuthorize("isAdmin()")
+    @DeleteMapping("/{bookId}/{reviewId}")
+    public String delete(@PathVariable Long bookId, @PathVariable Long reviewId) {
+        reviewService.delete(reviewId);
+        return "redirect:/books/" + bookId;
     }
 }
