@@ -23,14 +23,11 @@ function toggle(e) {
 function showBookReviews() {
     bookReviewsContainer.innerHTML = '';
 
-    let url = window.location.href;
-    let id = url.substring(url.lastIndexOf('/') + 1);
-    let bookId = Number.parseInt(id);
+    let bookId = parseInt(document.getElementById('bookId').value);
 
     fetch("http://localhost:8080/reviews/api/" + bookId)
         .then(response => response.json())
         .then(reviews => {
-                // let bookReviews = reviews.filter(r => r.bookId === bookId);
 
                 if (reviews.length === 0) {
                     bookReviewsContainer.innerHTML =
@@ -85,6 +82,14 @@ function createBookReviewElement(review) {
                             <footer class="blockquote-footer">Added by 
                                 <strong>${review.nickname}</strong> 
                                 on <strong>${dateTime}</strong>
+                                <form action="/reviews/${review.id}"
+                                      method="delete">
+                                    <button type="button"
+                                            title="Delete Review"
+                                            class="btn btn-danger btn-sm">
+                                        <i class="fa fa-trash-o fa-lg"></i> Delete Review
+                                    </button>
+                                </form>
                             </footer>
                         </div>`;
 

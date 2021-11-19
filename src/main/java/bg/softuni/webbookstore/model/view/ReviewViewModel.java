@@ -5,6 +5,7 @@ import java.time.ZonedDateTime;
 
 public class ReviewViewModel {
 
+    private Long id;
     private String nickname;
     private String title;
     private String textContent;
@@ -15,6 +16,15 @@ public class ReviewViewModel {
 
 
     public ReviewViewModel() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public ReviewViewModel setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public String getNickname() {

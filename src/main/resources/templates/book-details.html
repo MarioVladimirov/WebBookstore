@@ -6,7 +6,7 @@
 
 <head th:replace="fragments/commons :: head"></head>
 
-<body th:object="${book}">
+<body>
 
 <!-- Navigation-->
 <header th:replace="fragments/commons :: navbar"></header>
@@ -21,7 +21,10 @@
 
         <!-- Page Content -->
         <div id="content">
-            <article id="book-wrapper" class="rounded p-2 m-3">
+            <article th:object="${book}"
+                     id="book-wrapper" class="rounded p-2 m-3">
+
+                <input id="bookId" type="hidden" th:value="*{id}">
 
                 <div th:if="${addedSuccessfully}"
                      class="alert visible alert-success alert-dismissible fade show" role="alert">
