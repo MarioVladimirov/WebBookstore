@@ -31,7 +31,7 @@ public class BookstoreUserService implements UserDetailsService {
                 .findByUsername(username)
                 .orElseThrow(
                         () -> new UsernameNotFoundException(
-                                String.format(USERNAME_NOT_FOUND_EX_MESSAGE, username)
+                                String.format(USERNAME_NOT_FOUND_ERROR_MESSAGE, username)
                         ));
 
         return mapToUserDetails(userEntity);

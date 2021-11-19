@@ -10,7 +10,6 @@ import bg.softuni.webbookstore.web.exception.EmptyOrderException;
 import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -108,7 +107,7 @@ public class OrderController {
             orderService.updateStatus(orderId, OrderStatusEnum.valueOf(status.toUpperCase()));
             publishOrderStatusChangeEvent(orderId);
         } else {
-            throw new EmptyOrderException(CANNOT_UPDATE_ORDER_STATUS_EX_MESSAGE);
+            throw new EmptyOrderException(CANNOT_UPDATE_ORDER_STATUS_ERROR_MESSAGE);
         }
 
         return "redirect:/orders/" + orderId;
@@ -122,7 +121,7 @@ public class OrderController {
             orderService.proceedOrder(id);
             publishOrderStatusChangeEvent(id);
         } else {
-            throw new EmptyOrderException(CANNOT_UPDATE_ORDER_STATUS_EX_MESSAGE);
+            throw new EmptyOrderException(CANNOT_UPDATE_ORDER_STATUS_ERROR_MESSAGE);
         }
 
         return "redirect:/orders/" + id;

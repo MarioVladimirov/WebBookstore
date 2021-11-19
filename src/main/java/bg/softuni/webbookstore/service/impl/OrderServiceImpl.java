@@ -83,7 +83,7 @@ public class OrderServiceImpl implements OrderService {
                 .getCartItemsByCustomer(username);
 
         if (itemsToOrder.size() == 0) {
-            throw new EmptyOrderException(EMPTY_ORDER_ERROR_EX_MESSAGE);
+            throw new EmptyOrderException(EMPTY_ORDER_ERROR_MESSAGE);
         }
 
         BigDecimal totalPrice = itemsToOrder

@@ -24,12 +24,12 @@ public class GlobalConstants {
     public static final String VIEWS_COUNT_URI = "/books/%s";
 
 
-    public static final String USERNAME_NOT_FOUND_EX_MESSAGE = "User with name %s not found!";
+    public static final String USERNAME_NOT_FOUND_ERROR_MESSAGE = "User with name %s not found!";
 
-    public static final String EMPTY_ORDER_ERROR_EX_MESSAGE =
+    public static final String EMPTY_ORDER_ERROR_MESSAGE =
             "We are really sorry, the selected books are no longer available for purchase. Please search the books on our homepage.";
 
-    public static final String CANNOT_UPDATE_ORDER_STATUS_EX_MESSAGE =
+    public static final String CANNOT_UPDATE_ORDER_STATUS_ERROR_MESSAGE =
             "Sorry, order cannot be proceeded because books are either no longer available for purchase or order has already been delivered. " +
                     "Changing order status is not a valid operation.";
 }
