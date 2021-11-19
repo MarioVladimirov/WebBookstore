@@ -24,7 +24,7 @@
                 <section id="orders-list" class="p-4 m-3 align-content-center">
                     <h5 class="font-weight-bold mb-3">My Orders</h5>
 
-                    <div th:replace="fragments/orders-table"></div>
+                    <div th:replace="fragments/orders-table :: orders-table(${orders})"></div>
 
                     <div th:if="${#lists.isEmpty(orders)}">
                         <h5 class="text-center">There are no orders yet</h5>
