@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<div th:fragment="bookcards" class="row d-flex justify-content-center" id="booksList">
+<div th:fragment="bookcards(books)" class="row d-flex justify-content-center" id="booksList">
     <article th:each="b : ${books}"
              th:object="${b}"
              class="card rounded p-2 m-3 col-sm-6 col-md-3">

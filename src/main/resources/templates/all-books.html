@@ -26,7 +26,7 @@
             </h5>
             <hr class="hr-3 w-75 bg-white mb-3">
 
-            <div th:replace="fragments/book-cards-list" id="booksList"></div>
+            <div th:replace="fragments/book-cards-list :: bookcards(${books})" id="booksList"></div>
         </div>
     </section>
 </main>
