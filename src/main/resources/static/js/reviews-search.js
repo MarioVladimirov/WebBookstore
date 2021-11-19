@@ -27,12 +27,12 @@ function showBookReviews() {
     let id = url.substring(url.lastIndexOf('/') + 1);
     let bookId = Number.parseInt(id);
 
-    fetch("http://localhost:8080/reviews/api")
+    fetch("http://localhost:8080/reviews/api/" + bookId)
         .then(response => response.json())
         .then(reviews => {
-                let bookReviews = reviews.filter(r => r.bookId === bookId);
+                // let bookReviews = reviews.filter(r => r.bookId === bookId);
 
-                if (bookReviews.length === 0) {
+                if (reviews.length === 0) {
                     bookReviewsContainer.innerHTML =
                         `<div class="mb-3">
                             <h5 class="text-left text-secondary">Be the first one to write a review</h5>
@@ -41,7 +41,7 @@ function showBookReviews() {
                     return;
                 }
 
-                displayReviews(bookReviewsContainer, createBookReviewElement, ...bookReviews);
+                displayReviews(bookReviewsContainer, createBookReviewElement, ...reviews);
             }
         );
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ReviewService {
 
-    List<ReviewViewModel> findAllReviews();
+    List<ReviewViewModel> findAllReviewsByBook(Long bookId);
 
     List<ReviewViewModel> findAllReviewsByUser(String username);
 

@@ -35,9 +35,9 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<ReviewViewModel> findAllReviews() {
+    public List<ReviewViewModel> findAllReviewsByBook(Long bookId) {
         return reviewRepository
-                .findAll()
+                .findAllByBookId(bookId)
                 .stream()
                 .map(this::getReviewViewModel)
                 .collect(Collectors.toList());

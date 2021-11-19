@@ -19,10 +19,12 @@ public class ReviewRestController {
         this.reviewService = reviewService;
     }
 
-    @GetMapping("/api")
-    public ResponseEntity<List<ReviewViewModel>> getAllReviewsByBook() {
+    // TODO - /api/bookId - fetch only for one book
+    // TODO - delete option for admins
+    @GetMapping("/api/{bookId}")
+    public ResponseEntity<List<ReviewViewModel>> getAllReviewsByBook(@PathVariable Long bookId) {
 
-        List<ReviewViewModel> reviewViewModels = reviewService.findAllReviews();
+        List<ReviewViewModel> reviewViewModels = reviewService.findAllReviewsByBook(bookId);
 
         return ResponseEntity
                 .ok()
