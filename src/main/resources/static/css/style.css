@@ -31,6 +31,13 @@ body.form-page {
     margin-left: 180px;
 }
 
+#book-wrapper, .shopping-cart-wrapper,
+#author-wrapper, #publishing-house-wrapper,
+#user-details-wrapper, #orders-wrapper,
+#order-view-wrapper, #stats-wrapper {
+    background-color: #ececec;
+}
+
 .container-fluid {
     padding-top: 90px;
 }
@@ -98,13 +105,6 @@ div.form-group input:read-only, option:disabled {
 .card-body div p {
     height: 20px;
     line-height: 20px;
-}
-
-#book-wrapper, .shopping-cart-wrapper,
-#author-wrapper, #publishing-house-wrapper,
-#user-details-wrapper, #orders-wrapper,
-#order-view-wrapper, #stats-wrapper {
-    background-color: #ececec;
 }
 
 /* Book Details View */
