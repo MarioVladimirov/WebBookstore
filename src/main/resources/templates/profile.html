@@ -19,13 +19,13 @@
         <nav th:replace="fragments/commons :: sidebar"></nav>
 
         <!-- Page Content -->
-        <div id="content">
+        <div id="content" class="container">
 
             <article th:object="${user}">
-                <h4 class="text-white text-center mt-4"
+                <h2 class="text-white text-center"
                     th:text="|Hello, *{firstName} *{lastName}!|">
-                </h4>
-                <hr class="hr-3 w-75 bg-white mb-3">
+                </h2>
+                <hr class="hr-3 w-75 bg-white">
                 <br>
 
                 <div id="user-details-wrapper" class="rounded p-2 m-3">

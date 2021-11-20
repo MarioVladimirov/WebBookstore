@@ -21,10 +21,10 @@
         <!-- Page Content -->
         <div id="content" class="container">
 
-            <h5 sec:authorize="isAuthenticated()" class="text-white text-center mt-4"
+            <h4 sec:authorize="isAuthenticated()" class="text-white text-center"
                 th:text="|Hello, ${#authentication.getPrincipal().getUsername()}! Welcome to The Books Station!|">
-            </h5>
-            <hr class="hr-3 w-75 bg-white mb-3">
+            </h4>
+            <hr class="hr-3 w-75 bg-white">
 
             <div th:replace="fragments/book-cards-list :: bookcards(${books})" id="booksList"></div>
         </div>

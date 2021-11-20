@@ -41,7 +41,7 @@
                 <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item dropdown my-sm-2 mx-3">
                     <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Admin
+                        Actions
                     </a>
                     <div class="dropdown-menu" aria-labelledby="adminDropdown">
                         <a class="dropdown-item" th:href="@{/books/add}">Add Book</a>
@@ -101,82 +101,87 @@
     </nav>
 </header>
 
-<nav th:fragment="sidebar" id="sidebar" class="sidebar-blur position-fixed">
+<div th:fragment="sidebar" id="sidebar" class="sidebar-blur position-absolute">
     <div class="mx-2">
         <div class="sidebar-header">
             <h5>The Books Station</h5>
             <strong>BS</strong>
         </div>
-
-        <ul class="list-unstyled components">
-            <li class="active">
-                <a th:href="@{/books/all}">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="active" th:href="@{/books/all}">
                     <i class="fas fa-book-open"></i>
-                    All Books
+                    <span>All Books</span>
                 </a>
             </li>
-            <li>
-                <a sec:authorize="hasRole('ROLE_ADMIN')"
-                   th:href="@{/orders/all}">
-                    <i class="fas fa-clipboard-list fa-lg"></i>
-                    All Orders
-                </a>
-            </li>
-            <li>
+            <li class="nav-item">
                 <a href="#categoriesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <i class="fas fa-list-ul"></i>
                     Categories
                 </a>
                 <ul class="collapse list-unstyled" id="categoriesSubmenu">
-                    <li th:each="c : ${T(bg.softuni.webbookstore.model.entity.enums.CategoryEnum).values()}">
+                    <li th:each="c : ${T(bg.softuni.webbookstore.model.entity.enums.CategoryEnum).values()}"
+                        class="nav-item">
                         <a href="/" th:text="|&ensp;${c}|" th:value="${c}">
                             Category
                         </a>
                     </li>
                 </ul>
             </li>
-            <li>
+            <li class="nav-item">
                 <a href="#languagesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <i class="fas fa-list-ul"></i>
                     Languages
                 </a>
                 <ul class="collapse list-unstyled" id="languagesSubmenu">
-                    <li th:each="l : ${T(bg.softuni.webbookstore.model.entity.enums.LanguageEnum).values()}">
+                    <li th:each="l : ${T(bg.softuni.webbookstore.model.entity.enums.LanguageEnum).values()}"
+                        class="nav-item">
                         <a href="/" th:text="|&ensp;${l}|" th:value="${l}">
                             Language
                         </a>
                     </li>
                 </ul>
             </li>
-            <li>
-                <a sec:authorize="hasRole('ROLE_ADMIN')"
-                   th:href="@{/dashboard}">
-                    <i class="fas fa-chart-bar"></i>
-                    Dashboard
-                </a>
-            </li>
-            <li>
-                <a sec:authorize="hasRole('ROLE_ADMIN')"
-                   href="#statsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                    <i class="fas fa-sitemap"></i>
-                    Statistics
-                </a>
-                <ul class="collapse list-unstyled" id="statsSubmenu">
-                    <li>
-                        <a th:href="@{/stats/requests}">
-                            &ensp;Requests
-                        </a>
-                    </li>
-                    <li>
-                        <a th:href="@{/stats/orders}">
-                            &ensp;Orders
-                        </a>
-                    </li>
-                </ul>
-            </li>
         </ul>
+        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+            <div class="sidebar-header mt-3">
+                <h5>Admin</h5>
+            </div>
+            <ul class="nav flex-column mb-2">
+                <li class="nav-item">
+                    <a th:href="@{/dashboard}">
+                        <i class="fas fa-chart-bar"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/orders/all}">
+                        <i class="fas fa-clipboard-list fa-lg"></i>
+                        All Orders
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#statsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-sitemap"></i>
+                        Statistics
+                    </a>
+                    <ul class="collapse list-unstyled" id="statsSubmenu">
+                        <li>
+                            <a th:href="@{/stats/requests}">
+                                &ensp;Requests
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/stats/orders}">
+                                &ensp;Orders
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </th:block>
     </div>
-</nav>
+</div>
 
 <footer th:fragment="footer" class="footer container-fluid" id="footer">
     <div class="text-center">
