@@ -4,6 +4,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    font-family: "Open Sans", Verdana, Helvetica, Arial, sans-serif;
     color: #0b2e50;
 }
 
@@ -439,4 +440,23 @@ img {
     opacity: .4;
     cursor: default !important;
     pointer-events: none;
+}
+
+/* Dashboard */
+#dashboard table {
+    margin: 0 auto;
+    border: 1px solid black;
+    box-shadow: 10px 10px 35px 1px;
+    background: linear-gradient(white, #005cbf);
+}
+
+.list-group {
+    counter-reset: myOrderedListItemsCounter;
+    padding-left: 0;
+}
+
+.list-group > li:before {
+    counter-increment: myOrderedListItemsCounter;
+    content: counter(myOrderedListItemsCounter) ".";
+    margin-right: 0.5em;
 }

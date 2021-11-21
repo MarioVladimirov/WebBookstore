@@ -20,9 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.ZoneId;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static bg.softuni.webbookstore.constant.GlobalConstants.*;
@@ -219,6 +217,25 @@ public class BookServiceImpl implements BookService {
 
         bookEntity.setCopies(bookEntity.getCopies() - 1);
         bookRepository.save(bookEntity);
+    }
+
+    @Override
+    public List<String> findAllBookTitlesWithTwoOrLessCopies() {
+        return bookRepository.findAllBookTitlesWithTwoOrLessCopies();
+    }
+
+    @Override
+    public Map<String, Integer> getBookCategoriesMap() {
+        Map<String, Integer> categoriesMap = new HashMap<>();
+
+        for (CategoryEnum categoryEnum : CategoryEnum.values()) {
+            CategoryEntity category = categoryRepository
+                    .findByCategory(categoryEnum)
+                    .orElseThrow(() -> new ObjectNotFoundException(OBJECT_NAME_CATEGORY));
+            categoriesMap.put(categoryEnum.name(), bookRepository.findBooksCountByCategory(category));
+        }
+
+        return categoriesMap;
     }
 
     private BookSummaryViewModel getSummaryViewModel(BookEntity bookEntity) {

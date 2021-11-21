@@ -1,6 +1,7 @@
 package bg.softuni.webbookstore.service;
 
 import bg.softuni.webbookstore.model.binding.BookUpdateBindingModel;
+import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
 import bg.softuni.webbookstore.model.service.BookAddServiceModel;
 import bg.softuni.webbookstore.model.service.BookUpdateServiceModel;
 import bg.softuni.webbookstore.model.view.BookDetailViewModel;
@@ -8,6 +9,7 @@ import bg.softuni.webbookstore.model.view.BookSummaryViewModel;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface BookService {
@@ -41,4 +43,8 @@ public interface BookService {
     void increaseWithOneCopy(Long id);
 
     void decreaseWithOneCopy(Long id);
+
+    List<String> findAllBookTitlesWithTwoOrLessCopies();
+
+    Map<String, Integer> getBookCategoriesMap();
 }

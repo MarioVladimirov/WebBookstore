@@ -18,4 +18,9 @@ public class StringUtils {
     public static String getFullNameAsString(String firstName, String lastName) {
         return firstName + " " + lastName;
     }
+
+    public static String capitalizeEnum(String str) {
+        return str.charAt(0) + str.substring(1).toLowerCase()
+                .replaceAll("_", " ");
+    }
 }

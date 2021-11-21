@@ -1,5 +1,7 @@
 package bg.softuni.webbookstore.model.entity.enums;
 
+import bg.softuni.webbookstore.utils.StringUtils;
+
 public enum LanguageEnum {
     BULGARIAN,
     ENGLISH,
@@ -8,7 +10,6 @@ public enum LanguageEnum {
 
     @Override
     public String toString() {
-        String capitalized = name().charAt(0) + name().substring(1).toLowerCase();
-        return capitalized.replaceAll("_", " ");
+        return StringUtils.capitalizeEnum(name());
     }
 }

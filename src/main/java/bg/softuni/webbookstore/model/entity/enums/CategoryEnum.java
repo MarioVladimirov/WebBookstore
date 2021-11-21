@@ -1,5 +1,7 @@
 package bg.softuni.webbookstore.model.entity.enums;
 
+import bg.softuni.webbookstore.utils.StringUtils;
+
 public enum CategoryEnum {
     FICTION,
     CRIME_AND_THRILLER,
@@ -16,7 +18,6 @@ public enum CategoryEnum {
 
     @Override
     public String toString() {
-        String capitalized = name().charAt(0) + name().substring(1).toLowerCase();
-        return capitalized.replaceAll("_", " ");
+       return StringUtils.capitalizeEnum(name());
     }
 }

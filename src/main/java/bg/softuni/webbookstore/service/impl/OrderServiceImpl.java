@@ -22,7 +22,9 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -177,6 +179,28 @@ public class OrderServiceImpl implements OrderService {
     public void deleteOrdersOlderThanOneYear() {
         LocalDateTime previousYear = LocalDateTime.now().minus(365, ChronoUnit.DAYS);
         orderRepository.deleteAllByOrderTimeBefore(previousYear);
+    }
+
+    @Override
+    public Map<Integer, Integer> getOrderedBooksPerMonthMap() {
+        Map<Integer, Integer> orderedBooksPerMonth = new HashMap<>();
+
+        for (int i = 1; i <= 12; i++) {
+            orderedBooksPerMonth.put(i, orderItemRepository.findOrderedBooksCountByMonth(i));
+        }
+
+        return orderedBooksPerMonth;
+    }
+
+    @Override
+    public Map<Integer, BigDecimal> getIncomePerMonth() {
+        Map<Integer, BigDecimal> incomePerMonth = new HashMap<>();
+
+        for (int i = 1; i <= 12; i++) {
+            incomePerMonth.put(i, orderRepository.findIncomePerMonth(i));
+        }
+
+        return incomePerMonth;
     }
 
 

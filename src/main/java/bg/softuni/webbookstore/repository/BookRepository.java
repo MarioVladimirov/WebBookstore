@@ -1,9 +1,12 @@
 package bg.softuni.webbookstore.repository;
 
 import bg.softuni.webbookstore.model.entity.BookEntity;
+import bg.softuni.webbookstore.model.entity.CategoryEntity;
+import bg.softuni.webbookstore.model.entity.enums.CategoryEnum;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,6 +25,10 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
 
     List<BookEntity> findTop3ByActiveTrueOrderByAddedOnDesc();
 
+    List<BookEntity> findAllByActiveTrueAndAuthorIdOrderByAddedOnDesc(Long id);
+
+    List<BookEntity> findAllByActiveTrueAndPublishingHouseIdOrderByAddedOnDesc(Long id);
+
     @Query("SELECT b FROM BookEntity b " +
             "LEFT JOIN OrderItemEntity o ON b.id = o.book.id " +
             "LEFT JOIN ReviewEntity r ON b.id = r.book.id " +
@@ -30,7 +37,12 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
             "ORDER BY COUNT(o.id) DESC, COUNT(r.id) DESC, b.addedOn DESC")
     List<BookEntity> findTop3MostPopularBySoldCopiesAndReviewsCount(Pageable pageable);
 
-    List<BookEntity> findAllByActiveTrueAndAuthorIdOrderByAddedOnDesc(Long id);
+    @Query("SELECT b.title FROM BookEntity b " +
+            "WHERE b.copies <= 2 " +
+            "ORDER BY b.title")
+    List<String> findAllBookTitlesWithTwoOrLessCopies();
 
-    List<BookEntity> findAllByActiveTrueAndPublishingHouseIdOrderByAddedOnDesc(Long id);
+    @Query("SELECT COUNT(b.id) FROM BookEntity b " +
+            "WHERE :category MEMBER b.categories")
+    Integer findBooksCountByCategory(@Param("category") CategoryEntity category);
 }
