@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -170,6 +171,12 @@ public class OrderServiceImpl implements OrderService {
                 .stream()
                 .anyMatch(orderItemEntity -> orderItemEntity.getBook().getActive())
                 && !orderEntity.getStatus().equals(OrderStatusEnum.DELIVERED);
+    }
+
+    @Override
+    public void deleteOrdersOlderThanOneYear() {
+        LocalDateTime previousYear = LocalDateTime.now().minus(365, ChronoUnit.DAYS);
+        orderRepository.deleteAllByOrderTimeBefore(previousYear);
     }
 
 

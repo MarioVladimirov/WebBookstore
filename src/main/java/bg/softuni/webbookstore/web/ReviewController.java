@@ -68,6 +68,7 @@ public class ReviewController {
         return "redirect:/books/" + reviewAddBindingModel.getBookId();
     }
 
+    // TODO - implement delete functionality
     @PreAuthorize("isAdmin()")
     @DeleteMapping("/{bookId}/{reviewId}")
     public String delete(@PathVariable Long bookId, @PathVariable Long reviewId) {

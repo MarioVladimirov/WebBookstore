@@ -27,6 +27,9 @@ public class OrderEntity extends BaseEntity {
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     Set<OrderItemEntity> orderedBooks;
 
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    Set<LogEntity> logs;
+
     public OrderEntity() {
     }
 
@@ -72,6 +75,15 @@ public class OrderEntity extends BaseEntity {
 
     public OrderEntity setOrderedBooks(Set<OrderItemEntity> orderedBooks) {
         this.orderedBooks = orderedBooks;
+        return this;
+    }
+
+    public Set<LogEntity> getLogs() {
+        return logs;
+    }
+
+    public OrderEntity setLogs(Set<LogEntity> logs) {
+        this.logs = logs;
         return this;
     }
 }

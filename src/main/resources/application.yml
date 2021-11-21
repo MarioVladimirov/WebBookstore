@@ -34,6 +34,8 @@ cloudinary:
   api-key: 365111573122239
   api-secret: ${CLOUDINARY_SECRET}
 
+schedulers:
+  cron: "0 2 */1 * * *"
 
 logging:
   level:

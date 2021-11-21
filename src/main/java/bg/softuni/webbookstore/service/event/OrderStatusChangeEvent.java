@@ -1,4 +1,4 @@
-package bg.softuni.webbookstore.service.events;
+package bg.softuni.webbookstore.service.event;
 
 import org.springframework.context.ApplicationEvent;
 

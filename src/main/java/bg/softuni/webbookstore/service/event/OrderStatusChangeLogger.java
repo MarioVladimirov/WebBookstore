@@ -1,4 +1,4 @@
-package bg.softuni.webbookstore.service.events;
+package bg.softuni.webbookstore.service.event;
 
 import bg.softuni.webbookstore.model.entity.LogEntity;
 import bg.softuni.webbookstore.model.entity.OrderEntity;

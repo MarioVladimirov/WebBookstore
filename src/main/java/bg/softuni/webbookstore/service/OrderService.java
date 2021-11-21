@@ -2,7 +2,6 @@ package bg.softuni.webbookstore.service;
 
 import bg.softuni.webbookstore.model.entity.enums.OrderStatusEnum;
 import bg.softuni.webbookstore.model.view.OrderViewModel;
-import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,4 +25,6 @@ public interface OrderService {
     void proceedOrder(Long id);
 
     boolean canChangeStatus(Long orderId);
+
+    void deleteOrdersOlderThanOneYear();
 }

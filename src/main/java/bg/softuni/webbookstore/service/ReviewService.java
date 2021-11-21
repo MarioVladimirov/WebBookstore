@@ -16,4 +16,6 @@ public interface ReviewService {
     void delete(Long id);
 
     void deleteAllReviewsForBook(Long bookId);
+
+    void deleteReviewsOlderThanOneYear();
 }

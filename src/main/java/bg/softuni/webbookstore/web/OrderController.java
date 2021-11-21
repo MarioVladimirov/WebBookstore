@@ -5,7 +5,7 @@ import bg.softuni.webbookstore.model.view.OrderItemViewModel;
 import bg.softuni.webbookstore.model.view.OrderViewModel;
 import bg.softuni.webbookstore.service.LogService;
 import bg.softuni.webbookstore.service.OrderService;
-import bg.softuni.webbookstore.service.events.OrderStatusChangeEvent;
+import bg.softuni.webbookstore.service.event.OrderStatusChangeEvent;
 import bg.softuni.webbookstore.web.exception.EmptyOrderException;
 import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.springframework.context.ApplicationEventPublisher;
