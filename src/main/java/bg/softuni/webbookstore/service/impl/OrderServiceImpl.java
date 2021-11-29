@@ -19,6 +19,7 @@ import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -52,6 +53,7 @@ public class OrderServiceImpl implements OrderService {
         this.modelMapper = modelMapper;
     }
 
+    @Transactional
     @Override
     public List<OrderViewModel> findAllOrders() {
         return orderRepository
@@ -61,6 +63,7 @@ public class OrderServiceImpl implements OrderService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public List<OrderViewModel> findAllOrdersByCustomer(String username) {
         return orderRepository
@@ -70,6 +73,7 @@ public class OrderServiceImpl implements OrderService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public List<OrderViewModel> findLastFiveOrdersByCustomer(String username) {
         return orderRepository
@@ -114,6 +118,7 @@ public class OrderServiceImpl implements OrderService {
         return newOrder.getId();
     }
 
+    @Transactional
     @Override
     public Optional<OrderViewModel> findById(Long id) {
         return orderRepository
@@ -148,6 +153,7 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.save(orderEntity);
     }
 
+    @Transactional
     @Override
     public void proceedOrder(Long id) {
         OrderEntity orderEntity = orderRepository
@@ -162,6 +168,7 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    @Transactional
     @Override
     public boolean canChangeStatus(Long orderId) {
         OrderEntity orderEntity = orderRepository
