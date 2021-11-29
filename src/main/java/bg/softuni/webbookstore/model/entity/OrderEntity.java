@@ -31,6 +31,7 @@ public class OrderEntity extends BaseEntity {
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     List<LogEntity> logs = new ArrayList<>();
 
+
     public OrderEntity() {
     }
 

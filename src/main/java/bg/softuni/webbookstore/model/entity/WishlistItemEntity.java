@@ -14,6 +14,7 @@ public class WishlistItemEntity extends BaseEntity {
     @ManyToOne(optional = false)
     private UserEntity customer;
 
+
     public WishlistItemEntity() {
     }
 

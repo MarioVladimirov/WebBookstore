@@ -14,7 +14,7 @@ import bg.softuni.webbookstore.service.OrderService;
 import bg.softuni.webbookstore.service.ShoppingCartService;
 import bg.softuni.webbookstore.service.UserService;
 import bg.softuni.webbookstore.utils.StringUtils;
-import bg.softuni.webbookstore.web.exception.EmptyOrderException;
+import bg.softuni.webbookstore.web.exception.InvalidOrderException;
 import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -90,7 +90,7 @@ public class OrderServiceImpl implements OrderService {
                 .getCartItemsByCustomer(username);
 
         if (itemsToOrder.size() == 0) {
-            throw new EmptyOrderException(EMPTY_ORDER_ERROR_MESSAGE);
+            throw new InvalidOrderException(EMPTY_ORDER_ERROR_MESSAGE);
         }
 
         BigDecimal totalPrice = itemsToOrder

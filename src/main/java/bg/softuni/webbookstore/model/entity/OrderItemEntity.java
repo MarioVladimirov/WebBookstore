@@ -18,6 +18,7 @@ public class OrderItemEntity extends BaseEntity {
     @Column(nullable = false)
     private Integer quantity;
 
+
     public OrderItemEntity() {
     }
 

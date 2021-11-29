@@ -52,6 +52,7 @@ public class BookAddBindingModel {
     @NotBlank(message = "Please enter author last name")
     private String authorLastName;
 
+
     public BookAddBindingModel() {
     }
 

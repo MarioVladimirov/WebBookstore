@@ -6,7 +6,7 @@ import bg.softuni.webbookstore.model.view.OrderViewModel;
 import bg.softuni.webbookstore.service.LogService;
 import bg.softuni.webbookstore.service.OrderService;
 import bg.softuni.webbookstore.service.event.OrderStatusChangeEvent;
-import bg.softuni.webbookstore.web.exception.EmptyOrderException;
+import bg.softuni.webbookstore.web.exception.InvalidOrderException;
 import bg.softuni.webbookstore.web.exception.ObjectNotFoundException;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -84,8 +84,8 @@ public class OrderController {
         return "redirect:/orders/" + orderId;
     }
 
-    @ExceptionHandler(EmptyOrderException.class)
-    public ModelAndView handleEmptyOrderExceptions(EmptyOrderException e) {
+    @ExceptionHandler(InvalidOrderException.class)
+    public ModelAndView handleEmptyOrderExceptions(InvalidOrderException e) {
         ModelAndView modelAndView = new ModelAndView("errors/empty-order-error");
         modelAndView.addObject("message", e.getMessage());
         modelAndView.setStatus(HttpStatus.BAD_REQUEST);
@@ -107,7 +107,7 @@ public class OrderController {
             orderService.updateStatus(orderId, OrderStatusEnum.valueOf(status.toUpperCase()));
             publishOrderStatusChangeEvent(orderId);
         } else {
-            throw new EmptyOrderException(CANNOT_UPDATE_ORDER_STATUS_ERROR_MESSAGE);
+            throw new InvalidOrderException(CANNOT_UPDATE_ORDER_STATUS_ERROR_MESSAGE);
         }
 
         return "redirect:/orders/" + orderId;
@@ -121,7 +121,7 @@ public class OrderController {
             orderService.proceedOrder(id);
             publishOrderStatusChangeEvent(id);
         } else {
-            throw new EmptyOrderException(CANNOT_UPDATE_ORDER_STATUS_ERROR_MESSAGE);
+            throw new InvalidOrderException(CANNOT_UPDATE_ORDER_STATUS_ERROR_MESSAGE);
         }
 
         return "redirect:/orders/" + id;

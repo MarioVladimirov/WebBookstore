@@ -1,10 +1,10 @@
 package bg.softuni.webbookstore.web.exception;
 
-public class EmptyOrderException extends RuntimeException {
+public class InvalidOrderException extends RuntimeException {
 
     private final String message;
 
-    public EmptyOrderException(String message) {
+    public InvalidOrderException(String message) {
         this.message = message;
     }
 
