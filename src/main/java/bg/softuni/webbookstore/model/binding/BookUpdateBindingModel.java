@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 public class BookUpdateBindingModel {
 
@@ -39,7 +39,7 @@ public class BookUpdateBindingModel {
     private String language;
 
     @NotEmpty(message = "Please select categories")
-    private Set<String> categories;
+    private List<String> categories;
 
     @NotEmpty(message = "Please select publishing house")
     private String publishingHouseName;
@@ -144,11 +144,11 @@ public class BookUpdateBindingModel {
         return this;
     }
 
-    public Set<String> getCategories() {
+    public List<String> getCategories() {
         return categories;
     }
 
-    public BookUpdateBindingModel setCategories(Set<String> categories) {
+    public BookUpdateBindingModel setCategories(List<String> categories) {
         this.categories = categories;
         return this;
     }

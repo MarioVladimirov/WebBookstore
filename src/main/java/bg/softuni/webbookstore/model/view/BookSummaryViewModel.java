@@ -1,7 +1,7 @@
 package bg.softuni.webbookstore.model.view;
 
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 public class BookSummaryViewModel {
 
@@ -11,7 +11,7 @@ public class BookSummaryViewModel {
     private Integer copies;
     private BigDecimal price;
     private String language;
-    private Set<String> categories;
+    private List<String> categories;
     private String author;
     private Long authorId;
 
@@ -73,11 +73,11 @@ public class BookSummaryViewModel {
         return this;
     }
 
-    public Set<String> getCategories() {
+    public List<String> getCategories() {
         return categories;
     }
 
-    public BookSummaryViewModel setCategories(Set<String> categories) {
+    public BookSummaryViewModel setCategories(List<String> categories) {
         this.categories = categories;
         return this;
     }

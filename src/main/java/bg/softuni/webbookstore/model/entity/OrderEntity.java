@@ -5,6 +5,8 @@ import bg.softuni.webbookstore.model.entity.enums.OrderStatusEnum;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,11 +26,11 @@ public class OrderEntity extends BaseEntity {
     @ManyToOne
     private UserEntity customer;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
-    Set<OrderItemEntity> orderedBooks;
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    List<OrderItemEntity> orderedBooks = new ArrayList<>();
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
-    Set<LogEntity> logs;
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    List<LogEntity> logs = new ArrayList<>();
 
     public OrderEntity() {
     }
@@ -69,20 +71,20 @@ public class OrderEntity extends BaseEntity {
         return this;
     }
 
-    public Set<OrderItemEntity> getOrderedBooks() {
+    public List<OrderItemEntity> getOrderedBooks() {
         return orderedBooks;
     }
 
-    public OrderEntity setOrderedBooks(Set<OrderItemEntity> orderedBooks) {
+    public OrderEntity setOrderedBooks(List<OrderItemEntity> orderedBooks) {
         this.orderedBooks = orderedBooks;
         return this;
     }
 
-    public Set<LogEntity> getLogs() {
+    public List<LogEntity> getLogs() {
         return logs;
     }
 
-    public OrderEntity setLogs(Set<LogEntity> logs) {
+    public OrderEntity setLogs(List<LogEntity> logs) {
         this.logs = logs;
         return this;
     }

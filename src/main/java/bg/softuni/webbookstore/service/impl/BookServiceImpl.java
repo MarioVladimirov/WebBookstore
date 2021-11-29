@@ -18,6 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.time.ZoneId;
 import java.util.*;
@@ -50,6 +51,7 @@ public class BookServiceImpl implements BookService {
         this.modelMapper = modelMapper;
     }
 
+    @Transactional
     @Override
     public List<BookSummaryViewModel> findAllBooks() {
         return bookRepository
@@ -59,15 +61,17 @@ public class BookServiceImpl implements BookService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public List<BookSummaryViewModel> findTopThreeNewestBooks() {
         return bookRepository
-                .findTop3ByActiveTrueOrderByAddedOnDesc()
+                .findTop3NewestByActiveTrueOrderByAddedOnDesc()
                 .stream()
                 .map(this::getSummaryViewModel)
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public List<BookSummaryViewModel> findTopThreeMostPopularBooks() {
         return bookRepository
@@ -77,6 +81,7 @@ public class BookServiceImpl implements BookService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public List<BookSummaryViewModel> findBooksByAuthor(Long id) {
         return bookRepository
@@ -86,6 +91,7 @@ public class BookServiceImpl implements BookService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public List<BookSummaryViewModel> findBooksByPublishingHouse(Long id) {
         return bookRepository
@@ -95,6 +101,7 @@ public class BookServiceImpl implements BookService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public List<BookSummaryViewModel> getWishListBooksByCustomer(String username) {
         return wishlistRepository
@@ -136,6 +143,7 @@ public class BookServiceImpl implements BookService {
         return bookEntity.getId();
     }
 
+    @Transactional
     @Override
     public Optional<BookDetailViewModel> findBookDetails(Long id) {
         return bookRepository
@@ -143,6 +151,7 @@ public class BookServiceImpl implements BookService {
                 .map(this::getBookDetailViewModel);
     }
 
+    @Transactional
     @Override
     public Optional<BookUpdateBindingModel> findBookToEdit(Long id) {
         return bookRepository
@@ -297,7 +306,7 @@ public class BookServiceImpl implements BookService {
         return LanguageEnum.valueOf(language.toUpperCase());
     }
 
-    private Set<CategoryEntity> getCategoryEntities(Set<String> categories) {
+    private List<CategoryEntity> getCategoryEntities(List<String> categories) {
         return categories
                 .stream()
                 .map(category -> {
@@ -308,7 +317,7 @@ public class BookServiceImpl implements BookService {
                             .findByCategory(categoryEnum)
                             .orElseThrow(() -> new ObjectNotFoundException(OBJECT_NAME_CATEGORY));
                 })
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     private PictureEntity getPictureEntity(MultipartFile img) throws IOException {

@@ -6,6 +6,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@NamedEntityGraph(
+        name = "roles",
+        attributeNodes = {
+                @NamedAttributeNode("roles")
+        }
+)
 @Entity
 @Table(name = "users")
 public class UserEntity extends BaseEntity {
@@ -28,8 +34,8 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<UserRoleEntity> roles = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<UserRoleEntity> roles = new ArrayList<>();
 
 
     public UserEntity() {
@@ -89,11 +95,11 @@ public class UserEntity extends BaseEntity {
         return this;
     }
 
-    public Set<UserRoleEntity> getRoles() {
+    public List<UserRoleEntity> getRoles() {
         return roles;
     }
 
-    public UserEntity setRoles(Set<UserRoleEntity> roles) {
+    public UserEntity setRoles(List<UserRoleEntity> roles) {
         this.roles = roles;
         return this;
     }

@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 public class BookAddServiceModel {
 
@@ -17,7 +17,7 @@ public class BookAddServiceModel {
     private Integer releaseYear;
     private BigDecimal price;
     private String language;
-    private Set<String> categories;
+    private List<String> categories;
     private String publishingHouse;
     private String authorFirstName;
     private String authorLastName;
@@ -108,11 +108,11 @@ public class BookAddServiceModel {
         return this;
     }
 
-    public Set<String> getCategories() {
+    public List<String> getCategories() {
         return categories;
     }
 
-    public BookAddServiceModel setCategories(Set<String> categories) {
+    public BookAddServiceModel setCategories(List<String> categories) {
         this.categories = categories;
         return this;
     }

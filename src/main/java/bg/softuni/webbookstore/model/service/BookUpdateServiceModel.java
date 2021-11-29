@@ -3,7 +3,7 @@ package bg.softuni.webbookstore.model.service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 public class BookUpdateServiceModel {
 
@@ -16,7 +16,7 @@ public class BookUpdateServiceModel {
     private Integer releaseYear;
     private BigDecimal price;
     private String language;
-    private Set<String> categories;
+    private List<String> categories;
     private String publishingHouseName;
     private String authorFirstName;
     private String authorLastName;
@@ -105,11 +105,11 @@ public class BookUpdateServiceModel {
         return this;
     }
 
-    public Set<String> getCategories() {
+    public List<String> getCategories() {
         return categories;
     }
 
-    public BookUpdateServiceModel setCategories(Set<String> categories) {
+    public BookUpdateServiceModel setCategories(List<String> categories) {
         this.categories = categories;
         return this;
     }

@@ -2,15 +2,22 @@ package bg.softuni.webbookstore.model.entity;
 
 import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
 
-import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.Clock;
 import java.time.Instant;
-import java.time.ZoneId;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
+@NamedEntityGraph(
+        name = "bookEntity",
+        attributeNodes = {
+                @NamedAttributeNode("picture"),
+                @NamedAttributeNode("categories"),
+                @NamedAttributeNode("publishingHouse"),
+                @NamedAttributeNode("author"),
+                @NamedAttributeNode("creator")
+        }
+)
 @Entity
 @Table(name = "books")
 public class BookEntity extends BaseEntity {
@@ -52,8 +59,8 @@ public class BookEntity extends BaseEntity {
     @Column(nullable = false)
     private LanguageEnum language;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<CategoryEntity> categories = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<CategoryEntity> categories = new ArrayList<>();
 
     @ManyToOne(optional = false)
     private PublishingHouseEntity publishingHouse;
@@ -176,11 +183,11 @@ public class BookEntity extends BaseEntity {
         return this;
     }
 
-    public Set<CategoryEntity> getCategories() {
+    public List<CategoryEntity> getCategories() {
         return categories;
     }
 
-    public BookEntity setCategories(Set<CategoryEntity> categories) {
+    public BookEntity setCategories(List<CategoryEntity> categories) {
         this.categories = categories;
         return this;
     }

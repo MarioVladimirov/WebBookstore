@@ -3,7 +3,7 @@ import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
-import java.util.Set;
+import java.util.List;
 
 public class BookDetailViewModel {
 
@@ -19,7 +19,7 @@ public class BookDetailViewModel {
     private Integer releaseYear;
     private BigDecimal price;
     private LanguageEnum language;
-    private Set<String> categories;
+    private List<String> categories;
     private PublishingHouseViewModel publishingHouse;
     private String author;
     private Long authorId;
@@ -136,11 +136,11 @@ public class BookDetailViewModel {
         return this;
     }
 
-    public Set<String> getCategories() {
+    public List<String> getCategories() {
         return categories;
     }
 
-    public BookDetailViewModel setCategories(Set<String> categories) {
+    public BookDetailViewModel setCategories(List<String> categories) {
         this.categories = categories;
         return this;
     }

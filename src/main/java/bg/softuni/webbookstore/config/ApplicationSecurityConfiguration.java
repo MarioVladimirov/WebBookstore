@@ -39,7 +39,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                             "/roles/**", "/stats/*",
                             "/orders/all", "/orders/change-status", "/orders/proceed/*").hasRole(UserRoleEnum.ADMIN.name())
                     .antMatchers("/", "/users/login", "/users/register",
-                            "/books/*", "/reviews/api").permitAll()
+                            "/books/*", "/authors/*", "/publishinghouses/*", "/reviews/api").permitAll()
                     .anyRequest().authenticated()
                 .and()
                 .formLogin()

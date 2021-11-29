@@ -1,7 +1,6 @@
 package bg.softuni.webbookstore.model.entity;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "authors")
@@ -18,9 +17,6 @@ public class AuthorEntity extends BaseEntity {
 
     @ManyToOne
     private PictureEntity picture;
-
-    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
-    private List<BookEntity> books;
 
 
     public AuthorEntity() {
@@ -59,15 +55,6 @@ public class AuthorEntity extends BaseEntity {
 
     public AuthorEntity setPicture(PictureEntity picture) {
         this.picture = picture;
-        return this;
-    }
-
-    public List<BookEntity> getBooks() {
-        return books;
-    }
-
-    public AuthorEntity setBooks(List<BookEntity> books) {
-        this.books = books;
         return this;
     }
 }
