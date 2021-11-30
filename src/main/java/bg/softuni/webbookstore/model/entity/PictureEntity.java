@@ -1,14 +1,14 @@
 package bg.softuni.webbookstore.model.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "pictures")
 public class PictureEntity extends BaseEntity {
 
-    @Column(columnDefinition = "TEXT")
+    @Lob
     private String url;
     private String publicId;
 

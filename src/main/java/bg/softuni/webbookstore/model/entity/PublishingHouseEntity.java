@@ -9,10 +9,10 @@ public class PublishingHouseEntity extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(columnDefinition = "TEXT")
+    @Lob
     private String description;
 
-    @Column(name = "image_url", columnDefinition = "TEXT")
+    @Lob
     private String imageUrl;
 
 

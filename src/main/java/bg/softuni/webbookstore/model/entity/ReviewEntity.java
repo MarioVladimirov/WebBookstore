@@ -11,7 +11,7 @@ public class ReviewEntity extends BaseEntity {
 
     private String title;
 
-    @Column(columnDefinition = "TEXT")
+    @Lob
     private String textContent;
 
     @Column(nullable = false)

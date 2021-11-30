@@ -12,7 +12,7 @@ public class AuthorEntity extends BaseEntity {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(columnDefinition = "TEXT")
+    @Lob
     private String description;
 
     @ManyToOne
