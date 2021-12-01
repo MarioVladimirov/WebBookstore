@@ -4,7 +4,6 @@ import bg.softuni.webbookstore.model.entity.UserEntity;
 import bg.softuni.webbookstore.model.entity.UserRoleEntity;
 import bg.softuni.webbookstore.model.entity.enums.UserRoleEnum;
 import bg.softuni.webbookstore.repository.UserRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,22 +26,22 @@ class BookstoreUserServiceTest {
     private UserEntity testUser;
     private UserRoleEntity adminRole, userRole;
 
-    private BookstoreUserService bookstoreUserService;
+    private BookstoreUserService bookstoreUserServiceToTest;
 
     @Mock
     private UserRepository mockUserRepository;
 
     @BeforeEach
     void setUp() {
-        bookstoreUserService = new BookstoreUserService(mockUserRepository);
-        setUpTestUser();
+        bookstoreUserServiceToTest = new BookstoreUserService(mockUserRepository);
+        initTestUser();
     }
 
     @Test
     void test_UserNotFound() {
         assertThrows(
                 UsernameNotFoundException.class,
-                () -> bookstoreUserService.loadUserByUsername("wrong_username")
+                () -> bookstoreUserServiceToTest.loadUserByUsername("wrong_username")
         );
     }
 
@@ -51,7 +50,7 @@ class BookstoreUserServiceTest {
         Mockito.when(mockUserRepository.findByUsername(testUser.getUsername()))
                 .thenReturn(Optional.of(testUser));
 
-        UserDetails actual = bookstoreUserService.loadUserByUsername(testUser.getUsername());
+        UserDetails actual = bookstoreUserServiceToTest.loadUserByUsername(testUser.getUsername());
 
         String expectedRoles = "ROLE_ADMIN, ROLE_USER";
         String actualRoles = actual
@@ -64,7 +63,7 @@ class BookstoreUserServiceTest {
         assertEquals(expectedRoles, actualRoles);
     }
 
-    private void setUpTestUser() {
+    private void initTestUser() {
         adminRole = new UserRoleEntity()
                 .setRole(UserRoleEnum.ADMIN);
         userRole = new UserRoleEntity()

@@ -6,6 +6,7 @@ import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
 import bg.softuni.webbookstore.model.entity.enums.UserRoleEnum;
 import bg.softuni.webbookstore.repository.*;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,98 +18,81 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WithMockUser("testuser")
 @SpringBootTest
 @AutoConfigureMockMvc
-class BookRestControllerTest {
+class AuthorControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private UserRoleRepository userRoleRepository;
-
-    @Autowired
     private BookRepository bookRepository;
-
-    @Autowired
-    private CategoryRepository categoryRepository;
-
-    @Autowired
-    private PublishingHouseRepository publishingHouseRepository;
 
     @Autowired
     private AuthorRepository authorRepository;
 
     private UserEntity testUser;
+    private CategoryEntity testCategory;
+    private PublishingHouseEntity testPublishingHouse;
+
+    private AuthorEntity testAuthor1;
+    private AuthorEntity testAuthor2;
+
 
     @BeforeEach
     void setUp() {
-        userRoleRepository.deleteAll();
-        userRepository.deleteAll();
-        categoryRepository.deleteAll();
-        publishingHouseRepository.deleteAll();
         authorRepository.deleteAll();
         bookRepository.deleteAll();
-        initUserRole();
-        initTestUser();
+        testUser = initTestUser();
+        testCategory = initCategory();
+        testPublishingHouse = initPublishingHouse();
+        testAuthor1 = initAuthorOne();
+        testAuthor2 = initAuthorTwo();
+        initBooks();
     }
 
     @AfterEach
     void tearDown() {
         bookRepository.deleteAll();
-        publishingHouseRepository.deleteAll();
         authorRepository.deleteAll();
-        categoryRepository.deleteAll();
-        userRepository.deleteAll();
-        userRoleRepository.deleteAll();
     }
 
     @Test
-    void testGetBooks() throws Exception {
-        initBooks();
-
+    void test_GetAuthorDetails_ReturnsCorrect() throws Exception {
         mockMvc
-                .perform(get("/books/api/"))
+                .perform(get("/authors/1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$.[0].title", is("TestBook2")))
-                .andExpect(jsonPath("$.[1].title", is("TestBook1")));
+                .andExpect(view().name("author-details"))
+                .andExpect(model().attributeExists("author"))
+                .andExpect(model().attributeExists("books"));
+
+        String actualBookTitles = bookRepository.findAllByActiveTrueAndAuthorIdOrderByAddedOnDesc(1L)
+                .stream()
+                .map(BookEntity::getTitle)
+                .collect(Collectors.joining());
+        String expectedBookTitles = "TestBook1";
+
+        assertEquals(expectedBookTitles, actualBookTitles);
     }
 
-    private void initUserRole() {
-        UserRoleEntity userRole = new UserRoleEntity()
-                .setRole(UserRoleEnum.USER);
-        userRoleRepository.save(userRole);
-    }
-
-    private void initTestUser() {
-        testUser = new UserEntity()
+    private UserEntity initTestUser() {
+        return new UserEntity()
                 .setFirstName("Test")
                 .setLastName("Testov")
                 .setUsername("testuser")
                 .setEmail("test@test.bg")
                 .setAddress("Sofia")
-                .setPassword("12345");
-
-        testUser = userRepository.save(testUser);
+                .setRoles(List.of(new UserRoleEntity().setRole(UserRoleEnum.USER)))
+                .setPassword("713ced98f52887220162f4a73fc4109ac9a76bb919a888ffb41fed4f922148b158f84bdef58778a3");
     }
 
     private void initBooks() {
-        CategoryEntity testCategory = initCategory();
-        PublishingHouseEntity testPublishingHouse = initPublishingHouse();
-        AuthorEntity testAuthor = initAuthor();
-
         BookEntity book1 = new BookEntity()
                 .setIsbn("1")
                 .setTitle("TestBook1")
@@ -122,7 +106,7 @@ class BookRestControllerTest {
                 .setLanguage(LanguageEnum.BULGARIAN)
                 .setCategories(List.of(testCategory))
                 .setPublishingHouse(testPublishingHouse)
-                .setAuthor(testAuthor)
+                .setAuthor(testAuthor1)
                 .setCreator(testUser);
 
         BookEntity book2 = new BookEntity()
@@ -138,7 +122,7 @@ class BookRestControllerTest {
                 .setLanguage(LanguageEnum.BULGARIAN)
                 .setCategories(List.of(testCategory))
                 .setPublishingHouse(testPublishingHouse)
-                .setAuthor(testAuthor)
+                .setAuthor(testAuthor2)
                 .setCreator(testUser);
 
         bookRepository.save(book1);
@@ -146,20 +130,24 @@ class BookRestControllerTest {
     }
 
     private CategoryEntity initCategory() {
-        CategoryEntity testCategory = new CategoryEntity()
+        return new CategoryEntity()
                 .setCategory(CategoryEnum.FICTION);
-
-        return categoryRepository.save(testCategory);
     }
 
     private PublishingHouseEntity initPublishingHouse() {
-        PublishingHouseEntity testPublishingHouse = new PublishingHouseEntity()
+        return new PublishingHouseEntity()
                 .setName("TestPublishingHouse");
-
-        return publishingHouseRepository.save(testPublishingHouse);
     }
 
-    private AuthorEntity initAuthor() {
+    private AuthorEntity initAuthorOne() {
+        AuthorEntity testAuthor = new AuthorEntity()
+                .setFirstName("TestAuthor")
+                .setLastName("TestAuthor");
+
+        return authorRepository.save(testAuthor);
+    }
+
+    private AuthorEntity initAuthorTwo() {
         AuthorEntity testAuthor = new AuthorEntity()
                 .setFirstName("TestAuthor")
                 .setLastName("TestAuthor");

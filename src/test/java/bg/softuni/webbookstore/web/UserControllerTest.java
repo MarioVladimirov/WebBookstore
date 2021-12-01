@@ -47,6 +47,8 @@ class UserControllerTest {
 
     @BeforeEach
     void setUp() {
+        userRepository.deleteAll();
+        userRoleRepository.deleteAll();
         setUpMockMvc();
 
         UserRoleEntity userRole = setUpUserRole();
