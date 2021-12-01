@@ -92,13 +92,11 @@ public class OrderController {
         return modelAndView;
     }
 
-    @PreAuthorize("isAdmin()")
     @GetMapping("/change-status")
     public String changeStatus() {
         return "change-order-status";
     }
 
-    @PreAuthorize("isAdmin()")
     @PostMapping("/change-status")
     public String changeStatusConfirm(@RequestParam Long orderId,
                                       @RequestParam String status) {
@@ -113,7 +111,6 @@ public class OrderController {
         return "redirect:/orders/" + orderId;
     }
 
-    @PreAuthorize("isAdmin()")
     @GetMapping("/proceed/{id}")
     public String proceedOrder(@PathVariable Long id) {
 

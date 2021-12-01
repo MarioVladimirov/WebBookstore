@@ -27,19 +27,16 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
         this.passwordEncoder = passwordEncoder;
     }
 
-    //TODO
-    //add antMatchers for new routes
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                     .antMatchers("/books/add", "/authors/add",
-                            "/roles/**", "/stats/*",
+                            "/roles/**", "/stats/*", "/dashboard",
                             "/orders/all", "/orders/change-status", "/orders/proceed/*").hasRole(UserRoleEnum.ADMIN.name())
                     .antMatchers("/", "/users/login", "/users/register",
-                            "/books/*", "/authors/*", "/publishinghouses/*", "/reviews/api").permitAll()
+                            "/books/*", "/authors/*", "/publishinghouses/*", "/reviews/api/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
                 .formLogin()
