@@ -47,23 +47,10 @@ class UserControllerTest {
 
     @BeforeEach
     void setUp() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(wac)
-                .apply(springSecurity())
-                .build();
+        setUpMockMvc();
 
-        UserRoleEntity userRole = new UserRoleEntity()
-                .setRole(UserRoleEnum.USER);
-        userRoleRepository.save(userRole);
-
-        UserEntity testUser = new UserEntity()
-                .setFirstName("test")
-                .setLastName("test")
-                .setUsername("test")
-                .setEmail("test@test.bg")
-                .setAddress("Sofia")
-                .setPassword("713ced98f52887220162f4a73fc4109ac9a76bb919a888ffb41fed4f922148b158f84bdef58778a3")
-                .setRoles(List.of(userRole));
-        userRepository.save(testUser);
+        UserRoleEntity userRole = setUpUserRole();
+        setUpTestUser(userRole);
     }
 
     @AfterEach
@@ -152,5 +139,30 @@ class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("profile"))
                 .andExpect(model().attributeExists("user"));
+    }
+
+    private void setUpMockMvc() {
+        mockMvc = MockMvcBuilders.webAppContextSetup(wac)
+                .apply(springSecurity())
+                .build();
+    }
+
+    private UserRoleEntity setUpUserRole() {
+        UserRoleEntity userRole = new UserRoleEntity()
+                .setRole(UserRoleEnum.USER);
+        userRoleRepository.save(userRole);
+        return userRole;
+    }
+
+    private void setUpTestUser(UserRoleEntity userRole) {
+        UserEntity testUser = new UserEntity()
+                .setFirstName("test")
+                .setLastName("test")
+                .setUsername("test")
+                .setEmail("test@test.bg")
+                .setAddress("Sofia")
+                .setPassword("713ced98f52887220162f4a73fc4109ac9a76bb919a888ffb41fed4f922148b158f84bdef58778a3")
+                .setRoles(List.of(userRole));
+        userRepository.save(testUser);
     }
 }
