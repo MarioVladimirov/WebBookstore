@@ -64,7 +64,10 @@ class BookServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        bookServiceToTest = new BookServiceImpl(mockBookRepository, mockPictureRepository, mockWishlistRepository, mockUserRepository, mockCategoryRepository, mockPublishingHouseRepository, mockAuthorRepository, mockCloudinaryService, mockModelMapper);
+        bookServiceToTest = new BookServiceImpl(mockBookRepository, mockPictureRepository,
+                mockWishlistRepository, mockUserRepository,
+                mockCategoryRepository, mockPublishingHouseRepository,
+                mockAuthorRepository, mockCloudinaryService, mockModelMapper);
 
         testUser = initTestUser();
         testAdmin = initTestAdmin();
