@@ -6,27 +6,38 @@ import bg.softuni.webbookstore.model.entity.enums.LanguageEnum;
 import bg.softuni.webbookstore.model.entity.enums.UserRoleEnum;
 import bg.softuni.webbookstore.repository.*;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 class AuthorControllerTest {
+
+    private static final String TEST_AUTHOR_TO_ADD_FIRST_NAME = "TestAuthor";
+    private static final String TEST_AUTHOR_TO_ADD_LAST_NAME = "TestAuthor";
 
     @Autowired
     private MockMvc mockMvc;
@@ -85,6 +96,37 @@ class AuthorControllerTest {
         userRoleRepository.deleteAll();
     }
 
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void test_GetAddAuthorForm_OpensForm() throws Exception {
+        mockMvc
+                .perform(get("/authors/add"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("add-author"));
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void test_AddAuthor_SavesNewAuthorCorrectly() throws Exception {
+        MockMultipartFile image = new MockMultipartFile("image", "", "text/plain", "some_xml".getBytes());
+
+        ResultActions resultActions = mockMvc
+                .perform(MockMvcRequestBuilders.multipart("/authors/add")
+                        .file("image", image.getBytes())
+                        .param("firstName", TEST_AUTHOR_TO_ADD_FIRST_NAME)
+                        .param("lastName", TEST_AUTHOR_TO_ADD_LAST_NAME)
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                );
+
+        Optional<AuthorEntity> newlyCreatedAuthorOpt = authorRepository
+                .findByFirstNameAndLastName(TEST_AUTHOR_TO_ADD_FIRST_NAME, TEST_AUTHOR_TO_ADD_LAST_NAME);
+        assertTrue(newlyCreatedAuthorOpt.isPresent());
+
+        resultActions
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/authors/" + newlyCreatedAuthorOpt.get().getId()));
+    }
 
     @Test
     void test_GetAuthorDetails_ReturnsCorrect() throws Exception {
@@ -95,12 +137,12 @@ class AuthorControllerTest {
                 .andExpect(model().attributeExists("author"))
                 .andExpect(model().attributeExists("books"));
 
-        String actualBookTitles = bookRepository.findAllByActiveTrueAndAuthorIdOrderByAddedOnDesc(testAuthor1.getId())
+        String actualBookTitles = bookRepository
+                .findAllByActiveTrueAndAuthorIdOrderByAddedOnDesc(testAuthor1.getId())
                 .stream()
                 .map(BookEntity::getTitle)
                 .collect(Collectors.joining());
         String expectedBookTitles = "TestBook1";
-
         assertEquals(expectedBookTitles, actualBookTitles);
     }
 
