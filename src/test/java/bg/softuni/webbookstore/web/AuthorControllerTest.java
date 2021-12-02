@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -126,6 +127,20 @@ class AuthorControllerTest {
         resultActions
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/authors/" + newlyCreatedAuthorOpt.get().getId()));
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void test_AddAuthorWithInvalidParams_ReturnsToAddForm() throws Exception {
+        mockMvc
+                .perform(post("/authors/add")
+                        .param("firstName", "")
+                        .param("lastName", "")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                )
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/authors/add"));
     }
 
     @Test
