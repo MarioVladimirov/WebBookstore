@@ -15,8 +15,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -68,8 +66,8 @@ class BookServiceImplTest {
     void setUp() {
         bookServiceToTest = new BookServiceImpl(mockBookRepository, mockPictureRepository, mockWishlistRepository, mockUserRepository, mockCategoryRepository, mockPublishingHouseRepository, mockAuthorRepository, mockCloudinaryService, mockModelMapper);
 
-        initTestUser();
-        initTestAdmin();
+        testUser = initTestUser();
+        testAdmin = initTestAdmin();
         testCategory = initCategory();
         testPublishingHouse = initPublishingHouse();
         testAuthor = initAuthor();
@@ -108,8 +106,8 @@ class BookServiceImplTest {
                 .setRole(UserRoleEnum.ADMIN);
     }
 
-    private void initTestUser() {
-        testUser = new UserEntity()
+    private UserEntity initTestUser() {
+        return new UserEntity()
                 .setFirstName("Test")
                 .setLastName("Testov")
                 .setUsername("testuser")
@@ -119,8 +117,8 @@ class BookServiceImplTest {
                 .setRoles(List.of(initUserRole()));
     }
 
-    private void initTestAdmin() {
-        testAdmin = new UserEntity()
+    private UserEntity initTestAdmin() {
+        return new UserEntity()
                 .setFirstName("Admin")
                 .setLastName("Admin")
                 .setUsername("adminuser")

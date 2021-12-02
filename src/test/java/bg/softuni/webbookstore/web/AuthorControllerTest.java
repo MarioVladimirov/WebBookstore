@@ -32,47 +32,70 @@ class AuthorControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private UserRoleRepository userRoleRepository;
+
+    @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
+    private PublishingHouseRepository publishingHouseRepository;
 
     @Autowired
     private AuthorRepository authorRepository;
 
+    private UserRoleEntity adminRole;
     private UserEntity testUser;
     private CategoryEntity testCategory;
     private PublishingHouseEntity testPublishingHouse;
-
     private AuthorEntity testAuthor1;
     private AuthorEntity testAuthor2;
 
-
     @BeforeEach
     void setUp() {
+        userRoleRepository.deleteAll();
+        userRepository.deleteAll();
+        categoryRepository.deleteAll();
+        publishingHouseRepository.deleteAll();
         authorRepository.deleteAll();
         bookRepository.deleteAll();
+
+        adminRole = initUserRole();
         testUser = initTestUser();
         testCategory = initCategory();
         testPublishingHouse = initPublishingHouse();
         testAuthor1 = initAuthorOne();
         testAuthor2 = initAuthorTwo();
+
         initBooks();
     }
 
     @AfterEach
     void tearDown() {
         bookRepository.deleteAll();
+        publishingHouseRepository.deleteAll();
         authorRepository.deleteAll();
+        categoryRepository.deleteAll();
+        userRepository.deleteAll();
+        userRoleRepository.deleteAll();
     }
+
 
     @Test
     void test_GetAuthorDetails_ReturnsCorrect() throws Exception {
         mockMvc
-                .perform(get("/authors/1"))
+                .perform(get("/authors/" + testAuthor1.getId()))
                 .andExpect(status().isOk())
                 .andExpect(view().name("author-details"))
                 .andExpect(model().attributeExists("author"))
                 .andExpect(model().attributeExists("books"));
 
-        String actualBookTitles = bookRepository.findAllByActiveTrueAndAuthorIdOrderByAddedOnDesc(1L)
+        String actualBookTitles = bookRepository.findAllByActiveTrueAndAuthorIdOrderByAddedOnDesc(testAuthor1.getId())
                 .stream()
                 .map(BookEntity::getTitle)
                 .collect(Collectors.joining());
@@ -81,18 +104,24 @@ class AuthorControllerTest {
         assertEquals(expectedBookTitles, actualBookTitles);
     }
 
+    private UserRoleEntity initUserRole() {
+        return userRoleRepository.save(new UserRoleEntity()
+                .setRole(UserRoleEnum.ADMIN));
+    }
+
     private UserEntity initTestUser() {
-        return new UserEntity()
+        return userRepository.save(new UserEntity()
                 .setFirstName("Test")
                 .setLastName("Testov")
                 .setUsername("testuser")
                 .setEmail("test@test.bg")
                 .setAddress("Sofia")
-                .setRoles(List.of(new UserRoleEntity().setRole(UserRoleEnum.USER)))
-                .setPassword("713ced98f52887220162f4a73fc4109ac9a76bb919a888ffb41fed4f922148b158f84bdef58778a3");
+                .setPassword("12345")
+                .setRoles(List.of(adminRole)));
     }
 
     private void initBooks() {
+
         BookEntity book1 = new BookEntity()
                 .setIsbn("1")
                 .setTitle("TestBook1")
@@ -130,28 +159,24 @@ class AuthorControllerTest {
     }
 
     private CategoryEntity initCategory() {
-        return new CategoryEntity()
-                .setCategory(CategoryEnum.FICTION);
+        return categoryRepository.save(new CategoryEntity()
+                .setCategory(CategoryEnum.FICTION));
     }
 
     private PublishingHouseEntity initPublishingHouse() {
-        return new PublishingHouseEntity()
-                .setName("TestPublishingHouse");
+        return publishingHouseRepository.save(new PublishingHouseEntity()
+                .setName("TestPublishingHouse"));
     }
 
     private AuthorEntity initAuthorOne() {
-        AuthorEntity testAuthor = new AuthorEntity()
-                .setFirstName("TestAuthor")
-                .setLastName("TestAuthor");
-
-        return authorRepository.save(testAuthor);
+        return authorRepository.save(new AuthorEntity()
+                .setFirstName("TestAuthor1")
+                .setLastName("TestAuthor1"));
     }
 
     private AuthorEntity initAuthorTwo() {
-        AuthorEntity testAuthor = new AuthorEntity()
-                .setFirstName("TestAuthor")
-                .setLastName("TestAuthor");
-
-        return authorRepository.save(testAuthor);
+        return authorRepository.save(new AuthorEntity()
+                .setFirstName("TestAuthor2")
+                .setLastName("TestAuthor2"));
     }
 }

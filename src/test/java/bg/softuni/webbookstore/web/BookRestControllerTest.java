@@ -50,18 +50,28 @@ class BookRestControllerTest {
     @Autowired
     private AuthorRepository authorRepository;
 
+    private UserRoleEntity adminRole;
     private UserEntity testUser;
+    private CategoryEntity testCategory;
+    private PublishingHouseEntity testPublishingHouse;
+    private AuthorEntity testAuthor;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws InterruptedException {
         userRoleRepository.deleteAll();
         userRepository.deleteAll();
         categoryRepository.deleteAll();
         publishingHouseRepository.deleteAll();
         authorRepository.deleteAll();
         bookRepository.deleteAll();
-        initUserRole();
-        initTestUser();
+
+        adminRole = initUserRole();
+        testUser = initTestUser();
+        testCategory = initCategory();
+        testPublishingHouse = initPublishingHouse();
+        testAuthor = initAuthor();
+
+        initBooks();
     }
 
     @AfterEach
@@ -76,8 +86,6 @@ class BookRestControllerTest {
 
     @Test
     void testGetBooks() throws Exception {
-        initBooks();
-
         mockMvc
                 .perform(get("/books/api/"))
                 .andExpect(status().isOk())
@@ -86,28 +94,23 @@ class BookRestControllerTest {
                 .andExpect(jsonPath("$.[1].title", is("TestBook1")));
     }
 
-    private void initUserRole() {
-        UserRoleEntity userRole = new UserRoleEntity()
-                .setRole(UserRoleEnum.USER);
-        userRoleRepository.save(userRole);
+    private UserRoleEntity initUserRole() {
+        return userRoleRepository.save(new UserRoleEntity()
+                .setRole(UserRoleEnum.ADMIN));
     }
 
-    private void initTestUser() {
-        testUser = new UserEntity()
+    private UserEntity initTestUser() {
+        return userRepository.save(new UserEntity()
                 .setFirstName("Test")
                 .setLastName("Testov")
                 .setUsername("testuser")
                 .setEmail("test@test.bg")
                 .setAddress("Sofia")
-                .setPassword("12345");
-
-        testUser = userRepository.save(testUser);
+                .setPassword("12345")
+                .setRoles(List.of(adminRole)));
     }
 
-    private void initBooks() {
-        CategoryEntity testCategory = initCategory();
-        PublishingHouseEntity testPublishingHouse = initPublishingHouse();
-        AuthorEntity testAuthor = initAuthor();
+    private void initBooks() throws InterruptedException {
 
         BookEntity book1 = new BookEntity()
                 .setIsbn("1")
@@ -142,28 +145,23 @@ class BookRestControllerTest {
                 .setCreator(testUser);
 
         bookRepository.save(book1);
+        Thread.sleep(1000);
         bookRepository.save(book2);
     }
 
     private CategoryEntity initCategory() {
-        CategoryEntity testCategory = new CategoryEntity()
-                .setCategory(CategoryEnum.FICTION);
-
-        return categoryRepository.save(testCategory);
+        return categoryRepository.save(new CategoryEntity()
+                .setCategory(CategoryEnum.FICTION));
     }
 
     private PublishingHouseEntity initPublishingHouse() {
-        PublishingHouseEntity testPublishingHouse = new PublishingHouseEntity()
-                .setName("TestPublishingHouse");
-
-        return publishingHouseRepository.save(testPublishingHouse);
+        return publishingHouseRepository.save(new PublishingHouseEntity()
+                .setName("TestPublishingHouse"));
     }
 
     private AuthorEntity initAuthor() {
-        AuthorEntity testAuthor = new AuthorEntity()
+        return authorRepository.save(new AuthorEntity()
                 .setFirstName("TestAuthor")
-                .setLastName("TestAuthor");
-
-        return authorRepository.save(testAuthor);
+                .setLastName("TestAuthor"));
     }
 }

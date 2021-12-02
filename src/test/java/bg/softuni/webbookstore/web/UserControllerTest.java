@@ -35,6 +35,7 @@ class UserControllerTest {
     private static final String TEST_USERNAME = "testuser";
 
     private MockMvc mockMvc;
+    private UserRoleEntity userRole;
 
     @Autowired
     private WebApplicationContext wac;
@@ -49,10 +50,11 @@ class UserControllerTest {
     void setUp() {
         userRepository.deleteAll();
         userRoleRepository.deleteAll();
-        setUpMockMvc();
 
-        UserRoleEntity userRole = setUpUserRole();
-        setUpTestUser(userRole);
+        initMockMvc();
+
+        userRole = initUserRole();
+        initTestUser();
     }
 
     @AfterEach
@@ -143,28 +145,25 @@ class UserControllerTest {
                 .andExpect(model().attributeExists("user"));
     }
 
-    private void setUpMockMvc() {
+    private void initMockMvc() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac)
                 .apply(springSecurity())
                 .build();
     }
 
-    private UserRoleEntity setUpUserRole() {
-        UserRoleEntity userRole = new UserRoleEntity()
-                .setRole(UserRoleEnum.USER);
-        userRoleRepository.save(userRole);
-        return userRole;
+    private UserRoleEntity initUserRole() {
+        return userRoleRepository.save(new UserRoleEntity()
+                .setRole(UserRoleEnum.USER));
     }
 
-    private void setUpTestUser(UserRoleEntity userRole) {
-        UserEntity testUser = new UserEntity()
+    private void initTestUser() {
+        userRepository.save(new UserEntity()
                 .setFirstName("test")
                 .setLastName("test")
                 .setUsername("test")
                 .setEmail("test@test.bg")
                 .setAddress("Sofia")
                 .setPassword("713ced98f52887220162f4a73fc4109ac9a76bb919a888ffb41fed4f922148b158f84bdef58778a3")
-                .setRoles(List.of(userRole));
-        userRepository.save(testUser);
+                .setRoles(List.of(userRole)));
     }
 }
