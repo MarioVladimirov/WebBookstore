@@ -9,8 +9,6 @@ import java.util.Optional;
 
 public interface AuthorService {
 
-    List<String> findAllAuthorsNames();
-
     Long add(AuthorAddServiceModel authorAddServiceModel) throws IOException;
 
     Optional<AuthorViewModel> findById(Long id);

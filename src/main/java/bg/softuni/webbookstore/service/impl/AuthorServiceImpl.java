@@ -35,11 +35,6 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<String> findAllAuthorsNames() {
-        return authorRepository.findAllAuthorsNames();
-    }
-
-    @Override
     public Long add(AuthorAddServiceModel authorAddServiceModel) throws IOException {
 
         MultipartFile img = authorAddServiceModel.getImage();

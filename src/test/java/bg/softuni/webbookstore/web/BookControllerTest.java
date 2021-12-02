@@ -24,8 +24,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -108,7 +107,7 @@ class BookControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(username = "testuser", roles = "ADMIN")
     void test_GetAddBookForm_OpensForm() throws Exception {
         mockMvc
                 .perform(get("/books/add"))
@@ -155,7 +154,7 @@ class BookControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(username = "testuser", roles = "ADMIN")
     void test_AddBookWithInvalidParams_ReturnsToAddForm() throws Exception {
         mockMvc
                 .perform(post("/books/add")
@@ -217,7 +216,9 @@ class BookControllerTest {
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 );
 
-        Optional<BookEntity> updatedBookOpt = bookRepository.findById(bookToEdit.getId());
+        //TODO - insert multipartfile param
+
+        Optional<BookEntity> updatedBookOpt = bookRepository.findByIdAndActiveTrue(bookToEdit.getId());
         assertTrue(updatedBookOpt.isPresent());
 
         BookEntity updatedBook = updatedBookOpt.get();
@@ -244,6 +245,20 @@ class BookControllerTest {
                 )
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/books/edit/" + bookToEdit.getId() + "/errors"));
+    }
+
+    @Test
+    @WithMockUser(username = "testuser", roles = "ADMIN")
+    void test_Delete_WorksCorrectly() throws Exception {
+        BookEntity bookToDelete = testBooks.get(0);
+        mockMvc
+                .perform(delete("/books/" + bookToDelete.getId())
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/books/all"));
+
+        BookEntity deletedBook = bookRepository.findById(bookToDelete.getId()).get();
+        assertFalse(deletedBook.getActive());
     }
 
 
