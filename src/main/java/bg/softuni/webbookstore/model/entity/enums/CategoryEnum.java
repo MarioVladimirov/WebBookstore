@@ -13,6 +13,7 @@ public enum CategoryEnum {
     CHILDREN,
     HISTORY,
     ART,
+    DYSTOPIA,
     HORROR,
     POETRY;
 

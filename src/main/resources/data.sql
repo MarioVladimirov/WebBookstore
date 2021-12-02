@@ -40,9 +40,11 @@ VALUES (9, 'HISTORY');
 INSERT INTO categories (id, category)
 VALUES (10, 'ART');
 INSERT INTO categories (id, category)
-VALUES (11, 'HORROR');
+VALUES (11, 'DYSTOPIA');
 INSERT INTO categories (id, category)
-VALUES (12, 'POETRY');
+VALUES (12, 'HORROR');
+INSERT INTO categories (id, category)
+VALUES (13, 'POETRY');
 
 INSERT INTO publishing_houses (id, name, description, image_url)
 VALUES (1, 'Сиела',
@@ -68,6 +70,18 @@ VALUES (6, 'Колибри',
 
 Днec Koлибpи e бpaнд, пoпyляpeн ĸaĸтo в Бългapия, тaĸa и oтвъд нeйнитe пpeдeли. B ĸaтaлoгa cи Koлибpи имa нaд 1200 чeтивa. Bcяĸa гoдинa издaтeлcтвoтo пyблиĸyвa oĸoлo 120 нoви зaглaвия, ĸaĸтo и дeceтĸи дoпeчaтĸи нa пo-cтapи издaния. Taм фигypиpaт eдни oт нaй-бляcĸaвитe имeнa в cвeтoвнaтa бeлeтpиcтиĸa. Блaгoдapeниe нa Koлибpи бългapcĸият читaтeл ce зaпoзнa ĸaĸтo c yтвъpдeни, тaĸa и c нaбиpaщи пoпyляpнocт aвтopи oт paзлични cтpaни и ĸoнтинeнти, пpeдcтaвитeли нa paзлични жaнpoвe, eпoxи и идeйни тeчeния. ',
         'https://res.cloudinary.com/nzlateva/image/upload/v1635023437/web-bookstore-app/publishing-house-pics/colibri_ojrog4.jpg');
+INSERT INTO publishing_houses (id, name, description, image_url)
+VALUES (7, 'HarperCollins',
+        '',
+        'https://res.cloudinary.com/nzlateva/image/upload/v1635023437/web-bookstore-app/publishing-house-pics/default-ph-picture_cy6xdw.png');
+INSERT INTO publishing_houses (id, name, description, image_url)
+VALUES (8, 'Simon & Schuster',
+        '',
+        'https://res.cloudinary.com/nzlateva/image/upload/v1635023437/web-bookstore-app/publishing-house-pics/default-ph-picture_cy6xdw.png');
+INSERT INTO publishing_houses (id, name, description, image_url)
+VALUES (9, 'Penguin Random House',
+        '',
+        'https://res.cloudinary.com/nzlateva/image/upload/v1635023437/web-bookstore-app/publishing-house-pics/default-ph-picture_cy6xdw.png');
 
 
 INSERT INTO pictures (id, url)
@@ -97,6 +111,21 @@ VALUES (8,
 INSERT INTO pictures (id, url)
 VALUES (9,
         'https://res.cloudinary.com/nzlateva/image/upload/v1635022070/web-bookstore-app/authors-pics/Asimov_wz1nzu.jpg');
+INSERT INTO pictures (id, url)
+VALUES (10,
+        'https://res.cloudinary.com/nzlateva/image/upload/v1638480650/web-bookstore-app/book-cover-pics/Brave-New-World_nmus8h.jpg');
+INSERT INTO pictures (id, url)
+VALUES (11,
+        'https://res.cloudinary.com/nzlateva/image/upload/v1638479388/web-bookstore-app/authors-pics/Ray_Bradbury_tyae7t.jpg');
+INSERT INTO pictures (id, url)
+VALUES (12,
+        'https://res.cloudinary.com/nzlateva/image/upload/v1638479709/web-bookstore-app/book-cover-pics/Fahrenheit_451_zo4ahc.jpg');
+INSERT INTO pictures (id, url)
+VALUES (13,
+        'https://res.cloudinary.com/nzlateva/image/upload/v1638480036/web-bookstore-app/authors-pics/George_Orwell_tplbdw.jpg');
+INSERT INTO pictures (id, url)
+VALUES (14,
+        'https://res.cloudinary.com/nzlateva/image/upload/v1638479922/web-bookstore-app/book-cover-pics/1984_ygwpq6.jpg');
 
 
 INSERT INTO authors (id, first_name, last_name, description, picture_id)
@@ -126,9 +155,22 @@ INSERT INTO authors (id, first_name, last_name, description, picture_id)
 VALUES (5, 'Фредрик', 'Бакман',
         'Фредрик Бакман (на шведски: Fredrik Backman) е шведски журналист, блогър и писател, автор на бестселъри в жанровете съвременен роман и сатира.',
         7);
+INSERT INTO authors (id, first_name, last_name, description, picture_id)
+VALUES (6, 'Aldous', 'Huxley',
+        '',
+        7);
+INSERT INTO authors (id, first_name, last_name, description, picture_id)
+VALUES (7, 'Ray', 'Bradbury',
+        'Ray Douglas Bradbury was an American author and screenwriter. One of the most celebrated 20th-century American writers, he worked in a variety of modes, including fantasy, science fiction, horror, mystery, and realistic fiction.',
+        11);
+INSERT INTO authors (id, first_name, last_name, description, picture_id)
+VALUES (8, 'George', 'Orwell',
+        'Eric Arthur Blair known by his pen name George Orwell, was an English novelist, essayist, journalist and critic. His work is characterised by lucid prose, biting social criticism, total opposition to totalitarianism, and outspoken support of democratic socialism.',
+        13);
 
 
-INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, active, pages_count, copies, release_year,
+INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, active, pages_count, copies,
+                   release_year,
                    price, language,
                    publishing_house_id, author_id, creator_id)
 VALUES (1, '9547394169', 'Братя Карамазови',
@@ -137,7 +179,8 @@ VALUES (1, '9547394169', 'Братя Карамазови',
         UTC_TIMESTAMP(), UTC_TIMESTAMP(),
         true, 934, 3, 2003, 30.00, 'BULGARIAN',
         4, 3, 1);
-INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, active, pages_count, copies, release_year,
+INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, active, pages_count, copies,
+                   release_year,
                    price, language,
                    publishing_house_id, author_id, creator_id)
 VALUES (2, '9789545841958', 'Хрониките на Амбър 1',
@@ -147,14 +190,16 @@ VALUES (2, '9789545841958', 'Хрониките на Амбър 1',
         UTC_TIMESTAMP(), UTC_TIMESTAMP(),
         true, 576, 5, 2014, 29.99, 'BULGARIAN',
         3, 2, 1);
-INSERT INTO books (id, isbn, title, picture_id, added_on, modified, active, pages_count, copies, release_year, price, language,
+INSERT INTO books (id, isbn, title, picture_id, added_on, modified, active, pages_count, copies, release_year, price,
+                   language,
                    publishing_house_id, author_id, creator_id)
 VALUES (3, '9549513971', 'Събрани разкази; т.5',
         3,
         UTC_TIMESTAMP(), UTC_TIMESTAMP(),
         true, 288, 2, 2001, 7.00, 'BULGARIAN',
         5, 4, 1);
-INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, active, pages_count, copies, release_year,
+INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, active, pages_count, copies,
+                   release_year,
                    price, language,
                    publishing_house_id, author_id, creator_id)
 VALUES (4, '9789545841705', 'Властелинът на Пръстените',
@@ -165,7 +210,8 @@ VALUES (4, '9789545841705', 'Властелинът на Пръстените',
         UTC_TIMESTAMP(), UTC_TIMESTAMP(),
         true, 1088, 4, 2001, 46.99, 'BULGARIAN',
         3, 1, 1);
-INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, active, pages_count, copies, release_year,
+INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, active, pages_count, copies,
+                   release_year,
                    price, language,
                    publishing_house_id, author_id, creator_id)
 VALUES (5, '978954091017Х', 'Престъпление и наказание',
@@ -175,7 +221,8 @@ VALUES (5, '978954091017Х', 'Престъпление и наказание',
         UTC_TIMESTAMP(), UTC_TIMESTAMP(),
         true, 512, 1, 2011, 30.00, 'BULGARIAN',
         4, 3, 1);
-INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, active, pages_count, copies, release_year,
+INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, active, pages_count, copies,
+                   release_year,
                    price, language,
                    publishing_house_id, author_id, creator_id)
 VALUES (6, '9789542815075', 'Човек на име Уве',
@@ -187,7 +234,40 @@ VALUES (6, '9789542815075', 'Човек на име Уве',
         UTC_TIMESTAMP(), UTC_TIMESTAMP(),
         true, 294, 5, 2014, 14.00, 'BULGARIAN',
         1, 5, 1);
+INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, active, pages_count, copies,
+                   release_year,
+                   price, language,
+                   publishing_house_id, author_id, creator_id)
+VALUES (7, '9780060850524', 'Brave New World',
+        'Welcome to New London. Everybody is happy here. Our perfect society achieved peace and stability through the prohibition of monogamy, privacy, money, family and history itself. Now everyone belongs.
 
+You can be happy too. All you need to do is take your Soma pills.
+
+Discover the brave new world of Aldous Huxley''s classic novel, written in 1932, which prophesied a society which expects maximum pleasure and accepts complete surveillance - no matter what the cost.',
+        10,
+        UTC_TIMESTAMP(), UTC_TIMESTAMP(),
+        true, 288, 3, 2006, 20.00, 'ENGLISH',
+        7, 6, 1);
+INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, active, pages_count, copies,
+                   release_year,
+                   price, language,
+                   publishing_house_id, author_id, creator_id)
+VALUES (8, '9781451673319', 'Fahrenheit 451',
+        'Internationally acclaimed with more than 5 million copies in print, Fahrenheit 451 is Ray Bradbury''s classic novel of censorship and defiance, as resonant today as it was when it was first published nearly 50 years ago.',
+        12,
+        UTC_TIMESTAMP(), UTC_TIMESTAMP(),
+        true, 256, 2, 2012, 25.00, 'ENGLISH',
+        8, 7, 1);
+INSERT INTO books (id, isbn, title, description, picture_id, added_on, modified, active, pages_count, copies,
+                   release_year,
+                   price, language,
+                   publishing_house_id, author_id, creator_id)
+VALUES (9, '9780451524935', '1984',
+        'Portrays a terrifying vision of life in the future when a totalitarian government, considered a "Negative Utopia," watches over all citizens and directs all activities, becoming more powerful as time goes by.',
+        14,
+        UTC_TIMESTAMP(), UTC_TIMESTAMP(),
+        true, 336, 4, 1990, 25.00, 'ENGLISH',
+        9, 8, 1);
 
 INSERT INTO books_categories (book_entity_id, categories_id)
 VALUES (1, 1);
@@ -211,3 +291,16 @@ INSERT INTO books_categories (book_entity_id, categories_id)
 VALUES (5, 7);
 INSERT INTO books_categories (book_entity_id, categories_id)
 VALUES (6, 1);
+INSERT INTO books_categories (book_entity_id, categories_id)
+VALUES (7, 1);
+INSERT INTO books_categories (book_entity_id, categories_id)
+VALUES (7, 11);
+INSERT INTO books_categories (book_entity_id, categories_id)
+VALUES (8, 1);
+INSERT INTO books_categories (book_entity_id, categories_id)
+VALUES (8, 11);
+INSERT INTO books_categories (book_entity_id, categories_id)
+VALUES (9, 1);
+INSERT INTO books_categories (book_entity_id, categories_id)
+VALUES (9, 11);
+
