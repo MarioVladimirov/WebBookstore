@@ -39,6 +39,8 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
     @EntityGraph(value = "bookEntity")
     Optional<BookEntity> findByIdAndActiveTrue(Long id);
 
+    Optional<BookEntity> findByIsbn(String isbn);
+
     boolean existsByIsbn(String isbn);
 
     boolean existsByPictureId(Long pictureId);
