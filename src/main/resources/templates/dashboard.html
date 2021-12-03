@@ -42,7 +42,8 @@
                     </div>
                     <div class="col-md-6 p-3">
                         <div class="bg-white p-3 w-100 h-100 rounded">
-                            <h5 class="text-center font-weight-bold border-bottom">Books with 2 or fewer copies left</h5>
+                            <h5 class="text-center font-weight-bold border-bottom">Books with 2 or fewer copies
+                                left</h5>
                             <ol class="list-group">
                                 <li th:each="title : ${bookTitles}"
                                     th:text="${title}"
@@ -89,7 +90,15 @@
         let optionsArea = {
             title: 'Orders Per Month',
             hAxis: {title: 'Month'},
-            vAxis: {minValue: 0},
+            vAxis: {
+                0: {minValue: 0},
+                1: {minValue: 0}
+            },
+            series: {
+                0: {targetAxisIndex: 0},
+                1: {targetAxisIndex: 1},
+                2: {targetAxisIndex: 1}
+            },
             interpolateNulls: true
         };
 
@@ -117,6 +126,7 @@
             ['Children', [[${categoriesMap[CHILDREN]}]]],
             ['History', [[${categoriesMap[HISTORY]}]]],
             ['Art', [[${categoriesMap[ART]}]]],
+            ['Dystopia', [[${categoriesMap[DYSTOPIA]}]]],
             ['Horror', [[${categoriesMap[HORROR]}]]],
             ['Poetry', [[${categoriesMap[POETRY]}]]]
         ]);

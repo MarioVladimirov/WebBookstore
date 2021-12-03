@@ -304,3 +304,54 @@ VALUES (9, 1);
 INSERT INTO books_categories (book_entity_id, categories_id)
 VALUES (9, 11);
 
+INSERT INTO orders (id, order_time, price, status, customer_id)
+VALUES (1, '2021-01-03 21:45:00.080751', 30.00, 'DELIVERED', 1);
+INSERT INTO order_items (id, book_id, order_id, quantity)
+VALUES (1, 1, 1, 1);
+
+INSERT INTO orders (id, order_time, price, status, customer_id)
+VALUES (2, '2021-02-10 21:45:00.080751', 30.00, 'DELIVERED', 1);
+INSERT INTO order_items (id, book_id, order_id, quantity)
+VALUES (2, 1, 2, 1);
+
+INSERT INTO orders (id, order_time, price, status, customer_id)
+VALUES (3, '2021-03-16 21:45:00.080751', 36.99, 'DELIVERED', 1);
+INSERT INTO order_items (id, book_id, order_id, quantity)
+VALUES (3, 2, 3, 1);
+INSERT INTO order_items (id, book_id, order_id, quantity)
+VALUES (4, 3, 3, 1);
+
+INSERT INTO orders (id, order_time, price, status, customer_id)
+VALUES (4, '2021-04-18 21:45:00.080751', 46.99, 'DELIVERED', 1);
+INSERT INTO order_items (id, book_id, order_id, quantity)
+VALUES (5, 4, 4, 1);
+
+INSERT INTO orders (id, order_time, price, status, customer_id)
+VALUES (5, '2021-05-03 21:45:00.080751', 30.00, 'DELIVERED', 1);
+INSERT INTO order_items (id, book_id, order_id, quantity)
+VALUES (6, 5, 5, 1);
+
+INSERT INTO orders (id, order_time, price, status, customer_id)
+VALUES (6, '2021-06-07 21:45:00.080751', 14.00, 'DELIVERED', 1);
+INSERT INTO order_items (id, book_id, order_id, quantity)
+VALUES (7, 6, 6, 1);
+
+INSERT INTO orders (id, order_time, price, status, customer_id)
+VALUES (7, '2021-07-10 21:45:00.080751', 20.00, 'DELIVERED', 1);
+INSERT INTO order_items (id, book_id, order_id, quantity)
+VALUES (8, 7, 7, 1);
+
+INSERT INTO orders (id, order_time, price, status, customer_id)
+VALUES (8, '2021-08-20 21:45:00.080751', 25.00, 'DELIVERED', 1);
+INSERT INTO order_items (id, book_id, order_id, quantity)
+VALUES (9, 8, 8, 1);
+
+INSERT INTO orders (id, order_time, price, status, customer_id)
+VALUES (9, '2021-09-03 21:45:00.080751', 25.00, 'DELIVERED', 1);
+INSERT INTO order_items (id, book_id, order_id, quantity)
+VALUES (10, 9, 9, 1);
+
+INSERT INTO orders (id, order_time, price, status, customer_id)
+VALUES (10, '2021-10-05 21:45:00.080751', 29.99, 'DELIVERED', 1);
+INSERT INTO order_items (id, book_id, order_id, quantity)
+VALUES (11, 2, 10, 1);
