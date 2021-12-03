@@ -24,7 +24,7 @@
                 <div class="row justify-content-between mt-4">
                     <div class="col-md-6 p-3">
                         <div class="bg-white p-3 w-100 h-100 rounded">
-                            <div id="googleAreaChart"></div>
+                            <div id="googleComboChart"></div>
                         </div>
                     </div>
                     <div class="col-md-6 p-3">
@@ -66,11 +66,11 @@
 <script type="text/javascript" th:inline="javascript">
     google.charts.load('current', {'packages': ['corechart']});
 
-    google.charts.setOnLoadCallback(drawAreaChart);
+    google.charts.setOnLoadCallback(drawComboChart);
 
-    function drawAreaChart() {
+    function drawComboChart() {
         // Draw the chart and set the chart values
-        let dataArea = google.visualization.arrayToDataTable([
+        let dataCombo = google.visualization.arrayToDataTable([
             ['Month', 'Sold Books', 'Income'],
             ['January', [[${soldBooksPerMonth[1]}]], [[${incomePerMonth[1]}]]],
             ['February', [[${soldBooksPerMonth[2]}]], [[${incomePerMonth[2]}]]],
@@ -87,25 +87,24 @@
         ]);
 
         // Add chart options
-        let optionsArea = {
+        let optionsCombo = {
             title: 'Orders Per Month',
             hAxis: {title: 'Month'},
             vAxis: {
                 0: {minValue: 0},
                 1: {minValue: 0}
             },
+            seriesType: 'bars',
             series: {
-                0: {targetAxisIndex: 0},
-                1: {targetAxisIndex: 1},
-                2: {targetAxisIndex: 1}
-            },
-            interpolateNulls: true
+                0: {targetAxisIndex: 0, color: '#028ca6'},
+                1: {targetAxisIndex: 1, type: 'line', color: '#ebf203'}
+            }
         };
 
-        // Display the chart inside the <div> element with id="googleAreaChart"
-        let chartArea = new google.visualization
-            .AreaChart(document.getElementById('googleAreaChart'));
-        chartArea.draw(dataArea, optionsArea);
+        // Display the chart inside the <div> element with id="googleComboChart"
+        let chartCombo = new google.visualization
+            .ComboChart(document.getElementById('googleComboChart'));
+        chartCombo.draw(dataCombo, optionsCombo);
 
     }
 
